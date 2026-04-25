@@ -1,0 +1,26 @@
+{
+  "name": "저녁 브리핑",
+  "short_name": "Evening",
+  "description": "글로벌 매크로·반도체·지정학 저녁 브리핑",
+  "start_url": "/evening-briefing/",
+  "scope": "/evening-briefing/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f0e0c",
+  "theme_color": "#0f0e0c",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
