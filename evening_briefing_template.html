@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>저녁 브리핑 · 2026.04.24</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&display=swap">
+<style>
+  :root {
+    --bg: #0f0e0c;
+    --bg-soft: #171511;
+    --bg-card: #1c1a16;
+    --bg-deep: #0a0908;
+    --fg: #ebe8df;
+    --fg-dim: #a6a096;
+    --fg-faint: #6b6860;
+    --rule: #2a2620;
+    --rule-soft: #221f1a;
+    --accent-us: #e8b04a;
+    --accent-asia: #e74c3c;
+    --accent-geo: #7b9e89;
+    --accent-cap: #6d8ebd;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Pretendard Variable', Pretendard, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+    font-feature-settings: "tnum" on, "ss05" on;
+    padding: 40px 20px 80px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+
+  /* Header */
+  .masthead {
+    border-top: 3px solid var(--fg);
+    border-bottom: 1px solid var(--rule);
+    padding: 24px 0 20px;
+    margin-bottom: 36px;
+  }
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    margin-bottom: 14px;
+  }
+  .masthead h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 44px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .masthead h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent-us);
+  }
+  .masthead-sub {
+    font-size: 13px;
+    color: var(--fg-dim);
+    letter-spacing: 0.02em;
+  }
+
+  /* Control bar */
+  .control {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .control button {
+    background: transparent;
+    color: var(--fg-dim);
+    border: 1px solid var(--rule);
+    padding: 7px 12px;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    font-size: inherit;
+    transition: all 0.15s ease;
+  }
+  .control button:hover {
+    color: var(--fg);
+    border-color: var(--fg-faint);
+  }
+  .control button.active {
+    color: var(--bg);
+    background: var(--fg);
+    border-color: var(--fg);
+  }
+
+  /* Narrative */
+  .narrative {
+    background: var(--bg-soft);
+    border-left: 3px solid var(--accent-us);
+    padding: 22px 24px;
+    margin-bottom: 44px;
+  }
+  .narrative-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-us);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .narrative-main {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    line-height: 1.4;
+    font-weight: 400;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .narrative-port {
+    font-size: 13.5px;
+    color: var(--fg-dim);
+    padding-top: 10px;
+    border-top: 1px solid var(--rule);
+  }
+  .narrative-port strong { color: var(--fg); }
+
+  /* Section */
+  .section { margin-bottom: 36px; }
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    cursor: pointer;
+    user-select: none;
+    transition: border-color 0.15s ease;
+  }
+  .section-head:hover { border-bottom-color: var(--fg-faint); }
+  .section-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 1;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    flex: 1;
+  }
+  .section-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .section-toggle {
+    font-size: 11px;
+    color: var(--fg-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: transform 0.2s ease, color 0.15s ease;
+  }
+  .section.collapsed .section-toggle { transform: rotate(-90deg); }
+  .section-head:hover .section-toggle { color: var(--fg); }
+
+  .s-us .section-dot { background: var(--accent-us); }
+  .s-asia .section-dot { background: var(--accent-asia); }
+  .s-geo .section-dot { background: var(--accent-geo); }
+  .s-cap .section-dot { background: var(--accent-cap); }
+  .s-us .section-num { color: var(--accent-us); opacity: 0.55; }
+  .s-asia .section-num { color: var(--accent-asia); opacity: 0.55; }
+  .s-geo .section-num { color: var(--accent-geo); opacity: 0.55; }
+  .s-cap .section-num { color: var(--accent-cap); opacity: 0.55; }
+
+  .section-body {
+    max-height: 20000px;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.2s ease;
+    padding-top: 4px;
+  }
+  .section.collapsed .section-body {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  /* Item with accordion */
+  .item {
+    border-bottom: 1px dotted var(--rule);
+  }
+  .item:last-child { border-bottom: none; }
+  .item-summary {
+    padding: 16px 0;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    transition: background 0.12s ease;
+  }
+  .item-summary:hover { background: var(--bg-deep); margin: 0 -12px; padding-left: 12px; padding-right: 12px; }
+  .item-head {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.45;
+    margin-bottom: 6px;
+    letter-spacing: -0.005em;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .item-head-text { flex: 1; }
+  .item-expand {
+    font-size: 11px;
+    color: var(--fg-faint);
+    flex-shrink: 0;
+    margin-top: 4px;
+    transition: transform 0.2s ease, color 0.15s ease;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+  .item.open .item-expand {
+    transform: rotate(45deg);
+    color: var(--fg-dim);
+  }
+  .item-body {
+    font-size: 13.5px;
+    color: var(--fg-dim);
+    line-height: 1.65;
+  }
+  .item-body strong { color: var(--fg); font-weight: 600; }
+  .item-meta {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
+  /* Expanded detail */
+  .item-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+  .item.open .item-detail {
+    max-height: 2000px;
+  }
+  .detail-inner {
+    padding: 8px 0 22px;
+    border-left: 2px solid var(--rule);
+    padding-left: 18px;
+    margin-left: 2px;
+    margin-top: 4px;
+  }
+  .detail-block {
+    margin-bottom: 16px;
+  }
+  .detail-block:last-child { margin-bottom: 0; }
+  .detail-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .s-us .detail-label { color: var(--accent-us); }
+  .s-asia .detail-label { color: var(--accent-asia); }
+  .s-geo .detail-label { color: var(--accent-geo); }
+  .s-cap .detail-label { color: var(--accent-cap); }
+  .detail-text {
+    font-size: 13px;
+    color: var(--fg-dim);
+    line-height: 1.7;
+  }
+  .detail-text strong { color: var(--fg); }
+
+  /* Data chip */
+  .chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 5px;
+    padding: 2px 8px;
+    background: var(--bg-card);
+    border-radius: 3px;
+    font-family: 'Fraunces', serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+  .chip-up { color: #e8a055; }
+  .chip-dn { color: #6d9eb8; }
+
+  /* Mini table inside detail */
+  .mini-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 12.5px;
+  }
+  .mini-table th, .mini-table td {
+    padding: 6px 8px;
+    text-align: left;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .mini-table th {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
+    font-weight: 500;
+  }
+  .mini-table td { color: var(--fg-dim); }
+  .mini-table td strong { color: var(--fg); }
+  .mini-table td.num {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    text-align: right;
+  }
+
+  /* Closing */
+  .closing {
+    background: linear-gradient(135deg, var(--bg-soft) 0%, var(--bg-card) 100%);
+    padding: 28px 26px;
+    margin-top: 44px;
+    border: 1px solid var(--rule);
+    position: relative;
+  }
+  .closing::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 40px; height: 40px;
+    border-top: 2px solid var(--accent-us);
+    border-left: 2px solid var(--accent-us);
+  }
+  .closing-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-us);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .closing-text {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    line-height: 1.5;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-size: 11px;
+    color: var(--fg-faint);
+    letter-spacing: 0.02em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    body { padding: 24px 16px 60px; }
+    .masthead h1 { font-size: 34px; }
+    .narrative-main { font-size: 17px; }
+    .section-title { font-size: 18px; }
+    .section-num { font-size: 24px; }
+    .item-head { font-size: 14.5px; }
+    .closing-text { font-size: 16px; }
+    .control { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div class="masthead-top">
+      <span>EVENING BRIEFING · Vol. 02</span>
+      <span>2026.04.24 FRI · 21:00 KST</span>
+    </div>
+    <h1>오늘 밤, <em>세계</em>는<br>어디를 보고 있나</h1>
+    <div class="masthead-sub">한국 앱이 내일 아침에 옮길 것 ― 오늘 현지는 이미 읽었다</div>
+  </header>
+
+  <!-- Control -->
+  <div class="control">
+    <button id="btn-all-collapse" onclick="setAllItems(false)">모두 접기</button>
+    <button id="btn-all-expand" onclick="setAllItems(true)">모두 펼치기</button>
+    <span style="flex:1"></span>
+    <span style="color: var(--fg-faint); align-self: center;">아이템 클릭 → 심층 분석</span>
+  </div>
+
+  <!-- Narrative -->
+  <section class="narrative">
+    <div class="narrative-label">Today's Story</div>
+    <div class="narrative-main">
+      이란 휴전이 연장됐지만 호르무즈는 열리지 않았고, 브렌트유는 $101로 재상승.
+      동시에 TSMC가 A13·A12 차세대 공정을 공개하며 반도체 설비투자 열기는 식지 않음.
+    </div>
+    <div class="narrative-port">
+      <strong>포트 관점</strong> — 에너지 리스크는 재점화 중, AI 인프라 서사는 강화 중.
+      두 축이 동시에 진행되는 희귀한 국면. 룰북 v8.1 유지, 관찰.
+    </div>
+  </section>
+
+  <!-- Section 1 -->
+  <section class="section s-us">
+    <div class="section-head" onclick="toggleSection(this)">
+      <div class="section-num">01</div>
+      <div class="section-title">워싱턴 ― 의회와 백악관</div>
+      <div class="section-dot"></div>
+      <div class="section-toggle">▾</div>
+    </div>
+    <div class="section-body">
+
+      <div class="item" onclick="toggleItem(this)">
+        <div class="item-summary">
+          <div class="item-head">
+            <div class="item-head-text">FISA 702 만료 임박, 공화당 내분 ― 4월 30일 D-day</div>
+            <div class="item-expand">＋</div>
+          </div>
+          <div class="item-body">
+            해외정보감시법 Section 702가 <strong>4월 30일 만료</strong>. 지난주 하원은 5년 연장안과 18개월 무수정 연장안 <strong>둘 다 부결</strong>. 정보기관 감청 권한이 공백 상태로 진입할 가능성.
+          </div>
+          <div class="item-meta">Source — Punchbowl News</div>
+        </div>
+        <div class="item-detail">
+          <div class="detail-inner">
+            <div class="detail-block">
+              <span class="detail-label">Why it matters</span>
+              <div class="detail-text">
+                Section 702는 <strong>미국 내 서버를 거치는 외국인 통신 감청의 법적 근거</strong>. 빅테크(구글·메타·마이크로소프트)가 정부에 데이터를 제공하는 핵심 통로. 만료되면 이들 기업의 법적 리스크가 증가하고, 국가안보국(NSA)은 대체 영장 절차로 전환해야 함. 과거 만료 위기마다 단기 연장으로 봉합된 역사.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Context</span>
+              <div class="detail-text">
+                트럼프와 존슨 하원의장이 밀었던 "5년 연장 + 개인정보 보호 개혁" 패키지를 공화당 <strong>자유공격회의(Freedom Caucus)</strong>가 부결. 그 후 18개월 무수정 연장안도 부결 ― 이건 이례적. 전문가들은 "의회가 스스로 정보기관 권한에 지뢰를 심은 상황"이라고 평가. 상원 다수당 대표 튠(Thune)과 존슨이 해법 마련 중.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Market Implication</span>
+              <div class="detail-text">
+                빅테크 규제 불확실성 상승 ― 특히 4월 말 실적 시즌과 겹침. 다만 역사적으로 <strong>단기 연장으로 봉합되는 경우가 대부분</strong>이라 시장 가격 반영은 제한적. 관전 포인트는 "봉합 방식" ― 정보기관 권한 축소 개혁이 포함되면 빅테크 데이터 수익 모델에 중장기 영향.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggleItem(this)">
+        <div class="item-summary">
+          <div class="item-head">
+            <div class="item-head-text">DHS 셧다운 65일째, ICE 재정 "이달 말이 한계"</div>
+            <div class="item-expand">＋</div>
+          </div>
+          <div class="item-body">
+            국토안보부 셧다운이 <strong>두 달을 넘김</strong>. 행정부 관계자는 "이번 지급 사이클이 행정명령으로 버틸 수 있는 마지막"이라고 의회에 전달.
+          </div>
+          <div class="item-meta">Source — Punchbowl Premium Brief</div>
+        </div>
+        <div class="item-detail">
+          <div class="detail-inner">
+            <div class="detail-block">
+              <span class="detail-label">Why it matters</span>
+              <div class="detail-text">
+                DHS는 <strong>ICE, 국경순찰, TSA, 비밀경호국, 사이버보안국(CISA)</strong>을 모두 관할. 직원 약 24만 명. 셧다운 장기화는 <strong>공공 안전 · 사이버 인프라</strong> 양쪽에 영향. 트럼프는 행정명령으로 직원 급여를 편법 지급해 왔으나 이 방식의 법적 한계가 4월 말 도달.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Context</span>
+              <div class="detail-text">
+                정부 셧다운이 부서별로 진행된 이례적 케이스. 민주당은 ICE 확장 자금 지원을 거부했고, 공화당은 당내 단독 처리(party-line reconciliation)로 해결하려는 중. <strong>상원 예산위가 이번 주 예산 결의안 발표 예정</strong> ― 이게 통과되면 ICE·국경순찰 자금만 분리해 처리하는 방식으로 진행.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Market Implication</span>
+              <div class="detail-text">
+                직접 시장 임팩트는 제한적. 다만 <strong>셧다운 패턴이 "부서별 단독 통과"로 정착</strong>되면 미국 재정 프로세스의 구조적 변화 ― 국가 신용등급 평가에 영향. 피치·무디스가 이미 "거버넌스 리스크"를 언급한 상태. 장기적으로 달러 자산 프리미엄 훼손 가능성.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggleItem(this)">
+        <div class="item-summary">
+          <div class="item-head">
+            <div class="item-head-text">펜실베이니아 2028 상원 경선, 페터먼 거취 불확실</div>
+            <div class="item-expand">＋</div>
+          </div>
+          <div class="item-body">
+            공화당 지지율 73%, 민주당 지지율 22%라는 <strong>기묘한 분포</strong>로 민주당 내 당적 이탈설. 시장 영향은 크지 않지만, 민주당 내부 분열 신호로 관전 포인트.
+          </div>
+          <div class="item-meta">Source — Punchbowl News</div>
+        </div>
+        <div class="item-detail">
+          <div class="detail-inner">
+            <div class="detail-block">
+              <span class="detail-label">Why it matters</span>
+              <div class="detail-text">
+                페터먼은 상원 50-50 구도에서 <strong>캐스팅보트 위치</strong>. 민주당 의원이지만 대부분 이슈에서 공화당과 같이 투표. 2028년 재선 여부가 불투명해지면 상원의 이념 지형이 2027년 이후 재편될 가능성.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Context</span>
+              <div class="detail-text">
+                퀴니피악 2월 여론조사에서 공화 73% / 민주 22% 지지. 민주당 내부에선 <strong>보일, 델루지오 하원의원</strong>이 2028년 도전 검토. 이란 전쟁 찬성 입장이 민주당 지지층 이탈의 핵심 원인. 당적 변경(공화당 전향) 시나리오가 워싱턴 내부에서 거론됨.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Market Implication</span>
+              <div class="detail-text">
+                단기 임팩트 제로. 다만 2028년까지 상원 지형 변화는 <strong>세제·규제 정책의 연속성</strong>에 영향 ― 특히 기술 규제, 법인세, 인프라 예산 관련. 포트 관점에선 2028년 장기 리스크 관찰 사항으로만 기록.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section class="section s-asia">
+    <div class="section-head" onclick="toggleSection(this)">
+      <div class="section-num">02</div>
+      <div class="section-title">아시아 ― 반도체와 공급망</div>
+      <div class="section-dot"></div>
+      <div class="section-toggle">▾</div>
+    </div>
+    <div class="section-body">
+
+      <div class="item" onclick="toggleItem(this)">
+        <div class="item-summary">
+          <div class="item-head">
+            <div class="item-head-text">TSMC, A13·A12 차세대 공정 공개 ― "2029년 양산"</div>
+            <div class="item-expand">＋</div>
+          </div>
+          <div class="item-body">
+            북미 기술심포지엄에서 <strong>A13·A12 공정 로드맵</strong> 첫 공개. <span class="chip chip-up">AI 수요 ×11</span> 표현을 CEO가 반복 사용.
+          </div>
+          <div class="item-meta">Source — Nikkei Asia, Apr 23</div>
+        </div>
+        <div class="item-detail">
+          <div class="detail-inner">
+            <div class="detail-block">
+              <span class="detail-label">Why it matters</span>
+              <div class="detail-text">
+                현재 최첨단은 <strong>N3(3나노)</strong>, 곧 N2(2나노) 양산 시작. A13·A12는 그 이후 세대 ― 이름에서 "A"는 옹스트롬(Å) 단위. 삼성·인텔과의 기술 격차를 <strong>2029년까지 선점</strong>하려는 포석. 발표 자체가 고객사(NVIDIA, Apple, AMD)를 묶어두는 역할.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Context</span>
+              <div class="detail-text">
+                TSMC의 2026년 설비투자(CapEx) <strong>$56B</strong>로 사상 최대. CEO 웨이는 "AI 수요가 진짜인지 매우 긴장했다"고 실토했으나, 고객사·고객사의 고객사와의 논의 후 결정했다고 설명. 패키징·웨이퍼 생산 동시 확장, 애리조나 팹 N3 양산을 <strong>2028년 → 2027년으로 앞당김</strong>.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Market Implication</span>
+              <div class="detail-text">
+                TSMC 독주 체제 재확인. <strong>423920(필라반도체 2x) 편향 유지의 근거</strong>. 다만 2026 반도체 매출 +57% 전망은 TSMC 중심 시나리오 ― 나머지 플레이어(인텔·삼성 파운드리)가 따라가지 못하면 상위 몇 종목으로 수익이 집중. ETF 분산 효과가 줄어드는 구조.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggleItem(this)">
+        <div class="item-summary">
+          <div class="item-head">
+            <div class="item-head-text">HBM 지배력 ― SK하이닉스 50~62% vs 삼성 역습</div>
+            <div class="item-expand">＋</div>
+          </div>
+          <div class="item-body">
+            SK하이닉스가 <strong>HBM3E 시장의 절반 이상</strong> 점유. 삼성은 <strong>$73B 설비투자(+22%)</strong> 발표, HBM4 샘플 출하 시작.
+          </div>
+          <div class="item-meta">Source — International Business Times Asia</div>
+        </div>
+        <div class="item-detail">
+          <div class="detail-inner">
+            <div class="detail-block">
+              <span class="detail-label">Why it matters</span>
+              <div class="detail-text">
+                HBM(High Bandwidth Memory)은 <strong>AI GPU와 함께 팔리는 필수 부품</strong>. NVIDIA H100 한 장당 HBM 80GB 탑재. AI 수요가 GPU 수요로, GPU 수요가 HBM 수요로 직결. HBM 마진이 일반 DRAM의 5~7배라 메모리 3사 실적의 핵심 변수.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Context</span>
+              <div class="detail-text">
+                <table class="mini-table">
+                  <tr><th>업체</th><th>HBM 시장점유</th><th>2026 CapEx</th></tr>
+                  <tr><td><strong>SK하이닉스</strong></td><td>50~62%</td><td>역대 최대</td></tr>
+                  <tr><td><strong>삼성전자</strong></td><td>&lt;30% (목표 30%+)</td><td class="num">$73B (+22%)</td></tr>
+                  <tr><td><strong>Micron</strong></td><td>잔여</td><td>확대 중</td></tr>
+                </table>
+                <div style="margin-top: 10px;">
+                  SK하이닉스는 <strong>TSMC와 "One-Team" 연합</strong> ― HBM4의 로직 다이를 TSMC 첨단 노드로 위탁생산. 삼성은 "All-in-One" 전략 ― DRAM과 로직 다이를 자사 생태계로 통합.
+                </div>
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Market Implication</span>
+              <div class="detail-text">
+                2026 아시아 반도체 총 설비투자 <strong>$136B (+25% YoY)</strong>. 한국 KOSPI가 사상 최고가를 찍는 이유 중 하나. 다만 HBM은 <strong>공급 과잉 전환 시 가격 급락 이력</strong>이 있음 ― 2022~2023년 DRAM 가격 -70% 충격을 기억해야. 현재는 공급 부족 국면이지만 2027년 전후 역전 가능성 주시.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggleItem(this)">
+        <div class="item-summary">
+          <div class="item-head">
+            <div class="item-head-text">이란 전쟁발 헬륨 부족 ― 반도체 업계 사재기 시작</div>
+            <div class="item-expand">＋</div>
+          </div>
+          <div class="item-body">
+            <strong>헬륨의 60%가 중동 공급</strong>인데 호르무즈 봉쇄로 공급망 타격. 니케이 보도에 따르면 반도체 기업들이 "예방적 대량 구매"로 전환.
+          </div>
+          <div class="item-meta">Source — Nikkei Asia Tech, Apr 1</div>
+        </div>
+        <div class="item-detail">
+          <div class="detail-inner">
+            <div class="detail-block">
+              <span class="detail-label">Why it matters</span>
+              <div class="detail-text">
+                헬륨은 <strong>반도체 식각·세정 공정의 필수 가스</strong>. 대체재 없음. 공급 부족 시 웨이퍼 생산 직접 제한. 카타르·알제리가 주요 공급원이며 카타르발 물량이 호르무즈를 통과. 과거 2018~2019년 헬륨 부족기에 반도체 생산이 실제로 영향받은 전례.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Context</span>
+              <div class="detail-text">
+                헬륨뿐 아니라 <strong>레이저 부품, PCB, 특수 소재</strong>도 동시 부족 징후. 니케이는 "AI 데이터센터부터 자동차까지 현대 경제의 모든 섹터에 영향"이라고 경고. 반도체 업체들의 재고 확보 경쟁으로 <strong>스팟 가격 급등</strong> 진행 중.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Market Implication</span>
+              <div class="detail-text">
+                <strong>단기 공급 쇼크 리스크</strong>. Q2~Q3 반도체 실적에 원가 부담으로 반영될 가능성. 역설적으로 <strong>첨단 공정 독점 업체(TSMC)</strong>에는 유리 ― 이런 시기에 구형 공정이 먼저 타격 받고 첨단 공정은 우선순위가 밀림. 반도체 ETF 내부 격차 확대 요인.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggleItem(this)">
+        <div class="item-summary">
+          <div class="item-head">
+            <div class="item-head-text">한국 KOSPI 사상 최고가 돌파</div>
+            <div class="item-expand">＋</div>
+          </div>
+          <div class="item-body">
+            삼성 AI TV 호재 + <strong>KOSPI +2.7% 급등</strong>. 중동 긴장 완화 기대로 사상 최고가 경신.
+          </div>
+          <div class="item-meta">Source — Nikkei Asia, Apr 21</div>
+        </div>
+        <div class="item-detail">
+          <div class="detail-inner">
+            <div class="detail-block">
+              <span class="detail-label">Why it matters</span>
+              <div class="detail-text">
+                KOSPI가 <strong>사상 최고가 갱신</strong> ― 삼성·SK하이닉스 주도. 한국 지수는 역사적으로 글로벌 반도체 사이클의 선행 지표 역할. 다만 이번 상승은 휴전 기대 선반영 + HBM 슈퍼사이클 + 외국인 매수세 복합.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Context</span>
+              <div class="detail-text">
+                외국인 4월 한 달간 <strong>코스피 순매수 급증</strong>. 원화도 강세 전환. 다만 호르무즈가 실제로 안 열리고 있어 "이 기대가 정당화되려면 5월 중 협상 진전 필요". 삼성 AI TV 판매 호조 + HBM4 샘플 출하가 개별 재료로 작용.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Market Implication</span>
+              <div class="detail-text">
+                병우님은 <strong>423920을 통해 한국 상장 반도체 2x에 노출</strong>된 상태. KOSPI 강세는 간접적 순풍. 다만 "기대 선반영" 국면이라 <strong>협상 결렬 시 급락 위험</strong>도 동반. 룰북 기반 보유 유지, 추격 매수는 없음.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section class="section s-geo">
+    <div class="section-head" onclick="toggleSection(this)">
+      <div class="section-num">03</div>
+      <div class="section-title">중동·유럽 ― 에너지와 지정학</div>
+      <div class="section-dot"></div>
+      <div class="section-toggle">▾</div>
+    </div>
+    <div class="section-body">
+
+      <div class="item" onclick="toggleItem(this)">
+        <div class="item-summary">
+          <div class="item-head">
+            <div class="item-head-text">휴전 연장됐으나 호르무즈 미개방 ― 브렌트 <span class="chip chip-up">$101.91</span></div>
+            <div class="item-expand">＋</div>
+          </div>
+          <div class="item-body">
+            4월 22일 트럼프가 휴전 연장. 그러나 <strong>이란 혁명수비대가 해협에서 선박 2척 나포</strong>. 미 해군 봉쇄도 유지.
+          </div>
+          <div class="item-meta">Source — CNBC, Al Habtoor Research Centre</div>
+        </div>
+        <div class="item-detail">
+          <div class="detail-inner">
+            <div class="detail-block">
+              <span class="detail-label">Why it matters</span>
+              <div class="detail-text">
+                호르무즈 해협은 <strong>세계 원유의 20%, LNG의 30%</strong>가 통과하는 병목. IEA는 이번 봉쇄를 "글로벌 원유시장 역사상 최대 공급 충격"이라 평가. 휴전이 <strong>외교적 제스처</strong>일 뿐 실제 해협 재개방은 아니라는 해석이 시장 컨센서스로 자리잡는 중.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Context</span>
+              <div class="detail-text">
+                <table class="mini-table">
+                  <tr><th>시점</th><th>브렌트</th><th>상태</th></tr>
+                  <tr><td>2월 28일</td><td class="num">$80~82</td><td>전쟁 발발</td></tr>
+                  <tr><td>3월 중순</td><td class="num">$100+</td><td>호르무즈 봉쇄</td></tr>
+                  <tr><td>4월 7일</td><td class="num">$95</td><td>휴전 발효</td></tr>
+                  <tr><td>4월 22일</td><td class="num">$101.91</td><td>연장 + 선박 나포</td></tr>
+                </table>
+                <div style="margin-top: 10px;">
+                  Rapidan의 맥낼리는 "이란 지도부가 분열됐지만 기능은 한다. 트럼프보다 우위를 점했다고 자신하는 중"이라 평가. 이게 단기 해결 어려움의 핵심.
+                </div>
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Market Implication</span>
+              <div class="detail-text">
+                유가 $95~115 박스가 <strong>"새 정상(new normal)"</strong>으로 굳어지는 중. 이는 글로벌 인플레이션 +0.8%p 상방 압력. 연준은 "보고 지나가겠다"지만 영란은행·ECB는 인상 선회. <strong>금리 · 통화 · 주식 간 디커플링</strong>이 Q2 내내 지속될 가능성. 금(GLD) 수혜 구간.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggleItem(this)">
+        <div class="item-summary">
+          <div class="item-head">
+            <div class="item-head-text">이란의 이슬라마바드 협상 카드 ― 호르무즈 통과료 $2M</div>
+            <div class="item-expand">＋</div>
+          </div>
+          <div class="item-body">
+            이란이 <strong>호르무즈 주권 공식 인정 + 선박당 $2M 통과료</strong>를 협상안으로 제안. 배럴당 $2 구조적 비용 추가 효과.
+          </div>
+          <div class="item-meta">Source — Al Habtoor Research, Apr 23</div>
+        </div>
+        <div class="item-detail">
+          <div class="detail-inner">
+            <div class="detail-block">
+              <span class="detail-label">Why it matters</span>
+              <div class="detail-text">
+                이란의 협상안이 받아들여지면 <strong>호르무즈가 "이란이 관할하는 유료 고속도로"</strong>가 됨. 국제법상 해협의 "자유 통과권(innocent passage)" 원칙을 뒤집는 역사적 전환. 미국·사우디·UAE가 절대 동의할 수 없는 조건 ― 즉 협상이 장기화될 가능성을 시사.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Context</span>
+              <div class="detail-text">
+                이란의 다른 요구: <strong>중동 미군 철수, 대이란 제재 전면 해제, 동결 자산 반환, 전쟁 배상</strong>. 이슬라마바드 협상의 중재자는 파키스탄. JD 밴스 부통령 파키스탄 방문이 연기된 건 이 요구들에 대한 미국측 미응답. EIA는 Q2 브렌트 평균 <strong>$115</strong> 전망 유지.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Market Implication</span>
+              <div class="detail-text">
+                <strong>에너지 쇼크의 구조화</strong>. 단기 해결이 아니라 "관리 가능한 고유가 시대" 진입. 이는 <strong>석유 메이저(XOM, CVX, Shell), 에너지 인프라, 원전(CCJ), 가스(LNG)</strong> 섹터에 중장기 강세. 반도체·AI 인프라의 전력 수요 급증과 맞물려 <strong>에너지 섹터 구조적 재평가</strong> 진행 중. 경진님 계좌의 금(GLD) 보유는 이 국면에 맞는 설계.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggleItem(this)">
+        <div class="item-summary">
+          <div class="item-head">
+            <div class="item-head-text">필리핀 국가 에너지 비상 ― 원유 비축 6월까지만 버팀</div>
+            <div class="item-expand">＋</div>
+          </div>
+          <div class="item-body">
+            필리핀은 원유 98%를 중동 수입. <strong>3월 24일 국가 에너지 비상 선포</strong>. 인도도 4월에만 58만 가구에 배관 가스 신규 연결.
+          </div>
+          <div class="item-meta">Source — Wikipedia, 2026 Iran war fuel crisis</div>
+        </div>
+        <div class="item-detail">
+          <div class="detail-inner">
+            <div class="detail-block">
+              <span class="detail-label">Why it matters</span>
+              <div class="detail-text">
+                이란 전쟁의 <strong>실물 경제 타격이 동남아·남아시아에 먼저 집중</strong>. 이들 국가는 중동 의존도 90%+. 식량·비료 위기까지 복합. 글로벌 인플레이션의 선행 신호로 기능. 선진국 인플레이션 통계에 반영되기까지 2~3개월 시차.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Context</span>
+              <div class="detail-text">
+                인도 <strong>LPG 수입의 60%가 호르무즈 경유</strong> ― 가정용 조리 가스 부족으로 일부 음식점 영업 중단. 구자라트 세라믹 산업 가동 중단. 필리핀은 6월 30일까지만 원유 비축분 버팀. 네팔·스리랑카도 배급제 도입.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Market Implication</span>
+              <div class="detail-text">
+                <strong>신흥시장(EM) 통화·주식 리스크</strong>. 인도 루피, 필리핀 페소 약세 압력. EEM(신흥국 ETF) 2월 이후 지속 약세. 반면 인도의 <strong>국내 가스·석탄 자립 정책 가속화</strong>는 인프라·전력 섹터에 수혜. 장기적으로 에너지 블록화(지역별 자립) 추세 강화.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 4 -->
+  <section class="section s-cap">
+    <div class="section-head" onclick="toggleSection(this)">
+      <div class="section-num">04</div>
+      <div class="section-title">글로벌 자본 ― 중앙은행과 외환</div>
+      <div class="section-dot"></div>
+      <div class="section-toggle">▾</div>
+    </div>
+    <div class="section-body">
+
+      <div class="item" onclick="toggleItem(this)">
+        <div class="item-summary">
+          <div class="item-head">
+            <div class="item-head-text">BOJ 4월 회의 D-3 ― 금리 동결 유력, 그러나 분열 조짐</div>
+            <div class="item-expand">＋</div>
+          </div>
+          <div class="item-body">
+            4월 27~28일 일본은행 회의. 우에다 총재 4월 13일 연설이 인상 기대를 <strong>꺾음</strong> ― 시장이 가격에 반영한 인상폭은 5bp에 불과.
+          </div>
+          <div class="item-meta">Source — MUFG FX Daily, BOJ</div>
+        </div>
+        <div class="item-detail">
+          <div class="detail-inner">
+            <div class="detail-block">
+              <span class="detail-label">Why it matters</span>
+              <div class="detail-text">
+                일본은 <strong>1990년대 이후 금리를 정상화하려는 40년만의 전환</strong> 진행 중. 현재 0.75%는 1995년 이후 최고. 인상 속도가 <strong>엔화 · 글로벌 자본 흐름</strong>의 핵심 변수. 엔캐리 트레이드 규모 약 $20T ― 엔 강세 전환 시 글로벌 유동성 회수 압력.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Context</span>
+              <div class="detail-text">
+                다카이치 총리의 <strong>"리플레이션"</strong> 정책 기조가 엔약세 압력. JGB 금리 급등 → 엔약세 → 해외 자산 매입 유인. 그런데 BOJ는 중동 불확실성 때문에 인상 연기. <strong>내부 분열 보도</strong>에 따르면 다카타 위원은 1.0% 인상 주장, 우에다 총재는 관망. 7월 인상이 유력.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Market Implication</span>
+              <div class="detail-text">
+                <strong>USD/JPY 158~160 방어선</strong>이 깨지면 재무성 직접 개입 가능성. 카타야마 재무상이 G7에 "시급한 우려" 표명. 엔약세는 <strong>닛케이 강세 → 반도체 장비주(ASML, 도쿄일렉트론) 순풍</strong>이지만 엔강세 전환 시 급반전. 병우님 포트 직접 영향은 제한적이나 글로벌 유동성 체제 변화 관찰.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggleItem(this)">
+        <div class="item-summary">
+          <div class="item-head">
+            <div class="item-head-text">BOE · ECB ― 에너지 쇼크에 <span class="chip chip-up">+38bp 인상</span> 선반영</div>
+            <div class="item-expand">＋</div>
+          </div>
+          <div class="item-body">
+            영란은행의 2026년 잔여기간 인상폭 <strong>38bp 가격 반영</strong>. ECB도 6~7월 첫 인상 가능성.
+          </div>
+          <div class="item-meta">Source — RBC CM Currency Report Card</div>
+        </div>
+        <div class="item-detail">
+          <div class="detail-inner">
+            <div class="detail-block">
+              <span class="detail-label">Why it matters</span>
+              <div class="detail-text">
+                <strong>연준 vs 타 중앙은행의 정책 분기(divergence)</strong>. 연준은 에너지 쇼크를 "보고 지나가겠다"는 비둘기, BOE·ECB는 인상 선회. 이는 <strong>달러 상대 약세</strong>로 이어지는 조건. 원화 대비 달러는 이 흐름에 직접 영향.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Context</span>
+              <div class="detail-text">
+                영국은 2022년 "인플레이션 대응 늦었다"는 비판 트라우마. 이번엔 선제 대응 자세. EUR/USD가 <strong>$1.20선 돌파</strong> ― 2021년 6월 이후 처음. 연준이 비둘기 입장을 고수하는 한 달러 약세는 구조화될 가능성.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Market Implication</span>
+              <div class="detail-text">
+                <strong>원/달러 환율 하락 압력</strong> ― 병우님의 USD(ProShares Ultra Semiconductors) 원화 환산 수익률에 마이너스 요인. 다만 반도체 현물 상승이 이를 상쇄 중. 경진님의 금(GLD) 보유는 달러 약세 수혜. <strong>Q2 DXY 관찰이 포트 핵심 변수</strong>.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggleItem(this)">
+        <div class="item-summary">
+          <div class="item-head">
+            <div class="item-head-text">위안 안정 정책 유지 ― 달러 약세 시 절상 압력</div>
+            <div class="item-expand">＋</div>
+          </div>
+          <div class="item-body">
+            PBOC가 <strong>USD/CNY 안정화 유지</strong>. 기름 무역에서 <strong>위안 결제 비중 확대</strong> 중 ― 이란 호르무즈 통행료 결제에 위안 활용 사례.
+          </div>
+          <div class="item-meta">Source — RBC CM, MUFG Research</div>
+        </div>
+        <div class="item-detail">
+          <div class="detail-inner">
+            <div class="detail-block">
+              <span class="detail-label">Why it matters</span>
+              <div class="detail-text">
+                <strong>페트로달러 체제의 균열</strong> 징후. 이란이 원유·호르무즈 통행료를 위안으로 결제받기 시작하면, 중국의 "위안 국제화" 전략에 전환점. 사우디도 일부 대중 원유 수출을 위안 결제로 전환 중. 장기적으로 <strong>달러 기축 약화</strong>의 구조적 배경.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Context</span>
+              <div class="detail-text">
+                PBOC는 전쟁 기간 위안 안정 유지. 달러 약세 전환 시에도 과도한 위안 절상을 억제 ― <strong>USD/CNY 7.1~7.3 박스</strong> 유지 의도. 중국 경제가 부동산 하락·디플레이션으로 약한 상태라 수출 경쟁력 훼손을 원치 않음.
+              </div>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Market Implication</span>
+              <div class="detail-text">
+                <strong>중국 주식 재평가 기류</strong> ― 외국인 펀드매니저들이 AI·태양광에서 중국 기업을 재검토. FXI(중국 대형주 ETF) 관찰 포인트. 다만 미중 반도체 갈등은 여전히 격화 중이라 중국 반도체 직접 투자는 위험. 기축통화 체제 변화는 <strong>10년 단위 관찰 사항</strong>이지 단기 포트 조정 신호가 아님.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Closing -->
+  <section class="closing">
+    <div class="closing-label">오늘의 한 줄</div>
+    <div class="closing-text">
+      "호르무즈는 외교로 닫혀 있고, 반도체는 자본으로 열려 있다.
+      두 시계가 동시에 움직이는 분기 ― 뉴스가 아니라 구조를 보라."
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span>Evening Briefing v0.2 · prototype</span>
+    <span>Sources: Punchbowl · Nikkei Asia · CNBC · MUFG · RBC · Al Habtoor</span>
+  </footer>
+
+</div>
+
+<script>
+  function toggleItem(el) {
+    el.classList.toggle('open');
+  }
+  function toggleSection(head) {
+    head.parentElement.classList.toggle('collapsed');
+  }
+  function setAllItems(open) {
+    document.querySelectorAll('.item').forEach(item => {
+      if (open) item.classList.add('open');
+      else item.classList.remove('open');
+    });
+    document.querySelectorAll('.section').forEach(sec => {
+      sec.classList.remove('collapsed');
+    });
+  }
+</script>
+</body>
+</html>
