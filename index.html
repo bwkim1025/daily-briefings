@@ -30,19 +30,10 @@
       --ink-5: #c5c9d2;
       --line: #e6e8ee;
       --line-soft: #eef0f4;
-
-      /* Single accent — deep navy */
       --accent: #1d3a8a;
       --accent-strong: #142a66;
       --accent-soft: #e8edfa;
       --accent-ink: #0d1f4d;
-
-      /* Category dots — desaturated, harmonized with navy */
-      --c-us: #1d3a8a;
-      --c-asia: #2563b0;
-      --c-me: #5b6473;
-      --c-cap: #6b4cb8;
-
       --radius: 14px;
       --radius-sm: 10px;
     }
@@ -63,10 +54,6 @@
       --accent-strong: #8aa3ff;
       --accent-soft: #1a2247;
       --accent-ink: #b9caff;
-      --c-us: #6b8bff;
-      --c-asia: #5da4e0;
-      --c-me: #8a92a3;
-      --c-cap: #a991e8;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -135,6 +122,7 @@
       place-items: center;
       transition: all 0.15s ease;
       font-family: inherit;
+      text-decoration: none;
     }
     .icon-btn:hover { border-color: var(--ink-4); color: var(--ink); }
     .icon-btn:active { transform: scale(0.96); }
@@ -173,9 +161,7 @@
       margin-bottom: 14px;
       text-wrap: balance;
     }
-    .masthead h1 .accent {
-      color: var(--accent);
-    }
+    .masthead h1 .accent { color: var(--accent); }
     .masthead-meta {
       display: flex;
       align-items: center;
@@ -196,7 +182,6 @@
       background: var(--bg-sunk);
       border-radius: var(--radius);
       border: 1px solid var(--line-soft);
-      position: relative;
     }
     .story-label {
       font-size: 11px;
@@ -230,7 +215,7 @@
       font-weight: 700;
       font-size: 13px;
       letter-spacing: 0.02em;
-      color: var(--cat-color, var(--accent));
+      color: var(--accent);
       min-width: 24px;
       font-variant-numeric: tabular-nums;
     }
@@ -321,7 +306,7 @@
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--cat-color, var(--accent));
+      color: var(--accent);
       margin-bottom: 8px;
     }
     .item-body p {
@@ -362,41 +347,31 @@
     }
     .item-body td { color: var(--ink-2); font-weight: 500; }
 
-    /* ---------- One liner ---------- */
-    .oneliner {
-      margin-top: 36px;
-      padding: 26px 24px;
-      background: var(--accent);
-      color: #fff;
+    /* ---------- Market summary ---------- */
+    .market-bar {
+      margin-top: 32px;
+      padding: 18px 20px;
+      background: var(--bg-sunk);
       border-radius: var(--radius);
-      position: relative;
-      overflow: hidden;
+      border: 1px solid var(--line-soft);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
     }
-    .oneliner::before {
-      content: "";
-      position: absolute;
-      top: -40px; right: -40px;
-      width: 140px; height: 140px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.06);
-    }
-    .oneliner-label {
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
+    .market-bar-label {
+      font-size: 10px;
       font-weight: 700;
-      margin-bottom: 12px;
-      position: relative;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      white-space: nowrap;
+      padding-top: 2px;
     }
-    .oneliner-quote {
-      font-weight: 600;
-      font-size: 17px;
-      line-height: 1.55;
-      color: #fff;
-      letter-spacing: -0.015em;
-      text-wrap: pretty;
-      position: relative;
+    .market-bar-text {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--ink-2);
+      font-weight: 500;
     }
 
     /* ---------- Footer ---------- */
@@ -422,10 +397,7 @@
     .footer a:hover { color: var(--accent); }
 
     /* ---------- States ---------- */
-    .state {
-      text-align: center;
-      padding: 80px 20px;
-    }
+    .state { text-align: center; padding: 80px 20px; }
     .state-mark {
       display: inline-grid;
       place-items: center;
@@ -437,13 +409,7 @@
       font-weight: 700;
       margin-bottom: 16px;
     }
-    .state-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 6px;
-      letter-spacing: -0.015em;
-    }
+    .state-title { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 6px; letter-spacing: -0.015em; }
     .state-sub { font-size: 14px; color: var(--ink-3); }
 
     .skeleton {
@@ -461,9 +427,7 @@
     .skel-l { height: 12px; width: 90%; margin-bottom: 6px; }
     .skel-l.short { width: 60%; }
 
-    @media (hover: none) {
-      .item-head:active { background: var(--bg-sunk); }
-    }
+    @media (hover: none) { .item-head:active { background: var(--bg-sunk); } }
 
     @media (max-width: 480px) {
       .container { padding: 20px 16px 60px; }
@@ -473,8 +437,6 @@
       .item-head { padding: 16px 2px; }
       .item-headline { font-size: 15.5px; }
       .item-summary { font-size: 13.5px; }
-      .oneliner { padding: 22px 20px; }
-      .oneliner-quote { font-size: 16px; }
       .cat-title { font-size: 16px; }
     }
   </style>
@@ -487,6 +449,12 @@
         <span class="brand-label">Briefing</span>
       </div>
       <div class="top-actions">
+        <a href="archive.html" class="icon-btn" aria-label="아카이브" title="아카이브">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1.5" y="3" width="13" height="11" rx="1.5"/>
+            <path d="M1.5 6.5h13M5.5 1.5v3M10.5 1.5v3"/>
+          </svg>
+        </a>
         <button class="icon-btn" id="theme-toggle" aria-label="테마 전환" title="테마 전환">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
             <path d="M13.5 9.5A5 5 0 1 1 6.5 2.5a4 4 0 0 0 7 7Z"/>
@@ -496,297 +464,6 @@
     </div>
 
     <div id="content">
-      <div class="skel-block">
-        <div class="skeleton skel-h"></div>
-        <div class="skeleton skel-l"></div>
-        <div class="skeleton skel-l short"></div>
-      </div>
-      <div class="skel-block">
-        <div class="skeleton skel-h"></div>
-        <div class="skeleton skel-l"></div>
-        <div class="skeleton skel-l short"></div>
-      </div>
-      <div class="skel-block">
-        <div class="skeleton skel-h"></div>
-        <div class="skeleton skel-l"></div>
-        <div class="skeleton skel-l short"></div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // ---------- Theme ----------
-    const root = document.documentElement;
-    const savedTheme = localStorage.getItem('eb-theme');
-    if (savedTheme === 'dark') root.classList.add('dark');
-
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-      const isDark = root.classList.toggle('dark');
-      localStorage.setItem('eb-theme', isDark ? 'dark' : 'light');
-      const tc = document.querySelector('meta[name="theme-color"]');
-      if (tc) tc.setAttribute('content', isDark ? '#0b0e15' : '#ffffff');
-    });
-
-    // ---------- Categories ----------
-    const CATS = [
-      { key: 'US',      title: '미국 · 정치 · 정책',   sub: 'Washington', color: 'var(--c-us)' },
-      { key: 'ASIA',    title: '아시아 · 반도체',      sub: 'Asia',       color: 'var(--c-asia)' },
-      { key: 'ME',      title: '중동·유럽 · 지정학',   sub: 'Geopolitics', color: 'var(--c-me)' },
-      { key: 'CAPITAL', title: '글로벌 자본 · 환율',   sub: 'Capital',    color: 'var(--c-cap)' },
-    ];
-    const CAT_MAP = Object.fromEntries(CATS.map(c => [c.key, c]));
-
-    async function fetchLatestBriefing() {
-      const apiUrl = 'https://api.github.com/repos/bwkim1025/evening-briefing/contents/briefings';
-      const r = await fetch(apiUrl);
-      if (!r.ok) throw new Error('GitHub API 호출 실패');
-      const files = await r.json();
-      const mdFiles = files
-        .filter(f => f.name.endsWith('.md') && f.name !== '.gitkeep')
-        .sort((a, b) => b.name.localeCompare(a.name));
-      if (!mdFiles.length) return null;
-      const contentResp = await fetch(mdFiles[0].download_url);
-      return await contentResp.text();
-    }
-
-    function parseMarkdown(md) {
-      const result = { date: '', todaysStory: '', categories: {}, oneLiner: '' };
-      const lines = md.split('\n');
-      let mode = null, currentCat = null, currentItem = null, currentSection = null;
-      let buffer = [];
-      const flush = () => {
-        if (currentSection && currentItem) {
-          currentItem[currentSection] = buffer.join('\n').trim();
-        } else if (mode === 'TODAYS_STORY') {
-          result.todaysStory = buffer.join('\n').trim();
-        } else if (mode === 'ONE_LINER') {
-          result.oneLiner = buffer.join('\n').trim();
-        }
-        buffer = [];
-      };
-      for (const line of lines) {
-        const dateMatch = line.match(/^#\s+(\d{4}-\d{2}-\d{2})/);
-        if (dateMatch) { result.date = dateMatch[1]; continue; }
-        const h2 = line.match(/^##\s+(\w+)/);
-        if (h2) {
-          flush();
-          const tag = h2[1].toUpperCase();
-          if (tag === 'TODAYS_STORY' || tag === 'ONE_LINER') {
-            mode = tag; currentCat = null; currentItem = null;
-          } else if (CAT_MAP[tag]) {
-            mode = 'CATEGORY'; currentCat = tag;
-            result.categories[tag] = []; currentItem = null;
-          }
-          currentSection = null;
-          continue;
-        }
-        const h3 = line.match(/^###\s+(.+)/);
-        if (h3 && mode === 'CATEGORY') {
-          flush();
-          currentItem = { headline: h3[1].trim(), summary: '', whyItMatters: '', context: '', marketImplication: '' };
-          result.categories[currentCat].push(currentItem);
-          currentSection = 'summary';
-          continue;
-        }
-        const h4 = line.match(/^####\s+(.+)/);
-        if (h4 && currentItem) {
-          flush();
-          const sec = h4[1].toLowerCase().trim();
-          if (sec.startsWith('why')) currentSection = 'whyItMatters';
-          else if (sec.startsWith('context')) currentSection = 'context';
-          else if (sec.startsWith('market')) currentSection = 'marketImplication';
-          continue;
-        }
-        if (line.trim() === '---') continue;
-        buffer.push(line);
-      }
-      flush();
-      return result;
-    }
-
-    function mdInline(s) {
-      return escapeHtml(s)
-        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-        .replace(/\*(.+?)\*/g, '<em>$1</em>');
-    }
-
-    function mdToHtml(md) {
-      if (!md) return '';
-      const lines = md.split('\n');
-      let html = '';
-      let para = [];
-      let tableRows = [];
-      let inTable = false;
-      const flushPara = () => {
-        if (para.length) {
-          html += `<p>${para.join(' ').trim().split(/\n\s*\n/).join('</p><p>')}</p>`;
-          para = [];
-        }
-      };
-      const flushTable = () => {
-        if (!tableRows.length) return;
-        let header = null, body = [];
-        for (let i = 0; i < tableRows.length; i++) {
-          const cells = tableRows[i];
-          if (cells.every(c => /^:?-{2,}:?$/.test(c.trim()))) {
-            header = tableRows[i - 1] || null;
-            body = tableRows.slice(i + 1);
-            break;
-          }
-        }
-        if (!header) { header = tableRows[0]; body = tableRows.slice(1); }
-        html += '<table>';
-        if (header) html += '<tr>' + header.map(c => `<th>${mdInline(c.trim())}</th>`).join('') + '</tr>';
-        for (const row of body) html += '<tr>' + row.map(c => `<td>${mdInline(c.trim())}</td>`).join('') + '</tr>';
-        html += '</table>';
-        tableRows = [];
-        inTable = false;
-      };
-      for (const line of lines) {
-        if (/^\s*\|.*\|\s*$/.test(line)) {
-          flushPara();
-          const cells = line.trim().replace(/^\||\|$/g, '').split('|');
-          tableRows.push(cells);
-          inTable = true;
-          continue;
-        }
-        if (inTable) flushTable();
-        if (line.trim() === '') flushPara();
-        else para.push(mdInline(line.trim()));
-      }
-      flushPara();
-      if (inTable) flushTable();
-      return html;
-    }
-
-    function escapeHtml(s) {
-      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    }
-
-    function formatDateLong(dateStr) {
-      if (!dateStr) return '';
-      const d = new Date(dateStr + 'T21:00:00+09:00');
-      const days = ['일', '월', '화', '수', '목', '금', '토'];
-      const m = String(d.getMonth() + 1).padStart(2, '0');
-      const day = String(d.getDate()).padStart(2, '0');
-      return `${d.getFullYear()}.${m}.${day} · ${days[d.getDay()]}요일`;
-    }
-
-    function render(data) {
-      const dateLong = formatDateLong(data.date);
-      let categoriesHtml = '';
-      let catIdx = 0;
-      for (const cat of CATS) {
-        const items = data.categories[cat.key] || [];
-        if (!items.length) continue;
-        catIdx += 1;
-        const num = String(catIdx).padStart(2, '0');
-        let itemsHtml = '';
-        for (const it of items) {
-          const blocks = [];
-          if (it.whyItMatters)      blocks.push(`<div class="block"><h4>왜 중요한가</h4>${mdToHtml(it.whyItMatters)}</div>`);
-          if (it.context)           blocks.push(`<div class="block"><h4>배경</h4>${mdToHtml(it.context)}</div>`);
-          if (it.marketImplication) blocks.push(`<div class="block"><h4>시장 영향</h4>${mdToHtml(it.marketImplication)}</div>`);
-          itemsHtml += `
-            <details class="item">
-              <summary class="item-head">
-                <div>
-                  <div class="item-headline">${escapeHtml(it.headline)}</div>
-                  ${it.summary ? `<div class="item-summary">${mdInline(it.summary)}</div>` : ''}
-                </div>
-                <span class="item-toggle" aria-hidden="true">
-                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-                    <path d="M6 1.5v9M1.5 6h9"/>
-                  </svg>
-                </span>
-              </summary>
-              <div class="item-body">${blocks.join('')}</div>
-            </details>`;
-        }
-        categoriesHtml += `
-          <section class="category" style="--cat-color: ${cat.color}">
-            <div class="cat-head">
-              <span class="cat-num">${num}</span>
-              <span class="cat-title">${cat.title}</span>
-              <span class="cat-sub">${cat.sub}</span>
-            </div>
-            ${itemsHtml}
-          </section>`;
-      }
-
-      return `
-        <header class="masthead">
-          <span class="eyebrow"><span class="pulse"></span>오늘의 저녁 브리핑</span>
-          <h1>오늘 밤, <span class="accent">세계</span>는<br>어디를 보고 있나</h1>
-          <div class="masthead-meta">
-            <span>${dateLong}</span>
-            <span class="dot"></span>
-            <span>21:00 KST</span>
-          </div>
-        </header>
-
-        ${data.todaysStory ? `
-          <section class="story">
-            <div class="story-label">오늘의 흐름</div>
-            ${mdToHtml(data.todaysStory)}
-          </section>
-        ` : ''}
-
-        ${categoriesHtml}
-
-        ${data.oneLiner ? `
-          <section class="oneliner">
-            <div class="oneliner-label">오늘의 한 줄</div>
-            <div class="oneliner-quote">${mdInline(data.oneLiner)}</div>
-          </section>
-        ` : ''}
-
-        <footer class="footer">
-          <span>Evening Briefing</span>
-          <a href="archive.html">아카이브 →</a>
-        </footer>`;
-    }
-
-    function renderEmpty() {
-      return `
-        <div class="state">
-          <div class="state-mark">e</div>
-          <div class="state-title">아직 브리핑이 없습니다</div>
-          <div class="state-sub">매일 저녁 9시에 자동으로 도착합니다.</div>
-        </div>`;
-    }
-
-    function renderError(msg) {
-      return `
-        <div class="state">
-          <div class="state-mark">!</div>
-          <div class="state-title">불러오기 실패</div>
-          <div class="state-sub">${escapeHtml(msg)}</div>
-        </div>`;
-    }
-
-    async function init() {
-      const content = document.getElementById('content');
-      try {
-        const md = await fetchLatestBriefing();
-        if (!md) { content.innerHTML = renderEmpty(); return; }
-        const data = parseMarkdown(md);
-        content.innerHTML = render(data);
-      } catch (e) {
-        try {
-          const r = await fetch('briefings/2026-05-01.md');
-          if (r.ok) {
-            const md = await r.text();
-            const data = parseMarkdown(md);
-            content.innerHTML = render(data);
-            return;
-          }
-        } catch (_) {}
-        content.innerHTML = renderError(e.message);
-      }
-    }
-
-    init();
-  </script>
-</body>
-</html>
+      <div class="skel-block"><div class="skeleton skel-h"></div><div class="skeleton skel-l"></div><div class="skeleton skel-l short"></div></div>
+      <div class="skel-block"><div class="skeleton skel-h"></div><div class="skeleton skel-l"></div><div class="skeleton skel-l short"></div></div>
+      <div class="skel-block"><div class="skeleton skel-h"></div><div class="sk
