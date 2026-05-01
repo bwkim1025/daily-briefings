@@ -2,123 +2,551 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>저녁 브리핑</title>
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#0f0e0c">
+  <meta name="theme-color" content="#ffffff">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Evening">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #0f0e0c;
-      --bg-card: #1a1815;
-      --bg-card-hover: #211e1a;
-      --ink: #ebe8df;
-      --ink-muted: #8a857a;
-      --line: #2a2620;
-      --us: #e8b04a;
-      --asia: #e74c3c;
-      --me: #7b9e89;
-      --capital: #6d8ebd;
+      --bg: #ffffff;
+      --bg-elev: #ffffff;
+      --bg-sunk: #f6f7f9;
+      --bg-sunk-2: #eef0f4;
+      --ink: #0b1220;
+      --ink-2: #2b3340;
+      --ink-3: #5b6473;
+      --ink-4: #939aa6;
+      --ink-5: #c5c9d2;
+      --line: #e6e8ee;
+      --line-soft: #eef0f4;
+
+      /* Single accent — deep navy */
+      --accent: #1d3a8a;
+      --accent-strong: #142a66;
+      --accent-soft: #e8edfa;
+      --accent-ink: #0d1f4d;
+
+      /* Category dots — desaturated, harmonized with navy */
+      --c-us: #1d3a8a;
+      --c-asia: #2563b0;
+      --c-me: #5b6473;
+      --c-cap: #6b4cb8;
+
+      --radius: 14px;
+      --radius-sm: 10px;
     }
-    * { box-sizing: border-box; }
+
+    :root.dark {
+      --bg: #0b0e15;
+      --bg-elev: #11151e;
+      --bg-sunk: #161b27;
+      --bg-sunk-2: #1d2330;
+      --ink: #f1f3f8;
+      --ink-2: #c8cdd8;
+      --ink-3: #8a92a3;
+      --ink-4: #5b6273;
+      --ink-5: #383e4c;
+      --line: #1f2531;
+      --line-soft: #181d27;
+      --accent: #6b8bff;
+      --accent-strong: #8aa3ff;
+      --accent-soft: #1a2247;
+      --accent-ink: #b9caff;
+      --c-us: #6b8bff;
+      --c-asia: #5da4e0;
+      --c-me: #8a92a3;
+      --c-cap: #a991e8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     html, body {
       background: var(--bg);
       color: var(--ink);
-      margin: 0;
-      padding: 0;
-      font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
       font-size: 16px;
-      line-height: 1.65;
+      line-height: 1.6;
       word-break: keep-all;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       min-height: 100vh;
+      font-feature-settings: "ss01", "tnum";
     }
-    .container { max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-    .header { padding: 1rem 0 2rem; border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
-    .date { font-family: 'Fraunces', serif; font-size: .95rem; color: var(--ink-muted); letter-spacing: .05em; text-transform: uppercase; }
-    .title { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 500; margin: .4rem 0 0; letter-spacing: -.01em; }
-    .story { background: var(--bg-card); border-left: 3px solid var(--us); padding: 1.25rem 1.5rem; border-radius: 0 .5rem .5rem 0; margin-bottom: 2.5rem; font-family: 'Fraunces', serif; font-size: 1.05rem; line-height: 1.7; }
-    .category { margin-bottom: 2.5rem; }
-    .category-header { font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding-bottom: .6rem; margin-bottom: 1rem; border-bottom: 2px solid; }
-    .cat-us .category-header { color: var(--us); border-color: var(--us); }
-    .cat-asia .category-header { color: var(--asia); border-color: var(--asia); }
-    .cat-me .category-header { color: var(--me); border-color: var(--me); }
-    .cat-capital .category-header { color: var(--capital); border-color: var(--capital); }
-    details.item { background: var(--bg-card); border-radius: .6rem; margin-bottom: .6rem; overflow: hidden; transition: background .2s; }
-    details.item[open] { background: var(--bg-card-hover); }
-    summary.item-head { list-style: none; cursor: pointer; padding: 1rem 1.25rem; display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 1rem; }
-    summary.item-head::-webkit-details-marker { display: none; }
-    .item-headline { font-weight: 600; font-size: 1rem; line-height: 1.5; }
-    .item-summary { font-size: .88rem; color: var(--ink-muted); margin-top: .3rem; line-height: 1.55; }
-    .item-toggle { color: var(--ink-muted); font-size: 1.1rem; transition: transform .2s; align-self: center; }
-    details[open] .item-toggle { transform: rotate(45deg); }
-    .item-body { padding: 0 1.25rem 1.25rem; border-top: 1px solid var(--line); padding-top: 1rem; margin-top: .5rem; }
-    .item-body h4 { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-muted); margin: 1.1rem 0 .4rem; }
-    .item-body h4:first-child { margin-top: 0; }
-    .item-body p { margin: 0 0 .8rem; font-size: .95rem; }
-    .item-body table { width: 100%; border-collapse: collapse; font-size: .88rem; margin: .5rem 0 .8rem; }
-    .item-body th, .item-body td { padding: .5rem .7rem; text-align: left; border-bottom: 1px solid var(--line); }
-    .item-body th { color: var(--ink-muted); font-weight: 600; }
-    .oneliner { margin-top: 2.5rem; padding: 1.5rem; background: var(--bg-card); border-radius: .6rem; border-top: 3px solid var(--ink); font-family: 'Fraunces', serif; font-size: 1.1rem; line-height: 1.6; text-align: center; }
-    .oneliner-label { font-family: 'Pretendard Variable', sans-serif; font-size: .7rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: .6rem; }
-    .footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: .78rem; color: var(--ink-muted); text-align: center; }
-    .footer a { color: var(--ink-muted); text-decoration: none; border-bottom: 1px dotted var(--ink-muted); margin: 0 .8rem; }
-    .loading { text-align: center; padding: 4rem 1rem; color: var(--ink-muted); font-family: 'Fraunces', serif; }
-    .empty { text-align: center; padding: 4rem 1rem; color: var(--ink-muted); }
-    .empty .big { font-family: 'Fraunces', serif; font-size: 1.4rem; color: var(--ink); margin-bottom: 1rem; }
+    body { padding-top: env(safe-area-inset-top); }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px 20px 80px;
+    }
+
+    /* ---------- Top bar ---------- */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: -0.01em;
+    }
+    .brand-mark {
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--accent);
+    }
+    .brand-mark::before {
+      content: "";
+      display: inline-block;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent);
+      margin-right: 8px;
+      transform: translateY(-2px);
+    }
+    .brand-label {
+      font-size: 12px;
+      color: var(--ink-3);
+      letter-spacing: 0.02em;
+      font-weight: 500;
+    }
+    .top-actions { display: flex; gap: 6px; }
+    .icon-btn {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--bg-elev);
+      color: var(--ink-2);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+    .icon-btn:hover { border-color: var(--ink-4); color: var(--ink); }
+    .icon-btn:active { transform: scale(0.96); }
+    .icon-btn svg { width: 16px; height: 16px; }
+
+    /* ---------- Masthead ---------- */
+    .masthead {
+      padding: 12px 0 28px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--line);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      padding: 5px 10px;
+      background: var(--accent-soft);
+      border-radius: 999px;
+    }
+    .eyebrow .pulse {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+    }
+    .masthead h1 {
+      font-weight: 700;
+      font-size: clamp(30px, 7.5vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 14px;
+      text-wrap: balance;
+    }
+    .masthead h1 .accent {
+      color: var(--accent);
+    }
+    .masthead-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--ink-3);
+      font-weight: 500;
+    }
+    .masthead-meta .dot {
+      width: 3px; height: 3px; border-radius: 50%;
+      background: var(--ink-4);
+    }
+
+    /* ---------- Story ---------- */
+    .story {
+      padding: 22px 22px 24px;
+      margin-bottom: 36px;
+      background: var(--bg-sunk);
+      border-radius: var(--radius);
+      border: 1px solid var(--line-soft);
+      position: relative;
+    }
+    .story-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .story p {
+      font-size: clamp(16px, 4vw, 18px);
+      line-height: 1.6;
+      letter-spacing: -0.012em;
+      color: var(--ink);
+      font-weight: 500;
+      text-wrap: pretty;
+    }
+    .story p + p { margin-top: 10px; }
+
+    /* ---------- Category ---------- */
+    .category { margin-bottom: 40px; }
+    .cat-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding-bottom: 12px;
+      margin-bottom: 4px;
+      border-bottom: 1px solid var(--line);
+    }
+    .cat-num {
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      color: var(--cat-color, var(--accent));
+      min-width: 24px;
+      font-variant-numeric: tabular-nums;
+    }
+    .cat-title {
+      flex: 1;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.015em;
+    }
+    .cat-sub {
+      font-size: 11px;
+      color: var(--ink-3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* ---------- Item (accordion) ---------- */
+    .item {
+      border-bottom: 1px solid var(--line-soft);
+      transition: background 0.15s ease;
+    }
+    .item:last-child { border-bottom: none; }
+    .item-head {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 4px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: start;
+      user-select: none;
+    }
+    .item-head::-webkit-details-marker { display: none; }
+    .item-headline {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.45;
+      color: var(--ink);
+      letter-spacing: -0.012em;
+      text-wrap: balance;
+    }
+    .item-summary {
+      font-size: 14px;
+      color: var(--ink-3);
+      line-height: 1.55;
+      margin-top: 6px;
+      text-wrap: pretty;
+      font-weight: 500;
+    }
+    .item-toggle {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      color: var(--ink-3);
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+      margin-top: 2px;
+      background: var(--bg-elev);
+    }
+    .item-toggle svg { width: 12px; height: 12px; transition: transform 0.25s ease; }
+    .item[open] .item-toggle {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .item[open] .item-toggle svg { transform: rotate(45deg); }
+
+    .item-body {
+      padding: 4px 4px 24px;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .item-body .block { padding: 14px 0 0; }
+    .item-body .block + .block {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--line);
+    }
+    .item-body h4 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cat-color, var(--accent));
+      margin-bottom: 8px;
+    }
+    .item-body p {
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--ink-2);
+      margin-bottom: 10px;
+      text-wrap: pretty;
+      font-weight: 400;
+    }
+    .item-body p:last-child { margin-bottom: 0; }
+    .item-body strong { color: var(--ink); font-weight: 700; }
+
+    .item-body table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 13px;
+      margin: 12px 0;
+      background: var(--bg-sunk);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--line-soft);
+    }
+    .item-body th, .item-body td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .item-body tr:last-child th, .item-body tr:last-child td { border-bottom: none; }
+    .item-body th {
+      font-size: 10.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 700;
+      background: var(--bg-sunk-2);
+    }
+    .item-body td { color: var(--ink-2); font-weight: 500; }
+
+    /* ---------- One liner ---------- */
+    .oneliner {
+      margin-top: 36px;
+      padding: 26px 24px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: var(--radius);
+      position: relative;
+      overflow: hidden;
+    }
+    .oneliner::before {
+      content: "";
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .oneliner-label {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      font-weight: 700;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .oneliner-quote {
+      font-weight: 600;
+      font-size: 17px;
+      line-height: 1.55;
+      color: #fff;
+      letter-spacing: -0.015em;
+      text-wrap: pretty;
+      position: relative;
+    }
+
+    /* ---------- Footer ---------- */
+    .footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--ink-4);
+      font-weight: 500;
+    }
+    .footer a {
+      color: var(--ink-3);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.15s ease;
+    }
+    .footer a:hover { color: var(--accent); }
+
+    /* ---------- States ---------- */
+    .state {
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .state-mark {
+      display: inline-grid;
+      place-items: center;
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .state-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+      letter-spacing: -0.015em;
+    }
+    .state-sub { font-size: 14px; color: var(--ink-3); }
+
+    .skeleton {
+      background: linear-gradient(90deg, var(--line-soft) 0%, var(--bg-sunk) 50%, var(--line-soft) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s ease-in-out infinite;
+      border-radius: 6px;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .skel-block { padding: 20px 0; border-bottom: 1px solid var(--line-soft); }
+    .skel-h { height: 18px; width: 70%; margin-bottom: 10px; }
+    .skel-l { height: 12px; width: 90%; margin-bottom: 6px; }
+    .skel-l.short { width: 60%; }
+
+    @media (hover: none) {
+      .item-head:active { background: var(--bg-sunk); }
+    }
+
     @media (max-width: 480px) {
-      .container { padding: 1.5rem 1rem 3rem; }
-      .title { font-size: 1.6rem; }
-      .story { font-size: .98rem; padding: 1rem 1.1rem; }
-      .item-headline { font-size: .95rem; }
+      .container { padding: 20px 16px 60px; }
+      .masthead { padding-top: 4px; padding-bottom: 22px; margin-bottom: 24px; }
+      .story { padding: 18px 18px 20px; margin-bottom: 28px; }
+      .category { margin-bottom: 32px; }
+      .item-head { padding: 16px 2px; }
+      .item-headline { font-size: 15.5px; }
+      .item-summary { font-size: 13.5px; }
+      .oneliner { padding: 22px 20px; }
+      .oneliner-quote { font-size: 16px; }
+      .cat-title { font-size: 16px; }
     }
   </style>
 </head>
 <body>
   <div class="container" id="app">
-    <div class="loading">불러오는 중…</div>
+    <div class="topbar">
+      <div class="brand">
+        <span class="brand-mark">Evening</span>
+        <span class="brand-label">Briefing</span>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="theme-toggle" aria-label="테마 전환" title="테마 전환">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13.5 9.5A5 5 0 1 1 6.5 2.5a4 4 0 0 0 7 7Z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="skel-block">
+        <div class="skeleton skel-h"></div>
+        <div class="skeleton skel-l"></div>
+        <div class="skeleton skel-l short"></div>
+      </div>
+      <div class="skel-block">
+        <div class="skeleton skel-h"></div>
+        <div class="skeleton skel-l"></div>
+        <div class="skeleton skel-l short"></div>
+      </div>
+      <div class="skel-block">
+        <div class="skeleton skel-h"></div>
+        <div class="skeleton skel-l"></div>
+        <div class="skeleton skel-l short"></div>
+      </div>
+    </div>
   </div>
 
   <script>
-    const CAT_NAMES = {
-      US: '미국 · 정치 · 정책',
-      ASIA: '아시아 · 반도체 · 공급망',
-      ME: '중동·유럽 · 지정학',
-      CAPITAL: '글로벌 자본'
-    };
-    const CAT_CLASSES = {
-      US: 'cat-us', ASIA: 'cat-asia', ME: 'cat-me', CAPITAL: 'cat-capital'
-    };
+    // ---------- Theme ----------
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem('eb-theme');
+    if (savedTheme === 'dark') root.classList.add('dark');
 
-    // GitHub API로 briefings 폴더의 .md 파일 목록 가져오기
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark');
+      localStorage.setItem('eb-theme', isDark ? 'dark' : 'light');
+      const tc = document.querySelector('meta[name="theme-color"]');
+      if (tc) tc.setAttribute('content', isDark ? '#0b0e15' : '#ffffff');
+    });
+
+    // ---------- Categories ----------
+    const CATS = [
+      { key: 'US',      title: '미국 · 정치 · 정책',   sub: 'Washington', color: 'var(--c-us)' },
+      { key: 'ASIA',    title: '아시아 · 반도체',      sub: 'Asia',       color: 'var(--c-asia)' },
+      { key: 'ME',      title: '중동·유럽 · 지정학',   sub: 'Geopolitics', color: 'var(--c-me)' },
+      { key: 'CAPITAL', title: '글로벌 자본 · 환율',   sub: 'Capital',    color: 'var(--c-cap)' },
+    ];
+    const CAT_MAP = Object.fromEntries(CATS.map(c => [c.key, c]));
+
     async function fetchLatestBriefing() {
       const apiUrl = 'https://api.github.com/repos/bwkim1025/evening-briefing/contents/briefings';
       const r = await fetch(apiUrl);
       if (!r.ok) throw new Error('GitHub API 호출 실패');
       const files = await r.json();
-      
       const mdFiles = files
         .filter(f => f.name.endsWith('.md') && f.name !== '.gitkeep')
         .sort((a, b) => b.name.localeCompare(a.name));
-      
       if (!mdFiles.length) return null;
-      
-      // 가장 최신 파일 raw 내용 가져오기
       const contentResp = await fetch(mdFiles[0].download_url);
-      const md = await contentResp.text();
-      return md;
+      return await contentResp.text();
     }
 
     function parseMarkdown(md) {
@@ -126,7 +554,6 @@
       const lines = md.split('\n');
       let mode = null, currentCat = null, currentItem = null, currentSection = null;
       let buffer = [];
-
       const flush = () => {
         if (currentSection && currentItem) {
           currentItem[currentSection] = buffer.join('\n').trim();
@@ -137,25 +564,22 @@
         }
         buffer = [];
       };
-
       for (const line of lines) {
         const dateMatch = line.match(/^#\s+(\d{4}-\d{2}-\d{2})/);
         if (dateMatch) { result.date = dateMatch[1]; continue; }
-
         const h2 = line.match(/^##\s+(\w+)/);
         if (h2) {
           flush();
           const tag = h2[1].toUpperCase();
           if (tag === 'TODAYS_STORY' || tag === 'ONE_LINER') {
             mode = tag; currentCat = null; currentItem = null;
-          } else if (CAT_NAMES[tag]) {
+          } else if (CAT_MAP[tag]) {
             mode = 'CATEGORY'; currentCat = tag;
             result.categories[tag] = []; currentItem = null;
           }
           currentSection = null;
           continue;
         }
-
         const h3 = line.match(/^###\s+(.+)/);
         if (h3 && mode === 'CATEGORY') {
           flush();
@@ -164,7 +588,6 @@
           currentSection = 'summary';
           continue;
         }
-
         const h4 = line.match(/^####\s+(.+)/);
         if (h4 && currentItem) {
           flush();
@@ -174,46 +597,65 @@
           else if (sec.startsWith('market')) currentSection = 'marketImplication';
           continue;
         }
-
+        if (line.trim() === '---') continue;
         buffer.push(line);
       }
       flush();
       return result;
     }
 
+    function mdInline(s) {
+      return escapeHtml(s)
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>');
+    }
+
     function mdToHtml(md) {
       if (!md) return '';
       const lines = md.split('\n');
       let html = '';
-      let inTable = false;
       let para = [];
-      let tableHasHeader = false;
-
+      let tableRows = [];
+      let inTable = false;
       const flushPara = () => {
         if (para.length) {
-          html += `<p>${para.join(' ').trim()}</p>`;
+          html += `<p>${para.join(' ').trim().split(/\n\s*\n/).join('</p><p>')}</p>`;
           para = [];
         }
       };
-
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
-        if (line.match(/^\|.*\|$/)) {
-          flushPara();
-          if (!inTable) { html += '<table>'; inTable = true; tableHasHeader = false; }
-          const cells = line.split('|').slice(1, -1).map(c => c.trim());
-          if (cells.every(c => /^-+$/.test(c))) { tableHasHeader = true; continue; }
-          const tag = !tableHasHeader && !html.endsWith('</tr></table>') && html.lastIndexOf('<tr>') < html.lastIndexOf('<table>') ? 'th' : (!tableHasHeader ? 'th' : 'td');
-          html += `<tr>${cells.map(c => `<${tag}>${escapeHtml(c)}</${tag}>`).join('')}</tr>`;
-          if (!tableHasHeader) tableHasHeader = true;
-        } else {
-          if (inTable) { html += '</table>'; inTable = false; }
-          if (line.trim() === '') flushPara();
-          else para.push(escapeHtml(line.trim()));
+      const flushTable = () => {
+        if (!tableRows.length) return;
+        let header = null, body = [];
+        for (let i = 0; i < tableRows.length; i++) {
+          const cells = tableRows[i];
+          if (cells.every(c => /^:?-{2,}:?$/.test(c.trim()))) {
+            header = tableRows[i - 1] || null;
+            body = tableRows.slice(i + 1);
+            break;
+          }
         }
+        if (!header) { header = tableRows[0]; body = tableRows.slice(1); }
+        html += '<table>';
+        if (header) html += '<tr>' + header.map(c => `<th>${mdInline(c.trim())}</th>`).join('') + '</tr>';
+        for (const row of body) html += '<tr>' + row.map(c => `<td>${mdInline(c.trim())}</td>`).join('') + '</tr>';
+        html += '</table>';
+        tableRows = [];
+        inTable = false;
+      };
+      for (const line of lines) {
+        if (/^\s*\|.*\|\s*$/.test(line)) {
+          flushPara();
+          const cells = line.trim().replace(/^\||\|$/g, '').split('|');
+          tableRows.push(cells);
+          inTable = true;
+          continue;
+        }
+        if (inTable) flushTable();
+        if (line.trim() === '') flushPara();
+        else para.push(mdInline(line.trim()));
       }
       flushPara();
-      if (inTable) html += '</table>';
+      if (inTable) flushTable();
       return html;
     }
 
@@ -223,83 +665,124 @@
 
     function formatDateLong(dateStr) {
       if (!dateStr) return '';
-      const d = new Date(dateStr);
+      const d = new Date(dateStr + 'T21:00:00+09:00');
       const days = ['일', '월', '화', '수', '목', '금', '토'];
-      return `${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 (${days[d.getDay()]})`;
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${d.getFullYear()}.${m}.${day} · ${days[d.getDay()]}요일`;
     }
 
     function render(data) {
       const dateLong = formatDateLong(data.date);
-      let content = '';
-
-      for (const cat of ['US', 'ASIA', 'ME', 'CAPITAL']) {
-        const items = data.categories[cat] || [];
+      let categoriesHtml = '';
+      let catIdx = 0;
+      for (const cat of CATS) {
+        const items = data.categories[cat.key] || [];
         if (!items.length) continue;
+        catIdx += 1;
+        const num = String(catIdx).padStart(2, '0');
         let itemsHtml = '';
         for (const it of items) {
+          const blocks = [];
+          if (it.whyItMatters)      blocks.push(`<div class="block"><h4>왜 중요한가</h4>${mdToHtml(it.whyItMatters)}</div>`);
+          if (it.context)           blocks.push(`<div class="block"><h4>배경</h4>${mdToHtml(it.context)}</div>`);
+          if (it.marketImplication) blocks.push(`<div class="block"><h4>시장 영향</h4>${mdToHtml(it.marketImplication)}</div>`);
           itemsHtml += `
             <details class="item">
               <summary class="item-head">
                 <div>
                   <div class="item-headline">${escapeHtml(it.headline)}</div>
-                  ${it.summary ? `<div class="item-summary">${escapeHtml(it.summary)}</div>` : ''}
+                  ${it.summary ? `<div class="item-summary">${mdInline(it.summary)}</div>` : ''}
                 </div>
-                <span class="item-toggle">+</span>
+                <span class="item-toggle" aria-hidden="true">
+                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <path d="M6 1.5v9M1.5 6h9"/>
+                  </svg>
+                </span>
               </summary>
-              <div class="item-body">
-                ${it.whyItMatters ? `<h4>Why it matters</h4>${mdToHtml(it.whyItMatters)}` : ''}
-                ${it.context ? `<h4>Context</h4>${mdToHtml(it.context)}` : ''}
-                ${it.marketImplication ? `<h4>Market Implication</h4>${mdToHtml(it.marketImplication)}` : ''}
-              </div>
+              <div class="item-body">${blocks.join('')}</div>
             </details>`;
         }
-        content += `
-          <section class="category ${CAT_CLASSES[cat]}">
-            <div class="category-header">${CAT_NAMES[cat]}</div>
+        categoriesHtml += `
+          <section class="category" style="--cat-color: ${cat.color}">
+            <div class="cat-head">
+              <span class="cat-num">${num}</span>
+              <span class="cat-title">${cat.title}</span>
+              <span class="cat-sub">${cat.sub}</span>
+            </div>
             ${itemsHtml}
           </section>`;
       }
 
       return `
-        <header class="header">
-          <div class="date">${dateLong}</div>
-          <h1 class="title">저녁 브리핑</h1>
+        <header class="masthead">
+          <span class="eyebrow"><span class="pulse"></span>오늘의 저녁 브리핑</span>
+          <h1>오늘 밤, <span class="accent">세계</span>는<br>어디를 보고 있나</h1>
+          <div class="masthead-meta">
+            <span>${dateLong}</span>
+            <span class="dot"></span>
+            <span>21:00 KST</span>
+          </div>
         </header>
-        <div class="story">${mdToHtml(data.todaysStory)}</div>
-        ${content}
-        <div class="oneliner">
-          <div class="oneliner-label">오늘의 한 줄</div>
-          ${mdToHtml(data.oneLiner)}
-        </div>
+
+        ${data.todaysStory ? `
+          <section class="story">
+            <div class="story-label">오늘의 흐름</div>
+            ${mdToHtml(data.todaysStory)}
+          </section>
+        ` : ''}
+
+        ${categoriesHtml}
+
+        ${data.oneLiner ? `
+          <section class="oneliner">
+            <div class="oneliner-label">오늘의 한 줄</div>
+            <div class="oneliner-quote">${mdInline(data.oneLiner)}</div>
+          </section>
+        ` : ''}
+
         <footer class="footer">
-          <a href="archive.html">아카이브</a>
+          <span>Evening Briefing</span>
+          <a href="archive.html">아카이브 →</a>
         </footer>`;
     }
 
     function renderEmpty() {
       return `
-        <div class="empty">
-          <div class="big">아직 브리핑이 없습니다</div>
-          <div>매일 저녁 9시에 자동 생성됩니다.</div>
+        <div class="state">
+          <div class="state-mark">e</div>
+          <div class="state-title">아직 브리핑이 없습니다</div>
+          <div class="state-sub">매일 저녁 9시에 자동으로 도착합니다.</div>
+        </div>`;
+    }
+
+    function renderError(msg) {
+      return `
+        <div class="state">
+          <div class="state-mark">!</div>
+          <div class="state-title">불러오기 실패</div>
+          <div class="state-sub">${escapeHtml(msg)}</div>
         </div>`;
     }
 
     async function init() {
-      const app = document.getElementById('app');
+      const content = document.getElementById('content');
       try {
         const md = await fetchLatestBriefing();
-        if (!md) {
-          app.innerHTML = renderEmpty();
-          return;
-        }
+        if (!md) { content.innerHTML = renderEmpty(); return; }
         const data = parseMarkdown(md);
-        app.innerHTML = render(data);
+        content.innerHTML = render(data);
       } catch (e) {
-        app.innerHTML = `
-          <div class="empty">
-            <div class="big">불러오기 실패</div>
-            <div>${escapeHtml(e.message)}</div>
-          </div>`;
+        try {
+          const r = await fetch('briefings/2026-05-01.md');
+          if (r.ok) {
+            const md = await r.text();
+            const data = parseMarkdown(md);
+            content.innerHTML = render(data);
+            return;
+          }
+        } catch (_) {}
+        content.innerHTML = renderError(e.message);
       }
     }
 
