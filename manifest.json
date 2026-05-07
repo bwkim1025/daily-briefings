@@ -1,13 +1,13 @@
 {
-  "name": "저녁 브리핑",
-  "short_name": "Evening",
-  "description": "글로벌 매크로·반도체·지정학 저녁 브리핑",
-  "start_url": "/evening-briefing/",
-  "scope": "/evening-briefing/",
+  "name": "Daily Briefings",
+  "short_name": "Briefings",
+  "description": "매일 받는 시장·국제·의학·건강 브리핑",
+  "start_url": "/daily-briefings/",
+  "scope": "/daily-briefings/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0f0e0c",
-  "theme_color": "#0f0e0c",
+  "background_color": "#ffffff",
+  "theme_color": "#1d3a8a",
   "lang": "ko",
   "icons": [
     {
