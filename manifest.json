@@ -1,13 +1,13 @@
 {
-  "name": "Daily Briefings",
-  "short_name": "Briefings",
+  "name": "오늘의 브리핑",
+  "short_name": "오늘의 브리핑",
   "description": "매일 받는 시장·국제·의학·건강 브리핑",
   "start_url": "/daily-briefings/",
   "scope": "/daily-briefings/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
-  "theme_color": "#1d3a8a",
+  "theme_color": "#1a3a8a",
   "lang": "ko",
   "icons": [
     {
