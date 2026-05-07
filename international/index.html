@@ -90,6 +90,23 @@
     .state-title{font-size:18px;font-weight:700;color:var(--ink);margin-bottom:6px;letter-spacing:-0.015em;}
     .state-sub{font-size:14px;color:var(--ink-3);}
     @media(max-width:480px){.container{padding:20px 16px 60px;}}
+  
+    .calendar{margin:20px 0 28px;padding:14px 16px 16px;background:var(--bg-elev);border:1px solid var(--line);border-radius:var(--radius);}
+    .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+    .cal-title{font-size:14px;font-weight:600;color:var(--ink);}
+    .cal-nav{display:flex;gap:4px;}
+    .cal-btn{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink-3);cursor:pointer;display:grid;place-items:center;transition:all 0.15s ease;}
+    .cal-btn:hover{background:var(--bg-sunk);color:var(--ink);}
+    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+    .cal-wd{font-size:10px;color:var(--ink-4);text-align:center;padding:6px 0;font-weight:700;letter-spacing:0.05em;}
+    .cal-day{font-size:13px;height:34px;display:grid;place-items:center;border-radius:7px;color:var(--ink-4);position:relative;cursor:default;transition:all 0.15s ease;font-weight:500;}
+    .cal-empty{height:34px;}
+    .cal-day.has-brief{cursor:pointer;color:var(--ink);}
+    .cal-day.has-brief:hover{background:var(--bg-sunk);}
+    .cal-day.has-brief::after{content:'';position:absolute;bottom:4px;width:4px;height:4px;border-radius:50%;background:var(--accent);}
+    .cal-day.is-today{font-weight:700;color:var(--accent);}
+    .cal-day.is-selected{background:var(--accent);color:#fff;}
+    .cal-day.is-selected::after{background:#fff;}
   </style>
 </head>
 <body>
@@ -107,6 +124,16 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
       </div>
+    </div>
+        <div class="calendar" id="calendar">
+      <div class="cal-head">
+        <span class="cal-title" id="cal-title"></span>
+        <div class="cal-nav">
+          <button class="cal-btn" id="cal-prev" aria-label="이전 달"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="cal-btn" id="cal-next" aria-label="다음 달"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
     </div>
     <div id="content">
       <header class="masthead">
@@ -138,14 +165,7 @@
       return d.toISOString().slice(0,10);
     }
 
-    async function fetchBriefing() {
-      for (let i = 0; i < 14; i++) {
-        try {
-          const ds = kstDateStr(i);
-          const r = await fetch('https://raw.githubusercontent.com/bwkim1025/daily-briefings/main/international/briefings/' + ds + '.md');
-          if (r.ok) return await r.text();
-        } catch(e) {}
-      }
+          }
       return null;
     }
 
@@ -190,13 +210,83 @@
         +'<footer class="footer"><span>Daily Briefings · International</span><a href="../">← 홈으로</a></footer>';
     }
 
-    async function init() {
+    const __CAT='international';
+    const __SFX=[".md"];
+    const __CAL_STATE={viewYear:0,viewMonth:0,available:new Set(),selectedDate:null};
+    async function __loadDates(){
+      const k='briefings-list-'+__CAT;
+      const c=localStorage.getItem(k);
+      if(c){try{const{ts,dates}=JSON.parse(c);if(Date.now()-ts<1800000){__CAL_STATE.available=new Set(dates);return;}}catch(e){}}
+      try{
+        const r=await fetch('https://api.github.com/repos/bwkim1025/daily-briefings/contents/'+__CAT+'/briefings');
+        if(r.ok){
+          const items=await r.json();const dates=new Set();
+          for(const it of items){const m=it.name&&it.name.match(/^(\d{4}-\d{2}-\d{2})/);if(m)dates.add(m[1]);}
+          __CAL_STATE.available=dates;
+          localStorage.setItem(k,JSON.stringify({ts:Date.now(),dates:[...dates]}));
+        }
+      }catch(e){}
+    }
+    function __renderCal(){
+      const y=__CAL_STATE.viewYear,m=__CAL_STATE.viewMonth;
+      const fd=new Date(y,m,1).getDay();
+      const dim=new Date(y,m+1,0).getDate();
+      const today=kstDateStr(0);
+      const grid=document.getElementById('cal-grid');if(!grid)return;
+      let html='';
+      for(const w of ['일','월','화','수','목','금','토'])html+='<div class="cal-wd">'+w+'</div>';
+      for(let i=0;i<fd;i++)html+='<div class="cal-empty"></div>';
+      for(let d=1;d<=dim;d++){
+        const ds=y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+        const hb=__CAL_STATE.available.has(ds);
+        let cls='cal-day'+(hb?' has-brief':'')+(ds===today?' is-today':'')+(ds===__CAL_STATE.selectedDate?' is-selected':'');
+        html+='<div class="'+cls+'" data-date="'+ds+'">'+d+'</div>';
+      }
+      grid.innerHTML=html;
+      document.getElementById('cal-title').textContent=y+'년 '+(m+1)+'월';
+      grid.querySelectorAll('.cal-day.has-brief').forEach(el=>{
+        el.addEventListener('click',async()=>{
+          const ds=el.dataset.date;
+          __CAL_STATE.selectedDate=ds;__renderCal();
+          await __loadAndRender(ds);
+        });
+      });
+    }
+    async function __fetchMd(ds){
+      for(const sfx of __SFX){
+        try{
+          const r=await fetch('https://raw.githubusercontent.com/bwkim1025/daily-briefings/main/'+__CAT+'/briefings/'+ds+sfx);
+          if(r.ok)return await r.text();
+        }catch(e){}
+      }
+      return null;
+    }
+    async function __fetchLatest(){
+      const sorted=[...__CAL_STATE.available].sort().reverse();
+      for(const ds of sorted){const md=await __fetchMd(ds);if(md)return{date:ds,md};}
+      for(let i=0;i<14;i++){const ds=kstDateStr(i);const md=await __fetchMd(ds);if(md)return{date:ds,md};}
+      return null;
+    }
+    async function __loadAndRender(dateStr){
       const el=document.getElementById('content');
-      try {
-        const md=await fetchBriefing();
-        if(!md){el.innerHTML='<div class="state"><div class="state-mark"></div><div class="state-title">아직 브리핑이 없습니다</div><div class="state-sub">매일 18:00에 자동으로 도착합니다.</div></div><footer class="footer"><a href="../">← 홈으로</a></footer>';return;}
-        el.innerHTML=render(parseMarkdown(md));
-      }catch(e){el.innerHTML='<div class="state"><div class="state-mark">!</div><div class="state-title">불러오기 실패</div><div class="state-sub">'+esc(e.message)+'</div></div><footer class="footer"><a href="../">← 홈으로</a></footer>';}
+      try{
+        let result;
+        if(dateStr){const md=await __fetchMd(dateStr);if(md)result={date:dateStr,md};}
+        else result=await __fetchLatest();
+        if(!result){el.innerHTML='<div class="state"><div class="state-mark"></div><div class="state-title">아직 브리핑이 없습니다</div><div class="state-sub">매일 18:00에 자동으로 도착합니다.</div></div><footer class="footer"><a href="../">← 홈으로</a></footer>';return;}
+        if(!__CAL_STATE.selectedDate){__CAL_STATE.selectedDate=result.date;__renderCal();}
+        el.innerHTML=render(parseMarkdown(result.md));
+      }catch(e){
+        el.innerHTML='<div class="state"><div class="state-mark">!</div><div class="state-title">불러오기 실패</div><div class="state-sub">'+esc(e.message)+'</div></div><footer class="footer"><a href="../">← 홈으로</a></footer>';
+      }
+    }
+    async function init(){
+      const t=new Date(Date.now()+9*3600*1000);
+      __CAL_STATE.viewYear=t.getUTCFullYear();__CAL_STATE.viewMonth=t.getUTCMonth();
+      await __loadDates();__renderCal();
+      document.getElementById('cal-prev').addEventListener('click',()=>{__CAL_STATE.viewMonth--;if(__CAL_STATE.viewMonth<0){__CAL_STATE.viewMonth=11;__CAL_STATE.viewYear--;}__renderCal();});
+      document.getElementById('cal-next').addEventListener('click',()=>{__CAL_STATE.viewMonth++;if(__CAL_STATE.viewMonth>11){__CAL_STATE.viewMonth=0;__CAL_STATE.viewYear++;}__renderCal();});
+      await __loadAndRender();
     }
     init();
   </script>
