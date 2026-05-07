@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>인터내셔널 브리핑</title>
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#1a3a8a">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Briefings">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#ffffff;--bg-elev:#ffffff;--bg-sunk:#f6f7f9;--bg-sunk-2:#eef0f4;
+      --ink:#0b1220;--ink-2:#2b3340;--ink-3:#5b6473;--ink-4:#939aa6;--ink-5:#c5c9d2;
+      --line:#e6e8ee;--line-soft:#eef0f4;
+      --accent:#1d3a8a;--accent-strong:#142a66;--accent-soft:#e8edfa;--accent-ink:#0d1f4d;
+      --radius:14px;--radius-sm:10px;
+    }
+    :root.dark {
+      --bg:#0b0e15;--bg-elev:#11151e;--bg-sunk:#161b27;--bg-sunk-2:#1d2330;
+      --ink:#f1f3f8;--ink-2:#c8cdd8;--ink-3:#8a92a3;--ink-4:#5b6273;--ink-5:#383e4c;
+      --line:#1f2531;--line-soft:#181d27;
+      --accent:#6b8bff;--accent-strong:#8aa3ff;--accent-soft:#1a2247;--accent-ink:#b9caff;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html,body{background:var(--bg);color:var(--ink);font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;font-size:16px;line-height:1.6;word-break:keep-all;-webkit-font-smoothing:antialiased;min-height:100vh;font-feature-settings:"ss01","tnum";}
+    body{padding-top:env(safe-area-inset-top);}
+    .container{max-width:720px;margin:0 auto;padding:24px 20px 80px;}
+    .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;}
+    .brand{display:flex;align-items:center;gap:10px;letter-spacing:-0.01em;}
+    .brand-mark{font-weight:700;font-size:17px;color:var(--accent);}
+    .brand-mark::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:8px;transform:translateY(-2px);}
+    .brand-label{font-size:17px;color:var(--accent);letter-spacing:-0.01em;font-weight:700;}
+    .top-actions{display:flex;gap:6px;}
+    .icon-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--bg-elev);color:var(--ink-2);cursor:pointer;display:grid;place-items:center;transition:all 0.15s ease;font-family:inherit;text-decoration:none;}
+    .icon-btn:hover{border-color:var(--ink-4);color:var(--ink);}
+    .icon-btn:active{transform:scale(0.96);}
+    .icon-btn svg{width:16px;height:16px;}
+    .masthead{padding:12px 0 28px;margin-bottom:28px;border-bottom:1px solid var(--line);}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;color:var(--accent);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:14px;padding:5px 10px;background:var(--accent-soft);border-radius:999px;}
+    .eyebrow .pulse{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+    .masthead h1{font-weight:700;font-size:clamp(28px,7vw,40px);line-height:1.1;letter-spacing:-0.03em;color:var(--ink);margin-bottom:14px;text-wrap:balance;}
+    .masthead h1 .accent{color:var(--accent);}
+    .masthead-meta{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--ink-3);font-weight:500;}
+    .masthead-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--ink-4);}
+    .story{padding:22px 22px 24px;margin-bottom:36px;background:var(--bg-sunk);border-radius:var(--radius);border:1px solid var(--line-soft);}
+    .story-label{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:12px;}
+    .story p{font-size:clamp(15px,4vw,17px);line-height:1.65;letter-spacing:-0.01em;color:var(--ink);font-weight:500;text-wrap:pretty;}
+    .story p+p{margin-top:10px;}
+    .category{margin-bottom:40px;}
+    .cat-head{display:flex;align-items:baseline;gap:14px;padding-bottom:12px;margin-bottom:4px;border-bottom:1px solid var(--line);}
+    .cat-num{font-weight:700;font-size:13px;letter-spacing:0.02em;color:var(--accent);min-width:24px;font-variant-numeric:tabular-nums;}
+    .cat-title{flex:1;font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-0.015em;}
+    .cat-sub{font-size:11px;color:var(--ink-3);letter-spacing:0.08em;text-transform:uppercase;font-weight:600;}
+    .item{border-bottom:1px solid var(--line-soft);}
+    .item:last-child{border-bottom:none;}
+    .item-head{list-style:none;cursor:pointer;padding:18px 4px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:start;user-select:none;}
+    .item-head::-webkit-details-marker{display:none;}
+    .item-headline{font-size:16px;font-weight:600;line-height:1.45;color:var(--ink);letter-spacing:-0.012em;text-wrap:balance;}
+    .item-summary{font-size:14px;color:var(--ink-3);line-height:1.55;margin-top:6px;text-wrap:pretty;font-weight:500;}
+    .item-toggle{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink-3);transition:all 0.2s ease;flex-shrink:0;margin-top:2px;background:var(--bg-elev);}
+    .item-toggle svg{width:12px;height:12px;transition:transform 0.25s ease;}
+    .item[open] .item-toggle{background:var(--accent);border-color:var(--accent);color:#fff;}
+    .item[open] .item-toggle svg{transform:rotate(45deg);}
+    .item-body{padding:4px 4px 24px;animation:fadeIn 0.3s ease;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:translateY(0);}}
+    .item-body .block{padding:14px 0 0;}
+    .item-body .block+.block{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);}
+    .item-body h4{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+    .item-body p{font-size:14.5px;line-height:1.7;color:var(--ink-2);margin-bottom:10px;text-wrap:pretty;font-weight:400;}
+    .item-body p:last-child{margin-bottom:0;}
+    .item-body strong{color:var(--ink);font-weight:700;}
+    .item-body table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin:12px 0;background:var(--bg-sunk);border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--line-soft);}
+    .item-body th,.item-body td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line-soft);}
+    .item-body tr:last-child th,.item-body tr:last-child td{border-bottom:none;}
+    .item-body th{font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700;background:var(--bg-sunk-2);}
+    .item-body td{color:var(--ink-2);font-weight:500;}
+    .market-bar{margin-top:32px;padding:18px 20px;background:var(--bg-sunk);border-radius:var(--radius);border:1px solid var(--line-soft);display:flex;align-items:flex-start;gap:14px;}
+    .market-bar-label{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);white-space:nowrap;padding-top:2px;}
+    .market-bar-text{font-size:14.5px;line-height:1.6;color:var(--ink-2);font-weight:500;}
+    .footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--ink-4);font-weight:500;}
+    .footer a{color:var(--ink-3);text-decoration:none;font-weight:600;transition:color 0.15s ease;}
+    .footer a:hover{color:var(--accent);}
+    .state{text-align:center;padding:80px 20px;}
+    .state-mark{display:inline-grid;place-items:center;width:56px;height:56px;border-radius:16px;background:var(--accent-soft);color:var(--accent);font-size:24px;font-weight:700;margin-bottom:16px;}
+    .state-title{font-size:18px;font-weight:700;color:var(--ink);margin-bottom:6px;letter-spacing:-0.015em;}
+    .state-sub{font-size:14px;color:var(--ink-3);}
+    @media(max-width:480px){.container{padding:20px 16px 60px;}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">
+        <span class="brand-mark">Daily</span>
+        <span class="brand-label">Briefings</span>
+      </div>
+      <div class="top-actions">
+        <a href="../" class="icon-btn" aria-label="홈으로" title="홈으로">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+        </a>
+        <button id="theme-toggle" class="icon-btn" aria-label="테마 전환" title="테마 전환">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="content">
+      <header class="masthead">
+        <span class="eyebrow"><span class="pulse"></span>International</span>
+        <h1>한국 매체보다 <span class="accent">먼저</span><br>도착하는 현지 관점</h1>
+      </header>
+    </div>
+  </div>
+  <script>
+    const root = document.documentElement;
+    if (localStorage.getItem('eb-theme') === 'dark') root.classList.add('dark');
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark');
+      localStorage.setItem('eb-theme', isDark ? 'dark' : 'light');
+      const tc = document.querySelector('meta[name="theme-color"]');
+      if (tc) tc.setAttribute('content', isDark ? '#0b0e15' : '#1a3a8a');
+    });
+
+    const CATS = [
+      { key:'US',    title:'미국 · 워싱턴',         sub:'Washington' },
+      { key:'CHINA', title:'중국 · 대만 · 미중',    sub:'East Asia'  },
+      { key:'ME',    title:'중동 · 이란 · 이스라엘', sub:'Mideast'    },
+      { key:'EU',    title:'유럽 · 우크라이나',     sub:'Europe'     },
+    ];
+    const CAT_MAP = Object.fromEntries(CATS.map(c => [c.key, c]));
+
+    function kstDateStr(offsetDays) {
+      const d = new Date(Date.now() + 9*3600*1000 - (offsetDays||0)*86400*1000);
+      return d.toISOString().slice(0,10);
+    }
+
+    async function fetchBriefing() {
+      for (let i = 0; i < 14; i++) {
+        try {
+          const ds = kstDateStr(i);
+          const r = await fetch('https://raw.githubusercontent.com/bwkim1025/daily-briefings/main/international/briefings/' + ds + '.md');
+          if (r.ok) return await r.text();
+        } catch(e) {}
+      }
+      return null;
+    }
+
+    function esc(s) { return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+    function mdInline(s) { return esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>'); }
+    function mdToHtml(md) {
+      if (!md) return '';
+      const lines=md.split('\n'); let html='',para=[],rows=[],inTable=false;
+      const fp=()=>{if(para.length){html+='<p>'+para.join(' ').trim()+'</p>';para=[];}};
+      const ft=()=>{if(!rows.length)return;let hdr=null,body=[];for(let i=0;i<rows.length;i++){if(rows[i].every(c=>/^:?-{2,}:?$/.test(c.trim()))){hdr=rows[i-1]||null;body=rows.slice(i+1);break;}}if(!hdr){hdr=rows[0];body=rows.slice(1);}html+='<table>';if(hdr)html+='<tr>'+hdr.map(c=>'<th>'+mdInline(c.trim())+'</th>').join('')+'</tr>';for(const r of body)html+='<tr>'+r.map(c=>'<td>'+mdInline(c.trim())+'</td>').join('')+'</tr>';html+='</table>';rows=[];inTable=false;};
+      for(const line of lines){if(/^\s*\|.*\|\s*$/.test(line)){fp();rows.push(line.trim().replace(/^\||\|$/g,'').split('|'));inTable=true;continue;}if(inTable)ft();if(line.trim()==='')fp();else para.push(mdInline(line.trim()));}
+      fp();if(inTable)ft();return html;
+    }
+
+    function formatDate(ds) {
+      if(!ds)return'';const d=new Date(ds+'T18:00:00+09:00');const days=['일','월','화','수','목','금','토'];
+      return d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0')+' · '+days[d.getDay()]+'요일';
+    }
+
+    function parseMarkdown(md) {
+      const result={date:'',todaysStory:'',categories:{},market:''};
+      const lines=md.split('\n');let mode=null,currentCat=null,currentItem=null,currentSection=null,buffer=[];
+      const flush=()=>{if(currentSection&&currentItem)currentItem[currentSection]=buffer.join('\n').trim();else if(mode==='TODAYS_STORY')result.todaysStory=buffer.join('\n').trim();else if(mode==='MARKET')result.market=buffer.join('\n').trim();buffer=[];};
+      for(const line of lines){
+        const dm=line.match(/^#\s+(\d{4}-\d{2}-\d{2})/);if(dm){result.date=dm[1];continue;}
+        const h2=line.match(/^##\s+(\S+)/);if(h2){flush();const tag=h2[1].toUpperCase();if(tag==='TODAYS_STORY'){mode=tag;currentCat=null;currentItem=null;}else if(tag==='ONE_LINER'||tag==='MARKET'){mode='MARKET';currentCat=null;currentItem=null;}else if(CAT_MAP[tag]){mode='CATEGORY';currentCat=tag;result.categories[tag]=[];currentItem=null;}currentSection=null;continue;}
+        const h3=line.match(/^###\s+(.+)/);if(h3&&mode==='CATEGORY'){flush();currentItem={headline:h3[1].trim(),summary:'',whyItMatters:'',context:'',marketImplication:''};result.categories[currentCat].push(currentItem);currentSection='summary';continue;}
+        const h4=line.match(/^####\s+(.+)/);if(h4&&currentItem){flush();const s=h4[1].toLowerCase();if(s.startsWith('why'))currentSection='whyItMatters';else if(s.startsWith('context'))currentSection='context';else if(s.startsWith('market'))currentSection='marketImplication';continue;}
+        if(line.trim()==='---')continue;buffer.push(line);
+      }
+      flush();return result;
+    }
+
+    function render(data) {
+      let cats='',idx=0;
+      for(const cat of CATS){const items=data.categories[cat.key]||[];if(!items.length)continue;idx++;let ih='';
+        for(const it of items){const blocks=[];if(it.whyItMatters)blocks.push('<div class="block"><h4>왜 중요한가</h4>'+mdToHtml(it.whyItMatters)+'</div>');if(it.context)blocks.push('<div class="block"><h4>배경</h4>'+mdToHtml(it.context)+'</div>');if(it.marketImplication)blocks.push('<div class="block"><h4>영향</h4>'+mdToHtml(it.marketImplication)+'</div>');ih+='<details class="item"><summary class="item-head"><div><div class="item-headline">'+esc(it.headline)+'</div>'+(it.summary?'<div class="item-summary">'+mdInline(it.summary)+'</div>':'')+'</div><span class="item-toggle" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 1.5v9M1.5 6h9"/></svg></span></summary><div class="item-body">'+blocks.join('')+'</div></details>';}
+        cats+='<section class="category"><div class="cat-head"><span class="cat-num">'+String(idx).padStart(2,'0')+'</span><span class="cat-title">'+cat.title+'</span><span class="cat-sub">'+cat.sub+'</span></div>'+ih+'</section>';}
+      return '<header class="masthead"><span class="eyebrow"><span class="pulse"></span>🌍 International</span><h1>한국 매체보다 <span class="accent">먼저</span><br>도착하는 현지 관점</h1><div class="masthead-meta"><span>'+formatDate(data.date)+'</span><span class="dot"></span><span>매일 18:00 KST</span></div></header>'
+        +(data.todaysStory?'<section class="story"><div class="story-label">오늘의 흐름</div>'+mdToHtml(data.todaysStory)+'</section>':'')
+        +cats+(data.market?'<div class="market-bar"><div class="market-bar-label">One Liner</div><div class="market-bar-text">'+mdInline(data.market)+'</div></div>':'')
+        +'<footer class="footer"><span>Daily Briefings · International</span><a href="../">← 홈으로</a></footer>';
+    }
+
+    async function init() {
+      const el=document.getElementById('content');
+      try {
+        const md=await fetchBriefing();
+        if(!md){el.innerHTML='<div class="state"><div class="state-mark">🌍</div><div class="state-title">아직 브리핑이 없습니다</div><div class="state-sub">매일 18:00에 자동으로 도착합니다.</div></div><footer class="footer"><a href="../">← 홈으로</a></footer>';return;}
+        el.innerHTML=render(parseMarkdown(md));
+      }catch(e){el.innerHTML='<div class="state"><div class="state-mark">!</div><div class="state-title">불러오기 실패</div><div class="state-sub">'+esc(e.message)+'</div></div><footer class="footer"><a href="../">← 홈으로</a></footer>';}
+    }
+    init();
+  </script>
+</body>
+</html>
