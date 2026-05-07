@@ -163,12 +163,6 @@
     function kstDateStr(offsetDays) {
       const d = new Date(Date.now() + 9*3600*1000 - (offsetDays||0)*86400*1000);
       return d.toISOString().slice(0,10);
-    }
-
-          }
-      return null;
-    }
-
     function esc(s) { return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
     function mdInline(s) { return esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>'); }
     function mdToHtml(md) {
