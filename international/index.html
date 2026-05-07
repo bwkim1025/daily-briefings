@@ -165,6 +165,68 @@
       return d.toISOString().slice(0,10);
     }
 
+    async function fetchBriefing() {
+      for (let i = 0; i < 14; i++) {
+        try {
+          const ds = kstDateStr(i);
+          const r = await fetch('https://raw.githubusercontent.com/bwkim1025/daily-briefings/main/international/briefings/' + ds + '.md');
+          if (r.ok) return await r.text();
+        } catch(e) {}
+      }
+      return null;
+    }
+
+    function esc(s) { return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+    function mdInline(s) { return esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>'); }
+    function mdToHtml(md) {
+      if (!md) return '';
+      const lines=md.split('\n'); let html='',para=[],rows=[],inTable=false;
+      const fp=()=>{if(para.length){html+='<p>'+para.join(' ').trim()+'</p>';para=[];}};
+      const ft=()=>{if(!rows.length)return;let hdr=null,body=[];for(let i=0;i<rows.length;i++){if(rows[i].every(c=>/^:?-{2,}:?$/.test(c.trim()))){hdr=rows[i-1]||null;body=rows.slice(i+1);break;}}if(!hdr){hdr=rows[0];body=rows.slice(1);}html+='<table>';if(hdr)html+='<tr>'+hdr.map(c=>'<th>'+mdInline(c.trim())+'</th>').join('')+'</tr>';for(const r of body)html+='<tr>'+r.map(c=>'<td>'+mdInline(c.trim())+'</td>').join('')+'</tr>';html+='</table>';rows=[];inTable=false;};
+      for(const line of lines){if(/^\s*\|.*\|\s*$/.test(line)){fp();rows.push(line.trim().replace(/^\||\|$/g,'').split('|'));inTable=true;continue;}if(inTable)ft();if(line.trim()==='')fp();else para.push(mdInline(line.trim()));}
+      fp();if(inTable)ft();return html;
+    }
+
+    function formatDate(ds) {
+      if(!ds)return'';const d=new Date(ds+'T18:00:00+09:00');const days=['일','월','화','수','목','금','토'];
+      return d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0')+' · '+days[d.getDay()]+'요일';
+    }
+
+    function parseMarkdown(md) {
+      const result={date:'',todaysStory:'',categories:{},market:''};
+      const lines=md.split('\n');let mode=null,currentCat=null,currentItem=null,currentSection=null,buffer=[];
+      const flush=()=>{if(currentSection&&currentItem)currentItem[currentSection]=buffer.join('\n').trim();else if(mode==='TODAYS_STORY')result.todaysStory=buffer.join('\n').trim();else if(mode==='MARKET')result.market=buffer.join('\n').trim();buffer=[];};
+      for(const line of lines){
+        const dm=line.match(/^#\s+(\d{4}-\d{2}-\d{2})/);if(dm){result.date=dm[1];continue;}
+        const h2=line.match(/^##\s+(\S+)/);if(h2){flush();const tag=h2[1].toUpperCase();if(tag==='TODAYS_STORY'){mode=tag;currentCat=null;currentItem=null;}else if(tag==='ONE_LINER'||tag==='MARKET'){mode='MARKET';currentCat=null;currentItem=null;}else if(CAT_MAP[tag]){mode='CATEGORY';currentCat=tag;result.categories[tag]=[];currentItem=null;}currentSection=null;continue;}
+        const h3=line.match(/^###\s+(.+)/);if(h3&&mode==='CATEGORY'){flush();currentItem={headline:h3[1].trim(),summary:'',whyItMatters:'',context:'',marketImplication:''};result.categories[currentCat].push(currentItem);currentSection='summary';continue;}
+        const h4=line.match(/^####\s+(.+)/);if(h4&&currentItem){flush();const s=h4[1].toLowerCase();if(s.startsWith('why'))currentSection='whyItMatters';else if(s.startsWith('context'))currentSection='context';else if(s.startsWith('market'))currentSection='marketImplication';continue;}
+        if(line.trim()==='---')continue;buffer.push(line);
+      }
+      flush();return result;
+    }
+
+    function render(data) {
+      let cats='',idx=0;
+      for(const cat of CATS){const items=data.categories[cat.key]||[];if(!items.length)continue;idx++;let ih='';
+        for(const it of items){const blocks=[];if(it.whyItMatters)blocks.push('<div class="block"><h4>왜 중요한가</h4>'+mdToHtml(it.whyItMatters)+'</div>');if(it.context)blocks.push('<div class="block"><h4>배경</h4>'+mdToHtml(it.context)+'</div>');if(it.marketImplication)blocks.push('<div class="block"><h4>영향</h4>'+mdToHtml(it.marketImplication)+'</div>');ih+='<details class="item"><summary class="item-head"><div><div class="item-headline">'+esc(it.headline)+'</div>'+(it.summary?'<div class="item-summary">'+mdInline(it.summary)+'</div>':'')+'</div><span class="item-toggle" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 1.5v9M1.5 6h9"/></svg></span></summary><div class="item-body">'+blocks.join('')+'</div></details>';}
+        cats+='<section class="category"><div class="cat-head"><span class="cat-num">'+String(idx).padStart(2,'0')+'</span><span class="cat-title">'+cat.title+'</span><span class="cat-sub">'+cat.sub+'</span></div>'+ih+'</section>';}
+      return '<header class="masthead"><span class="eyebrow"><span class="pulse"></span>International</span><h1>한국 매체보다 <span class="accent">먼저</span><br>도착하는 현지 관점</h1><div class="masthead-meta"><span>'+formatDate(data.date)+'</span><span class="dot"></span><span>매일 18:00 KST</span></div></header>'
+        +(data.todaysStory?'<section class="story"><div class="story-label">오늘의 흐름</div>'+mdToHtml(data.todaysStory)+'</section>':'')
+        +cats+(data.market?'<div class="market-bar"><div class="market-bar-label">One Liner</div><div class="market-bar-text">'+mdInline(data.market)+'</div></div>':'')
+        +'<footer class="footer"><span>Daily Briefings · International</span><a href="../">← 홈으로</a></footer>';
+    }
+
+    async function init() {
+      const el=document.getElementById('content');
+      try {
+        const md=await fetchBriefing();
+        if(!md){el.innerHTML='<div class="state"><div class="state-mark"></div><div class="state-title">아직 브리핑이 없습니다</div><div class="state-sub">매일 18:00에 자동으로 도착합니다.</div></div><footer class="footer"><a href="../">← 홈으로</a></footer>';return;}
+        el.innerHTML=render(parseMarkdown(md));
+      }catch(e){el.innerHTML='<div class="state"><div class="state-mark">!</div><div class="state-title">불러오기 실패</div><div class="state-sub">'+esc(e.message)+'</div></div><footer class="footer"><a href="../">← 홈으로</a></footer>';}
+    }
+    
+    /* === Calendar feature - appended; overrides existing init() via hoisting === */
     const __CAT='international';
     const __SFX=[".md"];
     const __CAL_STATE={viewYear:0,viewMonth:0,available:new Set(),selectedDate:null};
@@ -239,10 +301,11 @@
       const t=new Date(Date.now()+9*3600*1000);
       __CAL_STATE.viewYear=t.getUTCFullYear();__CAL_STATE.viewMonth=t.getUTCMonth();
       await __loadDates();__renderCal();
-      document.getElementById('cal-prev').addEventListener('click',()=>{__CAL_STATE.viewMonth--;if(__CAL_STATE.viewMonth<0){__CAL_STATE.viewMonth=11;__CAL_STATE.viewYear--;}__renderCal();});
-      document.getElementById('cal-next').addEventListener('click',()=>{__CAL_STATE.viewMonth++;if(__CAL_STATE.viewMonth>11){__CAL_STATE.viewMonth=0;__CAL_STATE.viewYear++;}__renderCal();});
+      const pb=document.getElementById('cal-prev');if(pb)pb.addEventListener('click',()=>{__CAL_STATE.viewMonth--;if(__CAL_STATE.viewMonth<0){__CAL_STATE.viewMonth=11;__CAL_STATE.viewYear--;}__renderCal();});
+      const nb=document.getElementById('cal-next');if(nb)nb.addEventListener('click',()=>{__CAL_STATE.viewMonth++;if(__CAL_STATE.viewMonth>11){__CAL_STATE.viewMonth=0;__CAL_STATE.viewYear++;}__renderCal();});
       await __loadAndRender();
     }
+
     init();
   </script>
 
