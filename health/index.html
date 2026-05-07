@@ -126,6 +126,58 @@
     const CAT_MAP=Object.fromEntries(CATS.map(c=>[c.key,c]));
 
     function kstDateStr(n){const d=new Date(Date.now()+9*3600*1000-(n||0)*86400*1000);return d.toISOString().slice(0,10);}
+
+    const __CAT='health';
+    const __SFX=[".md"];
+    const __CAL_STATE={viewYear:0,viewMonth:0,available:new Set(),selectedDate:null};
+    async function __loadDates(){
+      const k='briefings-list-'+__CAT;
+      const c=localStorage.getItem(k);
+      if(c){try{const{ts,dates}=JSON.parse(c);if(Date.now()-ts<1800000){__CAL_STATE.available=new Set(dates);return;}}catch(e){}}
+      try{
+        const r=await fetch('https://api.github.com/repos/bwkim1025/daily-briefings/contents/'+__CAT+'/briefings');
+        if(r.ok){
+          const items=await r.json();const dates=new Set();
+          for(const it of items){const m=it.name&&it.name.match(/^(\d{4}-\d{2}-\d{2})/);if(m)dates.add(m[1]);}
+          __CAL_STATE.available=dates;
+          localStorage.setItem(k,JSON.stringify({ts:Date.now(),dates:[...dates]}));
+        }
+      }catch(e){}
+    }
+    function __renderCal(){
+      const y=__CAL_STATE.viewYear,m=__CAL_STATE.viewMonth;
+      const fd=new Date(y,m,1).getDay();
+      const dim=new Date(y,m+1,0).getDate();
+      const today=kstDateStr(0);
+      const grid=document.getElementById('cal-grid');if(!grid)return;
+      let html='';
+      for(const w of ['일','월','화','수','목','금','토'])html+='<div class="cal-wd">'+w+'</div>';
+      for(let i=0;i<fd;i++)html+='<div class="cal-empty"></div>';
+      for(let d=1;d<=dim;d++){
+        const ds=y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+        const hb=__CAL_STATE.available.has(ds);
+        let cls='cal-day'+(hb?' has-brief':'')+(ds===today?' is-today':'')+(ds===__CAL_STATE.selectedDate?' is-selected':'');
+        html+='<div class="'+cls+'" data-date="'+ds+'">'+d+'</div>';
+      }
+      grid.innerHTML=html;
+      document.getElementById('cal-title').textContent=y+'년 '+(m+1)+'월';
+      grid.querySelectorAll('.cal-day.has-brief').forEach(el=>{
+        el.addEventListener('click',async()=>{
+          const ds=el.dataset.date;
+          __CAL_STATE.selectedDate=ds;__renderCal();
+          await __loadAndRender(ds);
+        });
+      });
+    }
+    async function __fetchMd(ds){
+      for(const sfx of __SFX){
+        try{
+          const r=await fetch('https://raw.githubusercontent.com/bwkim1025/daily-briefings/main/'+__CAT+'/briefings/'+ds+sfx);
+          if(r.ok)return await r.text();
+        }catch(e){}
+      }
+      return null;
+    }
     async function __fetchLatest(){
       const sorted=[...__CAL_STATE.available].sort().reverse();
       for(const ds of sorted){const md=await __fetchMd(ds);if(md)return{date:ds,md};}
