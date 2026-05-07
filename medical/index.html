@@ -148,7 +148,7 @@
       for(const cat of CATS){const items=data.categories[cat.key]||[];if(!items.length)continue;idx++;let ih='';
         for(const it of items){const blocks=[];if(it.whyItMatters)blocks.push('<div class="block"><h4>선정 이유</h4>'+mdToHtml(it.whyItMatters)+'</div>');if(it.context)blocks.push('<div class="block"><h4>핵심 결과</h4>'+mdToHtml(it.context)+'</div>');if(it.marketImplication)blocks.push('<div class="block"><h4>임상 적용</h4>'+mdToHtml(it.marketImplication)+'</div>');if(it.source)blocks.push('<div class="block"><h4>출처</h4>'+mdToHtml(it.source)+'</div>');ih+='<details class="item"><summary class="item-head"><div><div class="item-headline">'+esc(it.headline)+'</div>'+(it.summary?'<div class="item-summary">'+mdInline(it.summary)+'</div>':'')+'</div><span class="item-toggle" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 1.5v9M1.5 6h9"/></svg></span></summary><div class="item-body">'+blocks.join('')+'</div></details>';}
         cats+='<section class="category"><div class="cat-head"><span class="cat-num">'+String(idx).padStart(2,'0')+'</span><span class="cat-title">'+cat.title+'</span><span class="cat-sub">'+cat.sub+'</span></div>'+ih+'</section>';}
-      return '<header class="masthead"><span class="eyebrow"><span class="pulse"></span>✚ Medical</span><h1>신장내과 · 가정의학과 <span class="accent">부부</span>를<br>위한 저널 큐레이션</h1><div class="masthead-meta"><span>'+formatDate(data.date)+'</span><span class="dot"></span><span>월·수 18:00 KST</span></div></header>'
+      return '<header class="masthead"><span class="eyebrow"><span class="pulse"></span>Medical</span><h1>신장내과 · 가정의학과 <span class="accent">부부</span>를<br>위한 저널 큐레이션</h1><div class="masthead-meta"><span>'+formatDate(data.date)+'</span><span class="dot"></span><span>월·수 18:00 KST</span></div></header>'
         +(data.todaysStory?'<section class="story"><div class="story-label">이번 주의 흐름</div>'+mdToHtml(data.todaysStory)+'</section>':'')
         +cats+(data.market?'<div class="market-bar"><div class="market-bar-label">One Liner</div><div class="market-bar-text">'+mdInline(data.market)+'</div></div>':'')
         +'<footer class="footer"><span>Daily Briefings · Medical</span><a href="../">← 홈으로</a></footer>';
@@ -156,7 +156,7 @@
 
     async function init(){
       const el=document.getElementById('content');
-      try{const md=await fetchBriefing();if(!md){el.innerHTML='<div class="state"><div class="state-mark">✚</div><div class="state-title">아직 브리핑이 없습니다</div><div class="state-sub">월·수 18:00에 자동으로 도착합니다.</div></div><footer class="footer"><a href="../">← 홈으로</a></footer>';return;}el.innerHTML=render(parseMarkdown(md));}
+      try{const md=await fetchBriefing();if(!md){el.innerHTML='<div class="state"><div class="state-mark"></div><div class="state-title">아직 브리핑이 없습니다</div><div class="state-sub">월·수 18:00에 자동으로 도착합니다.</div></div><footer class="footer"><a href="../">← 홈으로</a></footer>';return;}el.innerHTML=render(parseMarkdown(md));}
       catch(e){el.innerHTML='<div class="state"><div class="state-mark">!</div><div class="state-title">불러오기 실패</div><div class="state-sub">'+esc(e.message)+'</div></div><footer class="footer"><a href="../">← 홈으로</a></footer>';}
     }
     init();
