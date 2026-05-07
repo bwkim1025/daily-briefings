@@ -139,12 +139,6 @@
     const CAT_MAP = Object.fromEntries(CATS.map(c=>[c.key,c]));
 
     function kstDateStr(n){const d=new Date(Date.now()+9*3600*1000-(n||0)*86400*1000);return d.toISOString().slice(0,10);}
-
-            }
-      }
-      return null;
-    }
-
     function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
     function mdInline(s){return esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');}
     function mdToHtml(md){if(!md)return'';const lines=md.split('\n');let html='',para=[],rows=[],inTable=false;const fp=()=>{if(para.length){html+='<p>'+para.join(' ').trim()+'</p>';para=[];}};const ft=()=>{if(!rows.length)return;let hdr=null,body=[];for(let i=0;i<rows.length;i++){if(rows[i].every(c=>/^:?-{2,}:?$/.test(c.trim()))){hdr=rows[i-1]||null;body=rows.slice(i+1);break;}}if(!hdr){hdr=rows[0];body=rows.slice(1);}html+='<table>';if(hdr)html+='<tr>'+hdr.map(c=>'<th>'+mdInline(c.trim())+'</th>').join('')+'</tr>';for(const r of body)html+='<tr>'+r.map(c=>'<td>'+mdInline(c.trim())+'</td>').join('')+'</tr>';html+='</table>';rows=[];inTable=false;};for(const line of lines){if(/^\s*\|.*\|\s*$/.test(line)){fp();rows.push(line.trim().replace(/^\||\|$/g,'').split('|'));inTable=true;continue;}if(inTable)ft();if(line.trim()==='')fp();else para.push(mdInline(line.trim()));}fp();if(inTable)ft();return html;}
