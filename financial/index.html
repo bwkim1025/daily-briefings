@@ -74,11 +74,17 @@
     .item-body p{font-size:14.5px;line-height:1.7;color:var(--ink-2);margin-bottom:10px;text-wrap:pretty;font-weight:400;}
     .item-body p:last-child{margin-bottom:0;}
     .item-body strong{color:var(--ink);font-weight:700;}
+    .item-body a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;word-break:break-all;font-weight:500;}
+    .item-body a:hover{color:var(--accent-strong);}
+    .item-body ul{margin:6px 0 10px 18px;padding:0;}
+    .item-body ul li{font-size:14.5px;line-height:1.65;color:var(--ink-2);margin-bottom:4px;}
     .item-body table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin:12px 0;background:var(--bg-sunk);border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--line-soft);}
     .item-body th,.item-body td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line-soft);}
     .item-body tr:last-child th,.item-body tr:last-child td{border-bottom:none;}
     .item-body th{font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700;background:var(--bg-sunk-2);}
     .item-body td{color:var(--ink-2);font-weight:500;}
+    .author-line{margin-top:18px;padding:10px 14px;font-size:11.5px;color:var(--ink-4);font-weight:500;letter-spacing:0.01em;text-align:right;}
+    .author-line.missing{color:#c97c5a;font-style:italic;}
     .market-bar{margin-top:32px;padding:18px 20px;background:var(--bg-sunk);border-radius:var(--radius);border:1px solid var(--line-soft);display:flex;align-items:flex-start;gap:14px;}
     .market-bar-label{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);white-space:nowrap;padding-top:2px;}
     .market-bar-text{font-size:14.5px;line-height:1.6;color:var(--ink-2);font-weight:500;}
@@ -192,12 +198,21 @@
     }
 
     function esc(s) { return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-    function mdInline(s) { return esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>'); }
+    function _hostOf(u){try{return (new URL(u)).hostname.replace(/^www\./,'');}catch(e){return u;}}
+    function mdInline(s){
+      let t=esc(s);
+      t=t.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+      t=t.replace(/\[(https?:\/\/[^\s\]]+)\]/g,(_,u)=>'<a href="'+u+'" target="_blank" rel="noopener noreferrer">'+_hostOf(u)+'</a>');
+      t=t.replace(/(^|[\s(])(https?:\/\/[^\s)<]+)/g,(_,p,u)=>p+'<a href="'+u+'" target="_blank" rel="noopener noreferrer">'+u+'</a>');
+      t=t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');
+      return t;
+    }
     function mdToHtml(md) {
       if (!md) return '';
       const lines = md.split('\n');
-      let html='', para=[], rows=[], inTable=false;
+      let html='', para=[], rows=[], list=[], inTable=false;
       const fp = () => { if (para.length) { html += '<p>'+para.join(' ').trim()+'</p>'; para=[]; } };
+      const fl = () => { if (list.length) { html += '<ul>'+list.map(x=>'<li>'+mdInline(x)+'</li>').join('')+'</ul>'; list=[]; } };
       const ft = () => {
         if (!rows.length) return;
         let hdr=null, body=[];
@@ -209,11 +224,14 @@
         html += '</table>'; rows=[]; inTable=false;
       };
       for (const line of lines) {
-        if (/^\s*\|.*\|\s*$/.test(line)) { fp(); rows.push(line.trim().replace(/^\||\|$/g,'').split('|')); inTable=true; continue; }
+        if (/^\s*\|.*\|\s*$/.test(line)) { fp(); fl(); rows.push(line.trim().replace(/^\||\|$/g,'').split('|')); inTable=true; continue; }
         if (inTable) ft();
+        const lm = line.match(/^\s*[-*]\s+(.+)/);
+        if (lm) { fp(); list.push(lm[1]); continue; }
+        fl();
         if (line.trim()==='') fp(); else para.push(mdInline(line.trim()));
       }
-      fp(); if (inTable) ft();
+      fp(); fl(); if (inTable) ft();
       return html;
     }
 
@@ -225,13 +243,14 @@
     }
 
     function parseMarkdown(md) {
-      const result = { date:'', todaysStory:'', categories:{}, market:'' };
+      const result = { date:'', todaysStory:'', categories:{}, market:'', author:'' };
       const lines = md.split('\n');
       let mode=null, currentCat=null, currentItem=null, currentSection=null, buffer=[];
       const flush = () => {
         if (currentSection && currentItem) currentItem[currentSection] = buffer.join('\n').trim();
         else if (mode==='TODAYS_STORY') result.todaysStory = buffer.join('\n').trim();
         else if (mode==='MARKET') result.market = buffer.join('\n').trim();
+        else if (mode==='AUTHOR') result.author = buffer.join('\n').trim();
         buffer=[];
       };
       for (const line of lines) {
@@ -243,13 +262,14 @@
           const tag = h2[1].toUpperCase();
           if (tag==='TODAYS_STORY') { mode=tag; currentCat=null; currentItem=null; }
           else if (tag==='ONE_LINER'||tag==='MARKET') { mode='MARKET'; currentCat=null; currentItem=null; }
+          else if (tag==='AUTHOR') { mode='AUTHOR'; currentCat=null; currentItem=null; }
           else if (CAT_MAP[tag]) { mode='CATEGORY'; currentCat=tag; result.categories[tag]=[]; currentItem=null; }
           currentSection=null; continue;
         }
         const h3 = line.match(/^###\s+(.+)/);
         if (h3 && mode==='CATEGORY') {
           flush();
-          currentItem = { headline:h3[1].trim(), summary:'', whyItMatters:'', context:'', marketImplication:'' };
+          currentItem = { headline:h3[1].trim(), summary:'', whyItMatters:'', context:'', marketImplication:'', source:'' };
           result.categories[currentCat].push(currentItem);
           currentSection='summary'; continue;
         }
@@ -260,6 +280,8 @@
           if (s.startsWith('why')) currentSection='whyItMatters';
           else if (s.startsWith('context')) currentSection='context';
           else if (s.startsWith('market')) currentSection='marketImplication';
+          else if (s.startsWith('source') || s.includes('출처')) currentSection='source';
+          else currentSection=null;
           continue;
         }
         if (line.trim()==='---') continue;
@@ -283,6 +305,7 @@
           if (it.whyItMatters) blocks.push('<div class="block"><h4>왜 중요한가</h4>'+mdToHtml(it.whyItMatters)+'</div>');
           if (it.context) blocks.push('<div class="block"><h4>배경</h4>'+mdToHtml(it.context)+'</div>');
           if (it.marketImplication) blocks.push('<div class="block"><h4>시장 영향</h4>'+mdToHtml(it.marketImplication)+'</div>');
+          if (it.source) blocks.push('<div class="block"><h4>출처</h4>'+mdToHtml(it.source)+'</div>');
           ih += '<details class="item"><summary class="item-head"><div><div class="item-headline">'+esc(it.headline)+'</div>'+(it.summary?'<div class="item-summary">'+mdInline(it.summary)+'</div>':'')+'</div><span class="item-toggle" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 1.5v9M1.5 6h9"/></svg></span></summary><div class="item-body">'+blocks.join('')+'</div></details>';
         }
         cats += '<section class="category"><div class="cat-head"><span class="cat-num">'+String(idx).padStart(2,'0')+'</span><span class="cat-title">'+cat.title+'</span><span class="cat-sub">'+cat.sub+'</span></div>'+ih+'</section>';
@@ -291,6 +314,7 @@
         +(data.todaysStory?'<section class="story"><div class="story-label">오늘의 흐름</div>'+mdToHtml(data.todaysStory)+'</section>':'')
         +cats
         +(data.market?'<div class="market-bar"><div class="market-bar-label">One Liner</div><div class="market-bar-text">'+mdInline(data.market)+'</div></div>':'')
+        +(data.author?'<div class="author-line">작성: '+mdInline(data.author)+'</div>':'<div class="author-line missing">작성 모델 미기록</div>')
         +'<footer class="footer"><span>Daily Briefings · Financial</span><a href="../">← 홈으로</a></footer>';
     }
 
