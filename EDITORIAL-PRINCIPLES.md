@@ -43,7 +43,7 @@
 **형식 (한 줄):**
 ```
 ## AUTHOR
-Claude Opus 4.7 · claude-opus-4-7 · 2026-05-08 18:00 KST
+Claude Opus 4.7 · claude-opus-4-7 · 2026-05-08 07:00 KST
 ```
 
 - 첫 토큰: 사람이 읽기 쉬운 모델명 (예: `Claude Opus 4.7`, `Claude Sonnet 4.6`)
@@ -69,12 +69,11 @@ Claude Opus 4.7 · claude-opus-4-7 · 2026-05-08 18:00 KST
    (오늘 발표된 지표 + 시장 반응)
 
 ## 적용 대상 파일 (스케줄드 태스크)
-이 원칙은 다음 5개 자동 태스크에 모두 반영되어야 함:
-- financial-briefing (매일 18:00 KST)
-- international-briefing (매일 18:00 KST)
-- medical-journal (월요일 18:00 KST) — 주간 단위로 완화 적용
-- medical-policy (수요일 18:00 KST) — 주간 단위로 완화 적용
-- health-briefing (금요일 18:00 KST) — 주간 단위로 완화 적용
+이 원칙은 다음 4개 자동 태스크에 모두 반영되어야 함:
+- financial-briefing (매일 07:00 KST)
+- international-briefing (매일 07:00 KST)
+- medical-briefing (매일 07:00 KST)
+- health-briefing (매일 07:00 KST)
 
 ---
 
