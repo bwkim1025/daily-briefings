@@ -236,7 +236,7 @@
         +(data.todaysStory?'<section class="story"><div class="story-label">오늘의 흐름</div>'+mdToHtml(data.todaysStory)+'</section>':'')
         +cats+(data.market?'<div class="market-bar"><div class="market-bar-label">One Liner</div><div class="market-bar-text">'+mdInline(data.market)+'</div></div>':'')
         +(data.author?'<div class="author-line">작성: '+mdInline(data.author)+'</div>':'<div class="author-line missing">작성 모델 미기록</div>')
-        +'<footer class="footer"><span>Daily Briefings · International</span><a href="../">← 홈으로</a></footer>';
+        +'<footer class="footer"><span>Daily Briefings · International · v5</span><a href="../">← 홈으로</a></footer>';
     }
 
     async function init() {
