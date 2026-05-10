@@ -168,7 +168,7 @@
     }
     function mdToHtml(md){if(!md)return'';const lines=md.split('\n');let html='',para=[],rows=[],list=[],inTable=false;const fp=()=>{if(para.length){html+='<p>'+para.join(' ').trim()+'</p>';para=[];}};const fl=()=>{if(list.length){html+='<ul>'+list.map(x=>'<li>'+mdInline(x)+'</li>').join('')+'</ul>';list=[];}};const ft=()=>{if(!rows.length)return;let hdr=null,body=[];for(let i=0;i<rows.length;i++){if(rows[i].every(c=>/^:?-{2,}:?$/.test(c.trim()))){hdr=rows[i-1]||null;body=rows.slice(i+1);break;}}if(!hdr){hdr=rows[0];body=rows.slice(1);}html+='<table>';if(hdr)html+='<tr>'+hdr.map(c=>'<th>'+mdInline(c.trim())+'</th>').join('')+'</tr>';for(const r of body)html+='<tr>'+r.map(c=>'<td>'+mdInline(c.trim())+'</td>').join('')+'</tr>';html+='</table>';rows=[];inTable=false;};for(const line of lines){if(/^\s*\|.*\|\s*$/.test(line)){fp();fl();rows.push(line.trim().replace(/^\||\|$/g,'').split('|'));inTable=true;continue;}if(inTable)ft();const lm=line.match(/^\s*[-*]\s+(.+)/);if(lm){fp();list.push(lm[1]);continue;}fl();if(line.trim()==='')fp();else para.push(mdInline(line.trim()));}fp();fl();if(inTable)ft();return html;}
 
-    function formatDate(ds){if(!ds)return'';const d=new Date(ds+'T18:00:00+09:00');const days=['일','월','화','수','목','금','토'];return d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0')+' · '+days[d.getDay()]+'요일';}
+    function formatDate(ds){if(!ds)return'';const d=new Date(ds+'T07:00:00+09:00');const days=['일','월','화','수','목','금','토'];return d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0')+' · '+days[d.getDay()]+'요일';}
 
     function parseMarkdown(md){
       const result={date:'',todaysStory:'',categories:{},market:'',author:''};
@@ -205,7 +205,7 @@
           ih+='<details class="item"><summary class="item-head"><div><div class="item-headline">'+esc(it.headline)+'</div>'+(it.summary?'<div class="item-summary">'+mdInline(it.summary)+'</div>':'')+'</div><span class="item-toggle" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 1.5v9M1.5 6h9"/></svg></span></summary><div class="item-body">'+blocks.join('')+'</div></details>';
         }
         cats+='<section class="category"><div class="cat-head"><span class="cat-num">'+String(idx).padStart(2,'0')+'</span><span class="cat-title">'+cat.title+'</span><span class="cat-sub">'+cat.sub+'</span></div>'+ih+'</section>';}
-      return '<header class="masthead"><span class="eyebrow"><span class="pulse"></span>Medical</span><h1>신장내과 · 가정의학과 <span class="accent">부부</span>를<br>위한 저널 큐레이션</h1><div class="masthead-meta"><span>'+formatDate(data.date)+'</span><span class="dot"></span><span>월·수 18:00 KST</span></div></header>'
+      return '<header class="masthead"><span class="eyebrow"><span class="pulse"></span>Medical</span><h1>신장내과 · 가정의학과 <span class="accent">부부</span>를<br>위한 저널 큐레이션</h1><div class="masthead-meta"><span>'+formatDate(data.date)+'</span><span class="dot"></span><span>매일 07:00 KST</span></div></header>'
         +(data.todaysStory?'<section class="story"><div class="story-label">이번 주의 흐름</div>'+mdToHtml(data.todaysStory)+'</section>':'')
         +cats+(data.market?'<div class="market-bar"><div class="market-bar-label">One Liner</div><div class="market-bar-text">'+mdInline(data.market)+'</div></div>':'')
         +(data.author?'<div class="author-line">작성: '+mdInline(data.author)+'</div>':'<div class="author-line missing">작성 모델 미기록</div>')
@@ -214,7 +214,7 @@
 
     async function init(){
       const el=document.getElementById('content');
-      try{const md=await fetchBriefing();if(!md){el.innerHTML='<div class="state"><div class="state-mark"></div><div class="state-title">아직 브리핑이 없습니다</div><div class="state-sub">월·수 18:00에 자동으로 도착합니다.</div></div><footer class="footer"><a href="../">← 홈으로</a></footer>';return;}el.innerHTML=render(parseMarkdown(md));}
+      try{const md=await fetchBriefing();if(!md){el.innerHTML='<div class="state"><div class="state-mark"></div><div class="state-title">아직 브리핑이 없습니다</div><div class="state-sub">매일 07:00에 자동으로 도착합니다.</div></div><footer class="footer"><a href="../">← 홈으로</a></footer>';return;}el.innerHTML=render(parseMarkdown(md));}
       catch(e){el.innerHTML='<div class="state"><div class="state-mark">!</div><div class="state-title">불러오기 실패</div><div class="state-sub">'+esc(e.message)+'</div></div><footer class="footer"><a href="../">← 홈으로</a></footer>';}
     }
     
@@ -282,7 +282,7 @@
         let result;
         if(dateStr){const md=await __fetchMd(dateStr);if(md)result={date:dateStr,md};}
         else result=await __fetchLatest();
-        if(!result){el.innerHTML='<div class="state"><div class="state-mark"></div><div class="state-title">아직 브리핑이 없습니다</div><div class="state-sub">매일 18:00에 자동으로 도착합니다.</div></div><footer class="footer"><a href="../">← 홈으로</a></footer>';return;}
+        if(!result){el.innerHTML='<div class="state"><div class="state-mark"></div><div class="state-title">아직 브리핑이 없습니다</div><div class="state-sub">매일 07:00에 자동으로 도착합니다.</div></div><footer class="footer"><a href="../">← 홈으로</a></footer>';return;}
         if(!__CAL_STATE.selectedDate){__CAL_STATE.selectedDate=result.date;__renderCal();}
         el.innerHTML=render(parseMarkdown(result.md));
       }catch(e){
