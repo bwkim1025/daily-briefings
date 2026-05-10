@@ -1,16 +1,16 @@
 [
   {
-    "doi": "10.1056/NEJMoa2505928",
-    "title": "Cardiovascular Outcomes with Tirzepatide versus Dulaglutide in Type 2 Diabetes (SURPASS-CVOT)",
-    "journal": "N Engl J Med",
-    "publication_date": "2025-12-18",
-    "covered_in": "medical/briefings/2026-05-10.md"
+    "date": "2026-05-11",
+    "doi": "10.1056/NEJMoa2511778",
+    "title": "Phase 1 Trial of CRISPR-Cas9 Gene Editing Targeting ANGPTL3",
+    "journal": "NEJM",
+    "pubdate": "2025-11-08"
   },
   {
-    "doi": "10.1056/NEJMoa2511885",
-    "title": "ctDNA-Guided Adjuvant Atezolizumab in Muscle-Invasive Bladder Cancer (IMvigor011)",
-    "journal": "N Engl J Med",
-    "publication_date": "2025-12-18",
-    "covered_in": "medical/briefings/2026-05-10.md"
+    "date": "2026-05-11",
+    "doi": "10.1056/NEJMoa2516043",
+    "title": "Prehospital Whole Blood in Traumatic Hemorrhage (SWiFT Trial)",
+    "journal": "NEJM",
+    "pubdate": "2026-04"
   }
 ]
