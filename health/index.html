@@ -195,7 +195,7 @@
         +(data.todaysStory?'<section class="story"><div class="story-label">이번 주 건강 포인트</div>'+mdToHtml(data.todaysStory)+'</section>':'')
         +cats+(data.market?'<div class="market-bar"><div class="market-bar-label">이번 주 시도</div><div class="market-bar-text">'+mdInline(data.market)+'</div></div>':'')
         +(data.author?'<div class="author-line">작성: '+mdInline(data.author)+'</div>':'<div class="author-line missing">작성 모델 미기록</div>')
-        +'<footer class="footer"><span>Daily Briefings · Health</span><a href="../">← 홈으로</a></footer>';
+        +'<footer class="footer"><span>Daily Briefings · Health · v5</span><a href="../">← 홈으로</a></footer>';
     }
 
     async function init(){
