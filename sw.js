@@ -2,7 +2,7 @@
 // Cache strategy:
 //  - HTML / Markdown: Network-first (always latest briefings, fall back to cache offline)
 //  - Icons / manifest / static images: Cache-first
-const CACHE_VERSION = 'daily-briefings-v4';
+const CACHE_VERSION = 'daily-briefings-v5';
 const BASE = '/daily-briefings/';
 const PRECACHE = [
   BASE,
