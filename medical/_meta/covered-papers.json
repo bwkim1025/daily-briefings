@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "doi": "10.1056/NEJMoa2505928",
+    "title": "Cardiovascular Outcomes with Tirzepatide versus Dulaglutide in Type 2 Diabetes (SURPASS-CVOT)",
+    "journal": "N Engl J Med",
+    "publication_date": "2025-12-18",
+    "covered_in": "medical/briefings/2026-05-10.md"
+  },
+  {
+    "doi": "10.1056/NEJMoa2511885",
+    "title": "ctDNA-Guided Adjuvant Atezolizumab in Muscle-Invasive Bladder Cancer (IMvigor011)",
+    "journal": "N Engl J Med",
+    "publication_date": "2025-12-18",
+    "covered_in": "medical/briefings/2026-05-10.md"
+  }
+]
