@@ -55,3 +55,32 @@
     "journal": "NEJM",
     "pubdate": "2026-03-04"
   },
+  {
+    "date": "2026-05-16",
+    "doi": "10.1056/NEJMoa2514428",
+    "title": "Evolocumab in Patients without a Previous Myocardial Infarction or Stroke (VESALIUS-CV)",
+    "journal": "NEJM",
+    "pubdate": "2026-01-08"
+  },
+  {
+    "date": "2026-05-16",
+    "doi": "10.1056/NEJMoa2511885",
+    "title": "ctDNA-Guided Adjuvant Atezolizumab in Muscle-Invasive Bladder Cancer (IMvigor011)",
+    "journal": "NEJM",
+    "pubdate": "2025-12-18"
+  },
+  {
+    "date": "2026-05-17",
+    "doi": "10.1016/S0140-6736(25)02464-X",
+    "title": "Interval cancer, sensitivity, and specificity comparing AI-supported mammography screening with standard double reading without AI in the MASAI study",
+    "journal": "Lancet",
+    "pubdate": "2026-01-31"
+  },
+  {
+    "date": "2026-05-17",
+    "doi": "10.1016/S0140-6736(25)01953-1",
+    "title": "Zoliflodacin versus ceftriaxone plus azithromycin for treatment of uncomplicated urogenital gonorrhoea (Phase 3)",
+    "journal": "Lancet",
+    "pubdate": "2025-12-11"
+  }
+]
