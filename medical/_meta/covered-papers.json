@@ -181,3 +181,32 @@
     "journal": "Lancet",
     "pubdate": "2026-05-02"
   },
+  {
+    "date": "2026-05-25",
+    "doi": "10.1056/NEJMoa2508668",
+    "title": "Trastuzumab Deruxtecan plus Pertuzumab for First-Line HER2-Positive Metastatic Breast Cancer (DESTINY-Breast09)",
+    "journal": "NEJM",
+    "pubdate": "2026-02-05"
+  },
+  {
+    "date": "2026-05-25",
+    "doi": "10.1056/NEJMoa2516969",
+    "title": "First-Line Zongertinib in Advanced HER2-Mutant Non-Small-Cell Lung Cancer (Beamion LUNG-1)",
+    "journal": "NEJM",
+    "pubdate": "2026-04-15"
+  },
+  {
+    "date": "2026-05-26",
+    "doi": "10.1056/NEJMoa2512686",
+    "title": "Beta-Blockers after Myocardial Infarction with Normal Ejection Fraction (IPD meta-analysis: REBOOT/REDUCE-AMI/BETAMI/DANBLOCK/CAPITAL-RCT)",
+    "journal": "NEJM",
+    "pubdate": "2026-02-05"
+  },
+  {
+    "date": "2026-05-26",
+    "doi": "10.1056/NEJMoa2600283",
+    "title": "Intensive LDL Cholesterol Targeting in Atherosclerotic Cardiovascular Disease (Ez-PAVE, Korea, LDL <55 vs <70)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-28"
+  }
+]
