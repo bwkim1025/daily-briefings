@@ -327,5 +327,19 @@
     "title": "Molecular profile-based adjuvant treatment in high-intermediate risk endometrial cancer (PORTEC-4a)",
     "journal": "Lancet Oncology",
     "pubdate": "2026-01"
+  },
+  {
+    "date": "2026-06-06",
+    "doi": "10.1056/NEJMoa2517729",
+    "title": "Zanidatamab with and without Tislelizumab in HER2-Positive Gastroesophageal Cancer (HERIZON-GEA-01)",
+    "journal": "NEJM",
+    "pubdate": "2026-05-27"
+  },
+  {
+    "date": "2026-06-06",
+    "doi": "10.1056/NEJMoa2603878",
+    "title": "Perioperative Apalutamide in High-Risk Localized or Locally Advanced Prostate Cancer (PROTEUS)",
+    "journal": "NEJM",
+    "pubdate": "2026-05-31"
   }
 ]
