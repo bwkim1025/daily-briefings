@@ -341,5 +341,19 @@
     "title": "Perioperative Apalutamide in High-Risk Localized or Locally Advanced Prostate Cancer (PROTEUS)",
     "journal": "NEJM",
     "pubdate": "2026-05-31"
+  },
+  {
+    "date": "2026-06-07",
+    "doi": "10.1056/NEJMoa2602628",
+    "title": "Selpercatinib in Early-Stage RET Fusion-Positive NSCLC (LIBRETTO-432)",
+    "journal": "NEJM",
+    "pubdate": "2026-05-31"
+  },
+  {
+    "date": "2026-06-07",
+    "doi": "10.1200/JCO-26-01080",
+    "title": "Selinexor Plus Ruxolitinib in JAK Inhibitor-Naive Myelofibrosis (SENTRY)",
+    "journal": "JCO",
+    "pubdate": "2026-06"
   }
 ]
