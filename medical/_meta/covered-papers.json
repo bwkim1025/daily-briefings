@@ -567,59 +567,17 @@
     "pubdate": "2026"
   },
   {
-    "date": "2026-06-24",
-    "doi": "10.1056/NEJMoa2415550",
-    "title": "CRISPR-Cas12a Gene Editing of HBG1 and HBG2 Promoters to Treat Sickle Cell Disease (RUBY Trial)",
-    "journal": "NEJM",
-    "pubdate": "2026-04-02"
-  },
-  {
-    "date": "2026-06-24",
-    "doi": "10.1002/14651858.CD016297",
-    "title": "Amyloid-beta-targeting monoclonal antibodies for Alzheimer's disease — Cochrane Systematic Review",
-    "journal": "Cochrane Database Syst Rev",
-    "pubdate": "2026-04-16"
-  },
-  {
-    "date": "2026-06-25",
-    "doi": "10.1056/NEJMoa2516225",
-    "title": "Vasopressors or Fluids in Early Septic Shock (ARISE FLUIDS)",
-    "journal": "NEJM",
-    "pubdate": "2026-06-11"
-  },
-  {
-    "date": "2026-06-25",
-    "doi": "10.1016/S0140-6736(26)00608-2",
-    "title": "Interventions for the prevention and management of cardiometabolic multiple long-term conditions",
-    "journal": "Lancet",
-    "pubdate": "2026-06-20"
-  },
-  {
-    "date": "2026-06-26",
-    "doi": "10.1016/S0140-6736(26)00202-3",
-    "title": "Efficacy and safety of once-daily oral orforglipron compared with oral semaglutide in adults with type 2 diabetes (ACHIEVE-3)",
-    "journal": "Lancet",
-    "pubdate": "2026-02-26"
-  },
-  {
-    "date": "2026-06-26",
-    "doi": "10.1016/S0140-6736(26)00802-0",
-    "title": "Elecoglipron, an oral small molecule GLP-1 receptor agonist in adults with type 2 diabetes (SOLSTICE)",
-    "journal": "Lancet",
-    "pubdate": "2026-06-20"
-  },
-  {
-    "date": "2026-06-27",
-    "doi": "10.1056/NEJMoa2503687",
-    "title": "A Pragmatic Trial of a 6-Month Strategy for Rifampicin-Resistant Tuberculosis (BEAT Trial)",
-    "journal": "NEJM",
-    "pubdate": "2026-06-25"
-  },
-  {
-    "date": "2026-06-27",
+    "date": "2026-06-28",
     "doi": "10.1056/NEJMoa2518035",
     "title": "Ten-Year Outcomes after CAR T-Cell Therapy for B-Cell Lymphomas",
     "journal": "NEJM",
     "pubdate": "2026-06-25"
+  },
+  {
+    "date": "2026-06-28",
+    "doi": "10.1056/NEJMoa2515820",
+    "title": "Hospital Policy of Tranexamic Acid to Reduce Transfusion in Major Noncardiac Surgery (TRACTION)",
+    "journal": "NEJM",
+    "pubdate": "2026-06-10"
   }
 ]
