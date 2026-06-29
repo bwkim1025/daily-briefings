@@ -593,5 +593,19 @@
     "title": "A Phase 2 Randomized Trial of Mezagitamab in Primary Immune Thrombocytopenia",
     "journal": "NEJM",
     "pubdate": "2026-04-08"
+  },
+  {
+    "date": "2026-06-30",
+    "doi": "10.1056/NEJMoa2604565",
+    "title": "Phase 3 Trial of Oral Infigratinib in Children with Achondroplasia (PROPEL 3)",
+    "journal": "NEJM",
+    "pubdate": "2026-06-28"
+  },
+  {
+    "date": "2026-06-30",
+    "doi": "10.1038/s41591-026-04431-5",
+    "title": "General-purpose large language models outperform specialized clinical AI tools on medical benchmarks",
+    "journal": "Nature Medicine",
+    "pubdate": "2026-06-12"
   }
 ]
