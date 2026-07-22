@@ -803,5 +803,33 @@
     "title": "Finerenone in chronic kidney disease: individual participant data pooled analysis (INFINITY)",
     "journal": "The Lancet",
     "pubdate": "2026-06-05"
+  },
+  {
+    "date": "2026-07-21",
+    "doi": "10.1001/jama.2026.0210",
+    "title": "Tenecteplase for Acute Non-Large Vessel Occlusion 4.5 to 24 Hours After Ischemic Stroke (OPTION)",
+    "journal": "JAMA",
+    "pubdate": "2026-02-05"
+  },
+  {
+    "date": "2026-07-21",
+    "doi": "10.1001/jamaoncol.2025.6585",
+    "title": "Overall Survival With First-Line vs Second-Line CDK4/6 Inhibitor Use in Advanced Breast Cancer (SONIA)",
+    "journal": "JAMA Oncology",
+    "pubdate": "2026-02-19"
+  },
+  {
+    "date": "2026-07-22",
+    "doi": "10.1016/S0140-6736(26)00602-1",
+    "title": "Pembrolizumab plus weekly paclitaxel in platinum-resistant recurrent ovarian cancer (ENGOT-ov65/KEYNOTE-B96)",
+    "journal": "The Lancet",
+    "pubdate": "2026-04-01"
+  },
+  {
+    "date": "2026-07-22",
+    "doi": "10.1001/jama.2026.2253",
+    "title": "Changes in Clinician Time Expenditure and Visit Quantity With Adoption of AI-Powered Scribes",
+    "journal": "JAMA",
+    "pubdate": "2026-04-01"
   }
 ]
