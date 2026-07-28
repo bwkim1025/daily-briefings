@@ -859,5 +859,19 @@
     "title": "Phase 3 Trial of Oral Infigratinib in Children with Achondroplasia (PROPEL 3)",
     "journal": "NEJM",
     "pubdate": "2026-07-02"
+  },
+  {
+    "date": "2026-07-29",
+    "doi": "10.1038/s41591-025-04074-y",
+    "title": "Reliability of LLMs as medical assistants for the general public: a randomized preregistered study",
+    "journal": "Nature Medicine",
+    "pubdate": "2026-02-01"
+  },
+  {
+    "date": "2026-07-29",
+    "doi": "10.1001/jamacardio.2026.0083",
+    "title": "Long-Term Outcomes of Left Bundle-Branch Pacing vs Biventricular Pacing in Heart Failure (HeartSync-LBBP) / paired PhysioSync-HF 10.1001/jamacardio.2026.0101",
+    "journal": "JAMA Cardiology",
+    "pubdate": "2026-03-11"
   }
 ]
