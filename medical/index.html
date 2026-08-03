@@ -129,6 +129,7 @@
     document.getElementById('theme-toggle').addEventListener('click',()=>{const d=root.classList.toggle('dark');localStorage.setItem('eb-theme',d?'dark':'light');const tc=document.querySelector('meta[name="theme-color"]');if(tc)tc.setAttribute('content',d?'#0b0e15':'#1a3a8a');});
 
     const CATS = [
+      { key:'PAPERS',           title:'논문 · 인용수 Top 2', sub:'Papers'         },
       { key:'CARDIOLOGY',       title:'심장 · 순환기',      sub:'Cardiology'      },
       { key:'NEPHROLOGY',       title:'신장 · 투석 · 이식',  sub:'Nephrology'      },
       { key:'ENDOCRINOLOGY',    title:'내분비 · 당뇨',      sub:'Endocrinology'   },
@@ -149,7 +150,7 @@
     async function fetchBriefing() {
       for (let i=0;i<14;i++){
         const ds=kstDateStr(i);
-        for (const suffix of ['-journal.md','-policy.md']){
+        for (const suffix of ['.md','-journal.md','-policy.md']){
           try{const r=await fetch('https://raw.githubusercontent.com/bwkim1025/daily-briefings/main/medical/briefings/'+ds+suffix);if(r.ok)return await r.text();}catch(e){}
         }
       }
@@ -180,11 +181,11 @@
         const h3=line.match(/^###\s+(.+)/);if(h3&&mode==='CATEGORY'){flush();currentItem={headline:h3[1].trim(),summary:'',whyItMatters:'',abstract:'',keyResult:'',context:'',marketImplication:'',source:''};result.categories[currentCat].push(currentItem);currentSection='summary';continue;}
         const h4=line.match(/^####\s+(.+)/);if(h4&&currentItem){flush();const s=h4[1].toLowerCase();
           if(s.startsWith('why')||s.includes('matter')||s.includes('어떤')||s.includes('선정'))currentSection='whyItMatters';
-          else if(s.includes('초록')||s.startsWith('abstract'))currentSection='abstract';
+          else if(s.includes('초록')||s.startsWith('abstract')||s.includes('변경'))currentSection='abstract';
           else if(s.startsWith('key')||s.includes('find')||s.includes('주요')||s.includes('결과')||s.includes('그림')||s.includes('표')||s.startsWith('figure')||s.startsWith('table'))currentSection='keyResult';
-          else if(s.startsWith('clinical')||s.includes('relev')||s.includes('적용')||s.includes('가족'))currentSection='context';
-          else if(s.includes('caution')||s.includes('주의'))currentSection='marketImplication';
-          else if(s.startsWith('source')||s.includes('출처'))currentSection='source';
+          else if(s.includes('시행')||s.includes('caution')||s.includes('주의'))currentSection='context';
+          else if(s.startsWith('clinical')||s.includes('relev')||s.includes('적용')||s.includes('영향')||s.includes('가족'))currentSection='marketImplication';
+          else if(s.startsWith('source')||s.includes('출처')||s.includes('인용'))currentSection='source';
           else currentSection=null;
           continue;}
         if(line.trim()==='---')continue;buffer.push(line);
@@ -196,12 +197,12 @@
       let cats='',idx=0;
       for(const cat of CATS){const items=data.categories[cat.key]||[];if(!items.length)continue;idx++;let ih='';
         for(const it of items){const blocks=[];
-          if(it.whyItMatters)blocks.push('<div class="block"><h4>선정 이유</h4>'+mdToHtml(it.whyItMatters)+'</div>');
-          if(it.abstract)blocks.push('<div class="block"><h4>초록 · 핵심 방법/결과</h4>'+mdToHtml(it.abstract)+'</div>');
-          if(it.keyResult)blocks.push('<div class="block"><h4>주요 결과 · 그림/표</h4>'+mdToHtml(it.keyResult)+'</div>');
-          if(it.context)blocks.push('<div class="block"><h4>핵심 결과</h4>'+mdToHtml(it.context)+'</div>');
-          if(it.marketImplication)blocks.push('<div class="block"><h4>임상 적용</h4>'+mdToHtml(it.marketImplication)+'</div>');
-          if(it.source)blocks.push('<div class="block"><h4>출처</h4>'+mdToHtml(it.source)+'</div>');
+          if(it.whyItMatters)blocks.push('<div class="block"><h4>어떤 연구 · 선정 이유</h4>'+mdToHtml(it.whyItMatters)+'</div>');
+          if(it.abstract)blocks.push('<div class="block"><h4>초록 · 변경 내용</h4>'+mdToHtml(it.abstract)+'</div>');
+          if(it.keyResult)blocks.push('<div class="block"><h4>핵심 결과</h4>'+mdToHtml(it.keyResult)+'</div>');
+          if(it.context)blocks.push('<div class="block"><h4>시행일 · 주의</h4>'+mdToHtml(it.context)+'</div>');
+          if(it.marketImplication)blocks.push('<div class="block"><h4>임상 적용 · 진료 영향</h4>'+mdToHtml(it.marketImplication)+'</div>');
+          if(it.source)blocks.push('<div class="block"><h4>출처 · 인용 정보</h4>'+mdToHtml(it.source)+'</div>');
           ih+='<details class="item"><summary class="item-head"><div><div class="item-headline">'+esc(it.headline)+'</div>'+(it.summary?'<div class="item-summary">'+mdInline(it.summary)+'</div>':'')+'</div><span class="item-toggle" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 1.5v9M1.5 6h9"/></svg></span></summary><div class="item-body">'+blocks.join('')+'</div></details>';
         }
         cats+='<section class="category"><div class="cat-head"><span class="cat-num">'+String(idx).padStart(2,'0')+'</span><span class="cat-title">'+cat.title+'</span><span class="cat-sub">'+cat.sub+'</span></div>'+ih+'</section>';}
@@ -220,7 +221,7 @@
     
     /* === Calendar feature - appended; overrides existing init() via hoisting === */
     const __CAT='medical';
-    const __SFX=["-journal.md", "-policy.md"];
+    const __SFX=[".md", "-journal.md", "-policy.md"];
     const __CAL_STATE={viewYear:0,viewMonth:0,available:new Set(),selectedDate:null};
     async function __loadDates(){
       const k='briefings-list-'+__CAT;
