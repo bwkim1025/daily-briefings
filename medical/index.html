@@ -226,16 +226,23 @@
     async function __loadDates(){
       const k='briefings-list-'+__CAT;
       const c=localStorage.getItem(k);
-      if(c){try{const{ts,dates}=JSON.parse(c);if(Date.now()-ts<1800000){__CAL_STATE.available=new Set(dates);return;}}catch(e){}}
+      let stale=null;
+      if(c){try{const{ts,dates}=JSON.parse(c);stale=dates;if(Date.now()-ts<1800000){__CAL_STATE.available=new Set(dates);return;}}catch(e){}}
+      let ok=false;
       try{
         const r=await fetch('https://api.github.com/repos/bwkim1025/daily-briefings/contents/'+__CAT+'/briefings');
         if(r.ok){
           const items=await r.json();const dates=new Set();
           for(const it of items){const m=it.name&&it.name.match(/^(\d{4}-\d{2}-\d{2})/);if(m)dates.add(m[1]);}
-          __CAL_STATE.available=dates;
+          __CAL_STATE.available=dates;ok=true;
           localStorage.setItem(k,JSON.stringify({ts:Date.now(),dates:[...dates]}));
         }
       }catch(e){}
+      /* API 실패(레이트리밋 등) 시: 기한 지난 캐시라도 재사용, 그마저 없으면 최근 14일을 후보로 */
+      if(!ok){
+        if(stale&&stale.length){__CAL_STATE.available=new Set(stale);}
+        else{const s=new Set();for(let i=0;i<14;i++)s.add(kstDateStr(i));__CAL_STATE.available=s;}
+      }
     }
     function __renderCal(){
       const y=__CAL_STATE.viewYear,m=__CAL_STATE.viewMonth;
@@ -254,7 +261,7 @@
       }
       grid.innerHTML=html;
       document.getElementById('cal-title').textContent=y+'년 '+(m+1)+'월';
-      grid.querySelectorAll('.cal-day.has-brief').forEach(el=>{
+      grid.querySelectorAll('.cal-day').forEach(el=>{
         el.addEventListener('click',async()=>{
           const ds=el.dataset.date;
           __CAL_STATE.selectedDate=ds;__renderCal();
