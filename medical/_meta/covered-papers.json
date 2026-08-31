@@ -1,1374 +1,1395 @@
 [
- {
-  "date": "2026-05-11",
-  "doi": "10.1056/NEJMoa2511778",
-  "title": "Phase 1 Trial of CRISPR-Cas9 Gene Editing Targeting ANGPTL3",
-  "journal": "NEJM",
-  "pubdate": "2025-11-08"
- },
- {
-  "date": "2026-05-11",
-  "doi": "10.1056/NEJMoa2516043",
-  "title": "Prehospital Whole Blood in Traumatic Hemorrhage (SWiFT Trial)",
-  "journal": "NEJM",
-  "pubdate": "2026-04"
- },
- {
-  "date": "2026-05-13",
-  "doi": "10.1056/NEJMoa2505928",
-  "title": "Cardiovascular Outcomes with Tirzepatide versus Dulaglutide in Type 2 Diabetes (SURPASS-CVOT)",
-  "journal": "NEJM",
-  "pubdate": "2025-12-17"
- },
- {
-  "date": "2026-05-13",
-  "doi": "10.1056/NEJMoa2512133",
-  "title": "Sibeprenlimab in IgA Nephropathy — Interim Analysis of a Phase 3 Trial",
-  "journal": "NEJM",
-  "pubdate": "2026-02-12"
- },
- {
-  "date": "2026-05-14",
-  "doi": "10.1056/NEJMoa2501510",
-  "title": "Trial of Pegcetacoplan in C3 Glomerulopathy and Immune-Complex MPGN (VALIANT)",
-  "journal": "NEJM",
-  "pubdate": "2025-12-04"
- },
- {
-  "date": "2026-05-14",
-  "doi": "10.1056/NEJMoa2508681",
-  "title": "An Intravenous Brain-Penetrant Enzyme Therapy for Mucopolysaccharidosis II (Tividenofusp Alfa)",
-  "journal": "NEJM",
-  "pubdate": "2026-01-01"
- },
- {
-  "date": "2026-05-15",
-  "doi": "10.1056/NEJMoa2510198",
-  "title": "A Phase 3 Trial of Atacicept in Patients with IgA Nephropathy (ORIGIN 3)",
-  "journal": "NEJM",
-  "pubdate": "2026-02-12"
- },
- {
-  "date": "2026-05-15",
-  "doi": "10.1056/NEJMoa2512854",
-  "title": "Finerenone in Type 1 Diabetes and Chronic Kidney Disease (FINE-ONE)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-04"
- },
- {
-  "date": "2026-05-16",
-  "doi": "10.1056/NEJMoa2514428",
-  "title": "Evolocumab in Patients without a Previous Myocardial Infarction or Stroke (VESALIUS-CV)",
-  "journal": "NEJM",
-  "pubdate": "2026-01-08"
- },
- {
-  "date": "2026-05-16",
-  "doi": "10.1056/NEJMoa2511885",
-  "title": "ctDNA-Guided Adjuvant Atezolizumab in Muscle-Invasive Bladder Cancer (IMvigor011)",
-  "journal": "NEJM",
-  "pubdate": "2025-12-18"
- },
- {
-  "date": "2026-05-17",
-  "doi": "10.1016/S0140-6736(25)02464-X",
-  "title": "Interval cancer, sensitivity, and specificity comparing AI-supported mammography screening with standard double reading without AI in the MASAI study",
-  "journal": "Lancet",
-  "pubdate": "2026-01-31"
- },
- {
-  "date": "2026-05-17",
-  "doi": "10.1016/S0140-6736(25)01953-1",
-  "title": "Zoliflodacin versus ceftriaxone plus azithromycin for treatment of uncomplicated urogenital gonorrhoea (Phase 3)",
-  "journal": "Lancet",
-  "pubdate": "2025-12-11"
- },
- {
-  "date": "2026-05-18",
-  "doi": "10.1016/S0140-6736(25)02165-8",
-  "title": "Orforglipron, an oral small-molecule GLP-1 receptor agonist, for the treatment of obesity in people with type 2 diabetes (ATTAIN-2)",
-  "journal": "Lancet",
-  "pubdate": "2025-11-20"
- },
- {
-  "date": "2026-05-18",
-  "doi": "10.1056/NEJMoa2503531",
-  "title": "A Phase 3 Trial of Brepocitinib in Dermatomyositis (VALOR)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-28"
- },
- {
-  "date": "2026-05-19",
-  "doi": "10.1016/S0140-6736(26)00314-4",
-  "title": "Proton beam therapy for oropharyngeal cancer (TORPEdO): a phase 3, randomised controlled trial",
-  "journal": "Lancet",
-  "pubdate": "2026-03-21"
- },
- {
-  "date": "2026-05-19",
-  "doi": "10.1056/NEJMoa2509306",
-  "title": "Ensitrelvir for Covid-19 Postexposure Prophylaxis in Household Contacts (SCORPIO-PEP)",
-  "journal": "NEJM",
-  "pubdate": "2026-05-13"
- },
- {
-  "date": "2026-05-20",
-  "doi": "10.1056/NEJMoa2511674",
-  "title": "Perioperative Enfortumab Vedotin and Pembrolizumab in Bladder Cancer (KEYNOTE-905/EV-303)",
-  "journal": "NEJM",
-  "pubdate": "2026-02-18"
- },
- {
-  "date": "2026-05-20",
-  "doi": "10.1056/NEJMoa2505783",
-  "title": "Daraxonrasib in Previously Treated Advanced RAS-Mutated Pancreatic Cancer (RMC-6236-001)",
-  "journal": "NEJM",
-  "pubdate": "2026-05-06"
- },
- {
-  "date": "2026-05-21",
-  "doi": "10.1056/NEJMoa2510703",
-  "title": "Bleeding Risk with Apixaban vs. Rivaroxaban in Acute Venous Thromboembolism (COBRRA)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-11"
- },
- {
-  "date": "2026-05-21",
-  "doi": "10.1056/NEJMoa2517213",
-  "title": "Left Atrial Appendage Closure or Anticoagulation for Atrial Fibrillation (CHAMPION-AF)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-28"
- },
- {
-  "date": "2026-05-22",
-  "doi": "10.1056/NEJMoa2516150",
-  "title": "Efficacy and Safety of Obinutuzumab in Active Systemic Lupus Erythematosus (ALLEGORY)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-06"
- },
- {
-  "date": "2026-05-22",
-  "doi": "10.1056/NEJMoa2514663",
-  "title": "Teclistamab plus Daratumumab in Relapsed or Refractory Multiple Myeloma (MajesTEC-3)",
-  "journal": "NEJM",
-  "pubdate": "2025-12-09"
- },
- {
-  "date": "2026-05-23",
-  "doi": "10.1056/NEJMoa2515704",
-  "title": "Microaxial Flow Pump or Standard Care in High-Risk PCI (CHIP-BCIS3)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-29"
- },
- {
-  "date": "2026-05-23",
-  "doi": "10.1056/NEJMoa2600929",
-  "title": "Pulsed Field Ablation as Initial Therapy for Persistent Atrial Fibrillation (AVANT GUARD)",
-  "journal": "NEJM",
-  "pubdate": "2026-04-25"
- },
- {
-  "date": "2026-05-24",
-  "doi": "10.1056/NEJMoa2514661",
-  "title": "Trastuzumab Deruxtecan in Residual HER2-Positive Early Breast Cancer (DESTINY-Breast05)",
-  "journal": "NEJM",
-  "pubdate": "2025-12-10"
- },
- {
-  "date": "2026-05-24",
-  "doi": "10.1016/S0140-6736(26)00305-3",
-  "title": "Once-weekly semaglutide versus placebo in patients with alcohol use disorder and comorbid obesity: a randomised, double-blind, placebo-controlled trial",
-  "journal": "Lancet",
-  "pubdate": "2026-05-02"
- },
- {
-  "date": "2026-05-25",
-  "doi": "10.1056/NEJMoa2508668",
-  "title": "Trastuzumab Deruxtecan plus Pertuzumab for First-Line HER2-Positive Metastatic Breast Cancer (DESTINY-Breast09)",
-  "journal": "NEJM",
-  "pubdate": "2026-02-05"
- },
- {
-  "date": "2026-05-25",
-  "doi": "10.1056/NEJMoa2516969",
-  "title": "First-Line Zongertinib in Advanced HER2-Mutant Non-Small-Cell Lung Cancer (Beamion LUNG-1)",
-  "journal": "NEJM",
-  "pubdate": "2026-04-15"
- },
- {
-  "date": "2026-05-26",
-  "doi": "10.1056/NEJMoa2512686",
-  "title": "Beta-Blockers after Myocardial Infarction with Normal Ejection Fraction (IPD meta-analysis: REBOOT/REDUCE-AMI/BETAMI/DANBLOCK/CAPITAL-RCT)",
-  "journal": "NEJM",
-  "pubdate": "2026-02-05"
- },
- {
-  "date": "2026-05-26",
-  "doi": "10.1056/NEJMoa2600283",
-  "title": "Intensive LDL Cholesterol Targeting in Atherosclerotic Cardiovascular Disease (Ez-PAVE, Korea, LDL <55 vs <70)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-28"
- },
- {
-  "date": "2026-05-28",
-  "doi": "10.1056/NEJMoa2507874",
-  "title": "Atezolizumab plus FOLFOX for Stage III Mismatch Repair-Deficient Colon Cancer (ATOMIC, Alliance A021502)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-25"
- },
- {
-  "date": "2026-05-28",
-  "doi": "10.1056/NEJMoa2514752",
-  "title": "Dual Targeting of Extramedullary Myeloma with Talquetamab and Teclistamab (RedirecTT-1)",
-  "journal": "NEJM",
-  "pubdate": "2025-12-07"
- },
- {
-  "date": "2026-05-29",
-  "doi": "10.1056/NEJMoa2600752",
-  "title": "Setidegrasib in Advanced NSCLC and Pancreatic Cancer (KRAS G12D Degrader)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-25"
- },
- {
-  "date": "2026-05-29",
-  "doi": "10.1016/S0140-6736(25)01953-1",
-  "title": "Zoliflodacin vs Ceftriaxone+Azithromycin for Uncomplicated Urogenital Gonorrhoea (Phase 3)",
-  "journal": "Lancet",
-  "pubdate": "2025-12-11"
- },
- {
-  "date": "2026-05-30",
-  "doi": "10.1038/s41591-026-04386-7",
-  "title": "Orforglipron for maintenance of body weight reduction (ATTAIN-MAINTAIN, phase 3b)",
-  "journal": "Nature Medicine",
-  "pubdate": "2026-05"
- },
- {
-  "date": "2026-05-31",
-  "doi": "10.1056/NEJMoa2511774",
-  "title": "Orforglipron in Adults with Obesity (ATTAIN-1)",
-  "journal": "NEJM",
-  "pubdate": "2026-04-09"
- },
- {
-  "date": "2026-05-31",
-  "doi": "10.1056/NEJMoa2502081",
-  "title": "Coadministered Cagrilintide and Semaglutide in Adults with Overweight or Obesity (REDEFINE 1)",
-  "journal": "NEJM",
-  "pubdate": "2026-01-08"
- },
- {
-  "date": "2026-06-01",
-  "doi": "10.1056/NEJMoa2515131",
-  "title": "Phase 3 Results of Bepirovirsen Treatment for Chronic Hepatitis B (B-Well 1 & 2)",
-  "journal": "NEJM",
-  "pubdate": "2026-05-26"
- },
- {
-  "date": "2026-06-01",
-  "doi": "10.1056/NEJMoa2605555",
-  "title": "Daraxonrasib in Previously Treated Metastatic Pancreatic Cancer (RASolute 302)",
-  "journal": "NEJM",
-  "pubdate": "2026-05-31"
- },
- {
-  "date": "2026-06-02",
-  "doi": "10.1136/bmj-2025-085304",
-  "title": "Weight regain after cessation of medication for weight management: systematic review and meta-analysis",
-  "journal": "BMJ",
-  "pubdate": "2026-01-07"
- },
- {
-  "date": "2026-06-02",
-  "doi": "10.1001/jama.2025.24175",
-  "title": "Precision Immunotherapy to Improve Sepsis Outcomes: The ImmunoSep Randomized Clinical Trial",
-  "journal": "JAMA",
-  "pubdate": "2025-12-08"
- },
- {
-  "date": "2026-06-03",
-  "doi": "10.1016/S0140-6736(26)00459-9",
-  "title": "Efficacy and safety of oral semaglutide 14 mg in early-stage symptomatic Alzheimer's disease (evoke and evoke+)",
-  "journal": "Lancet",
-  "pubdate": "2026-03-19"
- },
- {
-  "date": "2026-06-03",
-  "doi": "10.1056/NEJMoa2603870",
-  "title": "Teclistamab in Multiple Myeloma with One to Three Previous Lines of Therapy (MajesTEC-9)",
-  "journal": "NEJM",
-  "pubdate": "2026-05-29"
- },
- {
-  "date": "2026-06-04",
-  "doi": "10.1056/NEJMoa2508800",
-  "title": "Medical Management and Revascularization for Asymptomatic Carotid Stenosis (CREST-2)",
-  "journal": "NEJM",
-  "pubdate": "2026-01-15"
- },
- {
-  "date": "2026-06-04",
-  "doi": "10.1001/jama.2025.20402",
-  "title": "Personalized Hemodynamic Resuscitation Targeting Capillary Refill Time in Early Septic Shock (ANDROMEDA-SHOCK-2)",
-  "journal": "JAMA",
-  "pubdate": "2025-12-09"
- },
- {
-  "date": "2026-06-05",
-  "doi": "10.1001/jama.2025.24784",
-  "title": "Risk-Based vs Annual Breast Cancer Screening (WISDOM)",
-  "journal": "JAMA",
-  "pubdate": "2025-12-12"
- },
- {
-  "date": "2026-06-05",
-  "doi": "10.1016/S1470-2045(25)00612-6",
-  "title": "Molecular profile-based adjuvant treatment in high-intermediate risk endometrial cancer (PORTEC-4a)",
-  "journal": "Lancet Oncology",
-  "pubdate": "2026-01"
- },
- {
-  "date": "2026-06-06",
-  "doi": "10.1056/NEJMoa2517729",
-  "title": "Zanidatamab with and without Tislelizumab in HER2-Positive Gastroesophageal Cancer (HERIZON-GEA-01)",
-  "journal": "NEJM",
-  "pubdate": "2026-05-27"
- },
- {
-  "date": "2026-06-06",
-  "doi": "10.1056/NEJMoa2603878",
-  "title": "Perioperative Apalutamide in High-Risk Localized or Locally Advanced Prostate Cancer (PROTEUS)",
-  "journal": "NEJM",
-  "pubdate": "2026-05-31"
- },
- {
-  "date": "2026-06-07",
-  "doi": "10.1056/NEJMoa2602628",
-  "title": "Selpercatinib in Early-Stage RET Fusion-Positive NSCLC (LIBRETTO-432)",
-  "journal": "NEJM",
-  "pubdate": "2026-05-31"
- },
- {
-  "date": "2026-06-07",
-  "doi": "10.1200/JCO-26-01080",
-  "title": "Selinexor Plus Ruxolitinib in JAK Inhibitor-Naive Myelofibrosis (SENTRY)",
-  "journal": "JCO",
-  "pubdate": "2026-06"
- },
- {
-  "date": "2026-06-08",
-  "doi": "10.1056/NEJMoa2604625",
-  "title": "Finerenone in Persons with Chronic Kidney Disease without Diabetes (FIND-CKD)",
-  "journal": "NEJM",
-  "pubdate": "2026-06-04"
- },
- {
-  "date": "2026-06-08",
-  "doi": "10.1056/NEJMoa2601103",
-  "title": "Mavacamten in Adolescents with Obstructive Hypertrophic Cardiomyopathy (SCOUT-HCM)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-29"
- },
- {
-  "date": "2026-06-09",
-  "doi": "10.1016/S0140-6736(26)00966-9",
-  "title": "Ivonescimab plus chemotherapy vs tislelizumab plus chemotherapy in advanced squamous NSCLC (HARMONi-6)",
-  "journal": "Lancet",
-  "pubdate": "2026"
- },
- {
-  "date": "2026-06-09",
-  "doi": "NCT04967521",
-  "title": "Abemaciclib in Advanced Dedifferentiated Liposarcoma (SARC041, ASCO 2026 Plenary LBA2)",
-  "journal": "ASCO 2026 Abstract LBA2",
-  "pubdate": "2026-05-31"
- },
- {
-  "date": "2026-06-10",
-  "doi": "10.1056/NEJMoa2509688",
-  "title": "Antithrombotic Therapy after Successful Catheter Ablation for Atrial Fibrillation (OCEAN)",
-  "journal": "NEJM",
-  "pubdate": "2026-01-22"
- },
- {
-  "date": "2026-06-10",
-  "doi": "10.1056/NEJMoa2512761",
-  "title": "Olezarsen for Managing Severe Hypertriglyceridemia and Pancreatitis Risk (CORE-TIMI 72)",
-  "journal": "NEJM",
-  "pubdate": "2026-01-29"
- },
- {
-  "date": "2026-06-11",
-  "doi": "10.1056/NEJMoa2504187",
-  "title": "Oral Icotrokinra for Plaque Psoriasis in Adults and Adolescents (ICONIC)",
-  "journal": "NEJM",
-  "pubdate": "2025-10-30"
- },
- {
-  "date": "2026-06-11",
-  "doi": "10.1056/NEJMoa2507109",
-  "title": "Efficacy and Safety of Baxdrostat in Uncontrolled and Resistant Hypertension (BaxHTN)",
-  "journal": "NEJM",
-  "pubdate": "2025-08-30"
- },
- {
-  "date": "2026-06-12",
-  "doi": "10.1056/NEJMoa2601005",
-  "title": "Discontinuation of Beta-Blocker Therapy after Myocardial Infarction (SMART-DECISION)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-30"
- },
- {
-  "date": "2026-06-12",
-  "doi": "10.1016/S0140-6736(26)00800-7",
-  "title": "Orforglipron versus dapagliflozin in type 2 diabetes (ACHIEVE-2)",
-  "journal": "Lancet",
-  "pubdate": "2026-06"
- },
- {
-  "date": "2026-06-13",
-  "doi": "10.1016/S1470-2045(25)00567-4",
-  "title": "AI and radiologists in pancreatic cancer detection on standard-of-care CT (PANORAMA)",
-  "journal": "Lancet Oncology",
-  "pubdate": "2026-01"
- },
- {
-  "date": "2026-06-13",
-  "doi": "10.1056/NEJMoa2602567",
-  "title": "Phase 3 Trial of Secukinumab in Polymyalgia Rheumatica (REPLENISH)",
-  "journal": "NEJM",
-  "pubdate": "2026-06-03"
- },
- {
-  "date": "2026-06-15",
-  "doi": "10.1056/NEJMoa2511002",
-  "title": "A Placebo-Controlled Trial of the Oral PCSK9 Inhibitor Enlicitide (CORALreef Lipids)",
-  "journal": "NEJM",
-  "pubdate": "2026-02-05"
- },
- {
-  "date": "2026-06-15",
-  "doi": "10.1056/NEJMoa2513880",
-  "title": "Asundexian for Secondary Stroke Prevention (OCEANIC-STROKE)",
-  "journal": "NEJM",
-  "pubdate": "2026-04"
- },
- {
-  "date": "2026-06-16",
-  "doi": "10.1001/jama.2026.0076",
-  "title": "Stereotactic Radiation vs Hippocampal-Avoidance WBRT for 5-20 Brain Metastases",
-  "journal": "JAMA",
-  "pubdate": "2026-02-18"
- },
- {
-  "date": "2026-06-16",
-  "doi": "10.1038/s41591-025-04189-2",
-  "title": "FMT plus pembrolizumab and axitinib in metastatic RCC (TACITO phase 2)",
-  "journal": "Nature Medicine",
-  "pubdate": "2026-01-28"
- },
- {
-  "date": "2026-06-17",
-  "doi": "10.1056/NEJMoa2600949",
-  "title": "Angiography-Derived Fractional Flow Reserve to Guide PCI (ALL-RISE)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-29"
- },
- {
-  "date": "2026-06-17",
-  "doi": "10.1016/S2213-8587(25)00356-0",
-  "title": "GLP-1 receptor agonists for obesity: eligibility across 99 countries",
-  "journal": "Lancet Diabetes Endocrinol",
-  "pubdate": "2026-01"
- },
- {
-  "date": "2026-06-19",
-  "doi": "10.1016/S0140-6736(25)01862-8",
-  "title": "Efficacy and safety of minocycline in patients with acute ischaemic stroke (EMPHASIS)",
-  "journal": "The Lancet",
-  "pubdate": "2026-02-14"
- },
- {
-  "date": "2026-06-19",
-  "doi": "10.1200/JCO.2026.44.16_suppl.500",
-  "title": "OPTIMA: test-directed chemotherapy in high clinical risk ER+/HER2- early breast cancer",
-  "journal": "J Clin Oncol (ASCO 2026 Abstract)",
-  "pubdate": "2026-06"
- },
- {
-  "date": "2026-06-20",
-  "doi": "10.1016/j.jacc.2026.03.036",
-  "title": "Oral PCSK9 Inhibitor Enlicitide vs Oral Nonstatin Therapies (CORALreef AddOn)",
-  "journal": "JACC",
-  "pubdate": "2026-03-25"
- },
- {
-  "date": "2026-06-20",
-  "doi": "10.1056/NEJMoa2502929",
-  "title": "First-Line Camizestrant for Emerging ESR1-Mutated Advanced Breast Cancer (SERENA-6)",
-  "journal": "NEJM",
-  "pubdate": "2025-06-01"
- },
- {
-  "date": "2026-06-18",
-  "doi": "10.1056/NEJMoa2601841",
-  "title": "Angiography-Based Physiology to Guide Coronary Revascularization (FAST III)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-29"
- },
- {
-  "date": "2026-06-18",
-  "doi": "10.1056/NEJMoa2502760",
-  "title": "Structured Exercise after Adjuvant Chemotherapy for Colon Cancer (CHALLENGE)",
-  "journal": "NEJM",
-  "pubdate": "2025-06-01"
- },
- {
-  "date": "2026-06-21",
-  "doi": "10.1056/NEJMoa2600751",
-  "title": "Survodutide for Obesity (SYNCHRONIZE-1)",
-  "journal": "NEJM",
-  "pubdate": "2026-06-07"
- },
- {
-  "date": "2026-06-21",
-  "doi": "10.1056/NEJMoa2604126",
-  "title": "Talazoparib plus Enzalutamide in HRR-altered mCSPC (TALAPRO-3)",
-  "journal": "NEJM",
-  "pubdate": "2026-05-30"
- },
- {
-  "date": "2026-06-22",
-  "doi": "10.1056/NEJMoa2508959",
-  "title": "Sacituzumab Govitecan plus Pembrolizumab in First-Line PD-L1-Positive Metastatic Triple-Negative Breast Cancer (ASCENT-04/KEYNOTE-D19)",
-  "journal": "NEJM",
-  "pubdate": "2026-01-22"
- },
- {
-  "date": "2026-06-22",
-  "doi": "10.1056/NEJMoa2512911",
-  "title": "Inhaled Treprostinil for Idiopathic Pulmonary Fibrosis (TETON-2)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-11"
- },
- {
-  "date": "2026-06-23",
-  "doi": "10.1056/NEJMoa2506905",
-  "title": "Cefazolin for Methicillin-Susceptible Staphylococcus aureus Bacteremia (SNAP Trial)",
-  "journal": "NEJM",
-  "pubdate": "2026-06"
- },
- {
-  "date": "2026-06-23",
-  "doi": "10.1056/NEJMoa2502099",
-  "title": "Tarlatamab in Small-Cell Lung Cancer after Platinum-Based Chemotherapy (DeLLphi-304)",
-  "journal": "NEJM",
-  "pubdate": "2026"
- },
- {
-  "date": "2026-06-28",
-  "doi": "10.1056/NEJMoa2518035",
-  "title": "Ten-Year Outcomes after CAR T-Cell Therapy for B-Cell Lymphomas",
-  "journal": "NEJM",
-  "pubdate": "2026-06-25"
- },
- {
-  "date": "2026-06-28",
-  "doi": "10.1056/NEJMoa2515820",
-  "title": "Hospital Policy of Tranexamic Acid to Reduce Transfusion in Major Noncardiac Surgery (TRACTION)",
-  "journal": "NEJM",
-  "pubdate": "2026-06-10"
- },
- {
-  "date": "2026-06-29",
-  "doi": "10.1056/NEJMoa2503687",
-  "title": "A Pragmatic Trial of a 6-Month Strategy for Rifampicin-Resistant Tuberculosis (BEAT TB)",
-  "journal": "NEJM",
-  "pubdate": "2026-06-25"
- },
- {
-  "date": "2026-06-29",
-  "doi": "10.1056/NEJMoa2513120",
-  "title": "A Phase 2 Randomized Trial of Mezagitamab in Primary Immune Thrombocytopenia",
-  "journal": "NEJM",
-  "pubdate": "2026-04-08"
- },
- {
-  "date": "2026-07-01",
-  "doi": "10.1056/NEJMoa2603387",
-  "title": "Exa-cel in Children with Transfusion-Dependent β-Thalassemia or Sickle Cell Disease (Ages 5-11)",
-  "journal": "NEJM",
-  "pubdate": "2026-06-11"
- },
- {
-  "date": "2026-07-01",
-  "doi": "10.1056/NEJMoa2501277",
-  "title": "CRISPR-Cas12a Gene Editing of HBG1 and HBG2 Promoters to Treat β-Thalassemia (EdiThal, reni-cel)",
-  "journal": "NEJM",
-  "pubdate": "2026-04-02"
- },
- {
-  "date": "2026-07-05",
-  "doi": "10.1001/jama.2025.21990",
-  "title": "Spinal Manipulation and Clinician-Supported Biopsychosocial Self-Management for Acute Low Back Pain (PACBACK)",
-  "journal": "JAMA",
-  "pubdate": "2025-12-29"
- },
- {
-  "date": "2026-07-05",
-  "doi": "10.1016/S1470-2045(25)00653-9",
-  "title": "Cilta-cel vs Standard of Care in Lenalidomide-Refractory Multiple Myeloma — CARTITUDE-4 Updated OS Analysis",
-  "journal": "Lancet Oncology",
-  "pubdate": "2026-01-07"
- },
- {
-  "date": "2026-07-07",
-  "doi": "10.1056/NEJMoa2516567",
-  "title": "Ultrasound-Facilitated, Catheter-Directed Fibrinolysis for Acute Pulmonary Embolism (HI-PEITHO)",
-  "journal": "NEJM",
-  "pubdate": "2026-03"
- },
- {
-  "date": "2026-07-07",
-  "doi": "10.1056/NEJMoa2514120",
-  "title": "Endovascular Treatment of Medium-Vessel-Occlusion Strokes (ORIENTAL MeVO)",
-  "journal": "NEJM",
-  "pubdate": "2026-05-14"
- },
- {
-  "date": "2026-07-09",
-  "doi": "10.1038/s41591-025-04186-5",
-  "title": "FMT plus immunotherapy in NSCLC and melanoma (FMT-LUMINate)",
-  "journal": "Nat Med",
-  "pubdate": "2026-01-28"
- },
- {
-  "date": "2026-07-09",
-  "doi": "10.1016/j.jacc.2026.02.5063",
-  "title": "Six-Year Outcomes After TAVR vs SAVR in Low-Risk Aortic Stenosis (Evolut Low Risk)",
-  "journal": "JACC",
-  "pubdate": "2026-02-01"
- },
- {
-  "date": "2026-07-10",
-  "doi": "10.1038/s41591-026-04204-0",
-  "title": "Bimagrumab plus Semaglutide for Obesity (Phase 2)",
-  "journal": "Nature Medicine",
-  "pubdate": "2026-03-02"
- },
- {
-  "date": "2026-07-10",
-  "doi": "10.1038/s41591-026-04206-y",
-  "title": "Plasma p-tau217 Clocks to Predict Onset of Symptomatic Alzheimer's Disease",
-  "journal": "Nature Medicine",
-  "pubdate": "2026-02-19"
- },
- {
-  "date": "2026-07-11",
-  "doi": "10.1016/S0140-6736(26)00202-3",
-  "title": "Oral orforglipron vs oral semaglutide in type 2 diabetes (ACHIEVE-3)",
-  "journal": "The Lancet",
-  "pubdate": "2026-02-01"
- },
- {
-  "date": "2026-07-11",
-  "doi": "10.1056/NEJMoa2513310",
-  "title": "Left Atrial Appendage Closure or Medical Therapy in Atrial Fibrillation (CLOSURE-AF)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-18"
- },
- {
-  "date": "2026-07-12",
-  "doi": "10.1200/JCO-25-01569",
-  "title": "Chemoradiation ± Atezolizumab in Limited-Stage Small Cell Lung Cancer (NRG/Alliance LU005)",
-  "journal": "JCO",
-  "pubdate": "2026-01-13"
- },
- {
-  "date": "2026-07-12",
-  "doi": "10.1056/NEJMoa2600440",
-  "title": "IVUS-Guided versus Angiography-Guided PCI in Unprotected Left Main Coronary Disease (OPTIMAL)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-30"
- },
- {
-  "date": "2026-07-13",
-  "doi": "10.1056/NEJMoa2511218",
-  "title": "Palbociclib for Hormone-Receptor-Positive, HER2-Positive Advanced Breast Cancer (PATINA)",
-  "journal": "NEJM",
-  "pubdate": "2026-01-29"
- },
- {
-  "date": "2026-07-13",
-  "doi": "10.1056/NEJMoa2506495",
-  "title": "Tecovirimat for the Treatment of Mpox (Clade II)",
-  "journal": "NEJM",
-  "pubdate": "2026-02-26"
- },
- {
-  "date": "2026-07-14",
-  "doi": "10.1016/S0140-6736(25)01578-8",
-  "title": "Assessment of adverse effects attributed to statin therapy in product labels: a meta-analysis of double-blind randomised controlled trials",
-  "journal": "Lancet",
-  "pubdate": "2026-02-01"
- },
- {
-  "date": "2026-07-14",
-  "doi": "10.1038/s41591-026-04229-5",
-  "title": "LLM-assisted systematic review of large language models in clinical medicine",
-  "journal": "Nature Medicine",
-  "pubdate": "2026-03-03"
- },
- {
-  "date": "2026-07-15",
-  "doi": "10.1016/S0140-6736(25)02549-8",
-  "title": "Baxdrostat in Resistant Hypertension (Bax24)",
-  "journal": "The Lancet",
-  "pubdate": "2026-03-01"
- },
- {
-  "date": "2026-07-15",
-  "doi": "10.1038/s41591-026-04273-1",
-  "title": "AL002 TREM2 agonist antibody in early Alzheimer's (INVOKE-2)",
-  "journal": "Nature Medicine",
-  "pubdate": "2026-03-05"
- },
- {
-  "date": "2026-07-16",
-  "doi": "10.1001/jamainternmed.2025.7453",
-  "title": "Treat-to-Target Urate-Lowering Treatment and Cardiovascular Outcomes in Patients With Gout",
-  "journal": "JAMA Internal Medicine",
-  "pubdate": "2026-01-26"
- },
- {
-  "date": "2026-07-16",
-  "doi": "10.1093/eurheartj/ehaf1115",
-  "title": "Pulsed field vs radiofrequency ablation for paroxysmal atrial fibrillation (BEAT PAROX-AF)",
-  "journal": "European Heart Journal",
-  "pubdate": "2026-01-22"
- },
- {
-  "date": "2026-07-17",
-  "doi": "10.1016/S2213-8587(26)00125-7",
-  "title": "Cagrilintide-semaglutide (CagriSema) versus semaglutide or cagrilintide in people with type 2 diabetes (REIMAGINE 2)",
-  "journal": "Lancet Diabetes & Endocrinology",
-  "pubdate": "2026-02"
- },
- {
-  "date": "2026-07-17",
-  "doi": "10.1016/S2213-8587(26)00126-9",
-  "title": "Once-weekly cagrilintide-semaglutide (CagriSema) in adults with type 2 diabetes inadequately controlled on diet and exercise (REIMAGINE 1)",
-  "journal": "Lancet Diabetes & Endocrinology",
-  "pubdate": "2026-06-07"
- },
- {
-  "date": "2026-07-18",
-  "doi": "10.1016/S0140-6736(25)02156-7",
-  "title": "Triple cardiovascular disease detection with an AI-enabled stethoscope (TRICORDER)",
-  "journal": "The Lancet",
-  "pubdate": "2026-01"
- },
- {
-  "date": "2026-07-18",
-  "doi": "10.1016/S0140-6736(25)02276-7",
-  "title": "Efimosfermin alfa (BOS-580) once per month in MASH with F2/F3 fibrosis (phase 2)",
-  "journal": "The Lancet",
-  "pubdate": "2026-02"
- },
- {
-  "date": "2026-07-19",
-  "doi": "10.1016/S0140-6736(26)01022-6",
-  "title": "Cagrilintide–semaglutide (CagriSema) as an add-on to basal insulin in adults with type 2 diabetes (REIMAGINE 3)",
-  "journal": "The Lancet",
-  "pubdate": "2026-06-07"
- },
- {
-  "date": "2026-07-19",
-  "doi": "10.1016/S2213-8587(25)00402-4",
-  "title": "Co-administered cagrilintide and semaglutide vs semaglutide alone in adults with overweight or obesity in Japan and Taiwan (REDEFINE 5)",
-  "journal": "Lancet Diabetes & Endocrinology",
-  "pubdate": "2026-06"
- },
- {
-  "date": "2026-07-20",
-  "doi": "10.1016/S0140-6736(26)00422-8",
-  "title": "Aspirin vs clopidogrel for chronic maintenance monotherapy after PCI: 10-year follow-up (HOST-EXAM)",
-  "journal": "The Lancet",
-  "pubdate": "2026-03-29"
- },
- {
-  "date": "2026-07-20",
-  "doi": "10.1016/S0140-6736(26)01009-3",
-  "title": "Finerenone in chronic kidney disease: individual participant data pooled analysis (INFINITY)",
-  "journal": "The Lancet",
-  "pubdate": "2026-06-05"
- },
- {
-  "date": "2026-07-21",
-  "doi": "10.1001/jama.2026.0210",
-  "title": "Tenecteplase for Acute Non-Large Vessel Occlusion 4.5 to 24 Hours After Ischemic Stroke (OPTION)",
-  "journal": "JAMA",
-  "pubdate": "2026-02-05"
- },
- {
-  "date": "2026-07-21",
-  "doi": "10.1001/jamaoncol.2025.6585",
-  "title": "Overall Survival With First-Line vs Second-Line CDK4/6 Inhibitor Use in Advanced Breast Cancer (SONIA)",
-  "journal": "JAMA Oncology",
-  "pubdate": "2026-02-19"
- },
- {
-  "date": "2026-07-22",
-  "doi": "10.1016/S0140-6736(26)00602-1",
-  "title": "Pembrolizumab plus weekly paclitaxel in platinum-resistant recurrent ovarian cancer (ENGOT-ov65/KEYNOTE-B96)",
-  "journal": "The Lancet",
-  "pubdate": "2026-04-01"
- },
- {
-  "date": "2026-07-22",
-  "doi": "10.1001/jama.2026.2253",
-  "title": "Changes in Clinician Time Expenditure and Visit Quantity With Adoption of AI-Powered Scribes",
-  "journal": "JAMA",
-  "pubdate": "2026-04-01"
- },
- {
-  "date": "2026-07-26",
-  "doi": "10.1016/S0140-6736(26)00691-4",
-  "title": "Dapirolizumab pegol in systemic lupus erythematosus (PHOENYCS GO)",
-  "journal": "Lancet",
-  "pubdate": "2026-06-01"
- },
- {
-  "date": "2026-07-27",
-  "doi": "10.1016/S0140-6736(26)00967-0",
-  "title": "Retatrutide in type 2 diabetes (TRANSCEND-T2D-1)",
-  "journal": "Lancet",
-  "pubdate": "2026-06-06"
- },
- {
-  "date": "2026-07-28",
-  "doi": "10.1056/NEJMoa2512275",
-  "title": "Setmelanotide for the Treatment of Acquired Hypothalamic Obesity (TRANSCEND)",
-  "journal": "NEJM",
-  "pubdate": "2026-07-08"
- },
- {
-  "date": "2026-07-28",
-  "doi": "10.1056/NEJMoa2604565",
-  "title": "Phase 3 Trial of Oral Infigratinib in Children with Achondroplasia (PROPEL 3)",
-  "journal": "NEJM",
-  "pubdate": "2026-07-02"
- },
- {
-  "date": "2026-07-29",
-  "doi": "10.1038/s41591-025-04074-y",
-  "title": "Reliability of LLMs as medical assistants for the general public: a randomized preregistered study",
-  "journal": "Nature Medicine",
-  "pubdate": "2026-02-01"
- },
- {
-  "date": "2026-07-29",
-  "doi": "10.1001/jamacardio.2026.0083",
-  "title": "Long-Term Outcomes of Left Bundle-Branch Pacing vs Biventricular Pacing in Heart Failure (HeartSync-LBBP) / paired PhysioSync-HF 10.1001/jamacardio.2026.0101",
-  "journal": "JAMA Cardiology",
-  "pubdate": "2026-03-11"
- },
- {
-  "date": "2026-07-30",
-  "doi": "10.1056/NEJMoa2601486",
-  "title": "Enfortumab Vedotin and Pembrolizumab in Cisplatin-Eligible Bladder Cancer (KEYNOTE-B15/EV-304)",
-  "journal": "NEJM",
-  "pubdate": "2026-07-22"
- },
- {
-  "date": "2026-07-30",
-  "doi": "10.1016/S0140-6736(26)01385-1",
-  "title": "Deramiocel heart-derived cellular therapy in advanced Duchenne muscular dystrophy (HOPE-3)",
-  "journal": "Lancet",
-  "pubdate": "2026-07-29"
- },
- {
-  "date": "2026-07-31",
-  "doi": "10.1016/S0140-6736(26)00717-8",
-  "title": "Polyendocrine metabolic ovarian syndrome, the new name for polycystic ovary syndrome: a multistep global consensus process",
-  "journal": "The Lancet",
-  "pubdate": "2026-05-12"
- },
- {
-  "date": "2026-07-31",
-  "doi": "10.1161/CIR.0000000000001415",
-  "title": "2026 AHA/ACC Multisociety Guideline for the Evaluation and Management of Acute Pulmonary Embolism in Adults",
-  "journal": "Circulation",
-  "pubdate": "2026-02-19"
- },
- {
-  "date": "2026-08-01",
-  "doi": "10.1016/j.jacc.2025.11.016",
-  "title": "2026 ACC/AHA Multisociety Guideline on the Management of Dyslipidemia",
-  "journal": "JACC",
-  "pubdate": "2026-03-01"
- },
- {
-  "date": "2026-08-01",
-  "doi": "10.3322/caac.70067",
-  "title": "Colorectal cancer statistics, 2026",
-  "journal": "CA: A Cancer Journal for Clinicians",
-  "pubdate": "2026-03-01"
- },
- {
-  "date": "2026-08-02",
-  "doi": "10.1038/s41591-026-04239-3",
-  "title": "Effects of daily multivitamin-multimineral and cocoa extract supplementation on epigenetic aging clocks in the COSMOS randomized clinical trial",
-  "journal": "Nature Medicine",
-  "pubdate": "2026-03-09"
- },
- {
-  "date": "2026-08-02",
-  "doi": "10.1056/NEJMoa2601521",
-  "title": "Intravascular Ultrasound-Guided or Angiography-Guided Complex High-Risk PCI (IVUS-CHIP)",
-  "journal": "NEJM",
-  "pubdate": "2026-03-30"
- },
- {
-  "date": "2026-08-03",
-  "doi": "10.1002/14651858.CD016297",
-  "title": "Amyloid-beta-targeting monoclonal antibodies for people with mild cognitive impairment or mild dementia due to Alzheimer's disease",
-  "journal": "Cochrane Database of Systematic Reviews",
-  "pubdate": "2026-04-16"
- },
- {
-  "date": "2026-08-03",
-  "doi": "10.1002/14651858.CD010461.pub4",
-  "title": "Advanced sperm selection techniques for assisted reproduction",
-  "journal": "Cochrane Database of Systematic Reviews",
-  "pubdate": "2026-06-02"
- },
- {
-  "date": "2026-08-04",
-  "doi": "10.1001/jama.2026.9350",
-  "title": "Addition of High-Dose Vitamin D3 to Standard Treatment in Patients With Metastatic Colorectal Cancer: The SOLARIS Randomized Clinical Trial",
-  "journal": "JAMA",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-04",
-  "doi": "10.1111/1756-185x.70798",
-  "title": "SSGJ-613 Alleviates Pain and Reduces the Risk of Acute Flares in Patients With Gout: A Randomized, Double-Blind, Phase II Study",
-  "journal": "International Journal of Rheumatic Diseases",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-05",
-  "doi": "10.2215/CJN.0000001169",
-  "title": "Skeletal Muscle Cramp Prevalence among Patients Receiving Dialysis: A Global Systematic Review and Meta-Analysis",
-  "journal": "CJASN",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-05",
-  "doi": "10.1038/s41598-026-62827-2",
-  "title": "Vegetarian diet is associated with a lower risk of chronic kidney disease in a population-based study",
-  "journal": "Scientific Reports",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-06",
-  "doi": "10.1007/s10157-026-02908-8",
-  "title": "Dose-dependent association of depression with incidence of end-stage kidney disease and all-cause mortality, CKD-JAC study",
-  "journal": "Clinical and Experimental Nephrology",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-06",
-  "doi": "10.1007/s10157-026-02928-4",
-  "title": "Association of prior Angiotensin receptor-neprilysin inhibitor use with the initial eGFR dip after initiation of SGLT2 inhibitors in patients with CKD",
-  "journal": "Clinical and Experimental Nephrology",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-06",
-  "doi": "10.1093/ndt/gfag171",
-  "title": "CKD-guideline adherence in primary and nephrology care for older patients with advanced CKD",
-  "journal": "Nephrology Dialysis Transplantation",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-07",
-  "doi": "10.1038/s41598-026-64671-w",
-  "title": "Metformin is associated with reduced rejection and improved graft survival in kidney transplant recipients with post-transplant diabetes mellitus",
-  "journal": "Scientific Reports",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-07",
-  "doi": "10.1038/s41598-026-64801-4",
-  "title": "Effect of tenapanor on bowel movements in hemodialysis patients with hyperphosphatemia based on a pooled post hoc analysis of three clinical trials",
-  "journal": "Scientific Reports",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-08",
-  "doi": "10.1093/ndt/gfag177",
-  "title": "Dapagliflozin preserves kidney function and reduces albuminuria in children with chronic kidney disease",
-  "journal": "Nephrology Dialysis Transplantation",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-08",
-  "doi": "10.1093/ndt/gfag175",
-  "title": "Sepsis and infectious outcomes for GLP-1 receptor agonists in CKD plus type 2 diabetes",
-  "journal": "Nephrology Dialysis Transplantation",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-08",
-  "doi": "10.1093/ndt/gfag124",
-  "title": "CKD-associated osteoporosis in patients with CKD G4-5D: a pragmatic treatment approach",
-  "journal": "Nephrology Dialysis Transplantation",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-09",
-  "doi": "10.1001/jama.2026.9268",
-  "title": "Dapagliflozin and Acute Kidney Injury Following Cardiac Surgery: A Randomized Clinical Trial (DAPA-CS)",
-  "journal": "JAMA",
-  "pubdate": "2026-07"
- },
- {
-  "date": "2026-08-09",
-  "doi": "10.1371/journal.pone.0354883",
-  "title": "Feasibility, safety and tolerability of intradialytic creatine supplementation in hemodialysis: A double-blind, randomized, placebo-controlled pilot study",
-  "journal": "PLOS ONE",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-10",
-  "doi": "10.2215/CJN.0000001160",
-  "title": "Cardiovascular and Kidney Outcomes Following Sodium-Glucose Cotransporter 2 Inhibitor Initiation in CKD: A Swedish Nationwide Cohort Study",
-  "journal": "Clinical Journal of the American Society of Nephrology",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-10",
-  "doi": "10.1093/ndt/gfag178",
-  "title": "Urinary Dickkopf-3 as a biomarker for kidney-function decline: a systematic review and meta-analysis",
-  "journal": "Nephrology Dialysis Transplantation",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-11",
-  "doi": "10.2215/CJN.0000001181",
-  "title": "Disparities in Kidney Transplantation Access and Outcomes among Native Hawaiians and Pacific Islanders in the United States",
-  "journal": "Clinical Journal of the American Society of Nephrology",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-11",
-  "doi": "10.1111/dom.71188",
-  "title": "Prevalence, Incidence and Mortality of Chronic Kidney Disease in Type 1 and Type 2 Diabetes-A Nationwide Danish Register-Based Cohort Study",
-  "journal": "Diabetes, Obesity and Metabolism",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-12",
-  "doi": "10.1056/NEJMoa2600526",
-  "title": "Sodium Bicarbonate for Critically Ill Adults with Metabolic Acidosis and Shock (SODa-BIC)",
-  "journal": "NEJM",
-  "pubdate": "2026-06"
- },
- {
-  "date": "2026-08-12",
-  "doi": "10.1093/ajh/hpag085",
-  "title": "Blood Pressure Time in Target Range and Clinical Outcomes in Chronic Kidney Disease",
-  "journal": "Am J Hypertens",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-13",
-  "doi": "10.1093/ckj/sfag231",
-  "title": "Dapagliflozin in lupus nephritis: renal and hematologic outcomes from a randomized controlled trial",
-  "journal": "Clinical Kidney Journal",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-13",
-  "doi": "10.1093/ndt/gfag014",
-  "title": "KDIGO 2026 Clinical Practice Guideline for Anemia in CKD: a commentary from the European Renal Best Practice (ERBP)",
-  "journal": "Nephrology Dialysis Transplantation",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-14",
-  "doi": "10.2215/CJN.0000001188",
-  "title": "Renal Outcomes of Triglyceride-Targeting Lipid-Lowering Therapies versus Statins in Patients with CKD",
-  "journal": "Clin J Am Soc Nephrol",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-14",
-  "doi": "10.1016/S0140-6736(26)01089-5",
-  "title": "Belzutifan plus lenvatinib versus cabozantinib in patients with previously treated advanced renal cell carcinoma (LITESPARK-011): an open-label, randomised, controlled, phase 3 trial",
-  "journal": "Lancet",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-15",
-  "doi": "10.1212/WNL.0000000000218413",
-  "title": "Association Between Menopausal Hormone Therapy and Alzheimer Disease Neuropathology",
-  "journal": "Neurology",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-15",
-  "doi": "",
-  "title": "Combination of abdominal obesity and vitamin D deficiency and all-cause mortality in adults over 50 (ELSA cohort)",
-  "journal": "Diabetes, Obesity and Metabolism",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-16",
-  "doi": "10.1053/j.ajkd.2026.05.019",
-  "title": "Blood Pressure, Kidney Function, and Kidney Mortality Among Mexican Adults",
-  "journal": "American Journal of Kidney Diseases",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-16",
-  "doi": "10.1001/jama.2026.11065",
-  "title": "Total Intravenous vs Volatile Inhalational Anesthesia for Major Noncardiac Surgery: A Randomized Clinical Trial (VITAL)",
-  "journal": "JAMA",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-17",
-  "doi": "10.1681/ASN.0000001225",
-  "title": "Hemodiafiltration versus High-flux Hemodialysis and Risk of Mortality: A Multinational Target Trial Emulation",
-  "journal": "JASN",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-17",
-  "doi": "10.1053/j.ajkd.2026.05.020",
-  "title": "Artificial Intelligence-Enabled Electrocardiography for Monitoring Serum Potassium Dynamics in Patients With Severe Hypokalemia",
-  "journal": "AJKD",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-18",
-  "doi": "10.1093/ndt/gfag184",
-  "title": "Renin-Angiotensin System Inhibition in Dialysis-Dependent Patients with Chronic Heart Failure due to Reduced Ejection Fraction: A Systematic Review and Meta-Analysis",
-  "journal": "NDT",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-18",
-  "doi": "10.2215/CJN.0000001168",
-  "title": "Comparative Effectiveness and Cardiovascular Safety of Romosozumab versus Teriparatide in Osteoporosis Patients with CKD: Target Trial Emulation Study",
-  "journal": "CJASN",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-19",
-  "doi": "10.1001/jama.2026.8568",
-  "title": "Neonatal Survival After Serial Amnioinfusions for Anhydramnios Due to Fetal Kidney Failure: The RAFT Clinical Trial",
-  "journal": "JAMA",
-  "pubdate": "2026-07"
- },
- {
-  "date": "2026-08-19",
-  "doi": "10.1007/s11869-026-01918-5",
-  "title": "Carbon dioxide overload, detected in human blood, suggests a potentially toxic atmosphere within 50 years",
-  "journal": "Air Quality, Atmosphere & Health",
-  "pubdate": "2026-02"
- },
- {
-  "date": "2026-08-20",
-  "doi": "10.1093/ndt/gfag188",
-  "title": "Trends in mortality in adult first kidney transplant recipients with and without diabetes as cause of kidney failure: an ERA Registry study",
-  "journal": "NDT",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-20",
-  "doi": "10.1126/scitranslmed.aed4678",
-  "title": "Urea transporter B-mediated urea uptake-induced protein carbamylation in platelets underlies bleeding in chronic kidney disease",
-  "journal": "Sci Transl Med",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-21",
-  "doi": "10.2215/CJN.0000001183",
-  "title": "Kidney Tubular Secretion Capacity and Risk of Cardiovascular Mortality in the General Population: The HUNT Study",
-  "journal": "CJASN",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-21",
-  "doi": "10.1016/j.kint.2026.07.018",
-  "title": "Genetic determinants of serum creatinine and cystatin C independent of kidney function generate bias in filtration markers",
-  "journal": "Kidney International",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-22",
-  "doi": "10.1093/ndt/gfag191",
-  "title": "Chronic kidney disease, atrial fibrillation, and stroke: risk scores in the era of SGLT2i, non-steroidal MRA, and GLP-1 RA, and presence of high competing mortality",
-  "journal": "NDT",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-22",
-  "doi": "10.1053/j.ajkd.2026.05.022",
-  "title": "12-year Follow-up of a Family With CKD Caused by an mtDNA Variant",
-  "journal": "AJKD",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-23",
-  "doi": "10.1016/j.kint.2026.07.021",
-  "title": "Hemoglobinuria as a marker of inflammation in IgA nephropathy: a multi-center cohort study",
-  "journal": "Kidney International",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-23",
-  "doi": "10.1681/ASN.0000001203",
-  "title": "Indoxyl Sulfate Promotes Uremic Arterial and Venous Thrombosis by Stabilizing IDO1 via the E3 Ligase SHFM3",
-  "journal": "Journal of the American Society of Nephrology",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-24",
-  "doi": "10.1016/j.kint.2026.07.019",
-  "title": "A self-sustaining hypoxia inducible factor-1α–creatine kinase B feedforward circuit drives macrophage-mediated kidney fibrosis",
-  "journal": "Kidney International",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-24",
-  "doi": "10.2215/CJN.0000001191",
-  "title": "Circulating Ephrin-Eph Signaling Reflects Interstitial Fibrosis and Tubular Atrophy in Diabetic Kidney Disease",
-  "journal": "CJASN",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-26",
-  "doi": "10.2215/CJN.0000001208",
-  "title": "Glucagon-Like Peptide-1 Receptor Agonist Use and Risks of Hospitalization and Mortality in Patients with End-Stage Kidney Disease",
-  "journal": "Clinical Journal of the American Society of Nephrology",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-26",
-  "doi": "10.1681/ASN.0000001245",
-  "title": "Dialysis Discontinuation Rates at Low Levels of Kidney Function in Patients with Acute Kidney Injury on Intermittent Hemodialysis",
-  "journal": "Journal of the American Society of Nephrology",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-26",
-  "doi": "10.2215/CJN.0000001177",
-  "title": "Plasma Levels of Growth Differentiation Factor 15 and Adverse Kidney Outcomes: Proteomics-Based Mediation Analysis and Mendelian Randomization",
-  "journal": "Clinical Journal of the American Society of Nephrology",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-28",
-  "doi": "10.2215/CJN.0000001206",
-  "title": "Proteinuria and Kidney Function Trajectories in Patients with Advanced CKD: Insights from CRIC and KNOW-CKD Studies",
-  "journal": "Clinical Journal of the American Society of Nephrology",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-28",
-  "doi": "10.2215/CJN.0000001187",
-  "title": "Evaluating Patterns and Outcomes in the Prescription of Incremental Peritoneal Dialysis in Support of Shared Decision-Making",
-  "journal": "Clinical Journal of the American Society of Nephrology",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-28",
-  "doi": "10.1093/ndt/gfag174",
-  "title": "Monoclonal gammopathy in ANCA-associated glomerulonephritis: prevalence, characteristics and outcomes",
-  "journal": "Nephrology Dialysis Transplantation",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-29",
-  "doi": "10.1016/j.kint.2026.07.028",
-  "title": "Improving the Histologic Classification of Advanced Diabetic Nephropathy Based on the Transformative Research in Diabetic Nephropathy (TRIDENT) Findings",
-  "journal": "Kidney International",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-29",
-  "doi": "10.1093/ndt/gfag198",
-  "title": "Comparative Effectiveness of Combination Therapy in Patients with Chronic Kidney Disease and Diabetes mellitus Type 2 using Real World Data",
-  "journal": "Nephrology Dialysis Transplantation",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-29",
-  "doi": "10.1093/joneph/aajag069",
-  "title": "Ultrasound-based peritoneal membrane thickness as a marker of inflammation and technique failure in peritoneal dialysis",
-  "journal": "Journal of Nephrology",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-30",
-  "doi": "10.1093/ndt/gfag197",
-  "title": "GLP-1 receptor agonists are associated with lower kidney cancer risk after metabolic bariatric surgery",
-  "journal": "Nephrology Dialysis Transplantation",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-30",
-  "doi": "10.1053/j.ajkd.2026.05.023",
-  "title": "Donor Self-Esteem Before and After Living Kidney Donation",
-  "journal": "American Journal of Kidney Diseases",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-30",
-  "doi": "10.1681/ASN.0000001238",
-  "title": "Ciliary ARL13B Drives Cystogenesis in the Kidney via Its GEF Activity",
-  "journal": "Journal of the American Society of Nephrology",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-30",
-  "doi": "10.1016/j.kint.2026.07.024",
-  "title": "SEISMIC: A multi-stakeholder summit addressing access issues in diagnosis and treatment of C3G nephropathy and IC-MPGN",
-  "journal": "Kidney International",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-31",
-  "doi": "10.1093/eurheartj/ehag729",
-  "title": "Finerenone in hypertensive non-diabetic chronic kidney disease: a FIND-CKD subgroup analysis",
-  "journal": "European Heart Journal",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-31",
-  "doi": "10.1038/s41440-026-02786-3",
-  "title": "Recombinant zoster vaccine and risk of kidney failure, cardiovascular, and mortality in patients with chronic kidney disease",
-  "journal": "Hypertension Research",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-31",
-  "doi": "10.1681/ASN.0000001239",
-  "title": "Renin Is Critical for Renin Lineage Cell Plasticity, Migration, and Disease Outcome in Experimental Crescentic Glomerulonephritis",
-  "journal": "Journal of the American Society of Nephrology",
-  "pubdate": "2026-08"
- },
- {
-  "date": "2026-08-31",
-  "doi": "10.1093/eurheartj/ehag098",
-  "title": "2026 ESC Guidelines for the management of cardiovascular disease and chronic kidney disease, in collaboration with the European Renal Association (ERA)",
-  "journal": "European Heart Journal",
-  "pubdate": "2026-08"
- }
+  {
+    "date": "2026-05-11",
+    "doi": "10.1056/NEJMoa2511778",
+    "title": "Phase 1 Trial of CRISPR-Cas9 Gene Editing Targeting ANGPTL3",
+    "journal": "NEJM",
+    "pubdate": "2025-11-08"
+  },
+  {
+    "date": "2026-05-11",
+    "doi": "10.1056/NEJMoa2516043",
+    "title": "Prehospital Whole Blood in Traumatic Hemorrhage (SWiFT Trial)",
+    "journal": "NEJM",
+    "pubdate": "2026-04"
+  },
+  {
+    "date": "2026-05-13",
+    "doi": "10.1056/NEJMoa2505928",
+    "title": "Cardiovascular Outcomes with Tirzepatide versus Dulaglutide in Type 2 Diabetes (SURPASS-CVOT)",
+    "journal": "NEJM",
+    "pubdate": "2025-12-17"
+  },
+  {
+    "date": "2026-05-13",
+    "doi": "10.1056/NEJMoa2512133",
+    "title": "Sibeprenlimab in IgA Nephropathy — Interim Analysis of a Phase 3 Trial",
+    "journal": "NEJM",
+    "pubdate": "2026-02-12"
+  },
+  {
+    "date": "2026-05-14",
+    "doi": "10.1056/NEJMoa2501510",
+    "title": "Trial of Pegcetacoplan in C3 Glomerulopathy and Immune-Complex MPGN (VALIANT)",
+    "journal": "NEJM",
+    "pubdate": "2025-12-04"
+  },
+  {
+    "date": "2026-05-14",
+    "doi": "10.1056/NEJMoa2508681",
+    "title": "An Intravenous Brain-Penetrant Enzyme Therapy for Mucopolysaccharidosis II (Tividenofusp Alfa)",
+    "journal": "NEJM",
+    "pubdate": "2026-01-01"
+  },
+  {
+    "date": "2026-05-15",
+    "doi": "10.1056/NEJMoa2510198",
+    "title": "A Phase 3 Trial of Atacicept in Patients with IgA Nephropathy (ORIGIN 3)",
+    "journal": "NEJM",
+    "pubdate": "2026-02-12"
+  },
+  {
+    "date": "2026-05-15",
+    "doi": "10.1056/NEJMoa2512854",
+    "title": "Finerenone in Type 1 Diabetes and Chronic Kidney Disease (FINE-ONE)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-04"
+  },
+  {
+    "date": "2026-05-16",
+    "doi": "10.1056/NEJMoa2514428",
+    "title": "Evolocumab in Patients without a Previous Myocardial Infarction or Stroke (VESALIUS-CV)",
+    "journal": "NEJM",
+    "pubdate": "2026-01-08"
+  },
+  {
+    "date": "2026-05-16",
+    "doi": "10.1056/NEJMoa2511885",
+    "title": "ctDNA-Guided Adjuvant Atezolizumab in Muscle-Invasive Bladder Cancer (IMvigor011)",
+    "journal": "NEJM",
+    "pubdate": "2025-12-18"
+  },
+  {
+    "date": "2026-05-17",
+    "doi": "10.1016/S0140-6736(25)02464-X",
+    "title": "Interval cancer, sensitivity, and specificity comparing AI-supported mammography screening with standard double reading without AI in the MASAI study",
+    "journal": "Lancet",
+    "pubdate": "2026-01-31"
+  },
+  {
+    "date": "2026-05-17",
+    "doi": "10.1016/S0140-6736(25)01953-1",
+    "title": "Zoliflodacin versus ceftriaxone plus azithromycin for treatment of uncomplicated urogenital gonorrhoea (Phase 3)",
+    "journal": "Lancet",
+    "pubdate": "2025-12-11"
+  },
+  {
+    "date": "2026-05-18",
+    "doi": "10.1016/S0140-6736(25)02165-8",
+    "title": "Orforglipron, an oral small-molecule GLP-1 receptor agonist, for the treatment of obesity in people with type 2 diabetes (ATTAIN-2)",
+    "journal": "Lancet",
+    "pubdate": "2025-11-20"
+  },
+  {
+    "date": "2026-05-18",
+    "doi": "10.1056/NEJMoa2503531",
+    "title": "A Phase 3 Trial of Brepocitinib in Dermatomyositis (VALOR)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-28"
+  },
+  {
+    "date": "2026-05-19",
+    "doi": "10.1016/S0140-6736(26)00314-4",
+    "title": "Proton beam therapy for oropharyngeal cancer (TORPEdO): a phase 3, randomised controlled trial",
+    "journal": "Lancet",
+    "pubdate": "2026-03-21"
+  },
+  {
+    "date": "2026-05-19",
+    "doi": "10.1056/NEJMoa2509306",
+    "title": "Ensitrelvir for Covid-19 Postexposure Prophylaxis in Household Contacts (SCORPIO-PEP)",
+    "journal": "NEJM",
+    "pubdate": "2026-05-13"
+  },
+  {
+    "date": "2026-05-20",
+    "doi": "10.1056/NEJMoa2511674",
+    "title": "Perioperative Enfortumab Vedotin and Pembrolizumab in Bladder Cancer (KEYNOTE-905/EV-303)",
+    "journal": "NEJM",
+    "pubdate": "2026-02-18"
+  },
+  {
+    "date": "2026-05-20",
+    "doi": "10.1056/NEJMoa2505783",
+    "title": "Daraxonrasib in Previously Treated Advanced RAS-Mutated Pancreatic Cancer (RMC-6236-001)",
+    "journal": "NEJM",
+    "pubdate": "2026-05-06"
+  },
+  {
+    "date": "2026-05-21",
+    "doi": "10.1056/NEJMoa2510703",
+    "title": "Bleeding Risk with Apixaban vs. Rivaroxaban in Acute Venous Thromboembolism (COBRRA)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-11"
+  },
+  {
+    "date": "2026-05-21",
+    "doi": "10.1056/NEJMoa2517213",
+    "title": "Left Atrial Appendage Closure or Anticoagulation for Atrial Fibrillation (CHAMPION-AF)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-28"
+  },
+  {
+    "date": "2026-05-22",
+    "doi": "10.1056/NEJMoa2516150",
+    "title": "Efficacy and Safety of Obinutuzumab in Active Systemic Lupus Erythematosus (ALLEGORY)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-06"
+  },
+  {
+    "date": "2026-05-22",
+    "doi": "10.1056/NEJMoa2514663",
+    "title": "Teclistamab plus Daratumumab in Relapsed or Refractory Multiple Myeloma (MajesTEC-3)",
+    "journal": "NEJM",
+    "pubdate": "2025-12-09"
+  },
+  {
+    "date": "2026-05-23",
+    "doi": "10.1056/NEJMoa2515704",
+    "title": "Microaxial Flow Pump or Standard Care in High-Risk PCI (CHIP-BCIS3)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-29"
+  },
+  {
+    "date": "2026-05-23",
+    "doi": "10.1056/NEJMoa2600929",
+    "title": "Pulsed Field Ablation as Initial Therapy for Persistent Atrial Fibrillation (AVANT GUARD)",
+    "journal": "NEJM",
+    "pubdate": "2026-04-25"
+  },
+  {
+    "date": "2026-05-24",
+    "doi": "10.1056/NEJMoa2514661",
+    "title": "Trastuzumab Deruxtecan in Residual HER2-Positive Early Breast Cancer (DESTINY-Breast05)",
+    "journal": "NEJM",
+    "pubdate": "2025-12-10"
+  },
+  {
+    "date": "2026-05-24",
+    "doi": "10.1016/S0140-6736(26)00305-3",
+    "title": "Once-weekly semaglutide versus placebo in patients with alcohol use disorder and comorbid obesity: a randomised, double-blind, placebo-controlled trial",
+    "journal": "Lancet",
+    "pubdate": "2026-05-02"
+  },
+  {
+    "date": "2026-05-25",
+    "doi": "10.1056/NEJMoa2508668",
+    "title": "Trastuzumab Deruxtecan plus Pertuzumab for First-Line HER2-Positive Metastatic Breast Cancer (DESTINY-Breast09)",
+    "journal": "NEJM",
+    "pubdate": "2026-02-05"
+  },
+  {
+    "date": "2026-05-25",
+    "doi": "10.1056/NEJMoa2516969",
+    "title": "First-Line Zongertinib in Advanced HER2-Mutant Non-Small-Cell Lung Cancer (Beamion LUNG-1)",
+    "journal": "NEJM",
+    "pubdate": "2026-04-15"
+  },
+  {
+    "date": "2026-05-26",
+    "doi": "10.1056/NEJMoa2512686",
+    "title": "Beta-Blockers after Myocardial Infarction with Normal Ejection Fraction (IPD meta-analysis: REBOOT/REDUCE-AMI/BETAMI/DANBLOCK/CAPITAL-RCT)",
+    "journal": "NEJM",
+    "pubdate": "2026-02-05"
+  },
+  {
+    "date": "2026-05-26",
+    "doi": "10.1056/NEJMoa2600283",
+    "title": "Intensive LDL Cholesterol Targeting in Atherosclerotic Cardiovascular Disease (Ez-PAVE, Korea, LDL <55 vs <70)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-28"
+  },
+  {
+    "date": "2026-05-28",
+    "doi": "10.1056/NEJMoa2507874",
+    "title": "Atezolizumab plus FOLFOX for Stage III Mismatch Repair-Deficient Colon Cancer (ATOMIC, Alliance A021502)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-25"
+  },
+  {
+    "date": "2026-05-28",
+    "doi": "10.1056/NEJMoa2514752",
+    "title": "Dual Targeting of Extramedullary Myeloma with Talquetamab and Teclistamab (RedirecTT-1)",
+    "journal": "NEJM",
+    "pubdate": "2025-12-07"
+  },
+  {
+    "date": "2026-05-29",
+    "doi": "10.1056/NEJMoa2600752",
+    "title": "Setidegrasib in Advanced NSCLC and Pancreatic Cancer (KRAS G12D Degrader)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-25"
+  },
+  {
+    "date": "2026-05-29",
+    "doi": "10.1016/S0140-6736(25)01953-1",
+    "title": "Zoliflodacin vs Ceftriaxone+Azithromycin for Uncomplicated Urogenital Gonorrhoea (Phase 3)",
+    "journal": "Lancet",
+    "pubdate": "2025-12-11"
+  },
+  {
+    "date": "2026-05-30",
+    "doi": "10.1038/s41591-026-04386-7",
+    "title": "Orforglipron for maintenance of body weight reduction (ATTAIN-MAINTAIN, phase 3b)",
+    "journal": "Nature Medicine",
+    "pubdate": "2026-05"
+  },
+  {
+    "date": "2026-05-31",
+    "doi": "10.1056/NEJMoa2511774",
+    "title": "Orforglipron in Adults with Obesity (ATTAIN-1)",
+    "journal": "NEJM",
+    "pubdate": "2026-04-09"
+  },
+  {
+    "date": "2026-05-31",
+    "doi": "10.1056/NEJMoa2502081",
+    "title": "Coadministered Cagrilintide and Semaglutide in Adults with Overweight or Obesity (REDEFINE 1)",
+    "journal": "NEJM",
+    "pubdate": "2026-01-08"
+  },
+  {
+    "date": "2026-06-01",
+    "doi": "10.1056/NEJMoa2515131",
+    "title": "Phase 3 Results of Bepirovirsen Treatment for Chronic Hepatitis B (B-Well 1 & 2)",
+    "journal": "NEJM",
+    "pubdate": "2026-05-26"
+  },
+  {
+    "date": "2026-06-01",
+    "doi": "10.1056/NEJMoa2605555",
+    "title": "Daraxonrasib in Previously Treated Metastatic Pancreatic Cancer (RASolute 302)",
+    "journal": "NEJM",
+    "pubdate": "2026-05-31"
+  },
+  {
+    "date": "2026-06-02",
+    "doi": "10.1136/bmj-2025-085304",
+    "title": "Weight regain after cessation of medication for weight management: systematic review and meta-analysis",
+    "journal": "BMJ",
+    "pubdate": "2026-01-07"
+  },
+  {
+    "date": "2026-06-02",
+    "doi": "10.1001/jama.2025.24175",
+    "title": "Precision Immunotherapy to Improve Sepsis Outcomes: The ImmunoSep Randomized Clinical Trial",
+    "journal": "JAMA",
+    "pubdate": "2025-12-08"
+  },
+  {
+    "date": "2026-06-03",
+    "doi": "10.1016/S0140-6736(26)00459-9",
+    "title": "Efficacy and safety of oral semaglutide 14 mg in early-stage symptomatic Alzheimer's disease (evoke and evoke+)",
+    "journal": "Lancet",
+    "pubdate": "2026-03-19"
+  },
+  {
+    "date": "2026-06-03",
+    "doi": "10.1056/NEJMoa2603870",
+    "title": "Teclistamab in Multiple Myeloma with One to Three Previous Lines of Therapy (MajesTEC-9)",
+    "journal": "NEJM",
+    "pubdate": "2026-05-29"
+  },
+  {
+    "date": "2026-06-04",
+    "doi": "10.1056/NEJMoa2508800",
+    "title": "Medical Management and Revascularization for Asymptomatic Carotid Stenosis (CREST-2)",
+    "journal": "NEJM",
+    "pubdate": "2026-01-15"
+  },
+  {
+    "date": "2026-06-04",
+    "doi": "10.1001/jama.2025.20402",
+    "title": "Personalized Hemodynamic Resuscitation Targeting Capillary Refill Time in Early Septic Shock (ANDROMEDA-SHOCK-2)",
+    "journal": "JAMA",
+    "pubdate": "2025-12-09"
+  },
+  {
+    "date": "2026-06-05",
+    "doi": "10.1001/jama.2025.24784",
+    "title": "Risk-Based vs Annual Breast Cancer Screening (WISDOM)",
+    "journal": "JAMA",
+    "pubdate": "2025-12-12"
+  },
+  {
+    "date": "2026-06-05",
+    "doi": "10.1016/S1470-2045(25)00612-6",
+    "title": "Molecular profile-based adjuvant treatment in high-intermediate risk endometrial cancer (PORTEC-4a)",
+    "journal": "Lancet Oncology",
+    "pubdate": "2026-01"
+  },
+  {
+    "date": "2026-06-06",
+    "doi": "10.1056/NEJMoa2517729",
+    "title": "Zanidatamab with and without Tislelizumab in HER2-Positive Gastroesophageal Cancer (HERIZON-GEA-01)",
+    "journal": "NEJM",
+    "pubdate": "2026-05-27"
+  },
+  {
+    "date": "2026-06-06",
+    "doi": "10.1056/NEJMoa2603878",
+    "title": "Perioperative Apalutamide in High-Risk Localized or Locally Advanced Prostate Cancer (PROTEUS)",
+    "journal": "NEJM",
+    "pubdate": "2026-05-31"
+  },
+  {
+    "date": "2026-06-07",
+    "doi": "10.1056/NEJMoa2602628",
+    "title": "Selpercatinib in Early-Stage RET Fusion-Positive NSCLC (LIBRETTO-432)",
+    "journal": "NEJM",
+    "pubdate": "2026-05-31"
+  },
+  {
+    "date": "2026-06-07",
+    "doi": "10.1200/JCO-26-01080",
+    "title": "Selinexor Plus Ruxolitinib in JAK Inhibitor-Naive Myelofibrosis (SENTRY)",
+    "journal": "JCO",
+    "pubdate": "2026-06"
+  },
+  {
+    "date": "2026-06-08",
+    "doi": "10.1056/NEJMoa2604625",
+    "title": "Finerenone in Persons with Chronic Kidney Disease without Diabetes (FIND-CKD)",
+    "journal": "NEJM",
+    "pubdate": "2026-06-04"
+  },
+  {
+    "date": "2026-06-08",
+    "doi": "10.1056/NEJMoa2601103",
+    "title": "Mavacamten in Adolescents with Obstructive Hypertrophic Cardiomyopathy (SCOUT-HCM)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-29"
+  },
+  {
+    "date": "2026-06-09",
+    "doi": "10.1016/S0140-6736(26)00966-9",
+    "title": "Ivonescimab plus chemotherapy vs tislelizumab plus chemotherapy in advanced squamous NSCLC (HARMONi-6)",
+    "journal": "Lancet",
+    "pubdate": "2026"
+  },
+  {
+    "date": "2026-06-09",
+    "doi": "NCT04967521",
+    "title": "Abemaciclib in Advanced Dedifferentiated Liposarcoma (SARC041, ASCO 2026 Plenary LBA2)",
+    "journal": "ASCO 2026 Abstract LBA2",
+    "pubdate": "2026-05-31"
+  },
+  {
+    "date": "2026-06-10",
+    "doi": "10.1056/NEJMoa2509688",
+    "title": "Antithrombotic Therapy after Successful Catheter Ablation for Atrial Fibrillation (OCEAN)",
+    "journal": "NEJM",
+    "pubdate": "2026-01-22"
+  },
+  {
+    "date": "2026-06-10",
+    "doi": "10.1056/NEJMoa2512761",
+    "title": "Olezarsen for Managing Severe Hypertriglyceridemia and Pancreatitis Risk (CORE-TIMI 72)",
+    "journal": "NEJM",
+    "pubdate": "2026-01-29"
+  },
+  {
+    "date": "2026-06-11",
+    "doi": "10.1056/NEJMoa2504187",
+    "title": "Oral Icotrokinra for Plaque Psoriasis in Adults and Adolescents (ICONIC)",
+    "journal": "NEJM",
+    "pubdate": "2025-10-30"
+  },
+  {
+    "date": "2026-06-11",
+    "doi": "10.1056/NEJMoa2507109",
+    "title": "Efficacy and Safety of Baxdrostat in Uncontrolled and Resistant Hypertension (BaxHTN)",
+    "journal": "NEJM",
+    "pubdate": "2025-08-30"
+  },
+  {
+    "date": "2026-06-12",
+    "doi": "10.1056/NEJMoa2601005",
+    "title": "Discontinuation of Beta-Blocker Therapy after Myocardial Infarction (SMART-DECISION)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-30"
+  },
+  {
+    "date": "2026-06-12",
+    "doi": "10.1016/S0140-6736(26)00800-7",
+    "title": "Orforglipron versus dapagliflozin in type 2 diabetes (ACHIEVE-2)",
+    "journal": "Lancet",
+    "pubdate": "2026-06"
+  },
+  {
+    "date": "2026-06-13",
+    "doi": "10.1016/S1470-2045(25)00567-4",
+    "title": "AI and radiologists in pancreatic cancer detection on standard-of-care CT (PANORAMA)",
+    "journal": "Lancet Oncology",
+    "pubdate": "2026-01"
+  },
+  {
+    "date": "2026-06-13",
+    "doi": "10.1056/NEJMoa2602567",
+    "title": "Phase 3 Trial of Secukinumab in Polymyalgia Rheumatica (REPLENISH)",
+    "journal": "NEJM",
+    "pubdate": "2026-06-03"
+  },
+  {
+    "date": "2026-06-15",
+    "doi": "10.1056/NEJMoa2511002",
+    "title": "A Placebo-Controlled Trial of the Oral PCSK9 Inhibitor Enlicitide (CORALreef Lipids)",
+    "journal": "NEJM",
+    "pubdate": "2026-02-05"
+  },
+  {
+    "date": "2026-06-15",
+    "doi": "10.1056/NEJMoa2513880",
+    "title": "Asundexian for Secondary Stroke Prevention (OCEANIC-STROKE)",
+    "journal": "NEJM",
+    "pubdate": "2026-04"
+  },
+  {
+    "date": "2026-06-16",
+    "doi": "10.1001/jama.2026.0076",
+    "title": "Stereotactic Radiation vs Hippocampal-Avoidance WBRT for 5-20 Brain Metastases",
+    "journal": "JAMA",
+    "pubdate": "2026-02-18"
+  },
+  {
+    "date": "2026-06-16",
+    "doi": "10.1038/s41591-025-04189-2",
+    "title": "FMT plus pembrolizumab and axitinib in metastatic RCC (TACITO phase 2)",
+    "journal": "Nature Medicine",
+    "pubdate": "2026-01-28"
+  },
+  {
+    "date": "2026-06-17",
+    "doi": "10.1056/NEJMoa2600949",
+    "title": "Angiography-Derived Fractional Flow Reserve to Guide PCI (ALL-RISE)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-29"
+  },
+  {
+    "date": "2026-06-17",
+    "doi": "10.1016/S2213-8587(25)00356-0",
+    "title": "GLP-1 receptor agonists for obesity: eligibility across 99 countries",
+    "journal": "Lancet Diabetes Endocrinol",
+    "pubdate": "2026-01"
+  },
+  {
+    "date": "2026-06-19",
+    "doi": "10.1016/S0140-6736(25)01862-8",
+    "title": "Efficacy and safety of minocycline in patients with acute ischaemic stroke (EMPHASIS)",
+    "journal": "The Lancet",
+    "pubdate": "2026-02-14"
+  },
+  {
+    "date": "2026-06-19",
+    "doi": "10.1200/JCO.2026.44.16_suppl.500",
+    "title": "OPTIMA: test-directed chemotherapy in high clinical risk ER+/HER2- early breast cancer",
+    "journal": "J Clin Oncol (ASCO 2026 Abstract)",
+    "pubdate": "2026-06"
+  },
+  {
+    "date": "2026-06-20",
+    "doi": "10.1016/j.jacc.2026.03.036",
+    "title": "Oral PCSK9 Inhibitor Enlicitide vs Oral Nonstatin Therapies (CORALreef AddOn)",
+    "journal": "JACC",
+    "pubdate": "2026-03-25"
+  },
+  {
+    "date": "2026-06-20",
+    "doi": "10.1056/NEJMoa2502929",
+    "title": "First-Line Camizestrant for Emerging ESR1-Mutated Advanced Breast Cancer (SERENA-6)",
+    "journal": "NEJM",
+    "pubdate": "2025-06-01"
+  },
+  {
+    "date": "2026-06-18",
+    "doi": "10.1056/NEJMoa2601841",
+    "title": "Angiography-Based Physiology to Guide Coronary Revascularization (FAST III)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-29"
+  },
+  {
+    "date": "2026-06-18",
+    "doi": "10.1056/NEJMoa2502760",
+    "title": "Structured Exercise after Adjuvant Chemotherapy for Colon Cancer (CHALLENGE)",
+    "journal": "NEJM",
+    "pubdate": "2025-06-01"
+  },
+  {
+    "date": "2026-06-21",
+    "doi": "10.1056/NEJMoa2600751",
+    "title": "Survodutide for Obesity (SYNCHRONIZE-1)",
+    "journal": "NEJM",
+    "pubdate": "2026-06-07"
+  },
+  {
+    "date": "2026-06-21",
+    "doi": "10.1056/NEJMoa2604126",
+    "title": "Talazoparib plus Enzalutamide in HRR-altered mCSPC (TALAPRO-3)",
+    "journal": "NEJM",
+    "pubdate": "2026-05-30"
+  },
+  {
+    "date": "2026-06-22",
+    "doi": "10.1056/NEJMoa2508959",
+    "title": "Sacituzumab Govitecan plus Pembrolizumab in First-Line PD-L1-Positive Metastatic Triple-Negative Breast Cancer (ASCENT-04/KEYNOTE-D19)",
+    "journal": "NEJM",
+    "pubdate": "2026-01-22"
+  },
+  {
+    "date": "2026-06-22",
+    "doi": "10.1056/NEJMoa2512911",
+    "title": "Inhaled Treprostinil for Idiopathic Pulmonary Fibrosis (TETON-2)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-11"
+  },
+  {
+    "date": "2026-06-23",
+    "doi": "10.1056/NEJMoa2506905",
+    "title": "Cefazolin for Methicillin-Susceptible Staphylococcus aureus Bacteremia (SNAP Trial)",
+    "journal": "NEJM",
+    "pubdate": "2026-06"
+  },
+  {
+    "date": "2026-06-23",
+    "doi": "10.1056/NEJMoa2502099",
+    "title": "Tarlatamab in Small-Cell Lung Cancer after Platinum-Based Chemotherapy (DeLLphi-304)",
+    "journal": "NEJM",
+    "pubdate": "2026"
+  },
+  {
+    "date": "2026-06-28",
+    "doi": "10.1056/NEJMoa2518035",
+    "title": "Ten-Year Outcomes after CAR T-Cell Therapy for B-Cell Lymphomas",
+    "journal": "NEJM",
+    "pubdate": "2026-06-25"
+  },
+  {
+    "date": "2026-06-28",
+    "doi": "10.1056/NEJMoa2515820",
+    "title": "Hospital Policy of Tranexamic Acid to Reduce Transfusion in Major Noncardiac Surgery (TRACTION)",
+    "journal": "NEJM",
+    "pubdate": "2026-06-10"
+  },
+  {
+    "date": "2026-06-29",
+    "doi": "10.1056/NEJMoa2503687",
+    "title": "A Pragmatic Trial of a 6-Month Strategy for Rifampicin-Resistant Tuberculosis (BEAT TB)",
+    "journal": "NEJM",
+    "pubdate": "2026-06-25"
+  },
+  {
+    "date": "2026-06-29",
+    "doi": "10.1056/NEJMoa2513120",
+    "title": "A Phase 2 Randomized Trial of Mezagitamab in Primary Immune Thrombocytopenia",
+    "journal": "NEJM",
+    "pubdate": "2026-04-08"
+  },
+  {
+    "date": "2026-07-01",
+    "doi": "10.1056/NEJMoa2603387",
+    "title": "Exa-cel in Children with Transfusion-Dependent β-Thalassemia or Sickle Cell Disease (Ages 5-11)",
+    "journal": "NEJM",
+    "pubdate": "2026-06-11"
+  },
+  {
+    "date": "2026-07-01",
+    "doi": "10.1056/NEJMoa2501277",
+    "title": "CRISPR-Cas12a Gene Editing of HBG1 and HBG2 Promoters to Treat β-Thalassemia (EdiThal, reni-cel)",
+    "journal": "NEJM",
+    "pubdate": "2026-04-02"
+  },
+  {
+    "date": "2026-07-05",
+    "doi": "10.1001/jama.2025.21990",
+    "title": "Spinal Manipulation and Clinician-Supported Biopsychosocial Self-Management for Acute Low Back Pain (PACBACK)",
+    "journal": "JAMA",
+    "pubdate": "2025-12-29"
+  },
+  {
+    "date": "2026-07-05",
+    "doi": "10.1016/S1470-2045(25)00653-9",
+    "title": "Cilta-cel vs Standard of Care in Lenalidomide-Refractory Multiple Myeloma — CARTITUDE-4 Updated OS Analysis",
+    "journal": "Lancet Oncology",
+    "pubdate": "2026-01-07"
+  },
+  {
+    "date": "2026-07-07",
+    "doi": "10.1056/NEJMoa2516567",
+    "title": "Ultrasound-Facilitated, Catheter-Directed Fibrinolysis for Acute Pulmonary Embolism (HI-PEITHO)",
+    "journal": "NEJM",
+    "pubdate": "2026-03"
+  },
+  {
+    "date": "2026-07-07",
+    "doi": "10.1056/NEJMoa2514120",
+    "title": "Endovascular Treatment of Medium-Vessel-Occlusion Strokes (ORIENTAL MeVO)",
+    "journal": "NEJM",
+    "pubdate": "2026-05-14"
+  },
+  {
+    "date": "2026-07-09",
+    "doi": "10.1038/s41591-025-04186-5",
+    "title": "FMT plus immunotherapy in NSCLC and melanoma (FMT-LUMINate)",
+    "journal": "Nat Med",
+    "pubdate": "2026-01-28"
+  },
+  {
+    "date": "2026-07-09",
+    "doi": "10.1016/j.jacc.2026.02.5063",
+    "title": "Six-Year Outcomes After TAVR vs SAVR in Low-Risk Aortic Stenosis (Evolut Low Risk)",
+    "journal": "JACC",
+    "pubdate": "2026-02-01"
+  },
+  {
+    "date": "2026-07-10",
+    "doi": "10.1038/s41591-026-04204-0",
+    "title": "Bimagrumab plus Semaglutide for Obesity (Phase 2)",
+    "journal": "Nature Medicine",
+    "pubdate": "2026-03-02"
+  },
+  {
+    "date": "2026-07-10",
+    "doi": "10.1038/s41591-026-04206-y",
+    "title": "Plasma p-tau217 Clocks to Predict Onset of Symptomatic Alzheimer's Disease",
+    "journal": "Nature Medicine",
+    "pubdate": "2026-02-19"
+  },
+  {
+    "date": "2026-07-11",
+    "doi": "10.1016/S0140-6736(26)00202-3",
+    "title": "Oral orforglipron vs oral semaglutide in type 2 diabetes (ACHIEVE-3)",
+    "journal": "The Lancet",
+    "pubdate": "2026-02-01"
+  },
+  {
+    "date": "2026-07-11",
+    "doi": "10.1056/NEJMoa2513310",
+    "title": "Left Atrial Appendage Closure or Medical Therapy in Atrial Fibrillation (CLOSURE-AF)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-18"
+  },
+  {
+    "date": "2026-07-12",
+    "doi": "10.1200/JCO-25-01569",
+    "title": "Chemoradiation ± Atezolizumab in Limited-Stage Small Cell Lung Cancer (NRG/Alliance LU005)",
+    "journal": "JCO",
+    "pubdate": "2026-01-13"
+  },
+  {
+    "date": "2026-07-12",
+    "doi": "10.1056/NEJMoa2600440",
+    "title": "IVUS-Guided versus Angiography-Guided PCI in Unprotected Left Main Coronary Disease (OPTIMAL)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-30"
+  },
+  {
+    "date": "2026-07-13",
+    "doi": "10.1056/NEJMoa2511218",
+    "title": "Palbociclib for Hormone-Receptor-Positive, HER2-Positive Advanced Breast Cancer (PATINA)",
+    "journal": "NEJM",
+    "pubdate": "2026-01-29"
+  },
+  {
+    "date": "2026-07-13",
+    "doi": "10.1056/NEJMoa2506495",
+    "title": "Tecovirimat for the Treatment of Mpox (Clade II)",
+    "journal": "NEJM",
+    "pubdate": "2026-02-26"
+  },
+  {
+    "date": "2026-07-14",
+    "doi": "10.1016/S0140-6736(25)01578-8",
+    "title": "Assessment of adverse effects attributed to statin therapy in product labels: a meta-analysis of double-blind randomised controlled trials",
+    "journal": "Lancet",
+    "pubdate": "2026-02-01"
+  },
+  {
+    "date": "2026-07-14",
+    "doi": "10.1038/s41591-026-04229-5",
+    "title": "LLM-assisted systematic review of large language models in clinical medicine",
+    "journal": "Nature Medicine",
+    "pubdate": "2026-03-03"
+  },
+  {
+    "date": "2026-07-15",
+    "doi": "10.1016/S0140-6736(25)02549-8",
+    "title": "Baxdrostat in Resistant Hypertension (Bax24)",
+    "journal": "The Lancet",
+    "pubdate": "2026-03-01"
+  },
+  {
+    "date": "2026-07-15",
+    "doi": "10.1038/s41591-026-04273-1",
+    "title": "AL002 TREM2 agonist antibody in early Alzheimer's (INVOKE-2)",
+    "journal": "Nature Medicine",
+    "pubdate": "2026-03-05"
+  },
+  {
+    "date": "2026-07-16",
+    "doi": "10.1001/jamainternmed.2025.7453",
+    "title": "Treat-to-Target Urate-Lowering Treatment and Cardiovascular Outcomes in Patients With Gout",
+    "journal": "JAMA Internal Medicine",
+    "pubdate": "2026-01-26"
+  },
+  {
+    "date": "2026-07-16",
+    "doi": "10.1093/eurheartj/ehaf1115",
+    "title": "Pulsed field vs radiofrequency ablation for paroxysmal atrial fibrillation (BEAT PAROX-AF)",
+    "journal": "European Heart Journal",
+    "pubdate": "2026-01-22"
+  },
+  {
+    "date": "2026-07-17",
+    "doi": "10.1016/S2213-8587(26)00125-7",
+    "title": "Cagrilintide-semaglutide (CagriSema) versus semaglutide or cagrilintide in people with type 2 diabetes (REIMAGINE 2)",
+    "journal": "Lancet Diabetes & Endocrinology",
+    "pubdate": "2026-02"
+  },
+  {
+    "date": "2026-07-17",
+    "doi": "10.1016/S2213-8587(26)00126-9",
+    "title": "Once-weekly cagrilintide-semaglutide (CagriSema) in adults with type 2 diabetes inadequately controlled on diet and exercise (REIMAGINE 1)",
+    "journal": "Lancet Diabetes & Endocrinology",
+    "pubdate": "2026-06-07"
+  },
+  {
+    "date": "2026-07-18",
+    "doi": "10.1016/S0140-6736(25)02156-7",
+    "title": "Triple cardiovascular disease detection with an AI-enabled stethoscope (TRICORDER)",
+    "journal": "The Lancet",
+    "pubdate": "2026-01"
+  },
+  {
+    "date": "2026-07-18",
+    "doi": "10.1016/S0140-6736(25)02276-7",
+    "title": "Efimosfermin alfa (BOS-580) once per month in MASH with F2/F3 fibrosis (phase 2)",
+    "journal": "The Lancet",
+    "pubdate": "2026-02"
+  },
+  {
+    "date": "2026-07-19",
+    "doi": "10.1016/S0140-6736(26)01022-6",
+    "title": "Cagrilintide–semaglutide (CagriSema) as an add-on to basal insulin in adults with type 2 diabetes (REIMAGINE 3)",
+    "journal": "The Lancet",
+    "pubdate": "2026-06-07"
+  },
+  {
+    "date": "2026-07-19",
+    "doi": "10.1016/S2213-8587(25)00402-4",
+    "title": "Co-administered cagrilintide and semaglutide vs semaglutide alone in adults with overweight or obesity in Japan and Taiwan (REDEFINE 5)",
+    "journal": "Lancet Diabetes & Endocrinology",
+    "pubdate": "2026-06"
+  },
+  {
+    "date": "2026-07-20",
+    "doi": "10.1016/S0140-6736(26)00422-8",
+    "title": "Aspirin vs clopidogrel for chronic maintenance monotherapy after PCI: 10-year follow-up (HOST-EXAM)",
+    "journal": "The Lancet",
+    "pubdate": "2026-03-29"
+  },
+  {
+    "date": "2026-07-20",
+    "doi": "10.1016/S0140-6736(26)01009-3",
+    "title": "Finerenone in chronic kidney disease: individual participant data pooled analysis (INFINITY)",
+    "journal": "The Lancet",
+    "pubdate": "2026-06-05"
+  },
+  {
+    "date": "2026-07-21",
+    "doi": "10.1001/jama.2026.0210",
+    "title": "Tenecteplase for Acute Non-Large Vessel Occlusion 4.5 to 24 Hours After Ischemic Stroke (OPTION)",
+    "journal": "JAMA",
+    "pubdate": "2026-02-05"
+  },
+  {
+    "date": "2026-07-21",
+    "doi": "10.1001/jamaoncol.2025.6585",
+    "title": "Overall Survival With First-Line vs Second-Line CDK4/6 Inhibitor Use in Advanced Breast Cancer (SONIA)",
+    "journal": "JAMA Oncology",
+    "pubdate": "2026-02-19"
+  },
+  {
+    "date": "2026-07-22",
+    "doi": "10.1016/S0140-6736(26)00602-1",
+    "title": "Pembrolizumab plus weekly paclitaxel in platinum-resistant recurrent ovarian cancer (ENGOT-ov65/KEYNOTE-B96)",
+    "journal": "The Lancet",
+    "pubdate": "2026-04-01"
+  },
+  {
+    "date": "2026-07-22",
+    "doi": "10.1001/jama.2026.2253",
+    "title": "Changes in Clinician Time Expenditure and Visit Quantity With Adoption of AI-Powered Scribes",
+    "journal": "JAMA",
+    "pubdate": "2026-04-01"
+  },
+  {
+    "date": "2026-07-26",
+    "doi": "10.1016/S0140-6736(26)00691-4",
+    "title": "Dapirolizumab pegol in systemic lupus erythematosus (PHOENYCS GO)",
+    "journal": "Lancet",
+    "pubdate": "2026-06-01"
+  },
+  {
+    "date": "2026-07-27",
+    "doi": "10.1016/S0140-6736(26)00967-0",
+    "title": "Retatrutide in type 2 diabetes (TRANSCEND-T2D-1)",
+    "journal": "Lancet",
+    "pubdate": "2026-06-06"
+  },
+  {
+    "date": "2026-07-28",
+    "doi": "10.1056/NEJMoa2512275",
+    "title": "Setmelanotide for the Treatment of Acquired Hypothalamic Obesity (TRANSCEND)",
+    "journal": "NEJM",
+    "pubdate": "2026-07-08"
+  },
+  {
+    "date": "2026-07-28",
+    "doi": "10.1056/NEJMoa2604565",
+    "title": "Phase 3 Trial of Oral Infigratinib in Children with Achondroplasia (PROPEL 3)",
+    "journal": "NEJM",
+    "pubdate": "2026-07-02"
+  },
+  {
+    "date": "2026-07-29",
+    "doi": "10.1038/s41591-025-04074-y",
+    "title": "Reliability of LLMs as medical assistants for the general public: a randomized preregistered study",
+    "journal": "Nature Medicine",
+    "pubdate": "2026-02-01"
+  },
+  {
+    "date": "2026-07-29",
+    "doi": "10.1001/jamacardio.2026.0083",
+    "title": "Long-Term Outcomes of Left Bundle-Branch Pacing vs Biventricular Pacing in Heart Failure (HeartSync-LBBP) / paired PhysioSync-HF 10.1001/jamacardio.2026.0101",
+    "journal": "JAMA Cardiology",
+    "pubdate": "2026-03-11"
+  },
+  {
+    "date": "2026-07-30",
+    "doi": "10.1056/NEJMoa2601486",
+    "title": "Enfortumab Vedotin and Pembrolizumab in Cisplatin-Eligible Bladder Cancer (KEYNOTE-B15/EV-304)",
+    "journal": "NEJM",
+    "pubdate": "2026-07-22"
+  },
+  {
+    "date": "2026-07-30",
+    "doi": "10.1016/S0140-6736(26)01385-1",
+    "title": "Deramiocel heart-derived cellular therapy in advanced Duchenne muscular dystrophy (HOPE-3)",
+    "journal": "Lancet",
+    "pubdate": "2026-07-29"
+  },
+  {
+    "date": "2026-07-31",
+    "doi": "10.1016/S0140-6736(26)00717-8",
+    "title": "Polyendocrine metabolic ovarian syndrome, the new name for polycystic ovary syndrome: a multistep global consensus process",
+    "journal": "The Lancet",
+    "pubdate": "2026-05-12"
+  },
+  {
+    "date": "2026-07-31",
+    "doi": "10.1161/CIR.0000000000001415",
+    "title": "2026 AHA/ACC Multisociety Guideline for the Evaluation and Management of Acute Pulmonary Embolism in Adults",
+    "journal": "Circulation",
+    "pubdate": "2026-02-19"
+  },
+  {
+    "date": "2026-08-01",
+    "doi": "10.1016/j.jacc.2025.11.016",
+    "title": "2026 ACC/AHA Multisociety Guideline on the Management of Dyslipidemia",
+    "journal": "JACC",
+    "pubdate": "2026-03-01"
+  },
+  {
+    "date": "2026-08-01",
+    "doi": "10.3322/caac.70067",
+    "title": "Colorectal cancer statistics, 2026",
+    "journal": "CA: A Cancer Journal for Clinicians",
+    "pubdate": "2026-03-01"
+  },
+  {
+    "date": "2026-08-02",
+    "doi": "10.1038/s41591-026-04239-3",
+    "title": "Effects of daily multivitamin-multimineral and cocoa extract supplementation on epigenetic aging clocks in the COSMOS randomized clinical trial",
+    "journal": "Nature Medicine",
+    "pubdate": "2026-03-09"
+  },
+  {
+    "date": "2026-08-02",
+    "doi": "10.1056/NEJMoa2601521",
+    "title": "Intravascular Ultrasound-Guided or Angiography-Guided Complex High-Risk PCI (IVUS-CHIP)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-30"
+  },
+  {
+    "date": "2026-08-03",
+    "doi": "10.1002/14651858.CD016297",
+    "title": "Amyloid-beta-targeting monoclonal antibodies for people with mild cognitive impairment or mild dementia due to Alzheimer's disease",
+    "journal": "Cochrane Database of Systematic Reviews",
+    "pubdate": "2026-04-16"
+  },
+  {
+    "date": "2026-08-03",
+    "doi": "10.1002/14651858.CD010461.pub4",
+    "title": "Advanced sperm selection techniques for assisted reproduction",
+    "journal": "Cochrane Database of Systematic Reviews",
+    "pubdate": "2026-06-02"
+  },
+  {
+    "date": "2026-08-04",
+    "doi": "10.1001/jama.2026.9350",
+    "title": "Addition of High-Dose Vitamin D3 to Standard Treatment in Patients With Metastatic Colorectal Cancer: The SOLARIS Randomized Clinical Trial",
+    "journal": "JAMA",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-04",
+    "doi": "10.1111/1756-185x.70798",
+    "title": "SSGJ-613 Alleviates Pain and Reduces the Risk of Acute Flares in Patients With Gout: A Randomized, Double-Blind, Phase II Study",
+    "journal": "International Journal of Rheumatic Diseases",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-05",
+    "doi": "10.2215/CJN.0000001169",
+    "title": "Skeletal Muscle Cramp Prevalence among Patients Receiving Dialysis: A Global Systematic Review and Meta-Analysis",
+    "journal": "CJASN",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-05",
+    "doi": "10.1038/s41598-026-62827-2",
+    "title": "Vegetarian diet is associated with a lower risk of chronic kidney disease in a population-based study",
+    "journal": "Scientific Reports",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-06",
+    "doi": "10.1007/s10157-026-02908-8",
+    "title": "Dose-dependent association of depression with incidence of end-stage kidney disease and all-cause mortality, CKD-JAC study",
+    "journal": "Clinical and Experimental Nephrology",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-06",
+    "doi": "10.1007/s10157-026-02928-4",
+    "title": "Association of prior Angiotensin receptor-neprilysin inhibitor use with the initial eGFR dip after initiation of SGLT2 inhibitors in patients with CKD",
+    "journal": "Clinical and Experimental Nephrology",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-06",
+    "doi": "10.1093/ndt/gfag171",
+    "title": "CKD-guideline adherence in primary and nephrology care for older patients with advanced CKD",
+    "journal": "Nephrology Dialysis Transplantation",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-07",
+    "doi": "10.1038/s41598-026-64671-w",
+    "title": "Metformin is associated with reduced rejection and improved graft survival in kidney transplant recipients with post-transplant diabetes mellitus",
+    "journal": "Scientific Reports",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-07",
+    "doi": "10.1038/s41598-026-64801-4",
+    "title": "Effect of tenapanor on bowel movements in hemodialysis patients with hyperphosphatemia based on a pooled post hoc analysis of three clinical trials",
+    "journal": "Scientific Reports",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-08",
+    "doi": "10.1093/ndt/gfag177",
+    "title": "Dapagliflozin preserves kidney function and reduces albuminuria in children with chronic kidney disease",
+    "journal": "Nephrology Dialysis Transplantation",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-08",
+    "doi": "10.1093/ndt/gfag175",
+    "title": "Sepsis and infectious outcomes for GLP-1 receptor agonists in CKD plus type 2 diabetes",
+    "journal": "Nephrology Dialysis Transplantation",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-08",
+    "doi": "10.1093/ndt/gfag124",
+    "title": "CKD-associated osteoporosis in patients with CKD G4-5D: a pragmatic treatment approach",
+    "journal": "Nephrology Dialysis Transplantation",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-09",
+    "doi": "10.1001/jama.2026.9268",
+    "title": "Dapagliflozin and Acute Kidney Injury Following Cardiac Surgery: A Randomized Clinical Trial (DAPA-CS)",
+    "journal": "JAMA",
+    "pubdate": "2026-07"
+  },
+  {
+    "date": "2026-08-09",
+    "doi": "10.1371/journal.pone.0354883",
+    "title": "Feasibility, safety and tolerability of intradialytic creatine supplementation in hemodialysis: A double-blind, randomized, placebo-controlled pilot study",
+    "journal": "PLOS ONE",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-10",
+    "doi": "10.2215/CJN.0000001160",
+    "title": "Cardiovascular and Kidney Outcomes Following Sodium-Glucose Cotransporter 2 Inhibitor Initiation in CKD: A Swedish Nationwide Cohort Study",
+    "journal": "Clinical Journal of the American Society of Nephrology",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-10",
+    "doi": "10.1093/ndt/gfag178",
+    "title": "Urinary Dickkopf-3 as a biomarker for kidney-function decline: a systematic review and meta-analysis",
+    "journal": "Nephrology Dialysis Transplantation",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-11",
+    "doi": "10.2215/CJN.0000001181",
+    "title": "Disparities in Kidney Transplantation Access and Outcomes among Native Hawaiians and Pacific Islanders in the United States",
+    "journal": "Clinical Journal of the American Society of Nephrology",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-11",
+    "doi": "10.1111/dom.71188",
+    "title": "Prevalence, Incidence and Mortality of Chronic Kidney Disease in Type 1 and Type 2 Diabetes-A Nationwide Danish Register-Based Cohort Study",
+    "journal": "Diabetes, Obesity and Metabolism",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-12",
+    "doi": "10.1056/NEJMoa2600526",
+    "title": "Sodium Bicarbonate for Critically Ill Adults with Metabolic Acidosis and Shock (SODa-BIC)",
+    "journal": "NEJM",
+    "pubdate": "2026-06"
+  },
+  {
+    "date": "2026-08-12",
+    "doi": "10.1093/ajh/hpag085",
+    "title": "Blood Pressure Time in Target Range and Clinical Outcomes in Chronic Kidney Disease",
+    "journal": "Am J Hypertens",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-13",
+    "doi": "10.1093/ckj/sfag231",
+    "title": "Dapagliflozin in lupus nephritis: renal and hematologic outcomes from a randomized controlled trial",
+    "journal": "Clinical Kidney Journal",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-13",
+    "doi": "10.1093/ndt/gfag014",
+    "title": "KDIGO 2026 Clinical Practice Guideline for Anemia in CKD: a commentary from the European Renal Best Practice (ERBP)",
+    "journal": "Nephrology Dialysis Transplantation",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-14",
+    "doi": "10.2215/CJN.0000001188",
+    "title": "Renal Outcomes of Triglyceride-Targeting Lipid-Lowering Therapies versus Statins in Patients with CKD",
+    "journal": "Clin J Am Soc Nephrol",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-14",
+    "doi": "10.1016/S0140-6736(26)01089-5",
+    "title": "Belzutifan plus lenvatinib versus cabozantinib in patients with previously treated advanced renal cell carcinoma (LITESPARK-011): an open-label, randomised, controlled, phase 3 trial",
+    "journal": "Lancet",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-15",
+    "doi": "10.1212/WNL.0000000000218413",
+    "title": "Association Between Menopausal Hormone Therapy and Alzheimer Disease Neuropathology",
+    "journal": "Neurology",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-15",
+    "doi": "",
+    "title": "Combination of abdominal obesity and vitamin D deficiency and all-cause mortality in adults over 50 (ELSA cohort)",
+    "journal": "Diabetes, Obesity and Metabolism",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-16",
+    "doi": "10.1053/j.ajkd.2026.05.019",
+    "title": "Blood Pressure, Kidney Function, and Kidney Mortality Among Mexican Adults",
+    "journal": "American Journal of Kidney Diseases",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-16",
+    "doi": "10.1001/jama.2026.11065",
+    "title": "Total Intravenous vs Volatile Inhalational Anesthesia for Major Noncardiac Surgery: A Randomized Clinical Trial (VITAL)",
+    "journal": "JAMA",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-17",
+    "doi": "10.1681/ASN.0000001225",
+    "title": "Hemodiafiltration versus High-flux Hemodialysis and Risk of Mortality: A Multinational Target Trial Emulation",
+    "journal": "JASN",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-17",
+    "doi": "10.1053/j.ajkd.2026.05.020",
+    "title": "Artificial Intelligence-Enabled Electrocardiography for Monitoring Serum Potassium Dynamics in Patients With Severe Hypokalemia",
+    "journal": "AJKD",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-18",
+    "doi": "10.1093/ndt/gfag184",
+    "title": "Renin-Angiotensin System Inhibition in Dialysis-Dependent Patients with Chronic Heart Failure due to Reduced Ejection Fraction: A Systematic Review and Meta-Analysis",
+    "journal": "NDT",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-18",
+    "doi": "10.2215/CJN.0000001168",
+    "title": "Comparative Effectiveness and Cardiovascular Safety of Romosozumab versus Teriparatide in Osteoporosis Patients with CKD: Target Trial Emulation Study",
+    "journal": "CJASN",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-19",
+    "doi": "10.1001/jama.2026.8568",
+    "title": "Neonatal Survival After Serial Amnioinfusions for Anhydramnios Due to Fetal Kidney Failure: The RAFT Clinical Trial",
+    "journal": "JAMA",
+    "pubdate": "2026-07"
+  },
+  {
+    "date": "2026-08-19",
+    "doi": "10.1007/s11869-026-01918-5",
+    "title": "Carbon dioxide overload, detected in human blood, suggests a potentially toxic atmosphere within 50 years",
+    "journal": "Air Quality, Atmosphere & Health",
+    "pubdate": "2026-02"
+  },
+  {
+    "date": "2026-08-20",
+    "doi": "10.1093/ndt/gfag188",
+    "title": "Trends in mortality in adult first kidney transplant recipients with and without diabetes as cause of kidney failure: an ERA Registry study",
+    "journal": "NDT",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-20",
+    "doi": "10.1126/scitranslmed.aed4678",
+    "title": "Urea transporter B-mediated urea uptake-induced protein carbamylation in platelets underlies bleeding in chronic kidney disease",
+    "journal": "Sci Transl Med",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-21",
+    "doi": "10.2215/CJN.0000001183",
+    "title": "Kidney Tubular Secretion Capacity and Risk of Cardiovascular Mortality in the General Population: The HUNT Study",
+    "journal": "CJASN",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-21",
+    "doi": "10.1016/j.kint.2026.07.018",
+    "title": "Genetic determinants of serum creatinine and cystatin C independent of kidney function generate bias in filtration markers",
+    "journal": "Kidney International",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-22",
+    "doi": "10.1093/ndt/gfag191",
+    "title": "Chronic kidney disease, atrial fibrillation, and stroke: risk scores in the era of SGLT2i, non-steroidal MRA, and GLP-1 RA, and presence of high competing mortality",
+    "journal": "NDT",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-22",
+    "doi": "10.1053/j.ajkd.2026.05.022",
+    "title": "12-year Follow-up of a Family With CKD Caused by an mtDNA Variant",
+    "journal": "AJKD",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-23",
+    "doi": "10.1016/j.kint.2026.07.021",
+    "title": "Hemoglobinuria as a marker of inflammation in IgA nephropathy: a multi-center cohort study",
+    "journal": "Kidney International",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-23",
+    "doi": "10.1681/ASN.0000001203",
+    "title": "Indoxyl Sulfate Promotes Uremic Arterial and Venous Thrombosis by Stabilizing IDO1 via the E3 Ligase SHFM3",
+    "journal": "Journal of the American Society of Nephrology",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-24",
+    "doi": "10.1016/j.kint.2026.07.019",
+    "title": "A self-sustaining hypoxia inducible factor-1α–creatine kinase B feedforward circuit drives macrophage-mediated kidney fibrosis",
+    "journal": "Kidney International",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-24",
+    "doi": "10.2215/CJN.0000001191",
+    "title": "Circulating Ephrin-Eph Signaling Reflects Interstitial Fibrosis and Tubular Atrophy in Diabetic Kidney Disease",
+    "journal": "CJASN",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-26",
+    "doi": "10.2215/CJN.0000001208",
+    "title": "Glucagon-Like Peptide-1 Receptor Agonist Use and Risks of Hospitalization and Mortality in Patients with End-Stage Kidney Disease",
+    "journal": "Clinical Journal of the American Society of Nephrology",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-26",
+    "doi": "10.1681/ASN.0000001245",
+    "title": "Dialysis Discontinuation Rates at Low Levels of Kidney Function in Patients with Acute Kidney Injury on Intermittent Hemodialysis",
+    "journal": "Journal of the American Society of Nephrology",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-26",
+    "doi": "10.2215/CJN.0000001177",
+    "title": "Plasma Levels of Growth Differentiation Factor 15 and Adverse Kidney Outcomes: Proteomics-Based Mediation Analysis and Mendelian Randomization",
+    "journal": "Clinical Journal of the American Society of Nephrology",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-28",
+    "doi": "10.2215/CJN.0000001206",
+    "title": "Proteinuria and Kidney Function Trajectories in Patients with Advanced CKD: Insights from CRIC and KNOW-CKD Studies",
+    "journal": "Clinical Journal of the American Society of Nephrology",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-28",
+    "doi": "10.2215/CJN.0000001187",
+    "title": "Evaluating Patterns and Outcomes in the Prescription of Incremental Peritoneal Dialysis in Support of Shared Decision-Making",
+    "journal": "Clinical Journal of the American Society of Nephrology",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-28",
+    "doi": "10.1093/ndt/gfag174",
+    "title": "Monoclonal gammopathy in ANCA-associated glomerulonephritis: prevalence, characteristics and outcomes",
+    "journal": "Nephrology Dialysis Transplantation",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-29",
+    "doi": "10.1016/j.kint.2026.07.028",
+    "title": "Improving the Histologic Classification of Advanced Diabetic Nephropathy Based on the Transformative Research in Diabetic Nephropathy (TRIDENT) Findings",
+    "journal": "Kidney International",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-29",
+    "doi": "10.1093/ndt/gfag198",
+    "title": "Comparative Effectiveness of Combination Therapy in Patients with Chronic Kidney Disease and Diabetes mellitus Type 2 using Real World Data",
+    "journal": "Nephrology Dialysis Transplantation",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-29",
+    "doi": "10.1093/joneph/aajag069",
+    "title": "Ultrasound-based peritoneal membrane thickness as a marker of inflammation and technique failure in peritoneal dialysis",
+    "journal": "Journal of Nephrology",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-30",
+    "doi": "10.1093/ndt/gfag197",
+    "title": "GLP-1 receptor agonists are associated with lower kidney cancer risk after metabolic bariatric surgery",
+    "journal": "Nephrology Dialysis Transplantation",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-30",
+    "doi": "10.1053/j.ajkd.2026.05.023",
+    "title": "Donor Self-Esteem Before and After Living Kidney Donation",
+    "journal": "American Journal of Kidney Diseases",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-30",
+    "doi": "10.1681/ASN.0000001238",
+    "title": "Ciliary ARL13B Drives Cystogenesis in the Kidney via Its GEF Activity",
+    "journal": "Journal of the American Society of Nephrology",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-30",
+    "doi": "10.1016/j.kint.2026.07.024",
+    "title": "SEISMIC: A multi-stakeholder summit addressing access issues in diagnosis and treatment of C3G nephropathy and IC-MPGN",
+    "journal": "Kidney International",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-31",
+    "doi": "10.1093/eurheartj/ehag729",
+    "title": "Finerenone in hypertensive non-diabetic chronic kidney disease: a FIND-CKD subgroup analysis",
+    "journal": "European Heart Journal",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-31",
+    "doi": "10.1038/s41440-026-02786-3",
+    "title": "Recombinant zoster vaccine and risk of kidney failure, cardiovascular, and mortality in patients with chronic kidney disease",
+    "journal": "Hypertension Research",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-31",
+    "doi": "10.1681/ASN.0000001239",
+    "title": "Renin Is Critical for Renin Lineage Cell Plasticity, Migration, and Disease Outcome in Experimental Crescentic Glomerulonephritis",
+    "journal": "Journal of the American Society of Nephrology",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-31",
+    "doi": "10.1093/eurheartj/ehag098",
+    "title": "2026 ESC Guidelines for the management of cardiovascular disease and chronic kidney disease, in collaboration with the European Renal Association (ERA)",
+    "journal": "European Heart Journal",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-09-01",
+    "doi": "10.1016/j.kint.2026.06.027",
+    "title": "Cadherin-11 mediates kidney injury through altered renal fibroblast mechanobiology",
+    "journal": "Kidney International",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-09-01",
+    "doi": "10.1016/j.xkme.2026.101394",
+    "title": "Dihydropyridine Calcium Channel Blocker Therapy and Risk of CKD Progression in Type 2 Diabetes Treated With Renin Angiotensin System Inhibitors and SGLT2 Inhibitors: A Real-World Retrospective Cohort Study",
+    "journal": "Kidney Medicine",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-09-01",
+    "doi": "10.1007/s10735-026-10963-4",
+    "title": "Anti-LCN2 antibody treatment is associated with attenuated hearing loss and blood-labyrinth barrier disruption in a mouse model of chronic kidney disease",
+    "journal": "Journal of Molecular Histology",
+    "pubdate": "2026-08"
+  }
 ]
