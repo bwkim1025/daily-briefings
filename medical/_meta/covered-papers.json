@@ -483,6 +483,20 @@
     "pubdate": "2026-01"
   },
   {
+    "date": "2026-06-18",
+    "doi": "10.1056/NEJMoa2601841",
+    "title": "Angiography-Based Physiology to Guide Coronary Revascularization (FAST III)",
+    "journal": "NEJM",
+    "pubdate": "2026-03-29"
+  },
+  {
+    "date": "2026-06-18",
+    "doi": "10.1056/NEJMoa2502760",
+    "title": "Structured Exercise after Adjuvant Chemotherapy for Colon Cancer (CHALLENGE)",
+    "journal": "NEJM",
+    "pubdate": "2025-06-01"
+  },
+  {
     "date": "2026-06-19",
     "doi": "10.1016/S0140-6736(25)01862-8",
     "title": "Efficacy and safety of minocycline in patients with acute ischaemic stroke (EMPHASIS)",
@@ -507,20 +521,6 @@
     "date": "2026-06-20",
     "doi": "10.1056/NEJMoa2502929",
     "title": "First-Line Camizestrant for Emerging ESR1-Mutated Advanced Breast Cancer (SERENA-6)",
-    "journal": "NEJM",
-    "pubdate": "2025-06-01"
-  },
-  {
-    "date": "2026-06-18",
-    "doi": "10.1056/NEJMoa2601841",
-    "title": "Angiography-Based Physiology to Guide Coronary Revascularization (FAST III)",
-    "journal": "NEJM",
-    "pubdate": "2026-03-29"
-  },
-  {
-    "date": "2026-06-18",
-    "doi": "10.1056/NEJMoa2502760",
-    "title": "Structured Exercise after Adjuvant Chemotherapy for Colon Cancer (CHALLENGE)",
     "journal": "NEJM",
     "pubdate": "2025-06-01"
   },
@@ -1271,6 +1271,41 @@
     "doi": "10.2215/CJN.0000001177",
     "title": "Plasma Levels of Growth Differentiation Factor 15 and Adverse Kidney Outcomes: Proteomics-Based Mediation Analysis and Mendelian Randomization",
     "journal": "Clinical Journal of the American Society of Nephrology",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-27",
+    "doi": "10.1093/ndt/gfag195",
+    "title": "Serum levels of guanidinylated YB-1 indicate active lupus nephritis",
+    "journal": "Nephrol Dial Transplant",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-27",
+    "doi": "10.1093/ndt/gfag193",
+    "title": "Spatial and seasonal patterns of pediatric idiopathic nephrotic syndrome in France",
+    "journal": "Nephrol Dial Transplant",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-27",
+    "doi": "10.1093/ndt/gfag190",
+    "title": "Hepatic injury-induced remote kidney injury is associated with impaired hepatic clearance of cell-free hemoglobin",
+    "journal": "Nephrol Dial Transplant",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-27",
+    "doi": "10.1016/j.kint.2026.07.027",
+    "title": "Asia-Pacific Summit on Implementation of Clinical Practice Guidelines on Diabetes and Blood Pressure Management in Chronic Kidney Disease: A KDIGO Summit Report",
+    "journal": "Kidney Int",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-27",
+    "doi": "10.1016/j.kint.2026.08.007",
+    "title": "Outcomes from the International Society of Nephrology Forum on Complement Therapeutics in C3G & IgAN",
+    "journal": "Kidney Int",
     "pubdate": "2026-08"
   },
   {
