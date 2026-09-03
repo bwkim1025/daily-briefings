@@ -609,6 +609,48 @@
     "pubdate": "2026-04-02"
   },
   {
+    "date": "2026-07-03",
+    "doi": "10.2215/CJN.0000001119",
+    "title": "Prospective Cohort Study Evaluating Impact of Hemodialysis on Glycemia: BLOSSOM Cohort",
+    "journal": "Clin J Am Soc Nephrol",
+    "pubdate": "2026-07"
+  },
+  {
+    "date": "2026-07-03",
+    "doi": "10.1093/ndt/gfag154",
+    "title": "Effect of Semaglutide on Measured vs Estimated Glomerular Filtration Rate",
+    "journal": "Nephrol Dial Transplant",
+    "pubdate": "2026-07"
+  },
+  {
+    "date": "2026-07-03",
+    "doi": "10.1093/ndt/gfag122",
+    "title": "Urinary protein vs albumin for assessing kidney failure risk in chronic kidney disease",
+    "journal": "Nephrol Dial Transplant",
+    "pubdate": "2026-06"
+  },
+  {
+    "date": "2026-07-03",
+    "doi": "10.2215/CJN.0000001164",
+    "title": "Nephrology in the Paradigm of Cardiovascular-Kidney-Metabolic Health: ASN Initiative Report",
+    "journal": "Clin J Am Soc Nephrol",
+    "pubdate": "2026-06"
+  },
+  {
+    "date": "2026-07-03",
+    "doi": "10.1016/j.kint.2026.06.016",
+    "title": "KDIGO life cycle of guideline development series: part 5",
+    "journal": "Kidney Int",
+    "pubdate": "2026-07"
+  },
+  {
+    "date": "2026-07-03",
+    "doi": "10.1016/j.kint.2026.03.034",
+    "title": "KDIGO life cycle of guideline development series: part 6",
+    "journal": "Kidney Int",
+    "pubdate": "2026-07"
+  },
+  {
     "date": "2026-07-05",
     "doi": "10.1001/jama.2025.21990",
     "title": "Spinal Manipulation and Clinician-Supported Biopsychosocial Self-Management for Acute Low Back Pain (PACBACK)",
@@ -635,6 +677,27 @@
     "title": "Endovascular Treatment of Medium-Vessel-Occlusion Strokes (ORIENTAL MeVO)",
     "journal": "NEJM",
     "pubdate": "2026-05-14"
+  },
+  {
+    "date": "2026-07-08",
+    "doi": "10.1001/jamanetworkopen.2026.22554",
+    "title": "Early Nephrology Consultation and Acute Kidney Injury in Hospitalized Patients",
+    "journal": "JAMA Network Open",
+    "pubdate": "2026-07"
+  },
+  {
+    "date": "2026-07-08",
+    "doi": "10.1007/s00270-026-04515-2",
+    "title": "Predilation-Free Scoring Paclitaxel-Coated Balloon Versus Conventional Plain Balloon Angioplasty for Failing Arteriovenous Access",
+    "journal": "Cardiovasc Intervent Radiol",
+    "pubdate": "2026-06"
+  },
+  {
+    "date": "2026-07-08",
+    "doi": "10.1002/alz.71623",
+    "title": "Cardiovascular-kidney-metabolic syndrome stage modifies the efficacy of intensive blood pressure control on cognitive outcomes: SPRINT MIND post hoc",
+    "journal": "Alzheimer's & Dementia",
+    "pubdate": "2026-07"
   },
   {
     "date": "2026-07-09",
@@ -1250,6 +1313,41 @@
     "doi": "10.2215/CJN.0000001191",
     "title": "Circulating Ephrin-Eph Signaling Reflects Interstitial Fibrosis and Tubular Atrophy in Diabetic Kidney Disease",
     "journal": "CJASN",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-25",
+    "doi": "10.1001/jama.2026.9639",
+    "title": "Measured and Estimated Glomerular Filtration Rates and Risk of Adverse Health Outcomes",
+    "journal": "JAMA",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-25",
+    "doi": "10.1136/bmj-2026-100407",
+    "title": "Intravenous iron to treat anaemia before cardiac surgery (ITACS)",
+    "journal": "BMJ",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-25",
+    "doi": "10.1001/jamainternmed.2026.3831",
+    "title": "Serologic Immunity to Hepatitis A and B in US Adults and High-Risk Populations",
+    "journal": "JAMA Internal Medicine",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-25",
+    "doi": "10.1093/eurheartj/ehag362",
+    "title": "Prevention of heart failure",
+    "journal": "European Heart Journal",
+    "pubdate": "2026-08"
+  },
+  {
+    "date": "2026-08-25",
+    "doi": "10.1136/bmj-2026-100287",
+    "title": "Diagnosis and management of acute hyperkalaemia",
+    "journal": "BMJ",
     "pubdate": "2026-08"
   },
   {
