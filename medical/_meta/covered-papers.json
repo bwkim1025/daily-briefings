@@ -1741,5 +1741,19 @@
     "title": "Thymic health and immunotherapy outcomes in patients with cancer",
     "journal": "Nature",
     "pubdate": "2026-03-18"
+  },
+  {
+    "date": "2026-09-15",
+    "doi": "10.1038/s41591-026-04431-5",
+    "title": "General-purpose large language models outperform specialized clinical AI tools on medical benchmarks",
+    "journal": "Nature Medicine",
+    "pubdate": "2026-06-12"
+  },
+  {
+    "date": "2026-09-15",
+    "doi": "10.1038/s41591-026-04292-y",
+    "title": "Implementation of the NHS England Lung Cancer Screening Programme over 5 years",
+    "journal": "Nature Medicine",
+    "pubdate": "2026-03-23"
   }
 ]
