@@ -1909,5 +1909,19 @@
     "title": "Randomized Controlled Trial of Integrated Kidney Supportive Care in End-Stage Kidney Disease",
     "journal": "Kidney International Reports",
     "pubdate": "2026-09"
+  },
+  {
+    "date": "2026-09-21",
+    "doi": "10.1126/science.adz4351",
+    "title": "Autonomous biomedical research with an artificial intelligence agent",
+    "journal": "Science",
+    "pubdate": "2026-07-09"
+  },
+  {
+    "date": "2026-09-21",
+    "doi": "10.1038/s41467-026-73923-2",
+    "title": "Towards robust foundation models for digital pathology",
+    "journal": "Nature Communications",
+    "pubdate": "2026-06-11"
   }
 ]
