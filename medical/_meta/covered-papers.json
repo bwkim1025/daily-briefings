@@ -1937,5 +1937,19 @@
     "title": "Antidiscrimination Laws and Kidney Transplant for Patients With Developmental Disabilities",
     "journal": "JAMA Internal Medicine",
     "pubdate": "2026-09"
+  },
+  {
+    "date": "2026-09-22",
+    "doi": "10.1038/s41586-026-10410-0",
+    "title": "Training language models to be warm can reduce accuracy and increase sycophancy",
+    "journal": "Nature. 2026;652(8112):1159-1165",
+    "pubdate": "2026-04-29"
+  },
+  {
+    "date": "2026-09-22",
+    "doi": "10.1038/s41586-026-10675-5",
+    "title": "Towards autonomous medical artificial intelligence agents (MIRA)",
+    "journal": "Nature. 2026;655(8125):1282-1291",
+    "pubdate": "2026-06-17"
   }
 ]
