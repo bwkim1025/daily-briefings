@@ -6,8 +6,8 @@
   "scope": "/daily-briefings/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#ffffff",
-  "theme_color": "#1a3a8a",
+  "background_color": "#f6f5f0",
+  "theme_color": "#132b41",
   "lang": "ko",
   "icons": [
     {
@@ -22,5 +22,6 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "id": "/daily-briefings/"
 }

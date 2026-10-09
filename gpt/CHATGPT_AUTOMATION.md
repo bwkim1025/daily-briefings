@@ -1,6 +1,6 @@
 # ChatGPT Daily Briefings Automation v1
 
-Updated: 2026-09-18. Target: bwkim1025/daily-briefings, branch main.
+Updated: 2026-10-09. Target: bwkim1025/daily-briefings, branch main.
 This is the GPT-owned runbook. Preserve existing app files, editorial principles, historical articles and metadata.
 Run as a ChatGPT web scheduled task with the connected GitHub app, not a local PC automation.
 Schedule: daily 07:04 Asia/Seoul, preserving the previous task's stated time. Content may finish after the start time.
@@ -28,7 +28,7 @@ On retry after a metadata failure, reconcile DOI metadata from today's already-p
 
 ## Sources and editorial policy
 
-Read EDITORIAL-PRINCIPLES.md from main every run, then yesterday's and latest available article for each category.
+Read EDITORIAL-PRINCIPLES.md and docs/VISUAL-AUTHORING.md from main every run; consult the linked schema for the visual types you use. Then read yesterday's and latest available article for each category in full. Authoring documentation changes representation only, not publishing authority.
 This document's editorial examples are not factual evidence. Verify new claims against actual dated sources.
 Financial/international: prioritize events in the last 24 hours; per category aim for 3 headlines, at least 2 genuinely new.
 A repeated story requires a specifically identified new development. State event dates, market session dates and timezone.
@@ -38,6 +38,13 @@ No fabricated numbers, quotes, approvals, studies, DOIs or source URLs. Open sup
 If evidence is insufficient, explicitly report the gap instead of inventing content or claiming new developments do not exist.
 Facts and interpretation must be distinguishable. Do not make trades or patient-specific treatment decisions.
 Paraphrase source abstracts in Korean; do not copy full copyrighted abstracts.
+
+### Read-only coverage lookup
+
+Use an evidence/topic index only when it is actually available to this run. Follow the index freshness and coverage checks in docs/VISUAL-AUTHORING.md; never assume that a private local authoring cache is accessible to a web scheduled task.
+An index is a search aid, not evidence for new claims or proof that an unmatched topic is new. Compare its source-file identities/hashes with the current repository listing. A Git blob SHA can be checked against the repository tree; a local SHA-256 requires the corresponding exact bytes to verify. A date, file count, or hash for one file does not establish full coverage.
+Read every missing, changed, unindexed or incompletely indexed file needed for the existing category comparison, and read relevant or ambiguous matches in full. Capped, truncated, visual-only or heading-only records cannot exclude topics mentioned only in prose. If coverage cannot be established, use the original source-file comparison and report any inaccessible history rather than claiming a complete check.
+Keep the current category lookback rules: this adds no new 90-day requirement to Daily Briefings. Yesterday/latest full reads and the medical all-time covered-papers.json DOI exclusion below remain required. Do not create, rebuild or update an index during daily execution; only the already-authorized medical DOI metadata may be updated.
 
 ## Exact output schema
 
@@ -75,9 +82,16 @@ Each item: ### headline; summary; #### 어떤 연구; #### 초록; #### 주요 �
 Use accessible Korean for family readers. No actual family health data needed. Clearly distinguish general education from individual medical advice.
 Target about 6,500 chars; follow the editorial depth reference health/briefings/2026-05-08.md.
 
+## Required evidence-led visual authoring
+
+For principal stories and substantive research items, use the bounded source-authored `visual` JSON format in docs/VISUAL-AUTHORING.md whenever a supported representation meaningfully clarifies verified evidence. When an edition has an eligible main item, include a useful visual there; interface cards alone do not meet this requirement. Prefer one or two useful visuals per main item; use three only for genuinely distinct information, within the documented limits. These are ceilings, not a quota for every slot.
+Use research-design for verified study structure, event-bars for the same reported event in comparable groups, effect-ci for a reported estimate and interval, and comparison-bars for directly comparable reported values. Open the actual primary/official source before authoring values. Include the exact source URL and locator. Set source.asOf to the actual date you opened and verified that source; today is valid only if verification really occurred today. Never invent a verification date or use it in place of the publication date, data cutoff or follow-up period. Preserve units, population, denominators, time period and uncertainty. Do not infer missing values, manufacture metrics, or turn a study design into a clinical decision algorithm. If no representation is adequately supported, keep the full prose and report the specific visual evidence gap; never fill an empty slot for appearance.
+Place each fenced `visual` block inside the existing relevant h4 body: study structure under `#### 어떤 연구`, study results/effects under `#### 주요 결과`, and financial/international comparisons under the relevant `#### Context` or existing factual block. Preserve all h2/h3/h4 keys, required abstracts, source links, caveats and author/date metadata. Keep the written explanation readable without the figure; do not replace required prose with JSON.
+The app renders validated data deterministically. Daily runs produce no image assets, generated chart code, external rendering-service requests or extra LLM rendering pass. Existing Markdown tables and prose remain valid when they communicate the evidence better. This changes no category/slot or length budget, source-quality requirement, historical file, schedule or write permission.
+
 ## Validation and publication
 
-Before each category commit: verify KST date, exact h2 order, populated h3/h4 sections, sources supporting claims, AUTHOR, no NUL or credentials.
+Before each category commit: verify KST date, exact h2 order, populated h3/h4 sections, sources supporting claims, AUTHOR, no NUL or credentials. Validate every visual against the published schema and reconcile its labels/data with the opened source; schema success alone does not fact-check content. If the runtime cannot execute the validator, perform the documented structural checks and disclose that validation limit. Omit an unverified or invalid visual while preserving the article prose.
 Only write today's four category paths and the strictly append-preserving medical/_meta/covered-papers.json.
 No app, service worker, workflow, security setting, past briefing or rotation-state changes during daily execution.
 Use the authenticated GitHub create-file or current-SHA update-file action on main. Commit each validated category immediately.
