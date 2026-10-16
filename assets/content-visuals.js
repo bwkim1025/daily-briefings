@@ -139,7 +139,9 @@
     // Shared log axis for all ratio rows; shared linear axis per difference unit. Value rows are printed without a plot.
     const doms={};const add=(key,vals)=>{const v=vals.filter(Number.isFinite);doms[key]=doms[key]?[Math.min(doms[key][0],...v),Math.max(doms[key][1],...v)]:[Math.min(...v),Math.max(...v)];};
     d.effects.forEach(e=>{if(e.kind==='value')return;const ratio=e.kind==='ratio',t=ratio?Math.log:v=>v,key=ratio?'ratio':'diff:'+e.unit;add(key,[t(e.estimate),t(ratio?1:0)].concat(e.interval?[t(e.interval.low),t(e.interval.high)]:[]));});
-    const val=(e,v)=>e.kind==='difference'?signed(v):fmt(v);
+    const dec=v=>(String(v).split('.')[1]||'').length;
+    // Print estimate and CI at the same precision (1.3 with CI 1.04–1.63 is shown as 1.30).
+    const val=(e,v)=>{const dp=Math.min(4,Math.max(dec(e.estimate),...(e.interval?[dec(e.interval.low),dec(e.interval.high)]:[])));const t=Number(v).toFixed(dp),n=Number(t);return (e.kind==='difference'&&n>0?'+':'')+String(Object.is(n,-0)||n===0?t.replace('-',''):t).replace('-','−');};
     const rows=d.effects.map(e=>{
       const ci=e.interval?' ('+e.interval.level+'% CI '+val(e,e.interval.low)+' ~ '+val(e,e.interval.high)+')':'';
       const unit=own(e,'unit')?' '+e.unit:'';
@@ -150,7 +152,9 @@
         const x=v=>10+580*(t(v)-lo)/(hi-lo),ref=x(ratio?1:0),pt=x(e.estimate);
         let body=line(ref,2,26,'cv-null');
         if(e.interval){const a=x(e.interval.low),b=x(e.interval.high);body+='<line class="cv-interval" x1="'+coord(a)+'" x2="'+coord(b)+'" y1="14" y2="14" vector-effect="non-scaling-stroke"/>'+line(a,8,20,'cv-cap')+line(b,8,20,'cv-cap');}
-        body+='<circle class="cv-point'+(e.interval?'':' cv-point-open')+'" cx="'+coord(pt)+'" cy="14" r="5.5" vector-effect="non-scaling-stroke"/>';
+        // Zero-length round-capped strokes stay circular even though the plot stretches horizontally.
+        const dot=(cls,w)=>'<line class="'+cls+'" x1="'+coord(pt)+'" x2="'+coord(pt)+'" y1="14" y2="14" stroke-width="'+w+'" stroke-linecap="round" vector-effect="non-scaling-stroke"/>';
+        body+=dot('cv-pg-dot',11)+(e.interval?'':dot('cv-pg-dot-hole',6));
         plot=svg(body,e.label+': '+txt+(ratio?' · 기준값 1':' · 기준값 0'),'0 0 600 28');
       }
       const tags=(e.primary?'<em class="cv-pg-primary">1차</em>':'')+(own(e,'basis')?'<em>'+(e.basis==='adjusted'?'보정':'비보정')+'</em>':'')+(e.kind!=='value'&&!e.interval?'<em>CI 미보고</em>':'');
