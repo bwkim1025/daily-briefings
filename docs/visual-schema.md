@@ -7,7 +7,7 @@ The renderer calls no model or external service. It uses fixed HTML/SVG template
 ## Common fields (all required)
 
 - `version`: integer `1`.
-- `type`: `research-design`, `event-bars`, `comparison-bars`, or `effect-ci`.
+- `type`: `research-design`, `event-bars`, `comparison-bars`, `effect-ci`, or `paper-glance`.
 - `title`: nonempty text, at most 160 characters.
 - `description`: source-grounded explanation and caveat, at most 600 characters. Explain what the reader should notice without inventing a conclusion.
 - `topic`: compact search hint, at most 100 characters. It is not evidence.
@@ -60,6 +60,23 @@ Additional fields:
 Difference plots use a linear scale and null **0**. Ratio plots use a logarithmic scale and null **1**; estimate and both interval endpoints must be strictly positive. The null is always in the display domain, with a labeled explanatory note. Negative differences are valid. Never substitute event-rate subtraction for a reported adjusted difference, relative risk, odds ratio or hazard ratio. Do not mix risk, odds and hazard labels. This type specifically requires a reported CI; when there is none, retain the estimate in prose/table or an appropriate comparison without a fabricated interval.
 
 The renderer reminds readers that an interval containing the null does not establish equivalence. Its checks establish structural consistency, not statistical validity, clinical applicability, causation, or source authenticity.
+
+## Paper at a glance (`paper-glance`)
+
+One card per medical paper: design badge, PICO cells with n, follow-up/registration chips, key effect rows (mini forest plot when a CI is reported) and the authors' conclusion. Additional fields:
+
+- `design`: `{kind, label, registration?}`. `kind` is one of `rct`, `cluster-rct`, `crossover-rct`, `nonrandomized-trial`, `single-arm`, `cohort`, `case-control`, `cross-sectional`, `meta-analysis`, `systematic-review`, `narrative-review`, `diagnostic`, `mendelian-randomization`, `target-trial`, `registry`, `modeling`, `qualitative`, `other`. Never label an observational study as a trial. `label` ≤80 (source wording, e.g. "다기관 공개 비열등성 RCT"); `registration` ≤60 (e.g. NCT number).
+- Optional `setting` ≤200 (country, data source, period).
+- `population`, `exposure` (intervention/exposure/index test), optional `comparator`: `{label ≤160, detail? ≤240, n?}`. Group `n` may not exceed population `n`; omit unreported counts.
+- `outcome` ≤240 (primary first); optional `followUp` ≤160.
+- `effects`: 1–6 rows (0 allowed only for `narrative-review`, `qualitative`, `systematic-review`): `{label ≤100, kind, measure ≤24, estimate, interval?, unit?, basis?, primary?, note? ≤100}`.
+  - `kind: "ratio"` (HR/OR/RR…): positive, no `unit`; all ratio rows share one log axis with null 1.
+  - `kind: "difference"`: requires an absolute `unit` (`%p`, `mg/g`, `점` …; never `%`/`ratio`); rows share a linear axis per unit with null 0.
+  - `kind: "value"` (rates, AUC, means): printed without a plot; put the comparator value in `note`.
+  - `interval` is `{low, high, level}` exactly as reported; omit if unreported (shown as an open point with "CI 미보고"). `basis` is `adjusted`/`unadjusted` only when the source states it. Mark the primary endpoint with `primary: true`.
+- `conclusion` ≤320: the authors' stated conclusion, paraphrased without strengthening it. Optional `caveats`: up to 3 items ≤140.
+
+Use only numbers printed in the paper/abstract; do not derive new effect measures. Place it as the first block under `#### 어떤 연구`; it supersedes a `research-design` block for the same paper.
 
 ## Verified SODa-BIC example
 
