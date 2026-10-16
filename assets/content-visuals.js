@@ -76,7 +76,7 @@
       for(const k of ['exposure','comparator'])if(plain(data[k])&&plain(data.population)&&Number.isInteger(data[k].n)&&Number.isInteger(data.population.n)&&data[k].n>data.population.n)fail(k+'.n','group count cannot exceed population count');
       str(data.outcome,'outcome',240);if(own(data,'followUp'))str(data.followUp,'followUp',160);str(data.conclusion,'conclusion',320);
       if(own(data,'caveats')){if(!Array.isArray(data.caveats)||data.caveats.length>3)fail('caveats','0–3 items');else data.caveats.forEach((c,i)=>str(c,'caveats['+i+']',140));}
-      if(!Array.isArray(data.effects)||data.effects.length>6||(data.effects.length<1&&!['narrative-review','qualitative','systematic-review'].includes(data.design&&data.design.kind)))fail('effects','1–6 rows required (0 allowed only for narrative-review, qualitative, systematic-review)');
+      if(!Array.isArray(data.effects)||data.effects.length>6)fail('effects','0–6 rows required (empty only when no quantitative effect is reported)');
       else data.effects.forEach((e,i)=>{const p='effects['+i+']';if(!keys(e,['label','kind','measure','estimate','interval','unit','basis','primary','note'],p))return;
         str(e.label,p+'.label',100);str(e.measure,p+'.measure',24);if(!['ratio','difference','value'].includes(e.kind))fail(p+'.kind','ratio, difference or value required');
         const pos=e.kind==='ratio'?Number.MIN_VALUE:-MAX_NUMBER;num(e.estimate,p+'.estimate',pos);
@@ -161,7 +161,7 @@
       return '<div class="cv-pg-effect"><div class="cv-pg-eline"><span class="cv-pg-elabel">'+esc(e.label)+tags+'</span><b>'+esc(txt)+'</b></div>'+plot+(own(e,'note')?'<p class="cv-pg-note">'+esc(e.note)+'</p>':'')+'</div>';
     }).join('');
     const hasRatio=d.effects.some(e=>e.kind==='ratio'),hasDiff=d.effects.some(e=>e.kind==='difference');
-    html+='<div class="cv-pg-effects"><p class="cv-pg-h">핵심 수치</p>'+(d.effects.length?rows:'<p class="cv-pg-note">원문 초록에 정량 효과 수치가 제시되지 않았습니다.</p>')+((hasRatio||hasDiff)?'<p class="cv-stat-note">점선 = 기준값('+(hasRatio?'비율 1, 같은 로그 축':'')+(hasRatio&&hasDiff?' · ':'')+(hasDiff?'차이 0, 단위별 같은 축':'')+'). 속이 빈 점은 신뢰구간이 보고되지 않은 값입니다.</p>':'')+'</div>';
+    html+='<div class="cv-pg-effects"><p class="cv-pg-h">핵심 수치</p>'+(d.effects.length?rows:'<p class="cv-pg-note">이 요약에 수록된 정량 효과 수치가 없습니다. 수치는 원문에서 확인하세요.</p>')+((hasRatio||hasDiff)?'<p class="cv-stat-note">점선 = 기준값('+(hasRatio?'비율 1, 같은 로그 축':'')+(hasRatio&&hasDiff?' · ':'')+(hasDiff?'차이 0, 단위별 같은 축':'')+'). 속이 빈 점은 신뢰구간이 보고되지 않은 값입니다.</p>':'')+'</div>';
     html+='<div class="cv-pg-bottom"><p class="cv-pg-h">저자 결론</p><p>'+esc(d.conclusion)+'</p></div>';
     if(own(d,'caveats')&&d.caveats.length)html+='<ul class="cv-pg-caveats">'+d.caveats.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ul>';
     return html+'</div>';

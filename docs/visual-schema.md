@@ -69,7 +69,7 @@ One card per medical paper: design badge, PICO cells with n, follow-up/registrat
 - Optional `setting` ≤200 (country, data source, period).
 - `population`, `exposure` (intervention/exposure/index test), optional `comparator`: `{label ≤160, detail? ≤240, n?}`. Group `n` may not exceed population `n`; omit unreported counts.
 - `outcome` ≤240 (primary first); optional `followUp` ≤160.
-- `effects`: 1–6 rows (0 allowed only for `narrative-review`, `qualitative`, `systematic-review`): `{label ≤100, kind, measure ≤24, estimate, interval?, unit?, basis?, primary?, note? ≤100}`.
+- `effects`: 0–6 rows (leave empty rather than invent numbers when none are reported, e.g. reviews): `{label ≤100, kind, measure ≤24, estimate, interval?, unit?, basis?, primary?, note? ≤100}`.
   - `kind: "ratio"` (HR/OR/RR…): positive, no `unit`; all ratio rows share one log axis with null 1.
   - `kind: "difference"`: requires an absolute `unit` (`%p`, `mg/g`, `점` …; never `%`/`ratio`); rows share a linear axis per unit with null 0.
   - `kind: "value"` (rates, AUC, means): printed without a plot; put the comparator value in `note`.
