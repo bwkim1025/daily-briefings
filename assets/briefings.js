@@ -44,7 +44,9 @@
     return null;
   }
   async function latest(cat,dates){
-    const today=C.kstDate();const candidates=[...new Set([today,...dates.filter(d=>d<=today),...Array.from({length:14},(_,i)=>C.kstDate(i))])];
+    const today=C.kstDate();
+    // Newest first across all hints: a stale index must never hide newer files (probe recent days too).
+    const candidates=[...new Set([today,...dates.filter(d=>d<=today),...Array.from({length:14},(_,i)=>C.kstDate(i))])].sort().reverse();
     for(const ds of candidates){const result=await fetchDate(cat,ds);if(result)return result;}
     return null;
   }
@@ -74,7 +76,7 @@
     let html=['일','월','화','수','목','금','토'].map(d=>'<div class="cal-wd">'+d+'</div>').join('');
     html+='<span></span>'.repeat(new Date(Date.UTC(y,m,1)).getUTCDay());
     for(let d=1;d<=new Date(Date.UTC(y,m+1,0)).getUTCDate();d++){
-      const date=y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0'),exists=available.includes(date),canSelect=exists||date===C.kstDate();
+      const date=y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0'),exists=available.includes(date),canSelect=exists||date<=C.kstDate(); // past days stay clickable even when the date list is stale or the API is rate-limited
       html+='<button class="cal-day'+(exists?' has-brief':'')+'" data-date="'+date+'" aria-label="'+date+(exists?' 브리핑 읽기':' 브리핑 확인')+'" aria-pressed="'+(date===selected)+'"'+(!canSelect?' disabled':'')+'>'+d+'</button>';
     }
     $('#cal-grid').innerHTML=html;$('#cal-grid').querySelectorAll('button:not(:disabled)').forEach(el=>el.addEventListener('click',()=>{closeCalendar();load(el.dataset.date,true);}));
@@ -89,7 +91,8 @@
     html+=story(data.story);
     if(data.preamble)html+='<div class="source-note prose">'+C.markdown(data.preamble)+'</div>';
     html+='<div class="reading-tools"><h2>한눈에 보는 이슈</h2><span>'+total+'개 이슈 · '+C.sourceCount(result.md)+'개 출처 도메인</span><button class="text-button" id="expand-all" aria-expanded="false">모두 펼치기</button></div>';
-    if(sections.length)html+='<nav class="overview" aria-label="본문 목차">'+sections.map((s,i)=>'<a href="#section-'+i+'"><span class="overview-label">'+String(i+1).padStart(2,'0')+' · '+C.esc(C.sectionLabel(page,s.key))+'</span><span class="overview-title">'+C.esc(s.items[0]?.headline||s.intro.trim())+'</span><span class="overview-count">'+s.items.length+'개 이슈 ↗</span></a>').join('')+'</nav>';
+    // Overview cards expand in place (accordion); they never jump. An explicit button opens the full article.
+    if(sections.length)html+='<div class="overview" role="list" aria-label="한눈에 보는 이슈">'+sections.map((s,i)=>'<details class="ov-card" role="listitem"><summary><span class="overview-label">'+String(i+1).padStart(2,'0')+' · '+C.esc(C.sectionLabel(page,s.key))+'</span><span class="overview-title">'+C.esc(s.items[0]?.headline||s.intro.trim())+'</span><span class="overview-count">'+s.items.length+'개 이슈 <span class="ov-toggle" aria-hidden="true">+</span></span></summary><div class="ov-body">'+(s.items.length?s.items.map((it,j)=>'<div class="ov-item"><strong>'+C.inline(it.headline)+'</strong>'+(it.summary.trim()&&!/```/.test(it.summary)?'<div class="ov-sum">'+C.markdown(it.summary)+'</div>':'')+'<button class="text-button ov-open" data-target="item-'+i+'-'+j+'">본문 펼치기</button></div>').join(''):'<div class="ov-item prose">'+C.markdown(s.intro)+'</div>')+'</div></details>').join('')+'</div>';
     html+=sections.map((section,index)=>'<section class="category" id="section-'+index+'"><header class="category-header"><span class="number">'+String(index+1).padStart(2,'0')+'</span><h2>'+C.esc(C.sectionLabel(page,section.key))+'</h2><span class="count">'+section.items.length+' ISSUES</span></header>'+(section.intro.trim()?'<div class="prose">'+C.markdown(section.intro)+'</div>':'')+section.items.map((item,i)=>'<details class="article" id="item-'+index+'-'+i+'"><summary><div class="article-heading"><h3>'+C.inline(item.headline)+'</h3>'+(item.summary.trim()?'<div class="article-summary">'+C.markdown(item.summary)+'</div>':'')+'</div><span class="toggle" aria-hidden="true">+</span></summary><div class="article-body">'+item.blocks.map(block=>{
       const title=blockLabels[block.title.toLowerCase()]||block.title;
       const cls=/결과|result/i.test(title)?' results':/주의|한계|limitation/i.test(title)?' caution':/출처|source/i.test(title)?' sources':'';
@@ -110,6 +113,7 @@
     $('#content').innerHTML=render(result);updateControls();renderCalendar();
     const url=new URL(location.href);url.searchParams.set('date',selected);if(push)history.pushState({},'',url);else history.replaceState({},'',url);
     document.title=config[page].name+' · '+selected;
+    document.querySelectorAll('.ov-open').forEach(b=>b.addEventListener('click',()=>{const el=document.getElementById(b.dataset.target);if(!el)return;el.open=true;el.scrollIntoView({behavior:'smooth',block:'start'});el.querySelector('summary').focus({preventScroll:true});}));
     $('#expand-all').addEventListener('click',event=>{const button=event.currentTarget,open=button.getAttribute('aria-expanded')!=='true';document.querySelectorAll('.article').forEach(el=>el.open=open);button.setAttribute('aria-expanded',String(open));button.textContent=open?'모두 접기':'모두 펼치기';});
   }
   async function category(){

@@ -1,8 +1,10 @@
-/* ContentVisuals v1. Fixed, dependency-free SVG templates; data is never executable. */
+/* ContentVisuals v1 (+paper-glance). Fixed, dependency-free SVG templates; data is never executable. */
 (function (scope) {
   'use strict';
   const MAX_BYTES = 12000, MAX_NUMBER = 1e9;
-  const TYPES = ['research-design', 'event-bars', 'effect-ci', 'comparison-bars'];
+  const TYPES = ['research-design', 'event-bars', 'effect-ci', 'comparison-bars', 'paper-glance'];
+  const DESIGNS = {'rct':'무작위 대조시험','cluster-rct':'군집 무작위시험','crossover-rct':'교차 무작위시험','nonrandomized-trial':'비무작위 중재연구','single-arm':'단일군 연구','cohort':'코호트 연구','case-control':'환자-대조군 연구','cross-sectional':'단면 연구','meta-analysis':'메타분석','systematic-review':'체계적 문헌고찰','diagnostic':'진단·예측 정확도','mendelian-randomization':'멘델 무작위분석','target-trial':'표적시험 모사','registry':'레지스트리 분석','modeling':'모델링 연구','qualitative':'질적 연구','narrative-review':'서술 리뷰·토론','other':'기타 설계'};
+  const TRIALS = ['rct','cluster-rct','crossover-rct','nonrandomized-trial','single-arm'];
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const bytes = text => { let n=0; for(const c of text) { const p=c.codePointAt(0); n+=p<128?1:p<2048?2:p<65536?3:4; } return n; };
   const plain = o => o !== null && typeof o === 'object' && !Array.isArray(o);
@@ -22,7 +24,8 @@
       'research-design':['population','allocation','arms','followUp','outcome'],
       'event-bars':['measure','timeframe','unit','rows'],
       'comparison-bars':['measure','timeframe','unit','rows'],
-      'effect-ci':['metric','measure','comparison','basis','unit','estimate','interval','pValue','lowerLabel','upperLabel']
+      'effect-ci':['metric','measure','comparison','basis','unit','estimate','interval','pValue','lowerLabel','upperLabel'],
+      'paper-glance':['design','setting','population','exposure','comparator','outcome','followUp','effects','conclusion','caveats']
     };
     keys(data,['version','type','title','description','topic','source',...(typeof data.type==='string'&&own(extra,data.type)?extra[data.type]:[])],'visual');
     if(data.version!==1)fail('version','must be 1');
@@ -65,6 +68,25 @@
       if(own(data,'upperLabel'))str(data.upperLabel,'upperLabel',120);
       if(own(data,'lowerLabel')!==own(data,'upperLabel'))fail('direction','supply both source-backed direction labels or neither');
     }
+    if(data.type==='paper-glance') {
+      if(keys(data.design,['kind','label','registration'],'design')){if(!own(DESIGNS,data.design.kind))fail('design.kind','supported design kind required');str(data.design.label,'design.label',80);if(own(data.design,'registration'))str(data.design.registration,'design.registration',60);}
+      if(own(data,'setting'))str(data.setting,'setting',200);
+      const group=(o,p)=>{if(keys(o,['label','detail','n'],p)){str(o.label,p+'.label',160);if(own(o,'detail'))str(o.detail,p+'.detail',240);if(own(o,'n'))integer(o.n,p+'.n');}};
+      group(data.population,'population');group(data.exposure,'exposure');if(own(data,'comparator'))group(data.comparator,'comparator');
+      for(const k of ['exposure','comparator'])if(plain(data[k])&&plain(data.population)&&Number.isInteger(data[k].n)&&Number.isInteger(data.population.n)&&data[k].n>data.population.n)fail(k+'.n','group count cannot exceed population count');
+      str(data.outcome,'outcome',240);if(own(data,'followUp'))str(data.followUp,'followUp',160);str(data.conclusion,'conclusion',320);
+      if(own(data,'caveats')){if(!Array.isArray(data.caveats)||data.caveats.length>3)fail('caveats','0–3 items');else data.caveats.forEach((c,i)=>str(c,'caveats['+i+']',140));}
+      if(!Array.isArray(data.effects)||data.effects.length>6||(data.effects.length<1&&!['narrative-review','qualitative','systematic-review'].includes(data.design&&data.design.kind)))fail('effects','1–6 rows required (0 allowed only for narrative-review, qualitative, systematic-review)');
+      else data.effects.forEach((e,i)=>{const p='effects['+i+']';if(!keys(e,['label','kind','measure','estimate','interval','unit','basis','primary','note'],p))return;
+        str(e.label,p+'.label',100);str(e.measure,p+'.measure',24);if(!['ratio','difference','value'].includes(e.kind))fail(p+'.kind','ratio, difference or value required');
+        const pos=e.kind==='ratio'?Number.MIN_VALUE:-MAX_NUMBER;num(e.estimate,p+'.estimate',pos);
+        if(own(e,'unit'))str(e.unit,p+'.unit',24);if(e.kind==='difference'&&(!own(e,'unit')||['%','ratio'].includes(e.unit)))fail(p+'.unit','difference needs absolute unit such as %p');
+        if(e.kind==='ratio'&&own(e,'unit'))fail(p+'.unit','ratio rows take no unit');
+        if(own(e,'basis')&&!['adjusted','unadjusted'].includes(e.basis))fail(p+'.basis','adjusted or unadjusted');
+        if(own(e,'primary')&&typeof e.primary!=='boolean')fail(p+'.primary','boolean');if(own(e,'note'))str(e.note,p+'.note',100);
+        if(own(e,'interval')&&keys(e.interval,['low','high','level'],p+'.interval')){num(e.interval.low,p+'.interval.low',pos);num(e.interval.high,p+'.interval.high',pos);num(e.interval.level,p+'.interval.level',0.01,99.99);if(e.interval.low>e.interval.high)fail(p+'.interval','low must not exceed high');if(e.estimate<e.interval.low||e.estimate>e.interval.high)fail(p+'.estimate','must be within interval');}
+      });
+    }
     return {ok:errors.length===0,errors};
   }
   const fmt=n=>String(Object.is(n,-0)?0:n).replace('-', '−');
@@ -105,6 +127,41 @@
     const ticks=[{v:d.interval.low,x:a},{v:reference,x:ref},{v:d.interval.high,x:b}].sort((a,b)=>a.x-b.x).filter((t,i,arr)=>!i||Math.abs(t.x-arr[i-1].x)>42);
     return '<p class="cv-measure">'+esc(basis+' '+d.measure)+'<span>'+esc(d.comparison)+'</span></p><div class="cv-effect-value">'+esc(value(d.estimate))+' <span>'+esc(unit)+'</span></div><p class="cv-ci-detail">'+d.interval.level+'% CI '+esc(value(d.interval.low))+' ~ '+esc(value(d.interval.high))+' '+esc(unit)+(own(d,'pValue')?' · P = '+fmt(d.pValue):'')+'</p><div class="cv-effect-plot">'+svg(plot,label,'0 0 600 66')+'<div class="cv-effect-ticks" aria-hidden="true">'+ticks.map(t=>'<span style="left:'+coord(t.x/6)+'%">'+esc(value(t.v))+'</span>').join('')+'</div></div>'+(own(d,'lowerLabel')?'<div class="cv-directions"><span>← '+esc(d.lowerLabel)+'</span><span>'+esc(d.upperLabel)+' →</span></div>':'')+'<p class="cv-stat-note">기준값 '+reference+' ('+(ratio?'비율 1, 로그 축':'차이 없음')+'). 신뢰구간이 기준값을 포함해도 동등성을 입증한 것은 아닙니다.</p>';
   }
+  function glance(d) {
+    const trial=TRIALS.includes(d.design.kind), tone=trial?'trial':['meta-analysis','systematic-review','narrative-review'].includes(d.design.kind)?'review':'obs';
+    const chip=t=>'<span class="cv-pg-chip">'+esc(t)+'</span>';
+    const n=r=>own(r,'n')?'<span class="cv-pg-n">n = '+esc(Number(r.n).toLocaleString('en-US'))+'</span>':'';
+    const cell=(letter,name,r)=>'<div class="cv-pg-cell"><dt><b>'+letter+'</b>'+esc(name)+'</dt><dd><strong>'+esc(r.label)+'</strong>'+n(r)+(own(r,'detail')?'<span>'+esc(r.detail)+'</span>':'')+'</dd></div>';
+    const iName=d.design.kind==='diagnostic'?'검사·지표':trial?'중재':'노출·요인';
+    let html='<div class="cv-pg cv-pg-'+tone+'"><div class="cv-pg-tags"><span class="cv-pg-badge">'+esc(DESIGNS[d.design.kind])+'</span>'+chip(d.design.label)+(own(d.population,'n')?chip('n = '+Number(d.population.n).toLocaleString('en-US')):'')+(own(d,'followUp')?chip('추적 '+d.followUp):'')+(own(d.design,'registration')?chip(d.design.registration):'')+'</div>';
+    if(own(d,'setting'))html+='<p class="cv-pg-setting">'+esc(d.setting)+'</p>';
+    html+='<dl class="cv-pg-pico">'+cell('P','대상',d.population)+cell(d.design.kind==='diagnostic'?'I':trial?'I':'E',iName,d.exposure)+(own(d,'comparator')?cell('C','비교',d.comparator):'')+'<div class="cv-pg-cell"><dt><b>O</b>결과</dt><dd><strong>'+esc(d.outcome)+'</strong></dd></div></dl>';
+    // Shared log axis for all ratio rows; shared linear axis per difference unit. Value rows are printed without a plot.
+    const doms={};const add=(key,vals)=>{const v=vals.filter(Number.isFinite);doms[key]=doms[key]?[Math.min(doms[key][0],...v),Math.max(doms[key][1],...v)]:[Math.min(...v),Math.max(...v)];};
+    d.effects.forEach(e=>{if(e.kind==='value')return;const ratio=e.kind==='ratio',t=ratio?Math.log:v=>v,key=ratio?'ratio':'diff:'+e.unit;add(key,[t(e.estimate),t(ratio?1:0)].concat(e.interval?[t(e.interval.low),t(e.interval.high)]:[]));});
+    const val=(e,v)=>e.kind==='difference'?signed(v):fmt(v);
+    const rows=d.effects.map(e=>{
+      const ci=e.interval?' ('+e.interval.level+'% CI '+val(e,e.interval.low)+' ~ '+val(e,e.interval.high)+')':'';
+      const unit=own(e,'unit')?' '+e.unit:'';
+      const txt=e.measure+' '+val(e,e.estimate)+unit+ci;
+      let plot='';
+      if(e.kind!=='value'){
+        const ratio=e.kind==='ratio',t=ratio?Math.log:v=>v,key=ratio?'ratio':'diff:'+e.unit;let [lo,hi]=doms[key];const pad=(hi-lo||1)*0.1;lo-=pad;hi+=pad;
+        const x=v=>10+580*(t(v)-lo)/(hi-lo),ref=x(ratio?1:0),pt=x(e.estimate);
+        let body=line(ref,2,26,'cv-null');
+        if(e.interval){const a=x(e.interval.low),b=x(e.interval.high);body+='<line class="cv-interval" x1="'+coord(a)+'" x2="'+coord(b)+'" y1="14" y2="14" vector-effect="non-scaling-stroke"/>'+line(a,8,20,'cv-cap')+line(b,8,20,'cv-cap');}
+        body+='<circle class="cv-point'+(e.interval?'':' cv-point-open')+'" cx="'+coord(pt)+'" cy="14" r="5.5" vector-effect="non-scaling-stroke"/>';
+        plot=svg(body,e.label+': '+txt+(ratio?' · 기준값 1':' · 기준값 0'),'0 0 600 28');
+      }
+      const tags=(e.primary?'<em class="cv-pg-primary">1차</em>':'')+(own(e,'basis')?'<em>'+(e.basis==='adjusted'?'보정':'비보정')+'</em>':'')+(e.kind!=='value'&&!e.interval?'<em>CI 미보고</em>':'');
+      return '<div class="cv-pg-effect"><div class="cv-pg-eline"><span class="cv-pg-elabel">'+esc(e.label)+tags+'</span><b>'+esc(txt)+'</b></div>'+plot+(own(e,'note')?'<p class="cv-pg-note">'+esc(e.note)+'</p>':'')+'</div>';
+    }).join('');
+    const hasRatio=d.effects.some(e=>e.kind==='ratio'),hasDiff=d.effects.some(e=>e.kind==='difference');
+    html+='<div class="cv-pg-effects"><p class="cv-pg-h">핵심 수치</p>'+(d.effects.length?rows:'<p class="cv-pg-note">원문 초록에 정량 효과 수치가 제시되지 않았습니다.</p>')+((hasRatio||hasDiff)?'<p class="cv-stat-note">점선 = 기준값('+(hasRatio?'비율 1, 같은 로그 축':'')+(hasRatio&&hasDiff?' · ':'')+(hasDiff?'차이 0, 단위별 같은 축':'')+'). 속이 빈 점은 신뢰구간이 보고되지 않은 값입니다.</p>':'')+'</div>';
+    html+='<div class="cv-pg-bottom"><p class="cv-pg-h">저자 결론</p><p>'+esc(d.conclusion)+'</p></div>';
+    if(own(d,'caveats')&&d.caveats.length)html+='<ul class="cv-pg-caveats">'+d.caveats.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ul>';
+    return html+'</div>';
+  }
   function fallback(raw,message='시각자료 형식을 확인할 수 없어 원문 데이터로 표시합니다.') {
     const text=typeof raw==='string'?raw:'';return '<aside class="cv-fallback"><p>'+esc(message)+'</p><pre><code>'+esc(text.slice(0,MAX_BYTES))+(text.length>MAX_BYTES?'\n… (표시 한도 초과)':'')+'</code></pre></aside>';
   }
@@ -112,7 +169,7 @@
     if(typeof raw!=='string'||raw.length>MAX_BYTES||bytes(raw)>MAX_BYTES)return fallback(raw,'시각자료가 크기 한도를 넘어 원문 데이터로 표시합니다.');
     let d;try{d=JSON.parse(raw);}catch{return fallback(raw);}
     const checked=validate(d);if(!checked.ok)return fallback(raw);
-    const body=d.type==='research-design'?design(d):d.type==='effect-ci'?effect(d):bars(d);
+    const body=d.type==='research-design'?design(d):d.type==='effect-ci'?effect(d):d.type==='paper-glance'?glance(d):bars(d);
     const source='<a href="'+esc(d.source.url)+'" target="_blank" rel="noopener noreferrer">'+esc(d.source.label)+' ↗</a>';
     return '<figure class="content-visual" data-visual-type="'+d.type+'"><figcaption><strong>'+esc(d.title)+'</strong><p>'+esc(d.description)+'</p></figcaption>'+body+'<footer class="cv-source">출처 '+source+' · '+esc(d.source.locator)+'<br>확인 기준 '+esc(d.source.asOf)+' · 원문 집계값·라벨의 학습용 재구성</footer></figure>';
   }

@@ -1,9 +1,9 @@
 // Daily Briefings only: Cache Storage is shared by all GitHub Pages apps on this origin.
 const CACHE_PREFIX = 'daily-briefings-';
-const CACHE_VERSION = CACHE_PREFIX + 'v9';
+const CACHE_VERSION = CACHE_PREFIX + 'v10';
 const BASE = new URL(self.registration.scope).pathname;
-const PRECACHE = ['', 'index.html', 'manifest.json', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'assets/briefings.css?v=9', 'assets/content-visuals.js?v=9', 'assets/content-visuals.css?v=9', 'assets/briefing-core.js?v=9', 'assets/briefings.js?v=9', 'assets/briefing-index.json', 'financial/', 'international/', 'medical/', 'health/'].map(path=>BASE+path);
-const REQUIRED = ['', 'index.html', 'financial/', 'international/', 'medical/', 'health/', 'assets/briefing-core.js?v=9', 'assets/briefings.js?v=9', 'assets/briefings.css?v=9', 'assets/content-visuals.js?v=9', 'assets/content-visuals.css?v=9'].map(path=>BASE+path);
+const PRECACHE = ['', 'index.html', 'manifest.json', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'assets/briefings.css?v=10', 'assets/content-visuals.js?v=10', 'assets/content-visuals.css?v=10', 'assets/briefing-core.js?v=10', 'assets/briefings.js?v=10', 'assets/briefing-index.json', 'financial/', 'international/', 'medical/', 'health/'].map(path=>BASE+path);
+const REQUIRED = ['', 'index.html', 'financial/', 'international/', 'medical/', 'health/', 'assets/briefing-core.js?v=10', 'assets/briefings.js?v=10', 'assets/briefings.css?v=10', 'assets/content-visuals.js?v=10', 'assets/content-visuals.css?v=10'].map(path=>BASE+path);
 self.addEventListener('install', event => {
   event.waitUntil((async()=>{
     const cache=await caches.open(CACHE_VERSION);
