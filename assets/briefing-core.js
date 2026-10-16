@@ -41,7 +41,7 @@
       if (line.trim().startsWith('|') && i+1<lines.length && splitRow(lines[i+1]).every(c=>/^:?-{2,}:?$/.test(c))) {
         flush(); const headers=splitRow(line); const align=splitRow(lines[++i]); const rows=[];
         while (i+1<lines.length && lines[i+1].trim().startsWith('|')) rows.push(splitRow(lines[++i]));
-        html+='<div class="table-scroll" role="region" aria-label="원문 데이터 표" tabindex="0"><table><thead><tr>'+headers.map(h=>'<th scope="col">'+inline(h)+'</th>').join('')+'</tr></thead><tbody>';
+        html+='<div class="table-scroll" role="region" aria-label="원문 데이터 표" tabindex="0"><table><thead><tr>'+headers.map((h,j)=>'<th scope="col"'+(/:$/.test(align[j])?' class="numeric"':'')+'>'+inline(h)+'</th>').join('')+'</tr></thead><tbody>';
         html+=rows.map(r=>'<tr>'+headers.map((_,j)=>'<td'+(/:$/.test(align[j])?' class="numeric"':'')+'>'+inline(r[j]||'')+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>'; continue;
       }
       if ((m=line.match(/^\s*(?:[-*+]\s+|\d+[.)]\s+)(.+)/))) {
