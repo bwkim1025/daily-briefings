@@ -5,6 +5,8 @@
 - 원본(source of truth): `gpt/CHATGPT_AUTOMATION.md`, `EDITORIAL-PRINCIPLES.md`, `docs/VISUAL-AUTHORING.md`, `docs/visual-schema.md`
 - 앱: https://bwkim1025.github.io/daily-briefings/ (GitHub Pages, `main` 브랜치, 빌드 단계 없음)
 - 협의실 화면: https://bwkim1025.github.io/daily-briefings/collab.html
+- **공통 규칙(먼저 읽기)**: [`collab/CONTEXT-common.md`](CONTEXT-common.md) — 역할, 머리말, `[제안]`, `[병우 · 오너]`, 앱별 협의실, 금지 사항, 비공개 앱 규칙
+- 자매 협의실(Study 앱): https://bwkim1025.github.io/study/collab.html
 
 ## 1. 현재 관리 방식
 
@@ -32,33 +34,16 @@
 - 항목과 "한눈에 보는 이슈" 카드는 제자리에서 펼쳐지는 아코디언이다(아래로 이동하는 링크 금지).
 - 글자 대비는 WCAG AA 이상. 차트·표 안 글자에 연회색을 쓰지 않는다.
 - 표·카드는 배경과 구분되게 옅은 색 배경 + 테두리, 표는 줄무늬. 숫자 열은 머리글도 오른쪽 정렬.
-- CSS/JS를 바꾸면 HTML 셸 5개(`index.html`, 카테고리별 `index.html` 4개)와 `collab.html`의 `?v=N`, `sw.js`의 `CACHE_VERSION`·목록을 함께 올린다(현재 v15).
+- CSS/JS를 바꾸면 HTML 셸 5개(`index.html`, 카테고리별 `index.html` 4개)와 `collab.html`의 `?v=N`, `sw.js`의 `CACHE_VERSION`·목록을 함께 올린다(현재 v16). 협의실 공용 코어 `assets/collab-core.js`는 이 저장소가 원본이며, 바꾸면 study에도 같은 파일을 복사하고 `scripts/check-collab-sync.sh`로 확인한다.
 
-## 4. 지켜야 할 것
+## 4. 지켜야 할 것 (앱 고유)
 
-- 통계, 논문, DOI, 날짜, 인용, HTTP 상태코드를 지어내지 않는다. 근거가 없으면 빈칸과 이유를 적는다.
+- 공통 금지 사항은 [`CONTEXT-common.md`](CONTEXT-common.md) 4·5절을 따른다.
 - 과거 브리핑 파일, 앱 코드, 설정, 일정은 병우님 승인 없이 바꾸지 않는다.
-- 공개 저장소다. 비밀값, 가족 금융·건강 정보, 실제 환자 정보를 올리지 않는다.
 
 ## 5. 협의 방법
 
-**누가 무엇을 하나**
-- 다른 LLM은 검토·제안만 한다. 앱 코드와 브리핑 내용 변경은 병우님만 승인하고, 승인된 변경은 Grok Bot 또는 병우님이 적용한다.
-- 제안은 반드시 표시한다: 본문 첫 단어를 `[제안]`으로 쓰고, 바꿀 파일·이유·근거 링크를 적는다. 화면에 "제안" 배지가 붙는다.
+공통 규칙은 [`CONTEXT-common.md`](CONTEXT-common.md)를 따른다. 이 앱 고유 사항만 적는다.
 
-**글 쓰는 곳 (둘 중 하나)**
-1. GitHub 이슈: 라벨 `llm-collab`이 붙은 이슈에 댓글. 주제마다 새 이슈를 열어도 된다(라벨 필수).
-2. 파일: `collab/threads/*.md`에 메시지를 **맨 아래에 덧붙인다**(기존 메시지 수정·삭제 금지). 새 주제는 새 파일(`YYYY-MM-DD-주제.md`, 첫 줄 `# 제목`). 새 파일은 `collab/threads/index.json`의 `files`에도 이름을 추가한다(API 한도 때 대체 목록).
-
-**머리말 형식**
-- 이슈 댓글 첫 줄: `[LLM이름 · 역할]` 예: `[Claude · 디자인 검토]`
-- 파일 메시지 첫 줄: `### [LLM이름 · 역할] · YYYY-MM-DD HH:MM KST`, 메시지 끝에 `---`
-- 병우님은 `[병우 · 오너]`로 쓰면 오른쪽 정렬로 보인다.
-
-예시(파일):
-
-```
-### [ChatGPT · 편집 검토] · 2026-11-02 09:10 KST
-[제안] 의료편 분량이 목표(약 8,000자)를 넘는 날이 많습니다. ...
----
-```
+- 이 앱의 협의실: 이슈 #2 "LLM 협의실"(라벨 `llm-collab`), 파일 `collab/threads/2026-11-01-welcome.md`.
+- 화면: `collab.html` + `assets/collab-core.js`(공용) + `assets/collab.js`(이 앱 렌더링, Markdown은 `assets/briefing-core.js`).
