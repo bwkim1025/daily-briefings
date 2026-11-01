@@ -17,3 +17,15 @@
 .story .prose .table-scroll{background:var(--surface);border-color:var(--table-edge)}
 .story .prose .table-scroll table{color:var(--ink)}
 @media print{.table-scroll{background:none;box-shadow:none}.prose th{background:#eee}}
+/* LLM 협의실 */
+.collab-btn{border:1px solid var(--table-edge);border-radius:9px;background:var(--surface);color:var(--ink);padding:8px 14px;min-height:44px;font-size:12px;font-weight:650}
+.collab-guide{background:var(--accent-bg);border:1px solid var(--table-edge);border-radius:12px;padding:15px 18px;font-size:13px;line-height:1.75;color:var(--ink);margin-bottom:24px}.collab-guide strong{margin-right:6px}.collab-guide code{background:var(--surface);padding:1px 5px;border-radius:4px;font-size:.88em}.collab-guide a{color:var(--accent);font-weight:650}
+.collab-h{font-size:16px;letter-spacing:-.4px;margin:0 0 12px;color:var(--ink)}.collab-h-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:22px}
+.collab-topics{display:flex;flex-wrap:wrap;gap:8px}.collab-topic{display:inline-flex;gap:8px;align-items:center;background:var(--soft);border:1px solid var(--table-edge);border-radius:9px;padding:8px 12px;font-size:13px;text-decoration:none;color:var(--ink)}.collab-topic span{font-size:10px;font-weight:750;color:var(--accent)}.collab-topic em{font-style:normal;font-size:11px;color:var(--text)}
+.collab-empty{font-size:13px;color:var(--text)}
+.timeline{display:flex;flex-direction:column;gap:12px}
+.msg{--tone:#6b7380;--tone-bg:var(--soft);background:var(--tone-bg);border:1px solid var(--table-edge);border-left:4px solid var(--tone);border-radius:12px;padding:15px 18px;max-width:860px}
+.msg[data-tone=grok]{--tone:#132b41;--tone-bg:#eef2f6}.msg[data-tone=gpt]{--tone:#1f7a5a;--tone-bg:#e6f2ec}.msg[data-tone=claude]{--tone:#a4542f;--tone-bg:#f7ebe3}.msg[data-tone=gemini]{--tone:#3d5fae;--tone-bg:#e8edf8}.msg[data-tone=owner]{--tone:#9a6518;--tone-bg:#f6e9d1;margin-left:auto}
+.dark .msg[data-tone=grok]{--tone:#9fb9d3;--tone-bg:#1c2e40}.dark .msg[data-tone=gpt]{--tone:#7fd0ad;--tone-bg:#1b3329}.dark .msg[data-tone=claude]{--tone:#e7a483;--tone-bg:#3b2a22}.dark .msg[data-tone=gemini]{--tone:#9db4ea;--tone-bg:#22304d}.dark .msg[data-tone=owner]{--tone:#efb858;--tone-bg:#3c3120}.dark .msg{--tone-bg:#1b2d3b}
+.msg header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}.msg header strong{font-size:14px;color:var(--ink)}.msg-role{font-size:11px;font-weight:650;color:var(--ink);background:var(--surface);border:1px solid var(--table-edge);border-radius:999px;padding:1px 9px}.msg-flag{font-size:11px;font-weight:750;color:#fff;background:#b4461f;border-radius:999px;padding:1px 9px}.msg time{margin-left:auto;font-size:11px;color:var(--text)}
+.msg-body{font-size:14px;line-height:1.8;color:var(--ink)}.msg-body p+p{margin-top:8px}.msg footer{display:flex;justify-content:space-between;gap:10px;margin-top:10px;padding-top:8px;border-top:1px solid var(--table-edge);font-size:11px;color:var(--text)}.msg footer a{color:var(--accent);font-weight:650;text-decoration:none}

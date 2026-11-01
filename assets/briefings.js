@@ -50,7 +50,7 @@
     for(const ds of candidates){const result=await fetchDate(cat,ds);if(result)return result;}
     return null;
   }
-  function navigation(){return '<nav class="nav" aria-label="브리핑 카테고리"><a href="'+base.href+'"'+(HOME?' aria-current="page"':'')+'>전체 브리핑</a>'+Object.entries(config).map(([key,c])=>'<a href="'+new URL(key+'/',base).href+'"'+(page===key?' aria-current="page"':'')+'>'+({financial:'파이낸셜',international:'인터내셔널',medical:'메디컬',health:'가족 건강'}[key])+'</a>').join('')+'</nav>';}
+  function navigation(){return '<nav class="nav" aria-label="브리핑 카테고리"><a href="'+base.href+'"'+(HOME?' aria-current="page"':'')+'>전체 브리핑</a>'+Object.entries(config).map(([key,c])=>'<a href="'+new URL(key+'/',base).href+'"'+(page===key?' aria-current="page"':'')+'>'+({financial:'파이낸셜',international:'인터내셔널',medical:'메디컬',health:'가족 건강'}[key])+'</a>').join('')+'<a href="'+new URL('collab.html',base).href+'">LLM 협의실</a></nav>';}
   function shell(){
     $('#app').innerHTML='<a class="skip" href="#main">본문으로 건너뛰기</a><div class="shell"><header class="topbar"><a class="brand" href="'+base.href+'"><img src="'+new URL('icon-192.png',base).href+'" alt="" width="40" height="40"><div><div class="brand-name">Daily Briefings</div><div class="brand-caption">A CLEARER VIEW, EVERY DAY</div></div></a><div class="tools"><button class="icon-btn" id="theme-toggle">'+svg('moon')+'</button></div></header>'+navigation()+'<main id="main"></main><footer class="footer"><span>DAILY BRIEFINGS · bwkim1025</span><span>Personal use only · 원문을 함께 확인하세요</span></footer></div>';
     setTheme(document.documentElement.classList.contains('dark'));
