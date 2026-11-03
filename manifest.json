@@ -1,13 +1,13 @@
 {
-  "name": "브리핑",
-  "short_name": "브리핑",
-  "description": "매일 받는 시장·국제·의학·건강 브리핑",
+  "name": "땡이네 뉴스",
+  "short_name": "땡이네 뉴스",
+  "description": "매일 아침 받는 파이낸셜·인터내셔널·헬스 브리핑",
   "start_url": "/daily-briefings/",
   "scope": "/daily-briefings/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f6f5f0",
-  "theme_color": "#132b41",
+  "background_color": "#F6F5F3",
+  "theme_color": "#F6F5F3",
   "lang": "ko",
   "icons": [
     {

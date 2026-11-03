@@ -95,11 +95,18 @@
   const kstDate = (offset=0) => new Date(Date.now()+9*3600000-offset*86400000).toISOString().slice(0,10);
   function lead(text) { const lines=text.split('\n'); const headline=lines.find(l=>/^### /.test(l)); const paragraph=lines.filter(l=>l.trim()&&!/^#|^---|^>/.test(l)).join(' ').split('####')[0]; return {headline:headline?headline.replace(/^### /,''):'', paragraph}; }
   function sourceCount(text) { return new Set([...text.matchAll(/https?:\/\/[^\s)\]>]+/g)].map(m=>{try{return new URL(m[0]).hostname.replace(/^www\./,'');}catch{return '';}}).filter(Boolean)).size; }
-  const sectionLabels={MARKETS:'미국 · 한국 증시',FX:'환율 · 채권 · 원자재',EARNINGS:'기업 실적 · 빅테크',POLICY:'정책',US:'미국 · 워싱턴',CHINA:'중국 · 대만 · 미중',ASIA:'아시아',ME:'중동',EU:'유럽',PAPERS:'오늘의 논문',NEPHROLOGY:'신장 · 투석 · 이식',CARDIOLOGY:'심장 · 순환기',ENDOCRINOLOGY:'내분비 · 당뇨',RHEUMATOLOGY:'류마티스 · 자가면역',GASTROENTEROLOGY:'소화기 · 간',PULMONOLOGY:'호흡기',ALLERGY:'알러지 · 면역',GENERAL_MEDICINE:'일반 내과',FAMILY_MEDICINE:'가정의학과',OTHERS:'기타 분과',INSURANCE:'급여 · 약가',AI_HEALTH:'의료 AI · 디지털',GUIDELINES:'가이드라인',NUTRITION:'영양 · 식단',EXERCISE_SLEEP:'운동 · 수면',EXERCISE:'운동',MOVEMENT:'운동',SLEEP:'수면',PARENTING:'육아 · 임신',PREGNANCY:'임신',WELLNESS:'생활 건강',FAMILY:'가족 건강',RESEARCH:'최신 연구',HEALTH:'건강',LIFESTYLE:'생활 습관'};
+  const sectionLabels={MARKETS:'미국 · 한국 증시',FX:'환율 · 채권 · 원자재',EARNINGS:'기업 실적 · 빅테크',POLICY:'정책',US:'미국 · 워싱턴',CHINA:'중국 · 대만 · 미중',ASIA:'아시아',ME:'중동',EU:'유럽',PAPERS:'오늘의 논문',NEPHROLOGY:'신장 · 투석 · 이식',CARDIOLOGY:'심장 · 순환기',ENDOCRINOLOGY:'내분비 · 당뇨',RHEUMATOLOGY:'류마티스 · 자가면역',GASTROENTEROLOGY:'소화기 · 간',PULMONOLOGY:'호흡기',ALLERGY:'알러지 · 면역',GENERAL_MEDICINE:'일반 내과',FAMILY_MEDICINE:'가정의학과',OTHERS:'기타 분과',INSURANCE:'급여 · 약가',AI_HEALTH:'의료 AI · 디지털',GUIDELINES:'가이드라인',NUTRITION:'영양 · 식단',EXERCISE_SLEEP:'운동 · 수면',EXERCISE:'운동',MOVEMENT:'운동',SLEEP:'수면',PARENTING:'육아 · 임신',PREGNANCY:'임신',WELLNESS:'생활 건강',FAMILY:'가족 건강',RESEARCH:'최신 연구',HEALTH:'건강',LIFESTYLE:'생활 습관',
+    // v3: 스포츠 · 테크·AI · 웨더 분야 섹션 이름
+    NBA:'NBA',BASKETBALL:'농구',BASEBALL:'야구',KBO:'KBO 야구',MLB:'MLB',SOCCER:'축구',FOOTBALL:'축구',GOLF:'골프',SPORTS:'스포츠',
+    AI:'AI · 모델',AI_TOOLS:'AI 도구',BIGTECH:'빅테크',CHIPS:'반도체 · 칩',DEVICES:'기기 · 플랫폼',SOFTWARE:'소프트웨어',SECURITY:'보안',STARTUPS:'스타트업 · 투자',
+    WEATHER:'부산 날씨',AIR:'대기질',FORECAST:'예보'};
   const categoryLabels={
     financial:{POLICY:'중앙은행 · 경제지표'},
     medical:{POLICY:'정책 · 보험/심사'},
-    international:{ME:'중동 · 이란 · 이스라엘',EU:'유럽 · 우크라이나'}
+    international:{ME:'중동 · 이란 · 이스라엘',EU:'유럽 · 우크라이나'},
+    sports:{OTHERS:'기타 종목'},
+    tech:{POLICY:'규제 · 정책',OTHERS:'기타 소식'},
+    weather:{OTHERS:'참고'}
   };
   function sectionLabel(category,key){return categoryLabels[category]?.[key]||sectionLabels[key]||key;}
   const api={esc,inline,markdown,parse,formatDate,kstDate,lead,sourceCount,sectionLabel};

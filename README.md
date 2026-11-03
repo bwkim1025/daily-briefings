@@ -1,1 +1,1 @@
-# Morning Briefing
+# 땡이네 뉴스 (daily-briefings)
