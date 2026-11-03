@@ -456,3 +456,5 @@ html.dark body .content-visual{--cv-ink:#F2F0ED;--cv-muted:#CFCAC4;--cv-line:#3A
 }
 @keyframes vt-out{to{opacity:0}}
 @keyframes vt-in{from{opacity:0;transform:translateY(8px)}}
+/* 1103d: the category hero already shows the title — don't repeat it in the mobile top bar */
+body:not([data-page=home]):not([data-page=collab]) .m-title{display:none}
