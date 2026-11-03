@@ -3,7 +3,7 @@
 // Rebuilds assets/briefing-index.json (the calendar/latest-date hint list) from the briefing files on disk.
 // Run after adding briefing files:  node scripts/update-briefing-index.cjs
 const fs = require('node:fs'), path = require('node:path'), { execSync } = require('node:child_process');
-const root = path.resolve(__dirname, '..'), cats = ['financial', 'international', 'medical', 'health'];
+const root = path.resolve(__dirname, '..'), cats = ['financial', 'international', 'medical', 'health', 'sports', 'tech', 'weather'];
 const categories = {};
 for (const cat of cats) {
   const dir = path.join(root, cat, 'briefings');
