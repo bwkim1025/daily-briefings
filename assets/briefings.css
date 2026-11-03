@@ -394,3 +394,9 @@ html.dark body .content-visual{--cv-ink:#F2F0ED;--cv-muted:#CFCAC4;--cv-line:#3A
 
 /* 땡이네 뉴스: gated (not yet published) category links stay hidden */
 .nav a[hidden],.cat-sheet a[hidden]{display:none!important}
+
+/* 1103: icon row = same shape everywhere; active category gets a marked border, tap again → 전체 */
+.cat-rounds a[aria-current=page] .ring{outline:3px solid var(--ink);outline-offset:2px}
+.cat-rounds a[aria-current=page] .lbl{font-weight:800;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+@media(max-width:760px){.nav,body[data-page=home] .nav{display:none}body:not([data-page=home]) .cat-rounds{margin:10px 0 14px}}
+.nav a:first-child{padding:0 15px 0 10px}

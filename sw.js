@@ -1,10 +1,10 @@
 // Daily Briefings only: Cache Storage is shared by all GitHub Pages apps on this origin.
 const CACHE_PREFIX = 'daily-briefings-';
-const CACHE_VERSION = CACHE_PREFIX + 'v20';
+const CACHE_VERSION = CACHE_PREFIX + 'v21';
 const BASE = new URL(self.registration.scope).pathname;
-const PRECACHE = ['', 'index.html', 'manifest.json', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png', 'assets/briefings.css?v=20', 'assets/content-visuals.js?v=20', 'assets/content-visuals.css?v=20', 'assets/briefing-core.js?v=20', 'assets/briefings.js?v=20', 'collab.html', 'assets/collab-core.js?v=20', 'assets/collab.js?v=20', 'assets/briefing-index.json', 'financial/', 'international/', 'sports/', 'health/', 'tech/', 'weather/', 'medical/', 'assets/icons/fin.svg', 'assets/icons/globe.svg', 'assets/icons/sport.svg', 'assets/icons/health.svg', 'assets/icons/tech.svg', 'assets/icons/weather.svg', 'assets/icons/sun.svg', 'assets/icons/cloud.svg', 'assets/icons/rain.svg', 'assets/icons/wind.svg', 'assets/icons/pm10.svg', 'assets/icons/pm25.svg'].map(path=>BASE+path);
+const PRECACHE = ['', 'index.html', 'manifest.json', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png', 'assets/briefings.css?v=21', 'assets/content-visuals.js?v=21', 'assets/content-visuals.css?v=21', 'assets/briefing-core.js?v=21', 'assets/briefings.js?v=21', 'collab.html', 'assets/collab-core.js?v=21', 'assets/collab.js?v=21', 'assets/briefing-index.json', 'financial/', 'international/', 'sports/', 'health/', 'tech/', 'weather/', 'medical/', 'assets/icons/fin.svg', 'assets/icons/globe.svg', 'assets/icons/sport.svg', 'assets/icons/health.svg', 'assets/icons/tech.svg', 'assets/icons/weather.svg', 'assets/icons/sun.svg', 'assets/icons/cloud.svg', 'assets/icons/rain.svg', 'assets/icons/wind.svg', 'assets/icons/pm10.svg', 'assets/icons/pm25.svg'].map(path=>BASE+path);
 // v3: medical/ stays in PRECACHE only (old links keep working; it is no longer listed). New category shells are required.
-const REQUIRED = ['', 'index.html', 'financial/', 'international/', 'sports/', 'health/', 'tech/', 'weather/', 'assets/briefing-core.js?v=20', 'assets/briefings.js?v=20', 'assets/briefings.css?v=20', 'assets/content-visuals.js?v=20', 'assets/content-visuals.css?v=20'].map(path=>BASE+path);
+const REQUIRED = ['', 'index.html', 'financial/', 'international/', 'sports/', 'health/', 'tech/', 'weather/', 'assets/briefing-core.js?v=21', 'assets/briefings.js?v=21', 'assets/briefings.css?v=21', 'assets/content-visuals.js?v=21', 'assets/content-visuals.css?v=21'].map(path=>BASE+path);
 self.addEventListener('install', event => {
   event.waitUntil((async()=>{
     const cache=await caches.open(CACHE_VERSION);
