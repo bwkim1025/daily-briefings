@@ -434,3 +434,25 @@ html.dark body .content-visual{--cv-ink:#F2F0ED;--cv-muted:#CFCAC4;--cv-line:#3A
 .cat-hero h1{font-size:26px;line-height:1.35;font-weight:800;letter-spacing:-.5px;color:var(--ink);margin:2px 0 0}
 .cat-hero p{font-size:14px;line-height:1.6;color:var(--text)}
 @media(max-width:760px){.cat-hero{border-radius:22px;padding:14px 16px 16px;margin:4px 0 12px}.cat-hero.lead-hero{padding-top:0}.cat-hero .lead-bar{height:5px;margin:0 -16px 6px}.cat-hero h1{font-size:21px;line-height:1.45}.cat-hero p{font-size:13px}body:not([data-page=home]) .cat-rounds{margin:10px 0 8px}}
+/* 1103c: page transitions (cross-document View Transitions; unsupported browsers just navigate) */
+@media(prefers-reduced-motion:no-preference){
+  @view-transition{navigation:auto}
+  .topbar{view-transition-name:topbar}
+  .tabbar{view-transition-name:tabbar}
+  .nav{view-transition-name:cat-nav}
+  .cat-rounds{view-transition-name:cat-rounds}
+  .digest-card[data-category=financial],.cat-hero[data-category=financial]{view-transition-name:card-financial}
+  .digest-card[data-category=international],.cat-hero[data-category=international]{view-transition-name:card-international}
+  .digest-card[data-category=sports],.cat-hero[data-category=sports]{view-transition-name:card-sports}
+  .digest-card[data-category=health],.cat-hero[data-category=health]{view-transition-name:card-health}
+  .digest-card[data-category=tech],.cat-hero[data-category=tech]{view-transition-name:card-tech}
+  .digest-card[data-category=weather],.cat-hero[data-category=weather]{view-transition-name:card-weather}
+  ::view-transition-group(*){animation-duration:.3s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+  ::view-transition-old(*),::view-transition-new(*){animation-duration:.24s}
+  ::view-transition-old(root){animation:.16s ease-out both vt-out}
+  ::view-transition-new(root){animation:.3s cubic-bezier(.2,.7,.2,1) .04s both vt-in}
+  ::view-transition-old(topbar),::view-transition-new(topbar),::view-transition-old(tabbar),::view-transition-new(tabbar){animation-duration:.16s}
+  #content>*{animation:vt-in .3s cubic-bezier(.2,.7,.2,1) both}
+}
+@keyframes vt-out{to{opacity:0}}
+@keyframes vt-in{from{opacity:0;transform:translateY(8px)}}
