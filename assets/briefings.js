@@ -140,7 +140,9 @@
   }
   // Sections hidden at render time for every date (md files untouched). financial MARKETS = '미국 · 한국 증시' (1103).
   const HIDE_SECTIONS={financial:['MARKETS']};
-  const visible=(cat,sections)=>sections.filter(s=>!(HIDE_SECTIONS[cat]||[]).includes(s.key));
+  const visible=(cat,sections)=>sections.filter(s=>s.key!=='SCHEDULE'&&!(HIDE_SECTIONS[cat]||[]).includes(s.key));
+  const schedOf=data=>C.schedule(data.sections.find(s=>s.key==='SCHEDULE'));
+  const schedList=items=>'<ul class="sched-list">'+items.map(x=>'<li><span class="sched-t">'+C.esc(x.time)+'</span><span class="sched-b"><strong>'+C.inline(x.title)+'</strong>'+(x.note?'<em>'+C.inline(x.note)+'</em>':'')+'</span></li>').join('')+'</ul>';
   const catUrl=(cat,date)=>{const url=new URL(cat+'/',base);if(date)url.searchParams.set('date',date);return url.href;};
   const cardTop=(cat,extra)=>'<div class="card-top"><span class="category-symbol">'+catArt(cat,22)+'</span><span class="category-name">'+config[cat].short+'</span>'+(extra||'')+'</div>';
   function card(cat,result,missing,isLead){
@@ -191,7 +193,7 @@
   // ---- Home: card feed + archive calendar + 오늘의 흐름 ----
   async function home(){
     const date=new URL(location.href).searchParams.get('date');
-    $('#main').innerHTML='<h1 class="sr-only">땡이네 뉴스</h1><div class="home-layout"><div class="home-feed">'+rounds()+'<div class="feed" id="feed"></div></div>'
+    $('#main').innerHTML='<h1 class="sr-only">땡이네 뉴스</h1><div class="home-layout"><div class="home-feed">'+rounds()+'<div class="feed" id="feed"></div><section class="sched-card" id="sched" aria-labelledby="sched-title" hidden></section></div>'
       +'<aside class="home-rail"><section class="home-cal" id="home-archive" aria-label="지난 호 달력"><div class="cal-head"><h2 id="cal-title"></h2><div class="cal-nav"><button id="cal-prev" type="button" aria-label="이전 달">'+svg('back')+'</button><button id="cal-next" type="button" aria-label="다음 달">'+svg('back','flip')+'</button></div></div><div class="cal-grid" id="cal-grid"></div><details class="archive-all"><summary>지난 호 전체 보기</summary><ul class="archive-list" id="archive-list"></ul></details><button class="text-button" id="close-calendar" type="button">달력 닫기</button></section>'
       +'<section class="flow-card" aria-labelledby="flow-title"><h2 id="flow-title">오늘의 흐름</h2><div id="flow-list"><p class="flow-wait">불러오는 중…</p></div></section></aside></div>';
     $('#cal-prev').addEventListener('click',()=>{view=new Date(Date.UTC(view.getUTCFullYear(),view.getUTCMonth()-1,1,12));renderCalendar();});
@@ -222,21 +224,19 @@
     }));
     if(id!==homeId)return;
     if(!date){const days=Object.values(results).filter(Boolean).map(r=>r.date).sort();selected=days[days.length-1]||'';if(selected){view=new Date(selected.slice(0,7)+'-01T12:00:00Z');if(label)label.textContent=shortDate(selected);}}
-    flow(results);fillers(results);syncHomeDates();
+    flow(results);balance(CARDS.length);schedules(results);syncHomeDates();
   }
   function flow(results){
     const items=STORIES.map(cat=>{const r=results[cat];if(!r)return '';const one=P(r).oneLiner.trim().split(/\n\s*\n/)[0].replace(/\s+/g,' ');return one?'<div class="flow-item"><span class="flow-k">'+config[cat].short+'</span><span class="flow-v">'+C.inline(one)+'</span></div>':'';}).join('');
     $('#flow-list').innerHTML=items||'<p class="flow-wait">한 줄 요약이 아직 없습니다</p>';
   }
-  // PC 3-column feed: lead spans two cells, then weather + one card per category. Empty cells in the last row get the
-  // first headline of a category's first section (only text that is already in the Markdown).
-  function fillers(results){
-    let need=(3-(2+(LISTED.includes('weather')?1:0)+STORIES.length-1)%3)%3;const out=[];
-    for(const cat of STORIES){
-      if(!need)break;const r=results[cat];if(!r)continue;const s=visible(cat,P(r).sections).find(x=>x.items.length);if(!s)continue;
-      out.push('<article class="digest-card more-card" data-category="'+cat+'">'+cardTop(cat,'<span class="card-kind">· '+C.esc(C.sectionLabel(cat,s.key))+'</span>')+'<div class="card-main"><h3 class="card-headline"><a href="'+catUrl(cat,r.date)+'">'+C.esc(splitHeadline(s.items[0].headline)[0])+'</a></h3></div></article>');need--;
-    }
-    $('#feed').insertAdjacentHTML('beforeend',out.join(''));
+  // One card per live category, no fillers. Odd leftovers in the last grid row widen the last card (CSS reads data-r2/data-r3).
+  function balance(n){const feed=$('#feed'),after=Math.max(0,n-1);feed.dataset.r3=after?String((after-1)%3):'0';feed.dataset.r2=String(after%2);}
+  // 오늘의 주요 일정: '## SCHEDULE' of each story category's issue for the shown date, grouped by topic (weather has none).
+  function schedules(results){
+    const box=$('#sched');if(!box)return;
+    const groups=STORIES.map(cat=>{const r=results[cat];if(!r||(selected&&r.date!==selected))return '';const items=schedOf(P(r));return items.length?'<div class="sched-group" data-category="'+cat+'"><h3>'+catArt(cat,20)+config[cat].short+'</h3>'+schedList(items)+'</div>':'';}).join('');
+    box.hidden=!groups;box.innerHTML=groups?'<h2 id="sched-title">오늘의 주요 일정 <span>'+C.esc(shortDate(selected))+' · 한국 시간</span></h2>'+groups:'';
   }
   function syncHomeDates(){if(!HOME)return;available=[...homeDates].filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(d)&&d<=C.kstDate()).sort().reverse();renderCalendar();renderArchiveList();}
   function renderArchiveList(){
@@ -278,6 +278,7 @@
       const cls=/결과|result/i.test(title)?' results':/주의|한계|limitation/i.test(title)?' caution':/출처|source/i.test(title)?' sources':'';
       return '<section class="block'+cls+'"><h4>'+C.esc(title)+'</h4><div class="prose">'+C.markdown(block.body)+'</div></section>';
     }).join('')+(item.blocks.length?'':'<p class="source-note">원문에 추가 세부 항목이 없습니다.</p>')+'</div></details>').join('')+'</section>').join('');
+    const sched=schedOf(data);if(sched.length)html+='<section class="sched-card sched-page" aria-label="오늘의 일정"><h2>오늘의 일정 <span>한국 시간</span></h2>'+schedList(sched)+'</section>';
     if(data.oneLiner)html+='<aside class="one-liner"><div class="kicker">마지막 한 줄</div><div class="prose">'+C.markdown(data.oneLiner)+'</div></aside>';
     html+='<div class="author">'+(data.author?'작성 · '+C.inline(data.author):'작성자 정보가 원문에 기록되지 않았습니다.')+'<br><a href="'+new URL(result.path,base).href+'">Markdown 원문 보기</a></div>';
     return html;

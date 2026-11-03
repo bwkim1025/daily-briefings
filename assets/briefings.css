@@ -396,7 +396,32 @@ html.dark body .content-visual{--cv-ink:#F2F0ED;--cv-muted:#CFCAC4;--cv-line:#3A
 .nav a[hidden],.cat-sheet a[hidden]{display:none!important}
 
 /* 1103: icon row = same shape everywhere; active category gets a marked border, tap again → 전체 */
-.cat-rounds a[aria-current=page] .ring{outline:3px solid var(--ink);outline-offset:2px}
-.cat-rounds a[aria-current=page] .lbl{font-weight:800;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.cat-rounds .ring{background:transparent}
+.cat-rounds a[aria-current=page] .ring{background:var(--grad)}
+.cat-rounds a[aria-current=page] .lbl{font-weight:800;color:var(--brand-ink)}
 @media(max-width:760px){.nav,body[data-page=home] .nav{display:none}body:not([data-page=home]) .cat-rounds{margin:10px 0 14px}}
 .nav a:first-child{padding:0 15px 0 10px}
+
+/* 1103b: desktop chip active = blue border only (no fill) */
+.nav a[aria-current=page]{background:var(--surface);border:2px solid var(--brand);color:var(--brand-ink);padding:0 14px 0 9px}
+.nav a[aria-current=page] .art{background:none}
+.nav a[aria-current=page]:first-child{padding:0 14px 0 9px}
+/* feed balance: no filler cards; widen the last card when the last row has a hole */
+@media(min-width:1100px){.feed[data-r3="1"]>.digest-card:last-child{grid-column:1/-1}.feed[data-r3="2"]>.digest-card:last-child{grid-column:span 2}}
+@media(min-width:761px) and (max-width:1099px){.feed[data-r2="1"]>.digest-card:last-child{grid-column:1/-1}}
+/* 오늘의 주요 일정 */
+.sched-card{margin-top:14px;background:var(--brand-soft);border:1px solid var(--hover-edge);border-radius:20px;padding:16px 18px;color:var(--ink)}
+.sched-card h2{font-size:17px;font-weight:800;letter-spacing:-.3px;margin-bottom:6px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sched-card h2 span{font-size:12px;font-weight:600;color:var(--muted)}
+.sched-group{padding:10px 0 4px;border-top:1px solid var(--hover-edge)}
+.sched-group:first-of-type{border-top:0}
+.sched-group h3{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:800;color:var(--brand-ink);margin-bottom:4px}
+.sched-group h3 .art{width:20px;height:20px}
+.sched-list{list-style:none;margin:0;padding:0}
+.sched-list li{display:flex;gap:12px;padding:6px 0;font-size:14px;line-height:1.5;min-width:0}
+.sched-t{flex:0 0 46px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--brand-ink)}
+.sched-b{flex:1;min-width:0;display:flex;flex-direction:column}
+.sched-b strong{font-weight:700;color:var(--ink)}
+.sched-b em{font-style:normal;font-size:12.5px;color:var(--muted)}
+.sched-b a{color:var(--brand-ink)}
+.sched-page{margin:24px 0 0}

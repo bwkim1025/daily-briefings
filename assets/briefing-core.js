@@ -99,7 +99,7 @@
     // v3: 스포츠 · 테크·AI · 웨더 분야 섹션 이름
     NBA:'NBA',BASKETBALL:'농구',BASEBALL:'야구',KBO:'KBO 야구',MLB:'MLB',SOCCER:'축구',FOOTBALL:'축구',GOLF:'골프',SPORTS:'스포츠',
     AI:'AI · 모델',AI_TOOLS:'AI 도구',BIGTECH:'빅테크',CHIPS:'반도체 · 칩',DEVICES:'기기 · 플랫폼',SOFTWARE:'소프트웨어',SECURITY:'보안',STARTUPS:'스타트업 · 투자',
-    WEATHER:'부산 날씨',AIR:'대기질',FORECAST:'예보'};
+    SCHEDULE:'오늘의 일정',WEATHER:'부산 날씨',AIR:'대기질',FORECAST:'예보'};
   const categoryLabels={
     financial:{POLICY:'중앙은행 · 경제지표'},
     medical:{POLICY:'정책 · 보험/심사'},
@@ -109,7 +109,13 @@
     weather:{OTHERS:'참고'}
   };
   function sectionLabel(category,key){return categoryLabels[category]?.[key]||sectionLabels[key]||key;}
-  const api={esc,inline,markdown,parse,formatDate,kstDate,lead,sourceCount,sectionLabel};
+  // ## SCHEDULE body: '- HH:MM 제목' or '- 종일 제목', optional ' — 메모'. Other lines are ignored.
+  function schedule(section){
+    if(!section)return [];const out=[];
+    for(const line of String(section.intro||'').split('\n')){const m=line.match(/^\s*[-*+]\s+(종일|\d{1,2}:\d{2})\s+(.+?)\s*$/);if(!m)continue;const i=m[2].indexOf(' — ');out.push({time:m[1].length===4?'0'+m[1]:m[1],title:i>0?m[2].slice(0,i):m[2],note:i>0?m[2].slice(i+3):''});}
+    return out; // file order is kept (the routine writes items in reading order)
+  }
+  const api={schedule,esc,inline,markdown,parse,formatDate,kstDate,lead,sourceCount,sectionLabel};
   if(typeof module!=='undefined' && module.exports) module.exports=api;
   else scope.BriefingCore=api;
 })(typeof window!=='undefined'?window:globalThis);
