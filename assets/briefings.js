@@ -138,11 +138,14 @@
     }
     return out;
   }
+  // Sections hidden at render time for every date (md files untouched). financial MARKETS = '미국 · 한국 증시' (1103).
+  const HIDE_SECTIONS={financial:['MARKETS']};
+  const visible=(cat,sections)=>sections.filter(s=>!(HIDE_SECTIONS[cat]||[]).includes(s.key));
   const catUrl=(cat,date)=>{const url=new URL(cat+'/',base);if(date)url.searchParams.set('date',date);return url.href;};
   const cardTop=(cat,extra)=>'<div class="card-top"><span class="category-symbol">'+catArt(cat,22)+'</span><span class="category-name">'+config[cat].short+'</span>'+(extra||'')+'</div>';
   function card(cat,result,missing,isLead){
     const c=config[cat];let title=missing?'이 날짜의 브리핑이 없습니다':'새 브리핑을 확인해 주세요',excerpt=missing?'':c.subtitle,sub='',points=[],date='',count='';
-    if(result){const data=P(result),lead=C.lead(data.story),parts=splitHeadline(lead.headline||data.sections.flatMap(s=>s.items)[0]?.headline||c.name);title=parts[0];sub=parts[1];excerpt=parts[1]||lead.paragraph||c.subtitle;date=result.date.slice(5).replace('-','.');count=data.sections.reduce((n,s)=>n+s.items.length,0)+'개 이슈 · '+C.sourceCount(result.md)+'개 출처 도메인';if(isLead)points=storyPoints(data.story);}
+    if(result){const data=P(result),secs=visible(cat,data.sections),lead=C.lead(data.story),parts=splitHeadline(lead.headline||secs.flatMap(s=>s.items)[0]?.headline||c.name);title=parts[0];sub=parts[1];excerpt=parts[1]||lead.paragraph||c.subtitle;date=result.date.slice(5).replace('-','.');count=secs.reduce((n,s)=>n+s.items.length,0)+'개 이슈 · '+C.sourceCount(result.md)+'개 출처 도메인';if(isLead)points=storyPoints(data.story);}
     const url=catUrl(cat,result?result.date:missing);
     const body=isLead?'<h2 class="card-headline"><a href="'+url+'">'+C.esc(title)+'</a></h2>'+(sub?'<p class="lead-sub">'+C.esc(sub)+'</p>':'')+(points.length?'<ol class="lead-points">'+points.map(p=>'<li>'+C.esc(p)+'</li>').join('')+'</ol>':(!sub&&excerpt?'<p class="card-excerpt">'+C.esc(excerpt)+'</p>':''))
       :'<h3 class="card-headline"><a href="'+url+'">'+C.esc(title)+'</a></h3>'+(excerpt?'<p class="card-excerpt">'+C.esc(excerpt)+'</p>':'');
@@ -230,7 +233,7 @@
   function fillers(results){
     let need=(3-(2+(LISTED.includes('weather')?1:0)+STORIES.length-1)%3)%3;const out=[];
     for(const cat of STORIES){
-      if(!need)break;const r=results[cat];if(!r)continue;const s=P(r).sections.find(x=>x.items.length);if(!s)continue;
+      if(!need)break;const r=results[cat];if(!r)continue;const s=visible(cat,P(r).sections).find(x=>x.items.length);if(!s)continue;
       out.push('<article class="digest-card more-card" data-category="'+cat+'">'+cardTop(cat,'<span class="card-kind">· '+C.esc(C.sectionLabel(cat,s.key))+'</span>')+'<div class="card-main"><h3 class="card-headline"><a href="'+catUrl(cat,r.date)+'">'+C.esc(splitHeadline(s.items[0].headline)[0])+'</a></h3></div></article>');need--;
     }
     $('#feed').insertAdjacentHTML('beforeend',out.join(''));
@@ -261,7 +264,7 @@
   function closeCalendar(){const el=$('#archive-picker');if(el.open){el.open=false;el.querySelector('summary').focus();}}
   function story(text){if(!text)return '';const split=text.search(/^####\s/m);let main=text,more='';if(split>=0){main=text.slice(0,split);more=text.slice(split);}return '<section class="story"><div class="kicker">오늘의 흐름 · THE BIG PICTURE</div><div class="prose">'+C.markdown(main)+'</div>'+(more?'<details class="story-more"><summary>배경과 해석 더 읽기</summary><div class="prose">'+C.markdown(more)+'</div></details>':'')+'</section>';}
   function render(result){
-    const data=C.parse(result.md),wx=page==='weather',sections=data.sections.filter(s=>(!wx||s.key!=='WEATHER')&&(s.items.length||s.intro.trim()));
+    const data=C.parse(result.md),wx=page==='weather',sections=visible(page,data.sections).filter(s=>(!wx||s.key!=='WEATHER')&&(s.items.length||s.intro.trim()));
     const total=sections.reduce((n,s)=>n+s.items.length,0);
     let html=(result.cached?'<p class="offline-note" role="status">연결을 확인할 수 없어 저장해 둔 브리핑을 표시합니다.</p>':'');
     if(data.date && data.date!==result.date)html+='<p class="offline-note">선택한 발행일 '+C.esc(result.date)+' · 원문 표기일 '+C.esc(data.date)+'</p>';
