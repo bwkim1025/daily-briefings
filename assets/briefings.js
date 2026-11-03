@@ -73,7 +73,7 @@
   const catCur=key=>page===key?' aria-current="page" title="다시 누르면 전체로"':'';
   function navigation(){return '<nav class="nav" aria-label="브리핑 카테고리">'+LISTED.map(key=>'<a href="'+catHref(key)+'"'+catCur(key)+'>'+catArt(key,24)+config[key].short+'</a>').join('')+'</nav>';}
   // Mobile icon row: identical on home and category pages; only the ring of the active category changes.
-  function rounds(){return '<nav class="cat-rounds" aria-label="분야 바로가기">'+STORIES.map(key=>'<a href="'+catHref(key)+'"'+catCur(key)+'><span class="ring"><span class="disc">'+catArt(key,30)+'</span></span><span class="lbl">'+config[key].short+'</span></a>').join('')+'</nav>';}
+  function rounds(){return '<nav class="cat-rounds" aria-label="분야 바로가기">'+STORIES.concat(LISTED.includes('weather')?['weather']:[]).map(key=>'<a href="'+catHref(key)+'"'+catCur(key)+(key==='weather'?' class="pc-only"':'')+'><span class="ring"><span class="disc">'+catArt(key,30)+'</span></span><span class="lbl">'+config[key].short+'</span></a>').join('')+'</nav>';}
   // Mobile bottom tabs: 오늘 / 분야 (sheet) / 지난 호 (calendar) / 협의실. Hidden on PC by CSS.
   function tabbar(){
     return '<nav class="tabbar" aria-label="빠른 이동"><a class="tab" href="'+base.href+'"'+(HOME?' aria-current="page"':'')+'>'+svg('home')+'<span>오늘</span></a>'
@@ -97,7 +97,7 @@
   }
   function shell(){
     const c=config[page];
-    $('#app').innerHTML='<a class="skip" href="#main">본문으로 건너뛰기</a><header class="topbar"><div class="topbar-in"><a class="brand" href="'+base.href+'"><span class="app-mark">'+svg('sun')+'</span><div><div class="brand-name">땡이네 뉴스</div><div class="brand-caption">A CLEARER VIEW, EVERY DAY</div></div></a>'
+    $('#app').innerHTML='<a class="skip" href="#main">본문으로 건너뛰기</a><header class="topbar"><div class="topbar-in"><a class="brand" href="'+base.href+'"><span class="app-mark app-icon"><img src="'+new URL('icon-192.png',base).href+'" alt="" width="34" height="34"></span><div><div class="brand-name">땡이네 뉴스</div><div class="brand-caption">A CLEARER VIEW, EVERY DAY</div></div></a>'
       +(HOME?'':'<a class="back-link" href="'+base.href+'" aria-label="전체 브리핑으로">'+svg('back')+'</a><span class="m-title">'+C.esc(c?(page==='weather'?c.name:c.short):'')+'</span>')
       +'<div class="tools">'+(HOME?'<button class="date-pill" id="date-pill" type="button" aria-controls="home-archive"><span class="pill-face">'+svg('calendar')+'<span id="date-label">'+shortDate(C.kstDate())+'</span>'+svg('chevron','pill-chev')+'</span></button>':'')
       +'<button class="icon-btn cal-btn" id="cal-btn" type="button" aria-label="달력 · 지난 호">'+svg('calendar')+'</button><button class="icon-btn" id="theme-toggle">'+svg('moon')+'</button><a class="collab-link" href="'+new URL('collab.html',base).href+'">협의실</a></div></div></header>'

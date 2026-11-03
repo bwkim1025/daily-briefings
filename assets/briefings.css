@@ -69,7 +69,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 :root{color-scheme:light;--paper:#F6F5F3;--surface:#FFFFFF;--ink:#1C1A19;--text:#1C1A19;--muted:#67635F;--line:#EAE7E3;--soft:#F4F2EF;--navy:#1657AE;--amber:#2D8CE6;--accent:#155DB5;--accent-bg:#E6F1FC;--table-edge:#DEDAD4;--table-zebra:#1c1a1905;--shadow:0 1px 2px #1c1a190d;
   --brand:#1B6FD1;--brand-ink:#155DB5;--brand-mark:#1B6FD1;--brand-soft:#E6F1FC;--solid:#1B6FD1;--grad:linear-gradient(135deg,#2D8CE6 0%,#1657AE 100%);--grad-text:linear-gradient(135deg,#1B6FD1 0%,#1657AE 100%);--tile:linear-gradient(145deg,#EEF6FF,#D8EAFC);--hover-edge:#C9DFF6;
   --warn:#9A4A0B;--warn-bg:#FDEBDC;--danger:#B42318;--danger-bg:#FDE2E2;--sc1:#9FD0FA;--sc2:#2D8CE6;--sc3:#F2A65A;--sc4:#E5484D;--tab-h:64px;
-  font-family:'Gothic A1','Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',system-ui,sans-serif}
+  font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','맑은 고딕','Noto Sans KR',system-ui,sans-serif}
 :root.dark{color-scheme:dark;--paper:#141312;--surface:#1E1C1B;--ink:#F2F0ED;--text:#E6E3DF;--muted:#ADA8A2;--line:#34312E;--soft:#282624;--amber:#6CB4F5;--accent:#8CC6F8;--accent-bg:#1A3550;--table-edge:#45413D;--table-zebra:#ffffff07;--shadow:none;
   --brand:#6CB4F5;--brand-ink:#8CC6F8;--brand-mark:#6CB4F5;--brand-soft:#1A3550;--tile:linear-gradient(145deg,#21405F,#18324C);--hover-edge:#2F5A84;--warn:#F7B57A;--warn-bg:#3F2814;--danger:#FF9F99;--danger-bg:#46201E}
 /* 분야별 강조색 → 모든 화면 앱 색 하나 */
@@ -458,3 +458,29 @@ html.dark body .content-visual{--cv-ink:#F2F0ED;--cv-muted:#CFCAC4;--cv-line:#3A
 @keyframes vt-in{from{opacity:0;transform:translateY(8px)}}
 /* 1103d: the category hero already shows the title — don't repeat it in the mobile top bar */
 body:not([data-page=home]):not([data-page=collab]) .m-title{display:none}
+
+/* 1103e: PC — same v3 icon row as mobile (round icons, blue ring when active) instead of the older chips; app icon in the brand */
+.app-mark.app-icon{background:none;overflow:hidden;border-radius:9px}.app-mark.app-icon img{width:34px;height:34px;display:block}
+@media(min-width:761px){
+  .nav{display:none}
+  .cat-rounds{display:flex;gap:6px;margin:14px 0 6px;justify-content:flex-start}
+  .cat-rounds a{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:84px;padding:4px 6px;text-decoration:none;color:var(--ink);border-radius:16px}
+  .cat-rounds a:hover .disc{border-color:var(--hover-edge)}
+  .ring{width:60px;height:60px;border-radius:50%;padding:3px;display:flex}
+  .disc{flex:1;border-radius:50%;background:var(--tile);border:3px solid var(--paper);display:grid;place-items:center;transition:border-color .15s}
+  .disc .art{width:32px;height:32px}
+  .lbl{font-size:13px;font-weight:700;white-space:nowrap}
+  body[data-page=home] .cat-rounds{margin:2px 0 14px}
+}
+/* 1103e: PC home balance — rail follows the scroll, schedule in two columns, wider canvas on large screens */
+@media(min-width:900px){.home-rail{position:sticky;top:16px}}
+@media(min-width:1100px){
+  .sched-card{column-count:2;column-gap:28px}
+  .sched-card h2{column-span:all}
+  .sched-group{break-inside:avoid-column}
+  .sched-group[data-category=sports]{break-inside:auto}
+  .sched-list li{break-inside:avoid}
+  .sched-group h3{break-after:avoid}
+}
+@media(min-width:1600px){.shell,.topbar-in{width:min(1440px,100%)}.home-layout{grid-template-columns:minmax(0,1fr) 360px}body:not([data-page=home]) .shell,body:not([data-page=home]) .topbar-in{width:min(1100px,100%)}}
+@media(max-width:760px){.cat-rounds a.pc-only{display:none}}
