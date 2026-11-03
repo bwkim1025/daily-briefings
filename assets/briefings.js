@@ -77,10 +77,13 @@
   // Mobile bottom tabs: 오늘 / 분야 (sheet) / 지난 호 (calendar) / 협의실. Hidden on PC by CSS.
   function tabbar(){
     return '<nav class="tabbar" aria-label="빠른 이동"><a class="tab" href="'+base.href+'"'+(HOME?' aria-current="page"':'')+'>'+svg('home')+'<span>오늘</span></a>'
-      +'<details class="tab-cats'+(!HOME&&config[page]?' is-here':'')+'"><summary class="tab">'+svg('layers')+'<span>분야</span></summary><div class="cat-sheet">'+LISTED.map(key=>'<a href="'+new URL(key+'/',base).href+'"'+(page===key?' aria-current="page"':'')+'>'+catArt(key,30)+'<span>'+config[key].short+'</span></a>').join('')+'</div></details>'
+      +'<details class="tab-cats'+(!HOME&&config[page]?' is-here':'')+'"><summary class="tab">'+svg('layers')+'<span>분야</span></summary><div class="cat-sheet">'+sheetLinks()+'</div></details>'
       +'<a class="tab" id="tab-archive" href="'+base.href+'#archive">'+svg('calendar')+'<span>지난 호</span></a>'
       +'<a class="tab" href="'+new URL('collab.html',base).href+'">'+svg('chat')+'<span>협의실</span></a></nav>';
   }
+  function sheetLinks(){return LISTED.map(key=>'<a href="'+new URL(key+'/',base).href+'"'+(page===key?' aria-current="page"':'')+'>'+catArt(key,30)+'<span>'+config[key].short+'</span></a>').join('');}
+  // Gate resolved after the first paint: redraw only the category menus if the listed set changed.
+  function refreshNav(){const n=$('.nav');if(n)n.outerHTML=navigation();document.querySelectorAll('.cat-rounds').forEach(r=>{r.outerHTML=rounds();});const s=$('.cat-sheet');if(s)s.innerHTML=sheetLinks();}
   function savedDates(cat){try{const saved=JSON.parse(localStorage.getItem('daily-briefings-dates-'+cat)||'null');return saved&&Array.isArray(saved.dates)?saved.dates:[];}catch{return [];}}
   async function gate(){
     let index=null;try{index=await request(new URL('assets/briefing-index.json',base),'json',4000);}catch{}
@@ -191,9 +194,11 @@
       +(src?'<p class="wx-source">'+src+'</p>':'')+'</div>';
   }
   // ---- Home: card feed + archive calendar + 오늘의 흐름 ----
-  async function home(){
+  const homeCards=()=>(LISTED.includes('weather')?['weather']:[]).concat(STORIES);
+  const skeletons=CARDS=>CARDS.map(cat=>'<article id="card-'+cat+'" class="digest-card'+(cat==='financial'?' lead-card':cat==='weather'?' wx-card':'')+'" data-category="'+cat+'">'+(cat==='financial'?'<div class="lead-bar" aria-hidden="true"></div>':'')+cardTop(cat)+'<div class="card-main"><div class="skeleton title"></div><div class="skeleton short"></div><div class="card-excerpt">최신 브리핑 확인 중…</div></div></article>').join('');
+  async function home(ready){
     const date=new URL(location.href).searchParams.get('date');
-    $('#main').innerHTML='<h1 class="sr-only">땡이네 뉴스</h1><div class="home-layout"><div class="home-feed">'+rounds()+'<div class="feed" id="feed"></div><section class="sched-card" id="sched" aria-labelledby="sched-title" hidden></section></div>'
+    $('#main').innerHTML='<h1 class="sr-only">땡이네 뉴스</h1><div class="home-layout"><div class="home-feed">'+rounds()+'<div class="feed" id="feed">'+skeletons(homeCards())+'</div><section class="sched-card" id="sched" aria-labelledby="sched-title" hidden></section></div>'
       +'<aside class="home-rail"><section class="home-cal" id="home-archive" aria-label="지난 호 달력"><div class="cal-head"><h2 id="cal-title"></h2><div class="cal-nav"><button id="cal-prev" type="button" aria-label="이전 달">'+svg('back')+'</button><button id="cal-next" type="button" aria-label="다음 달">'+svg('back','flip')+'</button></div></div><div class="cal-grid" id="cal-grid"></div><details class="archive-all"><summary>지난 호 전체 보기</summary><ul class="archive-list" id="archive-list"></ul></details><button class="text-button" id="close-calendar" type="button">달력 닫기</button></section>'
       +'<section class="flow-card" aria-labelledby="flow-title"><h2 id="flow-title">오늘의 흐름</h2><div id="flow-list"><p class="flow-wait">불러오는 중…</p></div></section></aside></div>';
     $('#cal-prev').addEventListener('click',()=>{view=new Date(Date.UTC(view.getUTCFullYear(),view.getUTCMonth()-1,1,12));renderCalendar();});
@@ -203,6 +208,7 @@
     document.addEventListener('click',e=>{const cal=$('#home-archive');if(cal&&cal.classList.contains('is-open')&&!cal.contains(e.target))closeHomeCal(false);});
     window.addEventListener('popstate',()=>loadHome(new URL(location.href).searchParams.get('date')));
     renderArchiveList();
+    await ready;probePending();
     await loadHome(/^\d{4}-\d{2}-\d{2}$/.test(date||'')?date:null);
     if(location.hash==='#archive'){history.replaceState(history.state,'',location.pathname+location.search);openArchive();}
   }
@@ -210,8 +216,8 @@
     const id=++homeId,feed=$('#feed'),label=$('#date-label');
     selected=date||'';if(date)view=new Date(date.slice(0,7)+'-01T12:00:00Z');if(label)label.textContent=shortDate(date||C.kstDate());
     if(push){const url=new URL(location.href);if(date)url.searchParams.set('date',date);else url.searchParams.delete('date');history.pushState({},'',url);}
-    const CARDS=(LISTED.includes('weather')?['weather']:[]).concat(STORIES);
-    feed.innerHTML=CARDS.map(cat=>'<article id="card-'+cat+'" class="digest-card'+(cat==='financial'?' lead-card':cat==='weather'?' wx-card':'')+'" data-category="'+cat+'">'+(cat==='financial'?'<div class="lead-bar" aria-hidden="true"></div>':'')+cardTop(cat)+'<div class="card-main"><div class="skeleton title"></div><div class="skeleton short"></div><div class="card-excerpt">최신 브리핑 확인 중…</div></div></article>').join('');
+    const CARDS=homeCards();
+    feed.innerHTML=skeletons(CARDS);
     renderCalendar();renderArchiveList();
     const results={};
     await Promise.all(CARDS.map(async cat=>{
@@ -291,14 +297,17 @@
     $('#content').setAttribute('aria-busy','false');
     if(!result){$('#content').innerHTML='<section class="empty"><h2>브리핑을 불러오지 못했습니다</h2><p>'+C.esc(date||'최신 호')+'의 발행 여부와 인터넷 연결을 확인해 주세요.<br>다른 날짜를 선택하거나 다시 시도할 수 있습니다.</p><button id="retry">다시 시도</button></section>';$('#retry').addEventListener('click',()=>load(date));$('#read-status').textContent='불러오기 실패';return;}
     lastResult=result;selected=result.date;view=new Date(selected.slice(0,7)+'-01T12:00:00Z');if(!available.includes(selected))available.push(selected);available.sort().reverse();
-    $('#content').innerHTML=render(result);updateControls();renderCalendar();
+    $('#content').innerHTML=render(result);updateControls();const hd=$('#hero-date');if(hd)hd.textContent=selected.slice(5).replace('-','.')+' 발행';renderCalendar();
     const url=new URL(location.href);url.searchParams.set('date',selected);if(push)history.pushState({},'',url);else history.replaceState({},'',url);
     document.title=config[page].name+' · '+selected;
     document.querySelectorAll('.ov-open').forEach(b=>b.addEventListener('click',()=>{const el=document.getElementById(b.dataset.target);if(!el)return;el.open=true;el.scrollIntoView({behavior:'smooth',block:'start'});el.querySelector('summary').focus({preventScroll:true});}));
     const expand=$('#expand-all');if(expand)expand.addEventListener('click',event=>{const button=event.currentTarget,open=button.getAttribute('aria-expanded')!=='true';document.querySelectorAll('.article').forEach(el=>el.open=open);button.setAttribute('aria-expanded',String(open));button.textContent=open?'모두 접기':'모두 펼치기';});
   }
-  async function category(){
-    const c=config[page];$('#main').innerHTML='<header class="page-masthead"><span class="masthead-art">'+catArt(page,36)+'</span><div><div class="kicker">'+c.en.toUpperCase()+' / DAILY EDITION</div><h1>'+c.name+'</h1><p>'+c.subtitle+'</p></div><div class="edition">FACTS · CONTEXT · PERSPECTIVE</div></header>'+controls()+'<div id="content" aria-busy="true"><div class="loading-note" role="status">브리핑을 불러오는 중입니다…</div></div>';
+  // Category top = the home card 'opened': same card surface, icon tile, label and (financial) gradient bar.
+  // Rendered synchronously so it exists at the first paint (the cross-document view transition morphs card → hero).
+  function hero(cat){const c=config[cat];return '<header class="cat-hero'+(cat==='financial'?' lead-hero':'')+'" data-category="'+cat+'">'+(cat==='financial'?'<div class="lead-bar" aria-hidden="true"></div>':'')+cardTop(cat,'<span class="card-date" id="hero-date"></span>')+'<h1>'+C.esc(c.name)+'</h1><p>'+C.esc(c.subtitle)+'</p></header>';}
+  async function category(ready){
+    const c=config[page];$('#main').innerHTML=hero(page)+controls()+'<div id="content" aria-busy="true"><div class="loading-note" role="status">브리핑을 불러오는 중입니다…</div></div>';
     $('#cal-prev').addEventListener('click',()=>{view=new Date(Date.UTC(view.getUTCFullYear(),view.getUTCMonth()-1,1,12));renderCalendar();});
     $('#cal-next').addEventListener('click',()=>{view=new Date(Date.UTC(view.getUTCFullYear(),view.getUTCMonth()+1,1,12));renderCalendar();});
     $('#close-calendar').addEventListener('click',closeCalendar);
@@ -309,10 +318,14 @@
     window.addEventListener('popstate',()=>load(new URL(location.href).searchParams.get('date')));
     const wantsArchive=location.hash==='#archive';if(wantsArchive)history.replaceState(history.state,'',location.pathname+location.search);
     const date=new URL(location.href).searchParams.get('date');
+    await ready;
     if(PENDING.has(page)&&!/^\d{4}-\d{2}-\d{2}$/.test(date||'')){$('#content').setAttribute('aria-busy','false');$('#content').innerHTML='<section class="empty"><h2>'+C.esc(c.short)+' 브리핑은 준비 중입니다</h2><p>첫 브리핑이 발행되면 여기와 홈에 나타납니다.</p></section>';$('#read-status').textContent='';probePending();return;}
     available=await dateIndex(page);renderCalendar();await load(/^\d{4}-\d{2}-\d{2}$/.test(date||'')?date:null);
     if(wantsArchive)openArchive();
   }
-  gate().then(()=>{shell();if(HOME)probePending();return HOME?home():category();}).catch(()=>{$('#main').innerHTML='<section class="empty"><h2>화면을 불러오지 못했습니다</h2><p>잠시 후 새로고침해 주세요.</p></section>';});
+  // First paint is synchronous (shell + home skeleton cards / category hero) so view transitions have both ends;
+  // the published-category gate resolves afterwards and only redraws menus if it hides something.
+  const before=LISTED.join(),ready=gate().then(()=>{if(LISTED.join()!==before)refreshNav();}).catch(()=>{});
+  Promise.resolve().then(()=>{shell();return HOME?home(ready):category(ready);}).catch(()=>{$('#main').innerHTML='<section class="empty"><h2>화면을 불러오지 못했습니다</h2><p>잠시 후 새로고침해 주세요.</p></section>';});
   if('serviceWorker' in navigator)window.addEventListener('load',()=>{navigator.serviceWorker.register(new URL('sw.js',base),{scope:base.pathname,updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{});});
 })();

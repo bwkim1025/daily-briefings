@@ -425,3 +425,12 @@ html.dark body .content-visual{--cv-ink:#F2F0ED;--cv-muted:#CFCAC4;--cv-line:#3A
 .sched-b em{font-style:normal;font-size:12.5px;color:var(--muted)}
 .sched-b a{color:var(--brand-ink)}
 .sched-page{margin:24px 0 0}
+
+/* 1103c: category top = the home card opened (same surface, radius, icon tile, blue label, financial gradient bar) */
+.cat-hero{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:16px 22px 18px;margin:14px 0 16px;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+.cat-hero.lead-hero{padding-top:0}
+.cat-hero .lead-bar{margin:0 -22px 6px}
+.cat-hero .card-top .category-symbol{width:30px;height:30px}
+.cat-hero h1{font-size:26px;line-height:1.35;font-weight:800;letter-spacing:-.5px;color:var(--ink);margin:2px 0 0}
+.cat-hero p{font-size:14px;line-height:1.6;color:var(--text)}
+@media(max-width:760px){.cat-hero{border-radius:22px;padding:14px 16px 16px;margin:4px 0 12px}.cat-hero.lead-hero{padding-top:0}.cat-hero .lead-bar{height:5px;margin:0 -16px 6px}.cat-hero h1{font-size:21px;line-height:1.45}.cat-hero p{font-size:13px}body:not([data-page=home]) .cat-rounds{margin:10px 0 8px}}
