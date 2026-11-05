@@ -1,0 +1,48 @@
+name: Update briefing index
+
+# 브리핑(.md)이 main에 올라오면 assets/briefing-index.json(달력·이전 호·최신 호가 쓰는 날짜 목록)을 다시 만든다.
+# 2026-11-05 검토(H3): 인덱스가 11-03에 멈춰 있었고, GitHub API가 막히면 앱이 낡은 목록만 보고 '이전 호'가 발행일을 건너뛰었다.
+# 이 워크플로가 만든 커밋은 GITHUB_TOKEN으로 push하므로 다시 이 워크플로를 부르지 않는다(무한 반복 없음).
+on:
+  push:
+    branches: [main]
+    paths: ['*/briefings/*.md']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: briefing-index
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Rebuild index
+        run: node scripts/update-briefing-index.cjs
+      - name: Commit if the date lists changed
+        run: |
+          # generatedFrom(커밋 해시)는 매번 바뀌므로 날짜 목록이 실제로 바뀐 경우에만 커밋한다
+          if git show HEAD:assets/briefing-index.json > /tmp/old.json 2>/dev/null && node -e "
+            const f=p=>{const j=JSON.parse(require('fs').readFileSync(p,'utf8'));delete j.generatedFrom;return JSON.stringify(j);};
+            process.exit(f('/tmp/old.json')===f('assets/briefing-index.json')?0:1)"; then
+            echo 'No date changes'; exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898281+github-actions[bot]@users.noreply.github.com'
+          git add assets/briefing-index.json
+          git commit -m 'Update briefing index'
+          # 그사이 다른 분야 브리핑이 먼저 올라왔으면 위에 얹어서 다시 만든다
+          for i in 1 2 3; do
+            git pull --rebase -X theirs origin main || { git rebase --abort; break; }
+            node scripts/update-briefing-index.cjs && git add assets/briefing-index.json && git commit --amend --no-edit || true
+            git push origin HEAD:main && exit 0
+            sleep 5
+          done
+          exit 1
