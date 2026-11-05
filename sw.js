@@ -1,10 +1,10 @@
 // Daily Briefings only: Cache Storage is shared by all GitHub Pages apps on this origin.
 const CACHE_PREFIX = 'daily-briefings-';
-const CACHE_VERSION = CACHE_PREFIX + 'v26';
+const CACHE_VERSION = CACHE_PREFIX + 'v27';
 const BASE = new URL(self.registration.scope).pathname;
-const PRECACHE = ['', 'index.html', 'manifest.json?v=26', 'favicon-v3.ico?v=26', 'favicon-v3-32.png?v=26', 'apple-touch-icon-v3.png?v=26', 'icon-v3-192.png?v=26', 'icon-v3-512.png?v=26', 'icon-v3-maskable-512.png?v=26', 'assets/briefings.css?v=26', 'assets/fonts/pretendard/pretendardvariable-dynamic-subset.css?v=26', 'assets/content-visuals.js?v=26', 'assets/content-visuals.css?v=26', 'assets/briefing-core.js?v=26', 'assets/briefings.js?v=26', 'collab.html', 'assets/collab-core.js?v=26', 'assets/collab.js?v=26', 'assets/briefing-index.json', 'financial/', 'international/', 'sports/', 'health/', 'tech/', 'weather/', 'medical/', 'assets/icons/fin.svg', 'assets/icons/globe.svg', 'assets/icons/sport.svg', 'assets/icons/health.svg', 'assets/icons/tech.svg', 'assets/icons/weather.svg', 'assets/icons/sun.svg', 'assets/icons/cloud.svg', 'assets/icons/rain.svg', 'assets/icons/wind.svg', 'assets/icons/pm10.svg', 'assets/icons/pm25.svg'].map(path=>BASE+path);
+const PRECACHE = ['', 'index.html', 'manifest.json?v=27', 'favicon-v3.ico?v=27', 'favicon-v3-32.png?v=27', 'apple-touch-icon-v3.png?v=27', 'icon-v3-192.png?v=27', 'icon-v3-512.png?v=27', 'icon-v3-maskable-512.png?v=27', 'assets/briefings.css?v=27', 'assets/fonts/pretendard/pretendardvariable-dynamic-subset.css?v=27', 'assets/content-visuals.js?v=27', 'assets/content-visuals.css?v=27', 'assets/briefing-core.js?v=27', 'assets/briefings.js?v=27', 'collab.html', 'assets/collab-core.js?v=27', 'assets/collab.js?v=27', 'assets/briefing-index.json', 'financial/', 'international/', 'sports/', 'health/', 'tech/', 'weather/', 'medical/', 'assets/icons/fin.svg', 'assets/icons/globe.svg', 'assets/icons/sport.svg', 'assets/icons/health.svg', 'assets/icons/tech.svg', 'assets/icons/weather.svg', 'assets/icons/sun.svg', 'assets/icons/cloud.svg', 'assets/icons/rain.svg', 'assets/icons/wind.svg', 'assets/icons/pm10.svg', 'assets/icons/pm25.svg'].map(path=>BASE+path);
 // v3: medical/ stays in PRECACHE only (old links keep working; it is no longer listed). New category shells are required.
-const REQUIRED = ['', 'index.html', 'financial/', 'international/', 'sports/', 'health/', 'tech/', 'weather/', 'assets/briefing-core.js?v=26', 'assets/briefings.js?v=26', 'assets/briefings.css?v=26', 'assets/fonts/pretendard/pretendardvariable-dynamic-subset.css?v=26', 'assets/content-visuals.js?v=26', 'assets/content-visuals.css?v=26'].map(path=>BASE+path);
+const REQUIRED = ['', 'index.html', 'financial/', 'international/', 'sports/', 'health/', 'tech/', 'weather/', 'assets/briefing-core.js?v=27', 'assets/briefings.js?v=27', 'assets/briefings.css?v=27', 'assets/fonts/pretendard/pretendardvariable-dynamic-subset.css?v=27', 'assets/content-visuals.js?v=27', 'assets/content-visuals.css?v=27'].map(path=>BASE+path);
 self.addEventListener('install', event => {
   event.waitUntil((async()=>{
     const cache=await caches.open(CACHE_VERSION);
@@ -15,7 +15,15 @@ self.addEventListener('install', event => {
   })());
 });
 self.addEventListener('activate', event => {
-  event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith(CACHE_PREFIX)&&key!==CACHE_VERSION).map(key=>caches.delete(key)))).catch(()=>{}).then(()=>self.clients.claim()));
+  // v27: 읽은 브리핑 본문(.md)은 이제 이 캐시만 오프라인 사본이다(앱이 localStorage 사본을 지움).
+  // 그래서 옛 버전 캐시를 지우기 전에 본문만 새 캐시로 옮긴다(화면 파일은 새 버전으로 다시 받았으므로 옮기지 않음).
+  const isArticle=url=>/\/briefings\/\d{4}-\d{2}-\d{2}[^/]*\.md$/.test(new URL(url).pathname);
+  event.waitUntil(caches.keys().then(async keys=>{
+    const old=keys.filter(key=>key.startsWith(CACHE_PREFIX)&&key!==CACHE_VERSION);
+    const cur=await caches.open(CACHE_VERSION);
+    for(const key of old){try{const c=await caches.open(key);for(const req of await c.keys()){if(!isArticle(req.url)||await cur.match(req))continue;const res=await c.match(req);if(res)await cur.put(req,res);}}catch{}}
+    await Promise.all(old.map(key=>caches.delete(key)));
+  }).catch(()=>{}).then(()=>self.clients.claim()));
 });
 self.addEventListener('fetch', event => {
   const request=event.request;

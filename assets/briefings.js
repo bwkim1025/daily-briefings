@@ -26,6 +26,8 @@
   const art=(name,size)=>name?'<img class="art" src="'+new URL('assets/icons/'+name+'.svg',base).href+'" alt="" width="'+size+'" height="'+size+'" decoding="async">':svg('cross','art');
   const catArt=(cat,size)=>art(config[cat]&&config[cat].art,size);
   const storage={get(key){try{return localStorage.getItem(key);}catch{return null;}},set(key,value){try{localStorage.setItem(key,value);}catch{}}};
+  // H1 이관: 예전 버전이 쌓아 둔 본문 사본(daily-briefings-article-*)을 한 번 지운다. 다른 앱·다른 키는 건드리지 않는다.
+  setTimeout(()=>{try{const old=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i)||'';if(k.startsWith('daily-briefings-article-'))old.push(k);}old.forEach(k=>localStorage.removeItem(k));}catch{}},3000);
   let requestId=0, selected='', available=[], view=new Date(C.kstDate()+'T12:00:00Z'), lastResult=null, homeId=0;
   const homeDates=new Set(), parsed=new WeakMap();
   const $=selector=>document.querySelector(selector);
@@ -35,10 +37,11 @@
   function setTheme(dark){document.documentElement.classList.toggle('dark',dark);$('#theme-toggle').setAttribute('aria-pressed',String(dark));$('#theme-toggle').setAttribute('aria-label',dark?'밝은 테마로 전환':'어두운 테마로 전환');$('meta[name=theme-color]').content=dark?'#141312':'#F6F5F3';}
   async function request(url,type='text',timeout=5500){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeout);try{const response=await fetch(url,{cache:'no-cache',signal:controller.signal});if(!response.ok)throw Error(String(response.status));return type==='json'?await response.json():await response.text();}finally{clearTimeout(timer);}}
   async function dateIndex(cat){
-    let dates=[];try{const saved=JSON.parse(storage.get('daily-briefings-dates-'+cat)||'null');if(saved&&Array.isArray(saved.dates))dates=saved.dates;}catch{}
+    let dates=[],savedAt=0;try{const saved=JSON.parse(storage.get('daily-briefings-dates-'+cat)||'null');if(saved&&Array.isArray(saved.dates)){dates=saved.dates;savedAt=Number(saved.at)||0;}}catch{}
     try{const index=await request(new URL('assets/briefing-index.json',base),'json');dates=[...new Set([...dates,...(index.categories[cat]||[])])];}catch{}
     // Refresh without delaying today's reading. A snapshot/cache never prevents probing today's file.
-    request('https://api.github.com/repos/bwkim1025/daily-briefings/contents/'+cat+'/briefings','json',4500).then(items=>{
+    // [검토 제안 P2] 목록 API는 분야마다 30분에 한 번만(비로그인 한도: IP당 시간 60회, 가족이 같은 와이파이를 쓰면 함께 소진).
+    if(Date.now()-savedAt>30*60000)request('https://api.github.com/repos/bwkim1025/daily-briefings/contents/'+cat+'/briefings','json',4500).then(items=>{
       if(!Array.isArray(items))return;const fresh=[...new Set(items.map(i=>(i.name||'').match(/^(\d{4}-\d{2}-\d{2})(?:-[a-z]+)?\.md$/)).filter(Boolean).map(m=>m[1]))].sort().reverse();
       storage.set('daily-briefings-dates-'+cat,JSON.stringify({dates:fresh,at:Date.now()}));
       if(page===cat){available=fresh;renderCalendar();updateControls();}
@@ -46,20 +49,21 @@
     }).catch(()=>{});
     return dates.filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(d)).sort().reverse();
   }
+  // 2026-11-05 검토(H1): 본문을 localStorage에 쌓지 않는다(지우는 경로가 없어 약 100일이면 같은 주소의 스터디 앱 저장까지 막음).
+  // 읽은 본문은 서비스워커가 이미 Cache Storage에 저장하므로, 네트워크가 안 되거나 느리면 그 사본을 직접 읽는다.
+  const articleUrls=(cat,date)=>(cat==='medical'?['.md','-journal.md','-policy.md']:['.md']).flatMap(suffix=>{const path=cat+'/briefings/'+date+suffix;return [[path,new URL(path,base).href],[path,'https://raw.githubusercontent.com/bwkim1025/daily-briefings/main/'+path]];});
+  async function fromCache(cat,date){
+    if(!('caches' in window))return null;
+    for(const [path,url] of articleUrls(cat,date)){try{const hit=await caches.match(url,{ignoreSearch:true});if(!hit||!hit.ok)continue;const md=await hit.text();if(/^#\s+\d{4}-\d{2}-\d{2}/m.test(md))return{date,md,path,cached:true};}catch{}}
+    return null;
+  }
   async function fetchDate(cat,date){
     if(!/^\d{4}-\d{2}-\d{2}$/.test(date))return null;
-    if(!navigator.onLine){try{const saved=JSON.parse(storage.get('daily-briefings-article-'+cat+'-'+date)||'null');if(saved?.md)return{date,md:saved.md,path:saved.path,cached:true};}catch{}return null;}
-    const suffixes=cat==='medical'?['.md','-journal.md','-policy.md']:['.md'];
-    for(const suffix of suffixes){
-      const path=cat+'/briefings/'+date+suffix;
-      for(const url of [new URL(path,base).href,'https://raw.githubusercontent.com/bwkim1025/daily-briefings/main/'+path]){
-        try{const md=await request(url);if(!/^#\s+\d{4}-\d{2}-\d{2}/m.test(md))continue;
-          storage.set('daily-briefings-article-'+cat+'-'+date,JSON.stringify({md,at:Date.now(),path}));
-          return{date,md,path,cached:false};}catch{}
-      }
+    if(!navigator.onLine)return fromCache(cat,date);
+    for(const [path,url] of articleUrls(cat,date)){
+      try{const md=await request(url);if(!/^#\s+\d{4}-\d{2}-\d{2}/m.test(md))continue;return{date,md,path,cached:false};}catch{}
     }
-    try{const cached=JSON.parse(storage.get('daily-briefings-article-'+cat+'-'+date)||'null');if(cached?.md)return{date,md:cached.md,path:cached.path,cached:true};}catch{}
-    return null;
+    return fromCache(cat,date);
   }
   async function latest(cat,dates){
     const today=C.kstDate();
@@ -70,7 +74,7 @@
   }
   // Category row: no '전체' item. The active category is marked; tapping it again returns to the unfiltered home.
   const catHref=key=>page===key?base.href:new URL(key+'/',base).href;
-  const catCur=key=>page===key?' aria-current="page" title="다시 누르면 전체로"':'';
+  const catCur=key=>page===key?' aria-current="page" title="다시 누르면 전체로" aria-label="'+config[key].short+' (지금 보는 분야) · 누르면 전체 브리핑으로"':'';
   function navigation(){return '<nav class="nav" aria-label="브리핑 카테고리">'+LISTED.map(key=>'<a href="'+catHref(key)+'"'+catCur(key)+'>'+catArt(key,24)+config[key].short+'</a>').join('')+'</nav>';}
   // Mobile icon row: identical on home and category pages; only the ring of the active category changes.
   function rounds(){return '<nav class="cat-rounds" aria-label="분야 바로가기">'+STORIES.concat(LISTED.includes('weather')?['weather']:[]).map(key=>'<a href="'+catHref(key)+'"'+catCur(key)+(key==='weather'?' class="pc-only"':'')+'><span class="ring"><span class="disc">'+catArt(key,30)+'</span></span><span class="lbl">'+config[key].short+'</span></a>').join('')+'</nav>';}
@@ -97,7 +101,7 @@
   }
   function shell(){
     const c=config[page];
-    $('#app').innerHTML='<a class="skip" href="#main">본문으로 건너뛰기</a><header class="topbar"><div class="topbar-in"><a class="brand" href="'+base.href+'"><span class="app-mark app-icon"><img src="'+new URL('icon-v3-192.png?v=26',base).href+'" alt="" width="34" height="34"></span><div><div class="brand-name">땡이네 뉴스</div><div class="brand-caption">A CLEARER VIEW, EVERY DAY</div></div></a>'
+    $('#app').innerHTML='<a class="skip" href="#main">본문으로 건너뛰기</a><header class="topbar"><div class="topbar-in"><a class="brand" href="'+base.href+'"><span class="app-mark app-icon"><img src="'+new URL('icon-v3-192.png?v=27',base).href+'" alt="" width="34" height="34"></span><div><div class="brand-name">땡이네 뉴스</div><div class="brand-caption">A CLEARER VIEW, EVERY DAY</div></div></a>'
       +(HOME?'':'<a class="back-link" href="'+base.href+'" aria-label="전체 브리핑으로">'+svg('back')+'</a><span class="m-title">'+C.esc(c?(page==='weather'?c.name:c.short):'')+'</span>')
       +'<div class="tools">'+(HOME?'<button class="date-pill" id="date-pill" type="button" aria-controls="home-archive"><span class="pill-face">'+svg('calendar')+'<span id="date-label">'+shortDate(C.kstDate())+'</span>'+svg('chevron','pill-chev')+'</span></button>':'')
       +'<button class="icon-btn cal-btn" id="cal-btn" type="button" aria-label="달력 · 지난 호">'+svg('calendar')+'</button><button class="icon-btn" id="theme-toggle">'+svg('moon')+'</button><a class="collab-link" href="'+new URL('collab.html',base).href+'">협의실</a></div></div></header>'
@@ -168,6 +172,7 @@
   const skyArt=sky=>{const s=String(sky||'');return /비|소나기|눈/.test(s)?'rain':/흐림/.test(s)?'cloud':/구름/.test(s)?'weather':/맑/.test(s)?'sun':'cloud';};
   const hourLabel=t=>{const m=String(t||'').match(/(\d{1,2})/);return m?String(Number(m[1])).padStart(2,'0')+'시':'';};
   const wxTile=(cls,name,label,value,note,noteCls)=>'<div class="'+cls+'"><div class="wx-k"><span class="tile-art">'+art(name,cls==='wx-box'?22:18)+'</span>'+label+'</div><div class="wx-v"><b>'+value+'</b>'+(note?'<em class="'+(noteCls||'').trim()+'">'+note+'</em>':'')+'</div></div>';
+  const staleTag=d=>'<span class="stale-tag" title="'+C.esc(d)+' 발행분">지난 정보</span>';
   function weatherCard(result,missing){
     const url=catUrl('weather',result?result.date:missing),w=result?wxData(result.md):null;
     const link=loc=>'<a class="wx-link" href="'+url+'" aria-label="웨더 · '+loc+' 자세히 보기"></a>';
@@ -178,7 +183,7 @@
     const full='<div class="wx-full"><div class="wx-now"><span class="wx-temp">'+fmt(now.temp,'°')+'</span><div class="wx-sky"><strong>'+C.esc(now.sky||'')+'</strong><span>최고 '+fmt(today.max,'°')+' · 최저 '+fmt(today.min,'°')+'</span></div>'+art(skyArt(now.sky),44)+'</div><div class="wx-tiles">'
       +wxTile('wx-tile','rain','강수',fmt(today.pop,'%'),rainText(today.rain_mm))+wxTile('wx-tile','wind','바람',fmt(wind.speed_ms,' m/s',true),C.esc(wind.dir||''))
       +wxTile('wx-tile','pm10','미세먼지',fmt(air.pm10,''),g10?g10.label:'',g10&&g10.cls)+wxTile('wx-tile','pm25','초미세먼지',fmt(air.pm25,''),g25?g25.label:'',g25&&g25.cls)+'</div></div>';
-    const line='<div class="wx-line">'+art(skyArt(now.sky),40)+'<div class="wx-line-main"><strong>'+loc+' '+fmt(now.temp,'°')+' · '+C.esc(now.sky||'')+'</strong><span>최고 '+fmt(today.max,'°')+' · 최저 '+fmt(today.min,'°')+' · 강수 '+fmt(today.pop,'%')+'</span></div><div class="wx-chips">'+(w.sample===true?'<span class="g-chip">샘플</span>':'')+(g10?'<span class="g-chip'+g10.cls+'">미세 '+g10.label+'</span>':'')+(g25?'<span class="g-chip'+g25.cls+'">초미세 '+g25.label+'</span>':'')+'</div></div>';
+    const line='<div class="wx-line">'+art(skyArt(now.sky),40)+'<div class="wx-line-main"><strong>'+loc+' '+fmt(now.temp,'°')+' · '+C.esc(now.sky||'')+'</strong><span>최고 '+fmt(today.max,'°')+' · 최저 '+fmt(today.min,'°')+' · 강수 '+fmt(today.pop,'%')+(w.sample===true?'':' · '+result.date.slice(5).replace('-','.')+(hour?' '+hour+'시':'')+' 기준')+'</span></div><div class="wx-chips">'+(w.sample===true?'<span class="g-chip">샘플</span>':'')+(g10?'<span class="g-chip'+g10.cls+'">미세 '+g10.label+'</span>':'')+(g25?'<span class="g-chip'+g25.cls+'">초미세 '+g25.label+'</span>':'')+'</div></div>';
     return '<article class="digest-card wx-card" data-category="weather">'+link(loc)+cardTop('weather','<span class="card-kind">· '+loc+'</span>'+tag)+full+line+'</article>';
   }
   function weatherView(w,date){
@@ -209,6 +214,8 @@
     window.addEventListener('popstate',()=>loadHome(new URL(location.href).searchParams.get('date')));
     renderArchiveList();
     await ready;probePending();
+    // [검토 제안 P4] ?date= 로 바로 열어도 달력 점·'지난 호 전체 보기'가 채워지게 날짜 목록을 따로 받는다.
+    if(/^\d{4}-\d{2}-\d{2}$/.test(date||''))Promise.all(homeCards().map(cat=>dateIndex(cat))).then(all=>{all.flat().forEach(d=>homeDates.add(d));syncHomeDates();}).catch(()=>{});
     await loadHome(/^\d{4}-\d{2}-\d{2}$/.test(date||'')?date:null);
     if(location.hash==='#archive'){history.replaceState(history.state,'',location.pathname+location.search);openArchive();}
   }
@@ -218,6 +225,7 @@
     if(push){const url=new URL(location.href);if(date)url.searchParams.set('date',date);else url.searchParams.delete('date');history.pushState({},'',url);}
     const CARDS=homeCards();
     feed.innerHTML=skeletons(CARDS);
+    {const sb=$('#sched');if(sb){sb.hidden=true;sb.innerHTML='';}} // [GPT] 느린 연결에서 이전 날짜 일정이 남지 않게
     renderCalendar();renderArchiveList();
     const results={};
     await Promise.all(CARDS.map(async cat=>{
@@ -227,21 +235,40 @@
       if(id!==homeId)return;
       results[cat]=result;if(result)homeDates.add(result.date);
       const slot=$('#card-'+cat);if(slot)slot.outerHTML=cat==='weather'?weatherCard(result,date):card(cat,result,date,cat==='financial');
+      // [GPT] 최신 호 보기인데 오늘 것이 아직 없으면 '지난 정보' 표시
+      if(!date&&result&&result.date<C.kstDate()){const top=$('#feed [data-category="'+cat+'"] .card-top');if(top)top.insertAdjacentHTML('beforeend',staleTag(result.date));}
     }));
     if(id!==homeId)return;
     if(!date){const days=Object.values(results).filter(Boolean).map(r=>r.date).sort();selected=days[days.length-1]||'';if(selected){view=new Date(selected.slice(0,7)+'-01T12:00:00Z');if(label)label.textContent=shortDate(selected);}}
     flow(results);balance(CARDS.length);schedules(results);syncHomeDates();
+    // [M7] 아무 분야도 없는 날짜(?date=로 연 경우): 카드 6장의 '없습니다' 대신 안내 하나 + 최신 호·다시 시도 버튼
+    $('#home-empty')?.remove();
+    feed.hidden=false;
+    if(date&&!Object.values(results).some(Boolean)){
+      feed.insertAdjacentHTML('beforebegin','<section class="empty" id="home-empty"><h2>'+C.esc(shortDate(date))+'에는 발행된 브리핑이 없습니다</h2><p>달력에서 점이 있는 날을 고르거나 최신 호를 보세요.</p><button type="button" id="home-latest">최신 호 보기</button> <button type="button" id="home-retry">다시 시도</button></section>');
+      feed.hidden=true; // 빈 카드 6장은 숨기고 안내 하나만
+      $('#home-latest').addEventListener('click',()=>loadHome(null,true));
+      $('#home-retry').addEventListener('click',()=>loadHome(date));
+    }
   }
   function flow(results){
     const items=STORIES.map(cat=>{const r=results[cat];if(!r)return '';const one=P(r).oneLiner.trim().split(/\n\s*\n/)[0].replace(/\s+/g,' ');return one?'<div class="flow-item"><span class="flow-k">'+config[cat].short+'</span><span class="flow-v">'+C.inline(one)+'</span></div>':'';}).join('');
-    $('#flow-list').innerHTML=items||'<p class="flow-wait">한 줄 요약이 아직 없습니다</p>';
+    $('#flow-list').innerHTML=items||'<p class="flow-wait">'+(selected&&selected<C.kstDate()?'이 날짜의 한 줄 요약이 없습니다':'한 줄 요약이 아직 없습니다')+'</p>';
   }
   // One card per live category, no fillers. Odd leftovers in the last grid row widen the last card (CSS reads data-r2/data-r3).
   function balance(n){const feed=$('#feed'),after=Math.max(0,n-1);feed.dataset.r3=after?String((after-1)%3):'0';feed.dataset.r2=String(after%2);}
+  // [검토 제안 P5] 홈에서는 NBA 경기를 한 줄 요약 + '전체 보기'로 접는다. 지난 경기(오늘 날짜, 지금보다 이른 시각)는 흐리게.
+  function compactSched(items,date){
+    const isNba=x=>/^NBA\s/.test(x.title),nba=items.filter(isNba),rest=items.filter(x=>!isNba(x));
+    if(nba.length<4)return schedList(items);
+    const t=nba.map(x=>x.time).filter(v=>/^\d/.test(v)),now=new Date(Date.now()+9*3600000).toISOString().slice(11,16),past=x=>date===C.kstDate()&&/^\d/.test(x.time)&&x.time<now;
+    return (rest.length?schedList(rest):'')+'<details class="sched-more"><summary><span class="sched-t">NBA</span><span class="sched-b"><strong>'+nba.length+'경기 · '+C.esc(t[0]||'')+(t.length>1?'–'+C.esc(t[t.length-1]):'')+'</strong><em>전체 경기 보기</em></span></summary>'
+      +'<ul class="sched-list sched-compact">'+nba.map(x=>'<li'+(past(x)?' class="is-past"':'')+'><span class="sched-t">'+C.esc(x.time)+'</span><span class="sched-b">'+C.inline(x.title.replace(/^NBA\s+/,''))+'</span></li>').join('')+'</ul></details>';
+  }
   // 오늘의 주요 일정: '## SCHEDULE' of each story category's issue for the shown date, grouped by topic (weather has none).
   function schedules(results){
     const box=$('#sched');if(!box)return;
-    const groups=STORIES.map(cat=>{const r=results[cat];if(!r||(selected&&r.date!==selected))return '';const items=schedOf(P(r));return items.length?'<div class="sched-group" data-category="'+cat+'"><h3>'+catArt(cat,20)+config[cat].short+'</h3>'+schedList(items)+'</div>':'';}).join('');
+    const groups=STORIES.map(cat=>{const r=results[cat];if(!r||(selected&&r.date!==selected))return '';const items=schedOf(P(r));return items.length?'<div class="sched-group" data-category="'+cat+'"><h3>'+catArt(cat,20)+config[cat].short+'</h3>'+(cat==='sports'?compactSched(items,r.date):schedList(items))+'</div>':'';}).join('');
     box.hidden=!groups;box.innerHTML=groups?'<h2 id="sched-title">오늘의 주요 일정 <span>'+C.esc(shortDate(selected))+' · 한국 시간</span></h2>'+groups:'';
   }
   function syncHomeDates(){if(!HOME)return;available=[...homeDates].filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(d)&&d<=C.kstDate()).sort().reverse();renderCalendar();renderArchiveList();}
@@ -261,11 +288,19 @@
     html+='<span></span>'.repeat(new Date(Date.UTC(y,m,1)).getUTCDay());
     for(let d=1;d<=new Date(Date.UTC(y,m+1,0)).getUTCDate();d++){
       const date=y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0'),exists=available.includes(date),canSelect=exists||date<=C.kstDate(); // past days stay clickable even when the date list is stale or the API is rate-limited
-      html+='<button class="cal-day'+(exists?' has-brief':'')+'" data-date="'+date+'" aria-label="'+date+(exists?' 브리핑 읽기':' 브리핑 확인')+'" aria-pressed="'+(date===selected)+'"'+(!canSelect?' disabled':'')+'>'+d+'</button>';
+      html+='<button class="cal-day'+(exists?' has-brief':'')+'" data-date="'+date+'" aria-label="'+(m+1)+'월 '+d+'일'+(exists?', 브리핑 있음':'')+'" aria-pressed="'+(date===selected)+'"'+(!canSelect?' disabled':'')+'>'+d+'</button>';
     }
     $('#cal-grid').innerHTML=html;$('#cal-grid').querySelectorAll('button:not(:disabled)').forEach(el=>el.addEventListener('click',()=>{
       if(HOME){const m=mobile(),d=el.dataset.date;closeHomeCal(m);loadHome(d,true);if(!m)$('.cal-day[data-date="'+d+'"]')?.focus();return;}
       closeCalendar();load(el.dataset.date,true);}));
+  }
+  // [검토 제안 P3] 날짜 목록이 낡아도(인덱스 미갱신·API 한도) 발행된 날을 건너뛰지 않게, 알려진 이전 호까지의 날을 차례로 확인한다.
+  async function previousIssue(){
+    const from=selected,known=available.filter(d=>d<from).sort().reverse()[0]||'';$('#read-status').textContent='이전 호 찾는 중…';
+    // 신호가 약할 때 날마다 5.5초씩 기다려 1분 넘게 멈추지 않게, 전체 8초가 지나면 알고 있는 이전 호로 간다
+    const deadline=Date.now()+8000;
+    for(let i=1;i<=14&&Date.now()<deadline;i++){const d=new Date(Date.parse(from+'T12:00:00Z')-i*86400000).toISOString().slice(0,10);if(d<=known)break;if(await fetchDate(page,d)){if(!available.includes(d))available.push(d);return d;}}
+    return known||null;
   }
   function closeCalendar(){const el=$('#archive-picker');if(el.open){el.open=false;el.querySelector('summary').focus();}}
   function story(text){if(!text)return '';const split=text.search(/^####\s/m);let main=text,more='';if(split>=0){main=text.slice(0,split);more=text.slice(split);}return '<section class="story"><div class="kicker">오늘의 흐름 · THE BIG PICTURE</div><div class="prose">'+C.markdown(main)+'</div>'+(more?'<details class="story-more"><summary>배경과 해석 더 읽기</summary><div class="prose">'+C.markdown(more)+'</div></details>':'')+'</section>';}
@@ -295,9 +330,12 @@
     const result=date?await fetchDate(page,date):await latest(page,available);
     if(id!==requestId)return;
     $('#content').setAttribute('aria-busy','false');
-    if(!result){$('#content').innerHTML='<section class="empty"><h2>브리핑을 불러오지 못했습니다</h2><p>'+C.esc(date||'최신 호')+'의 발행 여부와 인터넷 연결을 확인해 주세요.<br>다른 날짜를 선택하거나 다시 시도할 수 있습니다.</p><button id="retry">다시 시도</button></section>';$('#retry').addEventListener('click',()=>load(date));$('#read-status').textContent='불러오기 실패';return;}
+    if(!result){$('#content').innerHTML='<section class="empty"><h2>브리핑을 불러오지 못했습니다</h2><p>'+C.esc(date?shortDate(date):'최신 호')+'의 발행 여부와 인터넷 연결을 확인해 주세요.<br>다른 날짜를 선택하거나 다시 시도할 수 있습니다.</p><button id="retry">다시 시도</button>'+(date?' <button id="go-latest">최신 호 보기</button>':'')+'</section>';$('#retry').addEventListener('click',()=>load(date));$('#go-latest')?.addEventListener('click',()=>load(null,true));
+      // [GPT] 실패해도 주소·머리줄·제목이 요청한 날짜와 맞게
+      const hd=$('#hero-date');if(hd)hd.textContent=date?date.slice(5).replace('-','.')+' 발행 없음':'';
+      if(date){const u=new URL(location.href);u.searchParams.set('date',date);if(push)history.pushState({},'',u);else history.replaceState({},'',u);document.title=config[page].name+' · '+date;}$('#read-status').textContent='불러오기 실패';return;}
     lastResult=result;selected=result.date;view=new Date(selected.slice(0,7)+'-01T12:00:00Z');if(!available.includes(selected))available.push(selected);available.sort().reverse();
-    $('#content').innerHTML=render(result);updateControls();const hd=$('#hero-date');if(hd)hd.textContent=selected.slice(5).replace('-','.')+' 발행';renderCalendar();
+    $('#content').innerHTML=(!date&&result.date<C.kstDate()&&!result.cached?'<p class="offline-note">'+staleTag(result.date)+' 오늘 브리핑이 아직 없어 '+C.esc(shortDate(result.date))+' 호를 표시합니다.</p>':'')+render(result);updateControls();const hd=$('#hero-date');if(hd)hd.textContent=selected.slice(5).replace('-','.')+' 발행';renderCalendar();
     const url=new URL(location.href);url.searchParams.set('date',selected);if(push)history.pushState({},'',url);else history.replaceState({},'',url);
     document.title=config[page].name+' · '+selected;
     document.querySelectorAll('.ov-open').forEach(b=>b.addEventListener('click',()=>{const el=document.getElementById(b.dataset.target);if(!el)return;el.open=true;el.scrollIntoView({behavior:'smooth',block:'start'});el.querySelector('summary').focus({preventScroll:true});}));
@@ -311,7 +349,7 @@
     $('#cal-prev').addEventListener('click',()=>{view=new Date(Date.UTC(view.getUTCFullYear(),view.getUTCMonth()-1,1,12));renderCalendar();});
     $('#cal-next').addEventListener('click',()=>{view=new Date(Date.UTC(view.getUTCFullYear(),view.getUTCMonth()+1,1,12));renderCalendar();});
     $('#close-calendar').addEventListener('click',closeCalendar);
-    $('#previous-date').addEventListener('click',()=>load(available.filter(d=>d<selected).sort().reverse()[0],true));
+    $('#previous-date').addEventListener('click',async()=>load(await previousIssue(),true));
     $('#latest-date').addEventListener('click',()=>load(null,true));
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCalendar();});
     document.addEventListener('click',e=>{if(!$('#archive-picker').contains(e.target))$('#archive-picker').open=false;});

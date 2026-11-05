@@ -473,7 +473,7 @@ body:not([data-page=home]):not([data-page=collab]) .m-title{display:none}
   body[data-page=home] .cat-rounds{margin:2px 0 14px}
 }
 /* 1103e: PC home balance — rail follows the scroll, schedule in two columns, wider canvas on large screens */
-@media(min-width:900px){.home-rail{position:sticky;top:16px}}
+@media(min-width:900px) and (min-height:1000px){.home-rail{position:sticky;top:16px}} /* 레일(약 960px)이 화면보다 높으면 따라오지 않게(아래가 잘림) */
 @media(min-width:1100px){
   .sched-card{column-count:2;column-gap:28px}
   .sched-card h2{column-span:all}
@@ -484,3 +484,49 @@ body:not([data-page=home]):not([data-page=collab]) .m-title{display:none}
 }
 @media(min-width:1600px){.shell,.topbar-in{width:min(1440px,100%)}.home-layout{grid-template-columns:minmax(0,1fr) 360px}body:not([data-page=home]) .shell,body:not([data-page=home]) .topbar-in{width:min(1100px,100%)}}
 @media(max-width:760px){.cat-rounds a.pc-only{display:none}}
+
+/* ============================================================
+   2026-11-05 검토 반영. 색·모양은 그대로, 깨짐·대비·접근성·밀도만 손봄
+   ============================================================ */
+/* [H2] PC 홈 날씨 카드: '15'와 '°'가 두 줄로 갈라짐(body의 overflow-wrap:anywhere 때문) */
+.wx-temp,.wx-sky span,.wx-v b{white-space:nowrap}
+/* [M1] PC 홈 마지막 줄 단독 카드가 가로 전체로 늘어나던 것 → 6칸 격자로 2×2 / 한 줄 3장 */
+@media(min-width:1100px){
+  .feed{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .feed>.digest-card{grid-column:span 2}
+  .feed>.lead-card{grid-column:1/span 4}
+  .feed>.wx-card{grid-column:5/span 2}
+  .feed[data-r3="1"]>.digest-card:nth-last-child(-n+4){grid-column:span 3}
+  .feed[data-r3="2"]>.digest-card:nth-last-child(-n+2){grid-column:span 3}
+}
+/* [M3] 카드→분야 머리 전환: 상자만 커지고 글자는 늘어나 번지지 않게, 이전 카드 내용은 빨리 사라지게 */
+::view-transition-old(*),::view-transition-new(*){height:100%;object-fit:none;object-position:left top}
+::view-transition-old(card-financial),::view-transition-old(card-international),::view-transition-old(card-sports),
+::view-transition-old(card-health),::view-transition-old(card-tech),::view-transition-old(card-weather){animation-duration:.08s}
+/* [M4] 파란 판 안 키보드 초점: 파랑 위 파랑(1.0~1.4:1) → 흰색 */
+.story :focus-visible,.flow-card :focus-visible,.wx-hero :focus-visible{outline-color:#fff}
+/* [M5] 모바일 상태 안내(role=status)가 display:none이라 스크린리더가 못 읽음 → 화면에서만 숨김 */
+@media(max-width:700px){.status{display:block;position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}
+/* [M8] 모바일 분야 머리: 분야 이름이 세 번(아이콘 줄·라벨·제목) + 매일 같은 소개문 → 라벨·소개문 숨김 */
+@media(max-width:760px){.cat-hero{padding:12px 16px 14px;gap:4px}.cat-hero .category-name,.cat-hero p{display:none}.cat-hero h1{font-size:19px}}
+/* [M9] 다크 모드: 큰 파란 판이 눈부심 → 한 단계 깊은 파랑(흰 글자 대비는 8.2~11.5:1로 오히려 올라감). 카드 테두리도 한 단계 밝게 */
+html.dark .story,html.dark .flow-card,html.dark .wx-hero{background:linear-gradient(135deg,#1D4F8C 0%,#163A66 100%)}
+:root.dark{--line:#3D3935}
+/* [M2] 홈 일정 박스: NBA 접기(briefings.js compactSched와 짝) */
+.sched-more>summary{list-style:none;display:flex;gap:12px;align-items:center;min-height:44px;padding:4px 0;cursor:pointer}
+.sched-more>summary::-webkit-details-marker{display:none}
+.sched-more>summary em{color:var(--brand-ink);font-weight:700}
+.sched-more[open]>summary em{display:none}
+.sched-compact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px}
+.sched-compact li{padding:4px 0;font-size:13.5px}
+.sched-compact .sched-t{flex-basis:42px}
+.sched-compact .is-past{opacity:.55}
+/* [L1] 한글 11px 라벨 → 12px, 굵기 위계(800은 제목급에만), 모바일 날짜가 첫 헤드라인보다 크지 않게 */
+.lbl,.tab,.wx-k,.h-t,.flow-k{font-size:12px}
+.card-headline,.article h3{font-weight:700}
+@media(max-width:760px){.pill-face{font-size:19px}}
+/* [L5] PC 날짜 줄: 이전·최신 버튼이 가운데 떠 있지 않게 왼쪽으로, 상태 글은 오른쪽 */
+@media(min-width:701px){.date-controls{justify-content:flex-start}.date-controls .status{margin-left:auto}}
+/* [L2] 'Markdown 원문 보기' 링크 높이 14px → 44px 터치 영역 */
+.author a{display:inline-flex;align-items:center;min-height:44px}
+.stale-tag{font-size:11px;font-weight:800;color:var(--warn,#9a5b00);background:var(--warn-bg,#fdf0d9);border:1px solid currentColor;border-radius:999px;padding:1px 8px;white-space:nowrap;margin-left:6px}
