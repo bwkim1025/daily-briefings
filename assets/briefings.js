@@ -78,12 +78,11 @@
   function navigation(){return '<nav class="nav" aria-label="브리핑 카테고리">'+LISTED.map(key=>'<a href="'+catHref(key)+'"'+catCur(key)+'>'+catArt(key,24)+config[key].short+'</a>').join('')+'</nav>';}
   // Mobile icon row: identical on home and category pages; only the ring of the active category changes.
   function rounds(){return '<nav class="cat-rounds" aria-label="분야 바로가기">'+STORIES.concat(LISTED.includes('weather')?['weather']:[]).map(key=>'<a href="'+catHref(key)+'"'+catCur(key)+(key==='weather'?' class="pc-only"':'')+'><span class="ring"><span class="disc">'+catArt(key,30)+'</span></span><span class="lbl">'+config[key].short+'</span></a>').join('')+'</nav>';}
-  // Mobile bottom tabs: 오늘 / 분야 (sheet) / 지난 호 (calendar) / 협의실. Hidden on PC by CSS.
+  // Mobile bottom tabs: 오늘 / 분야 (sheet) / 지난 호 (calendar). Hidden on PC by CSS.
   function tabbar(){
     return '<nav class="tabbar" aria-label="빠른 이동"><a class="tab" href="'+base.href+'"'+(HOME?' aria-current="page"':'')+'>'+svg('home')+'<span>오늘</span></a>'
       +'<details class="tab-cats'+(!HOME&&config[page]?' is-here':'')+'"><summary class="tab">'+svg('layers')+'<span>분야</span></summary><div class="cat-sheet">'+sheetLinks()+'</div></details>'
-      +'<a class="tab" id="tab-archive" href="'+base.href+'#archive">'+svg('calendar')+'<span>지난 호</span></a>'
-      +'<a class="tab" href="'+new URL('collab.html',base).href+'">'+svg('chat')+'<span>협의실</span></a></nav>';
+      +'<a class="tab" id="tab-archive" href="'+base.href+'#archive">'+svg('calendar')+'<span>지난 호</span></a></nav>';
   }
   function sheetLinks(){return LISTED.map(key=>'<a href="'+new URL(key+'/',base).href+'"'+(page===key?' aria-current="page"':'')+'>'+catArt(key,30)+'<span>'+config[key].short+'</span></a>').join('');}
   // Gate resolved after the first paint: redraw only the category menus if the listed set changed.
@@ -101,10 +100,10 @@
   }
   function shell(){
     const c=config[page];
-    $('#app').innerHTML='<a class="skip" href="#main">본문으로 건너뛰기</a><header class="topbar"><div class="topbar-in"><a class="brand" href="'+base.href+'"><span class="app-mark app-icon"><img src="'+new URL('icon-v3-192.png?v=27',base).href+'" alt="" width="34" height="34"></span><div><div class="brand-name">땡이네 뉴스</div><div class="brand-caption">A CLEARER VIEW, EVERY DAY</div></div></a>'
+    $('#app').innerHTML='<a class="skip" href="#main">본문으로 건너뛰기</a><header class="topbar"><div class="topbar-in"><a class="brand" href="'+base.href+'"><span class="app-mark app-icon"><img src="'+new URL('icon-v3-192.png?v=28',base).href+'" alt="" width="34" height="34"></span><div><div class="brand-name">땡이네 뉴스</div><div class="brand-caption">A CLEARER VIEW, EVERY DAY</div></div></a>'
       +(HOME?'':'<a class="back-link" href="'+base.href+'" aria-label="전체 브리핑으로">'+svg('back')+'</a><span class="m-title">'+C.esc(c?(page==='weather'?c.name:c.short):'')+'</span>')
       +'<div class="tools">'+(HOME?'<button class="date-pill" id="date-pill" type="button" aria-controls="home-archive"><span class="pill-face">'+svg('calendar')+'<span id="date-label">'+shortDate(C.kstDate())+'</span>'+svg('chevron','pill-chev')+'</span></button>':'')
-      +'<button class="icon-btn cal-btn" id="cal-btn" type="button" aria-label="달력 · 지난 호">'+svg('calendar')+'</button><button class="icon-btn" id="theme-toggle">'+svg('moon')+'</button><a class="collab-link" href="'+new URL('collab.html',base).href+'">협의실</a></div></div></header>'
+      +'<button class="icon-btn cal-btn" id="cal-btn" type="button" aria-label="달력 · 지난 호">'+svg('calendar')+'</button><button class="icon-btn" id="theme-toggle">'+svg('moon')+'</button></div></div></header>'
       +'<div class="shell">'+navigation()+(HOME?'':rounds())+'<main id="main"></main><footer class="footer"><span>땡이네 뉴스 · bwkim1025</span><span>Personal use only · 원문을 함께 확인하세요</span></footer></div>'+tabbar();
     setTheme(document.documentElement.classList.contains('dark'));
     $('#theme-toggle').addEventListener('click',()=>{const dark=!document.documentElement.classList.contains('dark');setTheme(dark);storage.set('eb-theme',dark?'dark':'light');});
