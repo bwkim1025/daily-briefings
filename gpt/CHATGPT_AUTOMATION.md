@@ -49,7 +49,7 @@ Keep the current category lookback rules: this adds no new 90-day requirement to
 ## Exact output schema
 
 Each file begins # YYYY-MM-DD and ends ## AUTHOR.
-AUTHOR is actual readable model name · verified model ID or (미확인) · YYYY-MM-DD HH:MM KST; never reuse a Claude sample by default.
+AUTHOR is actual readable model name · verified model ID or (모델 버전 미확인) · YYYY-MM-DD HH:MM KST (actual KST read right before the commit, never a planned or estimated time); never reuse a Claude sample by default.
 App parsers use exact uppercase h2 tags and #### content blocks. Keep these tags and order.
 
 1. financial/briefings/YYYY-MM-DD.md
