@@ -302,7 +302,7 @@
     return known||null;
   }
   function closeCalendar(){const el=$('#archive-picker');if(el.open){el.open=false;el.querySelector('summary').focus();}}
-  function story(text){if(!text)return '';const split=text.search(/^####\s/m);let main=text,more='';if(split>=0){main=text.slice(0,split);more=text.slice(split);}return '<section class="story"><div class="kicker">오늘의 흐름 · THE BIG PICTURE</div><div class="prose">'+C.markdown(main)+'</div>'+(more?'<details class="story-more"><summary>배경과 해석 더 읽기</summary><div class="prose">'+C.markdown(more)+'</div></details>':'')+'</section>';}
+  function story(text){if(!text)return '';const split=text.search(/^####\s/m);let main=text,more='';if(split>=0){main=text.slice(0,split);more=text.slice(split);}return '<section class="story" id="todays-story"><div class="kicker">오늘의 흐름 · THE BIG PICTURE</div><div class="prose">'+C.markdown(main)+'</div>'+(more?'<details class="story-more"><summary>배경과 해석 더 읽기</summary><div class="prose">'+C.markdown(more)+'</div></details>':'')+'</section>';}
   function render(result){
     const data=C.parse(result.md),wx=page==='weather',sections=visible(page,data.sections).filter(s=>(!wx||s.key!=='WEATHER')&&(s.items.length||s.intro.trim()));
     const total=sections.reduce((n,s)=>n+s.items.length,0);
@@ -334,7 +334,7 @@
       const hd=$('#hero-date');if(hd)hd.textContent=date?date.slice(5).replace('-','.')+' 발행 없음':'';
       if(date){const u=new URL(location.href);u.searchParams.set('date',date);if(push)history.pushState({},'',u);else history.replaceState({},'',u);document.title=config[page].name+' · '+date;}$('#read-status').textContent='불러오기 실패';return;}
     lastResult=result;selected=result.date;view=new Date(selected.slice(0,7)+'-01T12:00:00Z');if(!available.includes(selected))available.push(selected);available.sort().reverse();
-    $('#content').innerHTML=(!date&&result.date<C.kstDate()&&!result.cached?'<p class="offline-note">'+staleTag(result.date)+' 오늘 브리핑이 아직 없어 '+C.esc(shortDate(result.date))+' 호를 표시합니다.</p>':'')+render(result);updateControls();const hd=$('#hero-date');if(hd)hd.textContent=selected.slice(5).replace('-','.')+' 발행';renderCalendar();
+    $('#content').innerHTML=(!date&&result.date<C.kstDate()&&!result.cached?'<p class="offline-note">'+staleTag(result.date)+' 오늘 브리핑이 아직 없어 '+C.esc(shortDate(result.date))+' 호를 표시합니다.</p>':'')+render(result);try{const h=decodeURIComponent((location.hash||'').slice(1));const el=h&&document.getElementById(h);if(el){if(el.tagName==='DETAILS')el.open=true;el.scrollIntoView({block:'start'});}}catch(e){}updateControls();const hd=$('#hero-date');if(hd)hd.textContent=selected.slice(5).replace('-','.')+' 발행';renderCalendar();
     const url=new URL(location.href);url.searchParams.set('date',selected);if(push)history.pushState({},'',url);else history.replaceState({},'',url);
     document.title=config[page].name+' · '+selected;
     document.querySelectorAll('.ov-open').forEach(b=>b.addEventListener('click',()=>{const el=document.getElementById(b.dataset.target);if(!el)return;el.open=true;el.scrollIntoView({behavior:'smooth',block:'start'});el.querySelector('summary').focus({preventScroll:true});}));
