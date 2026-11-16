@@ -532,14 +532,45 @@ html.dark .story,html.dark .flow-card,html.dark .wx-hero{background:linear-gradi
 .stale-tag{font-size:11px;font-weight:700;color:var(--warn,#9a5b00);background:var(--warn-bg,#fdf0d9);border:1px solid currentColor;border-radius:999px;padding:1px 8px;white-space:nowrap;margin-left:6px}
 
 /* ============================================================
-   2026-11-16 · 넓은 PC 화면(57인치 WUHD 등) 채우기. 1599px 이하는 이 블록의 영향이 전혀 없습니다.
-   - 2200px·3000px 이상에서 폭을 단계적으로 넓히고, 늘어난 폭은 열(2~3열·카드 한 줄)로 씁니다.
-   - 본문 열은 900px 안팎으로 두어 한 줄 길이를 제한합니다. 색·글꼴(Spoqa Han Sans Neo)·카드 모양은 그대로입니다.
-   - 되돌리기: 이 블록을 지우면 됩니다.
+   2026-11-16 · 넓은 PC 화면(57인치 WUHD 등) v2 — 폭 상한 대신 열 수를 늘립니다. 1599px 이하는 이 블록의 영향이 전혀 없습니다.
+   - 1600px 이상: 화면 폭을 그대로 씁니다(좌우 여백 = 안쪽 여백만). 분야 화면은 오른쪽에 '같은 날 다른 분야' 카드(briefings.js sideRail).
+   - 열 수: 홈 카드 6칸→12칸(2200)→한 줄 7칸(3200), 분야 화면 본문 2열(1600)→3열(2400). 이슈 수가 열 수로 나눠떨어지지 않으면 마지막 이슈를 넓혀 빈 칸을 없앱니다.
+   - 4800px 이상(배율 100~125%의 7680 모니터)은 화면 전체를 1.25배·2배로 키워 글자가 너무 작아지지 않게 합니다.
+   - 색·글꼴(Spoqa Han Sans Neo)·카드 모양은 그대로, 박스 안에 박스를 넣지 않습니다. 되돌리기: 이 블록 + briefings.js sideRail을 지우면 됩니다.
    ============================================================ */
-/* 홈(전체): 폭 2400px, 카드 12칸 격자 = 첫 줄 파이낸셜(6)·날씨(3)·첫 일반 분야(3), 다음 줄부터 세 장씩(4). 카드 DOM 순서는 날씨·파이낸셜·나머지이고 격자는 dense라 칸 번호로 자리를 정합니다 */
+@media(min-width:1600px){
+  .shell,.topbar-in,body:not([data-page=home]) .shell,body:not([data-page=home]) .topbar-in{width:100%;padding-left:40px;padding-right:40px}
+  .home-layout{grid-template-columns:minmax(0,1fr) 380px}
+  /* 분야 화면: 본문(왼쪽) + 같은 날 다른 분야(오른쪽) */
+  body:is([data-page=financial],[data-page=international],[data-page=sports],[data-page=health],[data-page=tech],[data-page=medical],[data-page=weather]) .shell{display:grid;grid-template-columns:minmax(0,1fr) 340px;column-gap:32px;align-items:start}
+  body:is([data-page=financial],[data-page=international],[data-page=sports],[data-page=health],[data-page=tech],[data-page=medical],[data-page=weather]) .shell>*{grid-column:1/-1;min-width:0}
+  body:is([data-page=financial],[data-page=international],[data-page=sports],[data-page=health],[data-page=tech],[data-page=medical],[data-page=weather]) .shell>#main{grid-column:1}
+  body:is([data-page=financial],[data-page=international],[data-page=sports],[data-page=health],[data-page=tech],[data-page=medical],[data-page=weather]) .shell>.cat-side{grid-column:2;display:flex;flex-direction:column;gap:14px;margin-top:14px}
+  .cat-side-title{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:-.1px;margin:2px 2px -2px}
+  .cat-side .digest-card{min-height:0}
+  /* 분야 본문 2열: 오늘의 이야기(왼쪽) · 오늘 들은 내용과 기준 안내(오른쪽), 이슈는 두 열 */
+  #content:has(>:is(#todays-story,.wx-view)){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto auto 1fr;column-gap:28px;align-items:start}
+  #content:has(>:is(#todays-story,.wx-view))>*{grid-column:1/-1;min-width:0}
+  #content:has(>:is(#todays-story,.wx-view))>:is(#todays-story,.wx-view){grid-column:1;grid-row:1/span 3}
+  #content:has(>:is(#todays-story,.wx-view))>#podcast-listen{grid-column:2;grid-row:1;margin-top:0}
+  #content:has(>:is(#todays-story,.wx-view))>.wx-note{grid-column:2;grid-row:2;margin-top:0}
+  #content:has(>:is(#todays-story,.wx-view))>.source-note{grid-column:2;grid-row:3}
+  #content:has(>:is(#todays-story,.wx-view))>.category{grid-column:auto}
+  /* 이슈 수가 홀수면 마지막 이슈를 두 칸으로(본문은 두 단으로 나눠 한 줄 길이 유지) */
+  #content:has(>:is(#todays-story,.wx-view))>.category:nth-child(odd of .category):nth-last-child(1 of .category){grid-column:1/-1}
+  #content:has(>:is(#todays-story,.wx-view))>.category:nth-child(odd of .category):nth-last-child(1 of .category) .article-body{column-count:2;column-gap:40px}
+  #content:has(>:is(#todays-story,.wx-view))>.category:nth-child(odd of .category):nth-last-child(1 of .category) .block{break-inside:avoid}
+  /* 일정 + 마지막 한 줄을 나란히 */
+  #content:has(>:is(#todays-story,.wx-view))>.sched-page{column-count:2;column-gap:28px}
+  #content:has(>:is(#todays-story,.wx-view))>.sched-page h2{column-span:all}
+  #content:has(>:is(#todays-story,.wx-view))>.sched-page li{break-inside:avoid}
+  #content:has(>:is(#todays-story,.wx-view))>.sched-page:has(+.one-liner){grid-column:1;margin-top:0}
+  #content:has(>:is(#todays-story,.wx-view))>.sched-page+.one-liner{grid-column:2;margin-top:0}
+  #content:has(>:is(#todays-story,.wx-view))>.sched-page:has(+.one-liner){column-count:1}
+}
+/* 홈 2200px 이상: 카드 12칸 격자 = 첫 줄 파이낸셜(6)·날씨(3)·첫 일반 분야(3), 다음 줄 세 장(4). 카드 DOM 순서는 날씨·파이낸셜·나머지, 격자는 dense라 칸 번호로 자리를 정함 */
 @media(min-width:2200px){
-  .shell,.topbar-in{width:min(2400px,100%);padding-left:40px;padding-right:40px}
+  .shell,.topbar-in,body:not([data-page=home]) .shell,body:not([data-page=home]) .topbar-in{padding-left:48px;padding-right:48px}
   .home-layout{grid-template-columns:minmax(0,1fr) 400px;gap:24px}
   .home-layout .feed{grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
   .home-layout .feed[data-r3]>.digest-card:nth-child(n){grid-column:span 4}
@@ -550,24 +581,33 @@ html.dark .story,html.dark .flow-card,html.dark .wx-hero{background:linear-gradi
   .home-layout .feed[data-r3="2"]>.digest-card:last-child:nth-child(n+4){grid-column:1/-1}
   .sched-card:not(.sched-page){column-count:3}
 }
-/* 분야 화면: 폭 1960px, 오늘의 이야기(왼쪽)·오늘 들은 내용과 기준 안내(오른쪽), 이슈는 두 열 */
-@media(min-width:2200px){
-  body:is([data-page=financial],[data-page=international],[data-page=sports],[data-page=health],[data-page=tech],[data-page=medical]) :is(.shell,.topbar-in){width:min(1960px,100%)}
-  #content:has(>#todays-story){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto 1fr;column-gap:32px;align-items:start}
-  #content:has(>#todays-story)>*{grid-column:1/-1;min-width:0}
-  #content:has(>#todays-story)>#todays-story{grid-column:1;grid-row:1/span 2}
-  #content:has(>#todays-story)>#podcast-listen{grid-column:2;grid-row:1;margin-top:0}
-  #content:has(>#todays-story)>.source-note{grid-column:2;grid-row:2}
-  #content:has(>#todays-story)>.category{grid-column:auto}
-  #content:has(>#todays-story)>.one-liner{grid-column:1}
-  #content:has(>#todays-story)>.sched-page{column-count:2;column-gap:28px}
-  #content:has(>#todays-story)>.sched-page h2{column-span:all}
-  #content:has(>#todays-story)>.sched-page li{break-inside:avoid}
+/* 분야 2400px 이상: 본문 세 열(6칸 격자). 이슈 3n+1개면 마지막 이슈 전체 폭(본문 세 단), 3n+2개면 마지막 두 이슈 반씩 */
+@media(min-width:2400px){
+  body:is([data-page=financial],[data-page=international],[data-page=sports],[data-page=health],[data-page=tech],[data-page=medical],[data-page=weather]) .shell{grid-template-columns:minmax(0,1fr) 380px}
+  #content:has(>:is(#todays-story,.wx-view)){grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:auto 1fr}
+  #content:has(>:is(#todays-story,.wx-view))>*{grid-column:1/-1}
+  #content:has(>:is(#todays-story,.wx-view))>:is(#todays-story,.wx-view){grid-column:1/span 2;grid-row:1/span 2}
+  #content:has(>:is(#todays-story,.wx-view))>#podcast-listen{grid-column:3/span 2;grid-row:1}
+  #content:has(>:is(#todays-story,.wx-view))>.source-note{grid-column:5/span 2;grid-row:1}
+  #content:has(>:is(#todays-story,.wx-view))>.wx-note{grid-column:5/span 2;grid-row:1}
+  #content:has(>:is(#todays-story,.wx-view)):has(>.wx-note)>.source-note{grid-column:3/span 4;grid-row:2}
+  #content:has(>:is(#todays-story,.wx-view))>.category{grid-column:span 2}
+  #content:has(>:is(#todays-story,.wx-view))>.category:nth-child(odd of .category):nth-last-child(1 of .category){grid-column:span 2}
+  #content:has(>:is(#todays-story,.wx-view))>.category:nth-child(odd of .category):nth-last-child(1 of .category) .article-body{column-count:auto}
+  #content:has(>:is(#todays-story,.wx-view))>.category:nth-child(3n+1 of .category):nth-last-child(1 of .category){grid-column:1/-1}
+  #content:has(>:is(#todays-story,.wx-view))>.category:nth-child(3n+1 of .category):nth-last-child(1 of .category) .article-body{column-count:3;column-gap:40px}
+  #content:has(>:is(#todays-story,.wx-view))>.category:nth-child(3n+1 of .category):nth-last-child(1 of .category) .block{break-inside:avoid}
+  #content:has(>:is(#todays-story,.wx-view))>.category:nth-child(3n+1 of .category):nth-last-child(2 of .category),
+  #content:has(>:is(#todays-story,.wx-view))>.category:nth-child(3n+2 of .category):nth-last-child(1 of .category){grid-column:span 3}
+  #content:has(>:is(#todays-story,.wx-view))>.sched-page:has(+.one-liner){grid-column:1/span 4;column-count:2}
+  #content:has(>:is(#todays-story,.wx-view))>.sched-page+.one-liner{grid-column:5/span 2}
+  #content:has(>:is(#todays-story,.wx-view))>.sched-page:not(:has(+.one-liner)){column-count:3}
 }
-/* 3000px 이상: 홈은 화면 폭에 맞춰(최대 4000px) 분야 카드 여섯 장을 한 줄로, 분야 화면은 세 열 */
-@media(min-width:3000px){
-  .shell,.topbar-in{width:min(4000px,100%);padding-left:64px;padding-right:64px}
-  .home-layout{grid-template-columns:minmax(0,1fr) 440px;gap:28px}
+/* 3200px 이상: 홈 카드 여섯 장 한 줄(파이낸셜 2칸), 오른쪽 레일은 달력·오늘의 흐름 두 열. 분야 화면은 본문 글자 한 단계 키움 */
+@media(min-width:3200px){
+  .shell,.topbar-in,body:not([data-page=home]) .shell,body:not([data-page=home]) .topbar-in{padding-left:64px;padding-right:64px}
+  .home-layout{grid-template-columns:minmax(0,1fr) 900px;gap:28px}
+  .home-rail{display:grid;grid-template-columns:400px minmax(0,1fr);gap:20px;align-items:start}
   .home-layout .feed{grid-template-columns:repeat(7,minmax(0,1fr))}
   .home-layout .feed[data-r3]>.digest-card:nth-child(n),
   .home-layout .feed[data-r3]>.digest-card:nth-child(1 of .digest-card:not(.lead-card,.wx-card)),
@@ -576,9 +616,11 @@ html.dark .story,html.dark .flow-card,html.dark .wx-hero{background:linear-gradi
   .home-layout .feed[data-r3]>.wx-card:nth-child(n){grid-column:3/span 1}
   .home-layout .feed[data-r3="0"]>.digest-card:last-child:nth-child(n+3){grid-column:auto/span 2}
   .sched-card:not(.sched-page){column-count:4}
-  body:is([data-page=financial],[data-page=international],[data-page=sports],[data-page=health],[data-page=tech],[data-page=medical]) :is(.shell,.topbar-in){width:min(2960px,100%)}
-  #content:has(>#todays-story){grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto}
-  #content:has(>#todays-story)>#todays-story{grid-row:1}
-  #content:has(>#todays-story)>.source-note{grid-column:3;grid-row:1}
-  #content:has(>#todays-story)>.sched-page{column-count:3}
+  body:is([data-page=financial],[data-page=international],[data-page=sports],[data-page=health],[data-page=tech],[data-page=medical],[data-page=weather]) .shell{grid-template-columns:minmax(0,1fr) 440px;column-gap:40px}
+  #content:has(>:is(#todays-story,.wx-view)){column-gap:36px}
+  #content:has(>:is(#todays-story,.wx-view)) :is(.story,.article-body,.category>.prose) .prose{font-size:16px}
+  #content:has(>:is(#todays-story,.wx-view)) .article h3{font-size:18px}
 }
+/* 7680 모니터를 배율 100~125%로 쓸 때(화면 폭 4800px 이상): 글자가 지나치게 작지 않게 화면 전체를 키움(실제 배치는 약 3840~4100px 기준) */
+@media(min-width:4800px){html{zoom:1.25}}
+@media(min-width:6400px){html{zoom:2}}
