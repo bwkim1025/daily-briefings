@@ -337,9 +337,27 @@
     $('#content').innerHTML=(!date&&result.date<C.kstDate()&&!result.cached?'<p class="offline-note">'+staleTag(result.date)+' 오늘 브리핑이 아직 없어 '+C.esc(shortDate(result.date))+' 호를 표시합니다.</p>':'')+render(result);try{const h=decodeURIComponent((location.hash||'').slice(1));const el=h&&document.getElementById(h);if(el){if(el.tagName==='DETAILS')el.open=true;el.scrollIntoView({block:'start'});}}catch(e){}updateControls();const hd=$('#hero-date');if(hd)hd.textContent=selected.slice(5).replace('-','.')+' 발행';renderCalendar();
     const url=new URL(location.href);url.searchParams.set('date',selected);if(push)history.pushState({},'',url);else history.replaceState({},'',url);
     document.title=config[page].name+' · '+selected;
+    sideRail();
     document.querySelectorAll('.ov-open').forEach(b=>b.addEventListener('click',()=>{const el=document.getElementById(b.dataset.target);if(!el)return;el.open=true;el.scrollIntoView({behavior:'smooth',block:'start'});el.querySelector('summary').focus({preventScroll:true});}));
     const expand=$('#expand-all');if(expand)expand.addEventListener('click',event=>{const button=event.currentTarget,open=button.getAttribute('aria-expanded')!=='true';document.querySelectorAll('.article').forEach(el=>el.open=open);button.setAttribute('aria-expanded',String(open));button.textContent=open?'모두 접기':'모두 펼치기';});
   }
+  // 2026-11-16 넓은 PC(1600px 이상)에서만: 분야 화면 오른쪽에 '같은 날 다른 분야' 카드(홈 카드와 같은 모양). 좁은 화면에서는 만들지도, 받지도 않는다.
+  const WIDE=matchMedia('(min-width:1600px)');let sideId=0;
+  async function sideRail(){
+    if(HOME||!config[page])return;
+    const shell=$('.shell');if(!shell)return;
+    let side=$('#cat-side');
+    if(!WIDE.matches||!selected){if(side)side.remove();return;}
+    if(side&&side.dataset.date===selected)return;
+    const id=++sideId,date=selected,cats=homeCards().filter(cat=>cat!==page);
+    const head='<h2 class="cat-side-title" id="cat-side-title">'+C.esc(shortDate(date))+' · 다른 분야</h2>';
+    if(!side){side=document.createElement('aside');side.className='cat-side';side.id='cat-side';side.setAttribute('aria-labelledby','cat-side-title');shell.insertBefore(side,shell.querySelector(':scope>.footer'));}
+    side.dataset.date=date;side.innerHTML=head+'<p class="flow-wait">불러오는 중…</p>';
+    const results=await Promise.all(cats.map(cat=>fetchDate(cat,date).catch(()=>null)));
+    if(id!==sideId||!side.isConnected)return;
+    side.innerHTML=head+cats.map((cat,i)=>cat==='weather'?weatherCard(results[i],date):card(cat,results[i],date,false)).join('');
+  }
+  WIDE.addEventListener('change',()=>{const side=$('#cat-side');if(side)side.dataset.date='';sideRail();});
   // Category top = the home card 'opened': same card surface, icon tile, label and (financial) gradient bar.
   // Rendered synchronously so it exists at the first paint (the cross-document view transition morphs card → hero).
   function hero(cat){const c=config[cat];return '<header class="cat-hero'+(cat==='financial'?' lead-hero':'')+'" data-category="'+cat+'">'+(cat==='financial'?'<div class="lead-bar" aria-hidden="true"></div>':'')+cardTop(cat,'<span class="card-date" id="hero-date"></span>')+'<h1>'+C.esc(c.name)+'</h1><p>'+C.esc(c.subtitle)+'</p></header>';}
