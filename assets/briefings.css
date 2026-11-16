@@ -532,10 +532,11 @@ html.dark .story,html.dark .flow-card,html.dark .wx-hero{background:linear-gradi
 .stale-tag{font-size:11px;font-weight:700;color:var(--warn,#9a5b00);background:var(--warn-bg,#fdf0d9);border:1px solid currentColor;border-radius:999px;padding:1px 8px;white-space:nowrap;margin-left:6px}
 
 /* ============================================================
-   2026-11-16 · 넓은 PC 화면(57인치 WUHD 등) v2 — 폭 상한 대신 열 수를 늘립니다. 1599px 이하는 이 블록의 영향이 전혀 없습니다.
+   2026-11-16 · 넓은 PC 화면(57인치 WUHD 등) v3 — 폭 상한 대신 열 수를 늘립니다. 1599px 이하는 이 블록의 영향이 전혀 없습니다.
    - 1600px 이상: 화면 폭을 그대로 씁니다(좌우 여백 = 안쪽 여백만). 분야 화면은 오른쪽에 '같은 날 다른 분야' 카드(briefings.js sideRail).
-   - 열 수: 홈 카드 6칸→12칸(2200)→한 줄 7칸(3200), 분야 화면 본문 2열(1600)→3열(2400). 이슈 수가 열 수로 나눠떨어지지 않으면 마지막 이슈를 넓혀 빈 칸을 없앱니다.
-   - 4800px 이상(배율 100~125%의 7680 모니터)은 화면 전체를 1.25배·2배로 키워 글자가 너무 작아지지 않게 합니다.
+   - 열 수: 홈 카드 6칸→12칸(2200)→한 줄 7칸(3200–4799), 분야 화면 본문 2열(1600)→3열(2400). 이슈 수가 열 수로 나눠떨어지지 않으면 마지막 이슈를 넓혀 빈 칸을 없앱니다.
+   - 4800px 이상: 화면을 확대해 2560 구성을 유지합니다. 미디어쿼리는 실제 뷰포트 폭을 보므로, 초광폭(3200px, 홈 카드 한 줄·레일 두 단) 규칙은 4799px에서 끊고 확대만 적용합니다.
+     4800–6399px zoom 2(5120→2560, 이 구간 배치 폭 2400–3199). 6400–7679px zoom 2.5(6400→2560, 2560–3071). 7680px 이상 zoom 3(7680→2560).
    - 색·글꼴(Spoqa Han Sans Neo)·카드 모양은 그대로, 박스 안에 박스를 넣지 않습니다. 되돌리기: 이 블록 + briefings.js sideRail을 지우면 됩니다.
    ============================================================ */
 @media(min-width:1600px){
@@ -603,8 +604,8 @@ html.dark .story,html.dark .flow-card,html.dark .wx-hero{background:linear-gradi
   #content:has(>:is(#todays-story,.wx-view))>.sched-page+.one-liner{grid-column:5/span 2}
   #content:has(>:is(#todays-story,.wx-view))>.sched-page:not(:has(+.one-liner)){column-count:3}
 }
-/* 3200px 이상: 홈 카드 여섯 장 한 줄(파이낸셜 2칸), 오른쪽 레일은 달력·오늘의 흐름 두 열. 분야 화면은 본문 글자 한 단계 키움 */
-@media(min-width:3200px){
+/* 3200–4799px: 홈 카드 여섯 장 한 줄(파이낸셜 2칸), 오른쪽 레일은 달력·오늘의 흐름 두 열. 분야 화면은 본문 글자 한 단계 키움. 4800px 이상에서는 2560 구성(2200·2400 규칙)을 확대하므로 이 규칙은 쓰지 않음 */
+@media(min-width:3200px) and (max-width:4799.98px){
   .shell,.topbar-in,body:not([data-page=home]) .shell,body:not([data-page=home]) .topbar-in{padding-left:64px;padding-right:64px}
   .home-layout{grid-template-columns:minmax(0,1fr) 900px;gap:28px}
   .home-rail{display:grid;grid-template-columns:400px minmax(0,1fr);gap:20px;align-items:start}
@@ -621,6 +622,7 @@ html.dark .story,html.dark .flow-card,html.dark .wx-hero{background:linear-gradi
   #content:has(>:is(#todays-story,.wx-view)) :is(.story,.article-body,.category>.prose) .prose{font-size:16px}
   #content:has(>:is(#todays-story,.wx-view)) .article h3{font-size:18px}
 }
-/* 7680 모니터를 배율 100~125%로 쓸 때(화면 폭 4800px 이상): 글자가 지나치게 작지 않게 화면 전체를 키움(실제 배치는 약 3840~4100px 기준) */
-@media(min-width:4800px){html{zoom:1.25}}
-@media(min-width:6400px){html{zoom:2}}
+/* 4800+ : 레이아웃 폭 = 뷰포트/zoom. 7680/3=2560. 6400부터 zoom 3이면 6400이 2133이 되어 2200·2400 열이 빠지므로 2.5로 2560을 유지 */
+@media(min-width:4800px){html{zoom:2}}
+@media(min-width:6400px){html{zoom:2.5}}
+@media(min-width:7680px){html{zoom:3}}
