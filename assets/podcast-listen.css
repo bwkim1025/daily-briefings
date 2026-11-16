@@ -1,0 +1,20 @@
+/* 미리보기: 오늘 들은 내용 칸과 항목 번호. 기존 색·글꼴을 그대로 씀 */
+.podcast-listen{margin:16px 0 20px;padding:18px 20px;background:var(--panel, #fff);border:1px solid var(--line, #e6eded);border-radius:18px}
+.podcast-listen h2{margin:0;font-size:16px;font-weight:800;letter-spacing:-.3px}
+.podcast-listen-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.podcast-listen audio{width:100%;margin:0 0 14px}
+.podcast-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.podcast-cols h3{margin:0 0 8px;font-size:12px;font-weight:700;color:var(--ink-3, #5b6b75)}
+.podcast-cols ul{margin:0;padding:0;list-style:none}
+.podcast-cols li{margin:0 0 6px;font-size:13px;line-height:1.55}
+.podcast-cols a{color:var(--teal, var(--accent, #0b6e6b));font-weight:650;text-decoration:none}
+.podcast-cols a:hover{text-decoration:underline}
+.podcast-play{appearance:none;border:0;border-radius:999px;background:var(--v3-deep, var(--ink, #132b41));color:#fff;font:inherit;font-size:13px;font-weight:700;padding:8px 14px;min-height:40px;cursor:pointer}
+.podcast-no{display:inline-flex;align-items:center;justify-content:center;min-width:54px;height:22px;padding:0 7px;margin:0 8px 0 0;border-radius:6px;background:var(--v3-soft, #edf3f8);color:var(--v3-deep, #315779);font-size:11px;font-weight:800;letter-spacing:-.2px;vertical-align:middle}
+@media(max-width:700px){
+  .podcast-cols{grid-template-columns:1fr}
+  .podcast-listen{padding:16px;border-radius:16px}
+}
+body[data-page] .podcast-listen{border:1px solid var(--table-edge, var(--line));border-radius:12px;background:var(--surface, #fffefa)}
+body[data-page] .podcast-play{background:var(--navy, #132b41);border-radius:8px}
+body[data-page] .podcast-no{background:var(--accent-bg, #f6e9d1);color:var(--accent, #9a6518)}

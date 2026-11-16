@@ -1,0 +1,180 @@
+{
+  "kind": "news",
+  "labelPrefix": "뉴스",
+  "listenBase": "https://ddang-podcast.bwkim1025.workers.dev/listen",
+  "episode": {
+    "date": "2026-11-16",
+    "title": "땡이네 뉴스 — 2026년 11월 16일",
+    "audio": "https://ddang-podcast.bwkim1025.workers.dev/listen/news/2026-11-16.mp3",
+    "items": [
+      {
+        "n": "날씨 1",
+        "cat": "weather",
+        "id": "todays-story",
+        "title": "부산 아침 11도, 낮 18도 — 우산 챙기기",
+        "covered": true
+      },
+      {
+        "n": "날씨 2",
+        "cat": "weather",
+        "id": "item-0-0",
+        "title": "서울·대구 오늘 예보",
+        "covered": false
+      },
+      {
+        "n": "국제 1",
+        "cat": "international",
+        "id": "todays-story",
+        "title": "남중국해 행동규범 문안 약 80% 잠정 합의",
+        "covered": true
+      },
+      {
+        "n": "국제 2",
+        "cat": "international",
+        "id": "item-0-0",
+        "title": "미국 항공 차질 사흘째",
+        "covered": true
+      },
+      {
+        "n": "국제 3",
+        "cat": "international",
+        "id": "item-1-0",
+        "title": "19일 미·중·러 3자 회담, 크렘린 확인",
+        "covered": true
+      },
+      {
+        "n": "국제 4",
+        "cat": "international",
+        "id": "item-2-0",
+        "title": "트럼프의 대이란 제재 관망",
+        "covered": false
+      },
+      {
+        "n": "국제 5",
+        "cat": "international",
+        "id": "item-3-0",
+        "title": "EU 협상팀, 아직 러시아에 연락 없어",
+        "covered": false
+      },
+      {
+        "n": "경제 1",
+        "cat": "financial",
+        "id": "todays-story",
+        "title": "호르무즈 유조선 기뢰 주장과 유가",
+        "covered": true
+      },
+      {
+        "n": "경제 2",
+        "cat": "financial",
+        "id": "item-0-0",
+        "title": "이번 주 원·달러 예상 범위",
+        "covered": true
+      },
+      {
+        "n": "경제 3",
+        "cat": "financial",
+        "id": "item-1-0",
+        "title": "젠슨 황 엔비디아 CEO 복귀 논의",
+        "covered": false
+      },
+      {
+        "n": "경제 4",
+        "cat": "financial",
+        "id": "item-2-0",
+        "title": "워시 연준 의장 회의와 국회 예산 심사",
+        "covered": false
+      },
+      {
+        "n": "건강 2",
+        "cat": "health",
+        "id": "item-0-0",
+        "title": "채식 식단과 혈압 메타분석",
+        "covered": true
+      },
+      {
+        "n": "건강 3",
+        "cat": "health",
+        "id": "item-1-0",
+        "title": "디지털 불면증 치료 메타분석",
+        "covered": true
+      },
+      {
+        "n": "건강 4",
+        "cat": "health",
+        "id": "item-2-0",
+        "title": "만 1세 어린이집 입소와 문제 행동",
+        "covered": true
+      },
+      {
+        "n": "건강 5",
+        "cat": "health",
+        "id": "item-3-0",
+        "title": "생활 습관 점수와 뇌졸중·심근경색",
+        "covered": true
+      },
+      {
+        "n": "기술 1",
+        "cat": "tech",
+        "id": "todays-story",
+        "title": "엔비디아 GPU 26만 장 공급 계획 유지",
+        "covered": true
+      },
+      {
+        "n": "기술 2",
+        "cat": "tech",
+        "id": "item-0-0",
+        "title": "메이퇀 LongCat-2.5 가중치 공개",
+        "covered": true
+      },
+      {
+        "n": "기술 3",
+        "cat": "tech",
+        "id": "item-0-1",
+        "title": "블랜드 Tofu-1 음성 모델",
+        "covered": false
+      },
+      {
+        "n": "기술 4",
+        "cat": "tech",
+        "id": "item-1-0",
+        "title": "삼성·SK하이닉스 고객 다변화",
+        "covered": true
+      },
+      {
+        "n": "기술 5",
+        "cat": "tech",
+        "id": "item-2-0",
+        "title": "워시 의장, 초지능과 일자리 회의",
+        "covered": false
+      },
+      {
+        "n": "스포츠 1",
+        "cat": "sports",
+        "id": "todays-story",
+        "title": "최혜진, LPGA 디 안니카 단독 2위",
+        "covered": true
+      },
+      {
+        "n": "스포츠 2",
+        "cat": "sports",
+        "id": "item-0-0",
+        "title": "클리블랜드, 프록터 첫 트리플더블",
+        "covered": true
+      },
+      {
+        "n": "스포츠 3",
+        "cat": "sports",
+        "id": "item-0-1",
+        "title": "필라델피아, 인디애나에 승리",
+        "covered": true
+      },
+      {
+        "n": "스포츠 4",
+        "cat": "sports",
+        "id": "item-1-0",
+        "title": "KBO FA 승인 공시 — 구자욱·원태인",
+        "covered": true
+      }
+    ]
+  }
+}
