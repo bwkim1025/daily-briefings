@@ -16,7 +16,7 @@
 - 의료편 발행 뒤 `medical/_meta/covered-papers.json`에 새로 다룬 논문만 덧붙인다(기존 항목 보존, DOI 중복 금지, DOI 창작 금지).
 - 날짜 목록: `node scripts/update-briefing-index.cjs`로 `assets/briefing-index.json`을 다시 만든다(달력·최신 호 힌트).
 - 검사: 발행 전 KST 날짜, h2 순서, h3/h4 채움, 출처, AUTHOR 줄, visual JSON 스키마를 확인한다(Grok Bot은 로컬 검사 스크립트를 쓰며 저장소에는 없다).
-- AUTHOR 줄 형식: `Grok Bot · (미확인) · YYYY-MM-DD HH:MM KST`.
+- AUTHOR 줄 형식: `Grok Bot · (모델 버전 미확인) · YYYY-MM-DD HH:MM KST`. 시각은 커밋 직전에 `TZ=Asia/Seoul date '+%Y-%m-%d %H:%M'`로 읽은 실제 KST이며, 예정·추정 시각을 미리 적지 않는다(2026-11-16 병우님 승인).
 
 ## 2. 파일 구조(파서 `assets/briefing-core.js`)
 
