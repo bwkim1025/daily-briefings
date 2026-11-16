@@ -1,11 +1,14 @@
 (function () {
   const script = document.currentScript;
   const base = new URL('.', script.src);
-  const src = new URL('podcast-listen.json', base);
+  const localSrc = new URL('podcast-listen.json', base);
 
   function dateFromPage() {
     const q = new URLSearchParams(location.search).get('date');
     if (q && /^\d{4}-\d{2}-\d{2}$/.test(q)) return q;
+    const title = document.title || '';
+    const tm = title.match(/(\d{4}-\d{2}-\d{2})/);
+    if (tm) return tm[1];
     const hd = document.getElementById('h-date') || document.getElementById('hero-date');
     const t = (hd && hd.textContent) || '';
     const m = t.match(/(\d{4})[.\-/](\d{1,2})[.\-/](\d{1,2})/);
@@ -56,12 +59,9 @@
     const covered = relevant.filter((it) => it.covered);
     const skipped = relevant.filter((it) => !it.covered);
     const lis = (arr) => arr.map((it) => {
-      const href = (it.cat ? new URL(it.cat + '/?date=' + ep.date + '#' + it.id, location.origin + location.pathname.replace(/[^/]+\/?$/, '')) : '#' + it.id);
-      // For same-page anchors on study / current news category:
-      const use = (!it.cat || it.cat === pageCat) ? ('#' + it.id) : (it.cat + '/?date=' + ep.date + '#' + it.id);
       const newsHome = document.body.getAttribute('data-page') === 'home';
       const link = (kind === 'news' && (newsHome || (it.cat && it.cat !== pageCat)))
-        ? '../'.replace(/^\.\.\/$/, '') + (document.body.getAttribute('data-page') === 'home' ? it.cat + '/' : (it.cat && it.cat !== pageCat ? '../' + it.cat + '/' : '')) + '?date=' + ep.date + '#' + it.id
+        ? (newsHome ? it.cat + '/' : (it.cat && it.cat !== pageCat ? '../' + it.cat + '/' : '')) + '?date=' + ep.date + '#' + it.id
         : '#' + it.id;
       return '<li><a href="' + link + '" data-podcast-id="' + it.id + '">' + label(kind, it.n) + '</a> — ' + (it.title || '') + '</li>';
     }).join('');
@@ -88,19 +88,26 @@
     return box;
   }
 
+  function unmount() {
+    const box = document.getElementById('podcast-listen');
+    if (box) box.remove();
+    document.querySelectorAll('.podcast-no').forEach((el) => el.remove());
+  }
+
   function mount(cfg) {
-    const ep = cfg.episode;
-    if (!ep) return;
+    const ep = cfg && cfg.episode;
+    const date = dateFromPage();
+    if (!ep || !date || date !== ep.date) {
+      unmount();
+      return;
+    }
     const kind = cfg.kind;
     const pageCat = document.body.getAttribute('data-page');
     const onHome = pageCat === 'home';
-    const date = dateFromPage() || ep.date;
-    // Show the bar for the episode date (latest day if the URL has no date).
-    if (date && date !== ep.date && !onHome) return;
     const host = document.getElementById('content') || document.querySelector('main') || document.getElementById('app');
     if (!host) return;
-    let box = document.getElementById('podcast-listen');
-    const next = panel(cfg, ep, kind, onHome ? null : (pageCat === 'home' ? null : pageCat));
+    const next = panel(cfg, ep, kind, onHome ? null : pageCat);
+    const box = document.getElementById('podcast-listen');
     if (box) box.replaceWith(next);
     else if (host.id === 'content' || host.tagName === 'MAIN') host.insertBefore(next, host.firstChild);
     else host.prepend(next);
@@ -109,23 +116,53 @@
     if (hash) openTarget(hash);
   }
 
-  function boot(cfg) {
-    const run = () => mount(cfg);
+  function boot(localCfg) {
+    const kind = (localCfg && localCfg.kind) || 'study';
+    const listenBase = ((localCfg && localCfg.listenBase) || '').replace(/\/$/, '');
+    let timer = null;
+    let inflight = '';
+
+    function apply(cfg) {
+      if (cfg && cfg.episode && cfg.episode.date === dateFromPage()) mount(cfg);
+      else unmount();
+    }
+
+    function loadForPage() {
+      const date = dateFromPage();
+      if (!date) return;
+      const key = kind + ':' + date;
+      if (inflight === key && document.getElementById('podcast-listen')) return;
+      inflight = key;
+      const remote = listenBase ? (listenBase + '/' + kind + '/' + date + '.json') : null;
+      const fallback = function () {
+        if (localCfg && localCfg.episode && localCfg.episode.date === date) apply(localCfg);
+        else unmount();
+      };
+      if (!remote) { fallback(); return; }
+      fetch(remote, { cache: 'no-cache' })
+        .then((r) => r.ok ? r.json() : null)
+        .then((cfg) => { if (cfg && cfg.episode) apply(cfg); else fallback(); })
+        .catch(fallback);
+    }
+
+    const run = () => {
+      clearTimeout(timer);
+      timer = setTimeout(loadForPage, 30);
+    };
     const observe = (el) => {
       if (!el) return;
-      new MutationObserver(() => {
-        if (!document.getElementById('podcast-listen') || !document.querySelector('.podcast-no')) run();
-      }).observe(el, { childList: true, subtree: false });
+      new MutationObserver(run).observe(el, { childList: true, subtree: false });
     };
     run();
+    setTimeout(run, 80);
     observe(document.getElementById('content'));
     observe(document.getElementById('app'));
     window.addEventListener('hashchange', () => openTarget(decodeURIComponent((location.hash || '').slice(1))));
     window.addEventListener('popstate', run);
   }
 
-  fetch(src.href, { cache: 'no-cache' })
+  fetch(localSrc.href, { cache: 'no-cache' })
     .then((r) => r.ok ? r.json() : null)
-    .then((cfg) => { if (cfg) boot(cfg); })
-    .catch(() => {});
+    .then((cfg) => boot(cfg || {}))
+    .catch(() => boot({}));
 })();
