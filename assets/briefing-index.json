@@ -1,5 +1,5 @@
 {
-  "generatedFrom": "e46aea8975cf8ff7075117b095fceb004791e17d",
+  "generatedFrom": "be176dd3157c80f40c17989de337d2fb7af2a4bc",
   "updated": "2026-11-19",
   "categories": {
     "financial": [
@@ -842,6 +842,12 @@
       "2026-11-05",
       "2026-11-04",
       "2026-11-03"
+    ],
+    "realestate": [
+      "2026-11-19"
+    ],
+    "parenting": [
+      "2026-11-19"
     ]
   }
 }

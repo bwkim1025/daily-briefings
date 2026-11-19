@@ -626,3 +626,6 @@ html.dark .story,html.dark .flow-card,html.dark .wx-hero{background:linear-gradi
 @media(min-width:4800px){html{zoom:2}}
 @media(min-width:6400px){html{zoom:2.5}}
 @media(min-width:7680px){html{zoom:3}}
+/* 1119: 분야 7개(부동산·육아·교육 추가) 모바일 원형 줄 — 글자 사이를 조금 좁혀 이웃 이름이 붙지 않게 */
+@media(max-width:760px){.cat-rounds .lbl{letter-spacing:-.6px}}
+@media(max-width:380px){.cat-rounds .lbl{font-size:10.5px}.cat-rounds .ring{transform:scale(.92)}}

@@ -11,12 +11,14 @@
     sports:{name:'스포츠 브리핑',short:'스포츠',en:'Sports',subtitle:'NBA를 중심으로, 꼭 볼 경기와 흐름.',icon:'chart',art:'sport'},
     health:{name:'헬스 브리핑',short:'헬스',en:'Health',subtitle:'일상에 닿는 건강 연구와 생활의 발견.',icon:'heart',art:'health'},
     tech:{name:'테크·AI 브리핑',short:'테크·AI',en:'Tech · AI',subtitle:'꼭 알아야 할 기술과 AI 소식.',icon:'chart',art:'tech'},
+    realestate:{name:'부동산·이사 브리핑',short:'부동산',en:'Real estate',subtitle:'부산·김해·양산 집값과 남천 분양·입주 소식.',icon:'chart',art:'home'},
+    parenting:{name:'육아·교육 브리핑',short:'육아·교육',en:'Parenting',subtitle:'초등 입학 준비와 영유아·아동 정책.',icon:'chart',art:'family'},
     weather:{name:'웨더 · 부산',short:'웨더',en:'Weather',subtitle:'부산의 기온·비·바람·미세먼지.',icon:'chart',art:'weather'},
     medical:{name:'메디컬 브리핑',short:'메디컬',en:'Medical',subtitle:'연구의 결과와 한계를 함께 읽습니다.',icon:'cross',art:'',hidden:true}
   };
   // New categories stay off every menu/home card until a briefing for them is known to exist
   // (assets/briefing-index.json entry or a saved GitHub date list). Their routes still open and show a 'preparing' note.
-  const GATED=['sports','tech','weather'], PENDING=new Set();
+  const GATED=['sports','tech','weather','realestate','parenting'], PENDING=new Set();
   let LISTED=Object.keys(config).filter(key=>!config[key].hidden), STORIES=LISTED.filter(key=>key!=='weather');
   const blockLabels={'why it matters':'왜 중요한가','context':'배경','market implication':'시장 영향','source':'출처','sources':'출처','why':'어떤 연구','abstract':'초록','results':'주요 결과','clinical application':'임상 적용','limitations':'주의할 점','takeaway':'핵심 정리'};
   const icons={chart:'<path d="M4 19h16M7 15V9m5 6V5m5 10v-5"/>',globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c5 5 5 13 0 18-5-5-5-13 0-18Z"/>',cross:'<path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6Z"/>',heart:'<path d="M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-4 4 1 10 8 15 7-5 12-11 8-15Z"/>',arrow:'<path d="M4 12h16m-6-6 6 6-6 6"/>',moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',chevron:'<path d="m6 9 6 6 6-6"/>',book:'<path d="M12 6v15M3 4h4a5 5 0 0 1 5 2 5 5 0 0 1 5-2h4v15h-4a5 5 0 0 0-5 2 5 5 0 0 0-5-2H3Z"/>',
