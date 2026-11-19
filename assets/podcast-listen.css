@@ -11,6 +11,28 @@
 .podcast-cols a:hover{text-decoration:underline}
 .podcast-play{appearance:none;border:0;border-radius:999px;background:var(--v3-deep, var(--ink, #132b41));color:#fff;font:inherit;font-size:13px;font-weight:700;padding:8px 14px;min-height:40px;cursor:pointer}
 .podcast-no{display:inline-flex;align-items:center;justify-content:center;min-width:54px;height:22px;padding:0 7px;margin:0 8px 0 0;border-radius:6px;background:var(--v3-soft, #edf3f8);color:var(--v3-deep, #315779);font-size:11px;font-weight:800;letter-spacing:-.2px;vertical-align:middle}
+/* 골라 듣기(분야·과목·항목 클립)와 재생 속도 */
+.pl-pick{margin:0 0 12px}
+.pl-hint{margin:0 0 8px;font-size:12px;color:var(--ink-3, #5b6b75)}
+.pl-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.pl-chip{appearance:none;display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 14px;border-radius:999px;border:1px solid var(--line, #d9e2e8);background:transparent;color:inherit;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.pl-chip small{font-size:11px;font-weight:600;opacity:.65}
+.pl-chip[aria-pressed=true]{background:var(--v3-deep, #132b41);border-color:var(--v3-deep, #132b41);color:#fff}
+.pl-chip.is-playing{box-shadow:0 0 0 2px var(--v3-soft, #b9d3ea)}
+.pl-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+.pl-go{appearance:none;border:0;border-radius:999px;background:var(--v3-deep, var(--ink, #132b41));color:#fff;font:inherit;font-size:13px;font-weight:700;padding:8px 16px;min-height:40px;cursor:pointer}
+.pl-go:disabled{opacity:.4;cursor:default}
+.pl-speed{display:inline-flex;border:1px solid var(--line, #d9e2e8);border-radius:999px;overflow:hidden}
+.pl-speed button{appearance:none;border:0;background:transparent;color:inherit;font:inherit;font-size:12px;font-weight:700;padding:6px 10px;min-height:36px;min-width:52px;cursor:pointer}
+.pl-speed button+button{border-left:1px solid var(--line, #d9e2e8)}
+.pl-speed button[aria-pressed=true]{background:var(--v3-soft, #edf3f8);color:var(--v3-deep, #315779)}
+.pl-now{margin:0 0 8px;font-size:12px;font-weight:700;color:var(--v3-deep, #315779)}
+.pl-item-play{appearance:none;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;margin:0 6px 0 0;padding:0;border-radius:50%;border:1px solid var(--line, #d9e2e8);background:transparent;color:inherit;font-size:10px;line-height:1;cursor:pointer;vertical-align:middle}
+.pl-item-play.is-playing{background:var(--v3-deep, #132b41);color:#fff;border-color:var(--v3-deep, #132b41)}
+.pl-only{font-size:11px;opacity:.65}
+body[data-page] .pl-chip[aria-pressed=true],body[data-page] .pl-go{background:var(--navy, #132b41);border-color:var(--navy, #132b41)}
+html.dark .pl-chip,html.dark .pl-speed,html.dark .pl-item-play{border-color:rgba(255,255,255,.25)}
+@media(max-width:700px){.pl-actions{justify-content:flex-start}.pl-speed button{min-width:48px;padding:6px 8px}}
 @media(max-width:700px){
   .podcast-cols{grid-template-columns:1fr}
   .podcast-listen{padding:16px;border-radius:16px}

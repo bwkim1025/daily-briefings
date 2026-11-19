@@ -99,14 +99,18 @@
     // v3: 스포츠 · 테크·AI · 웨더 분야 섹션 이름
     NBA:'NBA',BASKETBALL:'농구',BASEBALL:'야구',KBO:'KBO 야구',MLB:'MLB',SOCCER:'축구',FOOTBALL:'축구',GOLF:'골프',SPORTS:'스포츠',
     AI:'AI · 모델',AI_TOOLS:'AI 도구',BIGTECH:'빅테크',CHIPS:'반도체 · 칩',DEVICES:'기기 · 플랫폼',SOFTWARE:'소프트웨어',SECURITY:'보안',STARTUPS:'스타트업 · 투자',
-    SCHEDULE:'오늘의 일정',WEATHER:'부산 날씨',AIR:'대기질',FORECAST:'예보'};
+    SCHEDULE:'오늘의 일정',WEATHER:'부산 날씨',AIR:'대기질',FORECAST:'예보',
+    // 부동산·이사 · 육아·교육 분야 섹션 이름
+    BUSAN:'부산 분양 · 정비',NAMCHEON:'남천 · 수영구',GYEONGNAM:'김해 · 양산',HOUSING:'주택 정책 · 대출',MOVING:'이사 · 입주 준비',SCHOOL:'초등 입학 준비',CARE:'돌봄 · 방과후',CHILDCARE:'영유아 · 보육',EDUCATION:'교육 정책'};
   const categoryLabels={
     financial:{POLICY:'중앙은행 · 경제지표'},
     medical:{POLICY:'정책 · 보험/심사'},
     international:{ME:'중동 · 이란 · 이스라엘',EU:'유럽 · 우크라이나'},
     sports:{OTHERS:'기타 종목'},
     tech:{POLICY:'규제 · 정책',OTHERS:'기타 소식'},
-    weather:{OTHERS:'참고'}
+    weather:{OTHERS:'참고'},
+    realestate:{POLICY:'주택 정책 · 대출',OTHERS:'기타 소식'},
+    parenting:{POLICY:'아동 수당 · 지원 정책',OTHERS:'기타 소식'}
   };
   function sectionLabel(category,key){return categoryLabels[category]?.[key]||sectionLabels[key]||key;}
   // ## SCHEDULE body: '- HH:MM 제목' or '- 종일 제목', optional ' — 메모'. Other lines are ignored.
