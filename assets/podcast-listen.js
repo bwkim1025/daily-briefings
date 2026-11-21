@@ -15,9 +15,14 @@
   function storeRate(v) { try { localStorage.setItem(RATE_KEY, String(v)); } catch (e) {} }
   const rateText = (v) => (v === 1 ? '1.0' : String(v)) + '배';
   const mmss = (sec) => { const s = Math.max(0, Math.round(Number(sec) || 0)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+  // 주소의 # 뒤가 깨진 글자(%만 있는 경우 등)여도 오류 없이 빈 값으로 본다.
+  const hashId = () => { try { return decodeURIComponent((location.hash || '').slice(1)); } catch (e) { return ''; } };
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
   function dateFromPage() {
+    // 뉴스 앱은 지금 화면에 보이는 호의 날짜를 #main에 적어 둔다(주소에 ?date=가 없는 첫 화면 포함).
+    const shown = document.querySelector('#main');
+    if (shown && shown.dataset && /^\d{4}-\d{2}-\d{2}$/.test(shown.dataset.briefingDate || '')) return shown.dataset.briefingDate;
     const q = new URLSearchParams(location.search).get('date');
     if (q && /^\d{4}-\d{2}-\d{2}$/.test(q)) return q;
     const title = document.title || '';
@@ -213,7 +218,7 @@
     else if (host.id === 'content' || host.tagName === 'MAIN') host.insertBefore(next, host.firstChild);
     else host.prepend(next);
     decorateItems(ep, kind, onHome ? null : pageCat);
-    const hash = decodeURIComponent((location.hash || '').slice(1));
+    const hash = hashId();
     if (hash) openTarget(hash);
   }
 
@@ -258,7 +263,8 @@
     setTimeout(run, 80);
     observe(document.getElementById('content'));
     observe(document.getElementById('app'));
-    window.addEventListener('hashchange', () => openTarget(decodeURIComponent((location.hash || '').slice(1))));
+    window.addEventListener('hashchange', () => openTarget(hashId()));
+    document.addEventListener('briefing-date-change', run);
     window.addEventListener('popstate', run);
   }
 

@@ -38,9 +38,24 @@
   const shortDate=date=>{if(!/^\d{4}-\d{2}-\d{2}$/.test(date||''))return '';const d=new Date(date+'T12:00:00Z');return (d.getUTCMonth()+1)+'월 '+d.getUTCDate()+'일 '+'일월화수목금토'[d.getUTCDay()];};
   function setTheme(dark){document.documentElement.classList.toggle('dark',dark);$('#theme-toggle').setAttribute('aria-pressed',String(dark));$('#theme-toggle').setAttribute('aria-label',dark?'밝은 테마로 전환':'어두운 테마로 전환');$('meta[name=theme-color]').content=dark?'#141312':'#F6F5F3';}
   async function request(url,type='text',timeout=5500){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeout);try{const response=await fetch(url,{cache:'no-cache',signal:controller.signal});if(!response.ok)throw Error(String(response.status));return type==='json'?await response.json():await response.text();}finally{clearTimeout(timer);}}
+  let issueIndex;
+  function readIssueIndex(){
+    if(!issueIndex){
+      issueIndex=request(new URL('assets/briefing-index.json',base),'json',4000).catch(error=>{
+        issueIndex=null;
+        throw error;
+      });
+    }
+    return issueIndex;
+  }
+  function publishReadingDate(date){
+    const main=$('#main');
+    main.dataset.briefingDate=date||'';
+    main.dispatchEvent(new CustomEvent('briefing-date-change',{bubbles:true}));
+  }
   async function dateIndex(cat){
     let dates=[],savedAt=0;try{const saved=JSON.parse(storage.get('daily-briefings-dates-'+cat)||'null');if(saved&&Array.isArray(saved.dates)){dates=saved.dates;savedAt=Number(saved.at)||0;}}catch{}
-    try{const index=await request(new URL('assets/briefing-index.json',base),'json');dates=[...new Set([...dates,...(index.categories[cat]||[])])];}catch{}
+    try{const index=await readIssueIndex();dates=[...new Set([...dates,...(index.categories[cat]||[])])];}catch{}
     // Refresh without delaying today's reading. A snapshot/cache never prevents probing today's file.
     // [검토 제안 P2] 목록 API는 분야마다 30분에 한 번만(비로그인 한도: IP당 시간 60회, 가족이 같은 와이파이를 쓰면 함께 소진).
     if(Date.now()-savedAt>30*60000)request('https://api.github.com/repos/bwkim1025/daily-briefings/contents/'+cat+'/briefings','json',4500).then(items=>{
@@ -91,7 +106,7 @@
   function refreshNav(){const n=$('.nav');if(n)n.outerHTML=navigation();document.querySelectorAll('.cat-rounds').forEach(r=>{r.outerHTML=rounds();});const s=$('.cat-sheet');if(s)s.innerHTML=sheetLinks();}
   function savedDates(cat){try{const saved=JSON.parse(localStorage.getItem('daily-briefings-dates-'+cat)||'null');return saved&&Array.isArray(saved.dates)?saved.dates:[];}catch{return [];}}
   async function gate(){
-    let index=null;try{index=await request(new URL('assets/briefing-index.json',base),'json',4000);}catch{}
+    let index=null;try{index=await readIssueIndex();}catch{}
     GATED.forEach(cat=>{const known=(index&&index.categories&&index.categories[cat]||[]).length||savedDates(cat).length;if(!known)PENDING.add(cat);});
     LISTED=Object.keys(config).filter(key=>!config[key].hidden&&!PENDING.has(key));STORIES=LISTED.filter(key=>key!=='weather');
   }
@@ -102,7 +117,7 @@
   }
   function shell(){
     const c=config[page];
-    $('#app').innerHTML='<a class="skip" href="#main">본문으로 건너뛰기</a><header class="topbar"><div class="topbar-in"><a class="brand" href="'+base.href+'"><span class="app-mark app-icon"><img src="'+new URL('icon-v3-192.png?v=29',base).href+'" alt="" width="34" height="34"></span><div><div class="brand-name">땡이네 뉴스</div><div class="brand-caption">A CLEARER VIEW, EVERY DAY</div></div></a>'
+    $('#app').innerHTML='<a class="skip" href="#main">본문으로 건너뛰기</a><header class="topbar"><div class="topbar-in"><a class="brand" href="'+base.href+'"><span class="app-mark app-icon"><img src="'+new URL('icon-v3-192.png?v=30',base).href+'" alt="" width="34" height="34"></span><div><div class="brand-name">땡이네 뉴스</div><div class="brand-caption">A CLEARER VIEW, EVERY DAY</div></div></a>'
       +(HOME?'':'<a class="back-link" href="'+base.href+'" aria-label="전체 브리핑으로">'+svg('back')+'</a><span class="m-title">'+C.esc(c?(page==='weather'?c.name:c.short):'')+'</span>')
       +'<div class="tools">'+(HOME?'<button class="date-pill" id="date-pill" type="button" aria-controls="home-archive"><span class="pill-face">'+svg('calendar')+'<span id="date-label">'+shortDate(C.kstDate())+'</span>'+svg('chevron','pill-chev')+'</span></button>':'')
       +'<button class="icon-btn cal-btn" id="cal-btn" type="button" aria-label="달력 · 지난 호">'+svg('calendar')+'</button><button class="icon-btn" id="theme-toggle">'+svg('moon')+'</button></div></div></header>'
@@ -222,6 +237,10 @@
   }
   async function loadHome(date,push=false){
     const id=++homeId,feed=$('#feed'),label=$('#date-label');
+    publishReadingDate('');
+    $('#home-empty')?.remove();
+    feed.hidden=false;
+    $('#flow-list').innerHTML='<p class="flow-wait" role="status">불러오는 중…</p>';
     selected=date||'';if(date)view=new Date(date.slice(0,7)+'-01T12:00:00Z');if(label)label.textContent=shortDate(date||C.kstDate());
     if(push){const url=new URL(location.href);if(date)url.searchParams.set('date',date);else url.searchParams.delete('date');history.pushState({},'',url);}
     const CARDS=homeCards();
@@ -243,8 +262,7 @@
     if(!date){const days=Object.values(results).filter(Boolean).map(r=>r.date).sort();selected=days[days.length-1]||'';if(selected){view=new Date(selected.slice(0,7)+'-01T12:00:00Z');if(label)label.textContent=shortDate(selected);}}
     flow(results);balance(CARDS.length);schedules(results);syncHomeDates();
     // [M7] 아무 분야도 없는 날짜(?date=로 연 경우): 카드 6장의 '없습니다' 대신 안내 하나 + 최신 호·다시 시도 버튼
-    $('#home-empty')?.remove();
-    feed.hidden=false;
+    if(Object.values(results).some(Boolean))publishReadingDate(selected);
     if(date&&!Object.values(results).some(Boolean)){
       feed.insertAdjacentHTML('beforebegin','<section class="empty" id="home-empty"><h2>'+C.esc(shortDate(date))+'에는 발행된 브리핑이 없습니다</h2><p>달력에서 점이 있는 날을 고르거나 최신 호를 보세요.</p><button type="button" id="home-latest">최신 호 보기</button> <button type="button" id="home-retry">다시 시도</button></section>');
       feed.hidden=true; // 빈 카드 6장은 숨기고 안내 하나만
@@ -278,7 +296,7 @@
     list.innerHTML=available.length?available.map(d=>'<li><button type="button" class="archive-item" data-pick="'+d+'"'+(d===selected?' aria-current="true"':'')+'>'+C.formatDate(d)+'</button></li>').join(''):'<li class="archive-empty">발행 기록을 확인하는 중입니다</li>';
     list.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{closeHomeCal(mobile());loadHome(b.dataset.pick,true);}));
   }
-  function controls(){return '<div class="date-controls"><details class="archive-picker" id="archive-picker"><summary class="date-trigger">'+svg('calendar')+'<span id="selected-label">날짜 선택</span>'+svg('chevron','chevron')+'</summary><div class="calendar"><div class="cal-head"><strong id="cal-title"></strong><div class="cal-nav"><button id="cal-prev" aria-label="이전 달">‹</button><button id="cal-next" aria-label="다음 달">›</button></div></div><div class="cal-grid" id="cal-grid"></div><p class="cal-note">● 발행된 브리핑 · 날짜는 한국 시간 기준</p><button class="text-button" id="close-calendar">달력 닫기</button></div></details><div class="date-step"><button id="previous-date">이전 호</button><button id="latest-date">최신 호</button></div><span class="status" id="read-status" role="status"></span></div>';}
+  function controls(){return '<div class="date-controls"><details class="archive-picker" id="archive-picker"><summary class="date-trigger">'+svg('calendar')+'<span id="selected-label">날짜 선택</span>'+svg('chevron','chevron')+'</summary><div class="calendar"><div class="cal-head"><strong id="cal-title"></strong><div class="cal-nav"><button id="cal-prev" aria-label="이전 달">‹</button><button id="cal-next" aria-label="다음 달">›</button></div></div><div class="cal-grid" id="cal-grid"></div><p class="cal-note">● 발행된 브리핑 · 날짜는 한국 시간 기준</p><button class="text-button" id="close-calendar">달력 닫기</button></div></details><div class="date-step"><button id="previous-date" disabled>이전 호</button><button id="latest-date">최신 호</button></div><span class="status" id="read-status" role="status"></span></div>';}
   function updateControls(){
     if(!$('#selected-label'))return;$('#selected-label').textContent=selected?C.formatDate(selected):'날짜 선택';
     $('#previous-date').disabled=!available.some(d=>d<selected);$('#read-status').textContent=selected===C.kstDate()?'오늘 발행':selected?'보관된 브리핑':'';
@@ -326,7 +344,7 @@
     return html;
   }
   async function load(date,push=false){
-    const id=++requestId;$('#content').setAttribute('aria-busy','true');$('#read-status').textContent='브리핑 확인 중…';
+    const id=++requestId;publishReadingDate('');$('#cat-side')?.remove();$('#content').setAttribute('aria-busy','true');$('#read-status').textContent='브리핑 확인 중…';
     if(date){selected=date;updateControls();renderCalendar();}
     const result=date?await fetchDate(page,date):await latest(page,available);
     if(id!==requestId)return;
@@ -339,6 +357,7 @@
     $('#content').innerHTML=(!date&&result.date<C.kstDate()&&!result.cached?'<p class="offline-note">'+staleTag(result.date)+' 오늘 브리핑이 아직 없어 '+C.esc(shortDate(result.date))+' 호를 표시합니다.</p>':'')+render(result);try{const h=decodeURIComponent((location.hash||'').slice(1));const el=h&&document.getElementById(h);if(el){if(el.tagName==='DETAILS')el.open=true;el.scrollIntoView({block:'start'});}}catch(e){}updateControls();const hd=$('#hero-date');if(hd)hd.textContent=selected.slice(5).replace('-','.')+' 발행';renderCalendar();
     const url=new URL(location.href);url.searchParams.set('date',selected);if(push)history.pushState({},'',url);else history.replaceState({},'',url);
     document.title=config[page].name+' · '+selected;
+    publishReadingDate(selected);
     sideRail();
     document.querySelectorAll('.ov-open').forEach(b=>b.addEventListener('click',()=>{const el=document.getElementById(b.dataset.target);if(!el)return;el.open=true;el.scrollIntoView({behavior:'smooth',block:'start'});el.querySelector('summary').focus({preventScroll:true});}));
     const expand=$('#expand-all');if(expand)expand.addEventListener('click',event=>{const button=event.currentTarget,open=button.getAttribute('aria-expanded')!=='true';document.querySelectorAll('.article').forEach(el=>el.open=open);button.setAttribute('aria-expanded',String(open));button.textContent=open?'모두 접기':'모두 펼치기';});
@@ -368,7 +387,11 @@
     $('#cal-prev').addEventListener('click',()=>{view=new Date(Date.UTC(view.getUTCFullYear(),view.getUTCMonth()-1,1,12));renderCalendar();});
     $('#cal-next').addEventListener('click',()=>{view=new Date(Date.UTC(view.getUTCFullYear(),view.getUTCMonth()+1,1,12));renderCalendar();});
     $('#close-calendar').addEventListener('click',closeCalendar);
-    $('#previous-date').addEventListener('click',async()=>load(await previousIssue(),true));
+    $('#previous-date').addEventListener('click',async()=>{
+      const id=requestId;
+      const previous=await previousIssue();
+      if(previous&&id===requestId)load(previous,true);
+    });
     $('#latest-date').addEventListener('click',()=>load(null,true));
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCalendar();});
     document.addEventListener('click',e=>{if(!$('#archive-picker').contains(e.target))$('#archive-picker').open=false;});
