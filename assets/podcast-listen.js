@@ -35,12 +35,6 @@
     return null;
   }
 
-  function label(kind, n) {
-    if (kind === 'study') return '공부 ' + n + '번';
-    const s = String(n);
-    return s.indexOf('번') >= 0 ? '뉴스 ' + s : '뉴스 ' + s + '번';
-  }
-
   function openTarget(id) {
     if (!id) return;
     const el = document.getElementById(id);
@@ -49,28 +43,9 @@
     el.scrollIntoView({ block: 'start', behavior: 'smooth' });
   }
 
-  function decorateItems(ep, kind, pageCat) {
-    const items = ep.items || [];
-    items.forEach((it) => {
-      if (pageCat && it.cat && it.cat !== pageCat) return;
-      const el = document.getElementById(it.id);
-      if (!el || el.querySelector('.podcast-no')) return;
-      const badge = document.createElement('span');
-      badge.className = 'podcast-no';
-      badge.textContent = label(kind, it.n);
-      const head = el.querySelector('.item-copy, .article-heading, .kicker, h2, h3');
-      if (el.classList.contains('story') || it.id === 'todays-story') {
-        const k = el.querySelector('.kicker') || el.firstElementChild;
-        if (k) k.prepend(badge);
-        else el.prepend(badge);
-        return;
-      }
-      if (head) head.prepend(badge);
-    });
-  }
-
-  // 한 화면에 재생기는 하나. 큐(골라 듣기)와 속도를 관리한다.
-  function player(box, ep) {
+  // 한 화면에 재생기는 하나. 지금 재생 중인 칩과 속도를 관리한다.
+  // defaultKey: 분야 화면(예: 뉴스 스포츠)에서 아무것도 안 들을 때 강조만 해 둘 칩(자동 재생은 하지 않음).
+  function player(box, ep, defaultKey) {
     const audio = box.querySelector('audio');
     const now = box.querySelector('[data-pl-now]');
     let queue = [];
@@ -87,7 +62,12 @@
     applyRate();
     function show() {
       const cur = queue[pos];
-      box.querySelectorAll('[data-pl-key]').forEach((b) => b.classList.toggle('is-playing', !!cur && b.getAttribute('data-pl-key') === cur.key));
+      const on = cur ? cur.key : defaultKey;
+      box.querySelectorAll('[data-pl-key]').forEach((b) => {
+        const k = b.getAttribute('data-pl-key');
+        b.classList.toggle('is-playing', !!cur && k === cur.key);
+        b.setAttribute('aria-pressed', String(!!on && k === on));
+      });
       if (!cur) { now.textContent = ''; now.hidden = true; return; }
       now.hidden = false;
       now.textContent = '지금 듣는 중: ' + cur.label + (queue.length > 1 ? ' (' + (pos + 1) + '/' + queue.length + ')' : '');
@@ -112,6 +92,14 @@
     }
     return {
       play(list) { queue = list.filter((x) => x && x.audio); playAt(0); audio.scrollIntoView({ block: 'nearest' }); },
+      // 지금 듣는 칩을 다시 누르면 멈춤/이어 듣기.
+      toggle(key) {
+        const cur = queue[pos];
+        if (!cur || cur.key !== key) return false;
+        if (audio.paused) audio.play().catch(() => {}); else audio.pause();
+        return true;
+      },
+      show,
       rate(v) { storeRate(v); applyRate(); },
     };
   }
@@ -121,64 +109,30 @@
     box.className = 'podcast-listen';
     box.id = 'podcast-listen';
     box.setAttribute('aria-labelledby', 'podcast-listen-title');
-    const relevant = (ep.items || []).filter((it) => !pageCat || !it.cat || it.cat === pageCat);
-    const covered = relevant.filter((it) => it.covered || it.clipOnly);
-    const skipped = relevant.filter((it) => !it.covered && !it.clipOnly);
     const clips = Array.isArray(ep.clips) ? ep.clips : [];
-    const groups = clips.filter((c) => c.kind === 'group');
-    const itemClip = {};
-    clips.filter((c) => c.kind === 'item').forEach((c) => { itemClip[String(c.n)] = c; });
-    const full = { key: '__full', label: '전체 회차', audio: ep.audio };
-    const lis = (arr, withPlay) => arr.map((it) => {
-      const newsHome = document.body.getAttribute('data-page') === 'home';
-      const link = (kind === 'news' && (newsHome || (it.cat && it.cat !== pageCat)))
-        ? (newsHome ? it.cat + '/' : (it.cat && it.cat !== pageCat ? '../' + it.cat + '/' : '')) + '?date=' + ep.date + '#' + it.id
-        : '#' + it.id;
-      const c = withPlay ? itemClip[String(it.n)] : null;
-      const btn = c ? '<button type="button" class="pl-item-play" data-pl-key="' + esc(c.key) + '" aria-label="' + esc(label(kind, it.n)) + '만 듣기">▶</button>' : '';
-      const only = it.clipOnly ? ' <span class="pl-only">분야 음성에만</span>' : '';
-      return '<li>' + btn + '<a href="' + link + '" data-podcast-id="' + esc(it.id) + '">' + esc(label(kind, it.n)) + '</a> — ' + esc(it.title || '') + only + '</li>';
-    }).join('');
-    // 분야(뉴스)·과목(공부) 단추: 누르면 고르고/풀고, 여러 개 고른 뒤 '고른 것 듣기'로 이어 듣는다.
-    const chip = (g) => '<button type="button" class="pl-chip" aria-pressed="false" data-pl-group="' + esc(g.key) + '" data-pl-key="' + esc(g.key) + '">' + esc(g.label) + '<small>' + mmss(g.durationSec) + '</small></button>';
+    const groups = clips.filter((c) => c.kind === 'group' && c.audio);
+    // '전체' = 오늘 회차 전체를 처음부터 순서대로. 분야(뉴스)·과목(공부) 칩 = 그 그룹 클립만 바로 재생.
+    const full = { key: '__full', label: '전체', audio: ep.audio };
+    const byKey = { __full: full };
+    groups.forEach((g) => { byKey[g.key] = { key: g.key, label: g.label || '', audio: g.audio }; });
+    const chip = (key, text, sec) => '<button type="button" class="pl-chip" aria-pressed="false" data-pl-key="' + esc(key) + '">' + esc(text) + (sec ? '<small>' + mmss(sec) + '</small>' : '') + '</button>';
     const speed = '<div class="pl-speed" role="group" aria-label="재생 속도">' + RATES.map((r) => '<button type="button" data-pl-rate="' + r + '" aria-pressed="' + (r === savedRate()) + '">' + rateText(r) + '</button>').join('') + '</div>';
     box.innerHTML =
-      '<div class="podcast-listen-head"><h2 id="podcast-listen-title">오늘 들은 내용</h2>' +
-      '<button type="button" class="podcast-play" data-podcast-play data-pl-key="__full">오늘 회차 전체 듣기</button></div>' +
-      (groups.length
-        ? '<div class="pl-pick"><p class="pl-hint">' + (kind === 'study' ? '과목' : '분야') + '을 눌러 고르고 듣기를 누르면 그것만 이어서 나옵니다.</p>' +
-          '<div class="pl-chips" role="group" aria-label="골라 듣기">' + groups.map(chip).join('') + '</div>' +
-          '<div class="pl-actions"><button type="button" class="pl-go" data-pl-go disabled>고른 것 듣기</button>' + speed + '</div></div>'
-        : '<div class="pl-actions">' + speed + '</div>') +
+      '<div class="podcast-listen-head"><h2 id="podcast-listen-title">오늘 회차 듣기</h2></div>' +
+      '<p class="pl-hint">\'전체\'는 처음부터 순서대로, ' + (kind === 'study' ? '과목' : '분야') + '을 누르면 그것만 바로 재생돼요.</p>' +
+      '<div class="pl-chips" role="group" aria-label="' + (kind === 'study' ? '과목별 듣기' : '분야별 듣기') + '">' +
+        (ep.audio ? chip('__full', '전체', 0) : '') + groups.map((g) => chip(g.key, g.label, g.durationSec)).join('') + '</div>' +
+      '<div class="pl-actions">' + speed + '</div>' +
       '<p class="pl-now" data-pl-now hidden></p>' +
-      '<audio controls preload="none" src="' + esc(ep.audio) + '"></audio>' +
-      '<div class="podcast-cols"><div><h3>음성에서 다룬 항목</h3><ul>' + (lis(covered, true) || '<li>없음</li>') +
-      '</ul></div><div><h3>앱에서 찾아보실 항목</h3><ul>' + (lis(skipped, false) || '<li>없음</li>') +
-      '</ul></div></div>';
-    box.querySelectorAll('a[data-podcast-id]').forEach((a) => {
-      a.addEventListener('click', (e) => {
-        if (a.getAttribute('href').charAt(0) !== '#') return;
-        e.preventDefault();
-        history.replaceState(history.state, '', a.getAttribute('href'));
-        openTarget(a.getAttribute('data-podcast-id'));
-      });
-    });
-    const pl = player(box, ep);
-    const byKey = {};
-    clips.forEach((c) => { byKey[c.key] = c; });
-    const chips = Array.from(box.querySelectorAll('[data-pl-group]'));
-    const go = box.querySelector('[data-pl-go]');
-    const picked = () => chips.filter((b) => b.getAttribute('aria-pressed') === 'true').map((b) => byKey[b.getAttribute('data-pl-group')]);
-    const sync = () => { if (go) { const n = picked().length; go.disabled = !n; go.textContent = n ? '고른 ' + n + '개 듣기' : '고른 것 듣기'; } };
-    chips.forEach((b) => b.addEventListener('click', () => { b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); sync(); }));
-    // 분야 화면(예: 스포츠)에서는 그 분야를 미리 골라 둔다. 바로 '고른 1개 듣기'.
-    if (pageCat && byKey['all-' + pageCat]) { const b = chips.find((x) => x.getAttribute('data-pl-group') === 'all-' + pageCat); if (b) b.setAttribute('aria-pressed', 'true'); }
-    sync();
-    if (go) go.addEventListener('click', () => pl.play(picked()));
-    box.querySelector('[data-podcast-play]').addEventListener('click', () => pl.play([full]));
-    box.querySelectorAll('.pl-item-play').forEach((b) => b.addEventListener('click', () => {
-      const c = byKey[b.getAttribute('data-pl-key')];
-      if (c) pl.play([{ key: c.key, label: (c.label || '') + ' · ' + (c.title || ''), audio: c.audio }]);
+      '<audio controls preload="none" src="' + esc(ep.audio) + '"></audio>';
+    const defaultKey = pageCat && byKey['all-' + pageCat] ? 'all-' + pageCat : '';
+    const pl = player(box, ep, defaultKey);
+    pl.show();
+    box.querySelectorAll('.pl-chip[data-pl-key]').forEach((b) => b.addEventListener('click', () => {
+      const key = b.getAttribute('data-pl-key');
+      if (pl.toggle(key)) return;
+      const c = byKey[key];
+      if (c) pl.play([c]);
     }));
     box.querySelectorAll('[data-pl-rate]').forEach((b) => b.addEventListener('click', () => {
       const v = Number(b.getAttribute('data-pl-rate'));
@@ -191,6 +145,7 @@
   function unmount() {
     const box = document.getElementById('podcast-listen');
     if (box) box.remove();
+    // 예전 판(v19 이하)이 붙인 번호 배지가 남아 있으면 지운다.
     document.querySelectorAll('.podcast-no').forEach((el) => el.remove());
   }
 
@@ -210,14 +165,14 @@
     // 재생 중인 칸은 다시 그리지 않는다(같은 날짜·같은 회차면 소리가 끊기지 않게).
     if (old && old.dataset.epKey === kind + ':' + ep.date && old.isConnected) {
       const a = old.querySelector('audio');
-      if (a && !a.paused) { decorateItems(ep, kind, onHome ? null : pageCat); return; }
+      if (a && !a.paused) return;
     }
     const next = panel(cfg, ep, kind, onHome ? null : pageCat);
     next.dataset.epKey = kind + ':' + ep.date;
     if (old) old.replaceWith(next);
     else if (host.id === 'content' || host.tagName === 'MAIN') host.insertBefore(next, host.firstChild);
     else host.prepend(next);
-    decorateItems(ep, kind, onHome ? null : pageCat);
+    document.querySelectorAll('.podcast-no').forEach((el) => el.remove());
     const hash = hashId();
     if (hash) openTarget(hash);
   }
