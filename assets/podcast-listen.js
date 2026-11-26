@@ -119,7 +119,7 @@
     const speed = '<div class="pl-speed" role="group" aria-label="재생 속도">' + RATES.map((r) => '<button type="button" data-pl-rate="' + r + '" aria-pressed="' + (r === savedRate()) + '">' + rateText(r) + '</button>').join('') + '</div>';
     box.innerHTML =
       '<div class="podcast-listen-head"><h2 id="podcast-listen-title">오늘 회차 듣기</h2></div>' +
-      '<p class="pl-hint">\'전체\'는 처음부터 순서대로, ' + (kind === 'study' ? '과목' : '분야') + '을 누르면 그것만 바로 재생돼요.</p>' +
+      '<p class="pl-hint">\'전체\'는 처음부터 순서대로, ' + (kind === 'study' ? '과목을' : '분야를') + ' 누르면 그것만 바로 재생돼요.</p>' +
       '<div class="pl-chips" role="group" aria-label="' + (kind === 'study' ? '과목별 듣기' : '분야별 듣기') + '">' +
         (ep.audio ? chip('__full', '전체', 0) : '') + groups.map((g) => chip(g.key, g.label, g.durationSec)).join('') + '</div>' +
       '<div class="pl-actions">' + speed + '</div>' +
