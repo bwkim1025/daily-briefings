@@ -146,7 +146,7 @@ body:not([data-page=home]) .topbar-in{width:min(1036px,100%)}
 .lead-points li{counter-increment:pt;display:flex;gap:10px;font-size:14px;line-height:22px;color:var(--ink)}
 .lead-points li:before{content:counter(pt);width:20px;height:20px;flex-shrink:0;border-radius:6px;background:var(--brand-soft);color:var(--brand-ink);font-size:11px;font-weight:700;display:grid;place-items:center;margin-top:1px}
 /* 웨더 카드(카드 전체가 웨더 화면 링크) */
-.wx-card{grid-column:3;grid-row:1;border-radius:24px;padding-bottom:16px}
+.wx-card{border-radius:24px;padding-bottom:16px}
 .wx-link{position:absolute;inset:0;z-index:1;border-radius:inherit}
 .wx-link:focus-visible{outline-offset:-3px}
 .chip{font-size:12px;font-weight:700;color:var(--brand-ink);background:var(--brand-soft);border-radius:999px;padding:4px 11px;white-space:nowrap}
@@ -495,7 +495,6 @@ body:not([data-page=home]):not([data-page=collab]) .m-title{display:none}
   .feed{grid-template-columns:repeat(6,minmax(0,1fr))}
   .feed>.digest-card{grid-column:span 2}
   .feed>.lead-card{grid-column:1/span 4}
-  .feed>.wx-card{grid-column:5/span 2}
   .feed[data-r3="1"]>.digest-card:nth-last-child(-n+4){grid-column:span 3}
   .feed[data-r3="2"]>.digest-card:nth-last-child(-n+2){grid-column:span 3}
 }
@@ -569,15 +568,15 @@ html.dark .story,html.dark .flow-card,html.dark .wx-hero{background:linear-gradi
   #content:has(>:is(#todays-story,.wx-view))>.sched-page+.one-liner{grid-column:2;margin-top:0}
   #content:has(>:is(#todays-story,.wx-view))>.sched-page:has(+.one-liner){column-count:1}
 }
-/* 홈 2200px 이상: 카드 12칸 격자 = 첫 줄 파이낸셜(6)·날씨(3)·첫 일반 분야(3), 다음 줄 세 장(4). 카드 DOM 순서는 날씨·파이낸셜·나머지, 격자는 dense라 칸 번호로 자리를 정함 */
+/* 홈 2200px 이상: 카드 12칸 격자. 첫 줄은 DOM 순서대로 파이낸셜(6)·둘째 카드(3)·셋째 카드(3), 다음 줄은 세 장(4). 웨더는 분야 순서(부동산 다음)를 따른다. */
 @media(min-width:2200px){
   .shell,.topbar-in,body:not([data-page=home]) .shell,body:not([data-page=home]) .topbar-in{padding-left:48px;padding-right:48px}
   .home-layout{grid-template-columns:minmax(0,1fr) 400px;gap:24px}
   .home-layout .feed{grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
   .home-layout .feed[data-r3]>.digest-card:nth-child(n){grid-column:span 4}
   .home-layout .feed[data-r3]>.lead-card:nth-child(n){grid-column:1/span 6}
-  .home-layout .feed[data-r3]>.wx-card:nth-child(n){grid-column:7/span 3}
-  .home-layout .feed[data-r3]>.digest-card:nth-child(1 of .digest-card:not(.lead-card,.wx-card)){grid-column:10/span 3}
+  .home-layout .feed[data-r3]>.digest-card:nth-child(2),
+  .home-layout .feed[data-r3]>.digest-card:nth-child(3){grid-column:span 3}
   .home-layout .feed[data-r3="0"]>.digest-card:nth-last-child(-n+2):nth-child(n+4){grid-column:span 6}
   .home-layout .feed[data-r3="2"]>.digest-card:last-child:nth-child(n+4){grid-column:1/-1}
   .sched-card:not(.sched-page){column-count:3}
@@ -614,7 +613,6 @@ html.dark .story,html.dark .flow-card,html.dark .wx-hero{background:linear-gradi
   .home-layout .feed[data-r3]>.digest-card:nth-child(1 of .digest-card:not(.lead-card,.wx-card)),
   .home-layout .feed[data-r3]>.digest-card:nth-last-child(n):nth-child(n+4){grid-column:auto/span 1}
   .home-layout .feed[data-r3]>.lead-card:nth-child(n){grid-column:1/span 2}
-  .home-layout .feed[data-r3]>.wx-card:nth-child(n){grid-column:3/span 1}
   .home-layout .feed[data-r3="0"]>.digest-card:last-child:nth-child(n+3){grid-column:auto/span 2}
   .sched-card:not(.sched-page){column-count:4}
   body:is([data-page=financial],[data-page=international],[data-page=sports],[data-page=health],[data-page=tech],[data-page=medical],[data-page=weather]) .shell{grid-template-columns:minmax(0,1fr) 440px;column-gap:40px}

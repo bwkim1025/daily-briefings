@@ -7,13 +7,13 @@
   // hidden: the route stays readable for old links but is not listed in navigation or on home.
   const config={
     financial:{name:'파이낸셜 브리핑',short:'파이낸셜',en:'Financial',subtitle:'시장과 숫자, 그 뒤에 있는 맥락.',icon:'chart',art:'fin'},
+    tech:{name:'테크·AI 브리핑',short:'테크·AI',en:'Tech · AI',subtitle:'꼭 알아야 할 기술과 AI 소식.',icon:'chart',art:'tech'},
+    health:{name:'헬스 브리핑',short:'헬스',en:'Health',subtitle:'일상에 닿는 건강 연구와 생활의 발견.',icon:'heart',art:'health'},
+    realestate:{name:'부동산·이사 브리핑',short:'부동산',en:'Real estate',subtitle:'부산·김해·양산 집값과 남천 분양·입주 소식.',icon:'chart',art:'home'},
+    weather:{name:'웨더 · 부산',short:'웨더',en:'Weather',subtitle:'부산의 기온·비·바람·미세먼지.',icon:'chart',art:'weather'},
     international:{name:'인터내셔널 브리핑',short:'인터내셔널',en:'International',subtitle:'세계를 읽는 네 개의 시선.',icon:'globe',art:'globe'},
     sports:{name:'스포츠 브리핑',short:'스포츠',en:'Sports',subtitle:'NBA를 중심으로, 꼭 볼 경기와 흐름.',icon:'chart',art:'sport'},
-    health:{name:'헬스 브리핑',short:'헬스',en:'Health',subtitle:'일상에 닿는 건강 연구와 생활의 발견.',icon:'heart',art:'health'},
-    tech:{name:'테크·AI 브리핑',short:'테크·AI',en:'Tech · AI',subtitle:'꼭 알아야 할 기술과 AI 소식.',icon:'chart',art:'tech'},
-    realestate:{name:'부동산·이사 브리핑',short:'부동산',en:'Real estate',subtitle:'부산·김해·양산 집값과 남천 분양·입주 소식.',icon:'chart',art:'home'},
     parenting:{name:'육아·교육 브리핑',short:'육아·교육',en:'Parenting',subtitle:'초등 입학 준비와 영유아·아동 정책.',icon:'chart',art:'family'},
-    weather:{name:'웨더 · 부산',short:'웨더',en:'Weather',subtitle:'부산의 기온·비·바람·미세먼지.',icon:'chart',art:'weather'},
     medical:{name:'메디컬 브리핑',short:'메디컬',en:'Medical',subtitle:'연구의 결과와 한계를 함께 읽습니다.',icon:'cross',art:'',hidden:true}
   };
   // New categories stay off every menu/home card until a briefing for them is known to exist
@@ -94,7 +94,7 @@
   const catCur=key=>page===key?' aria-current="page" title="다시 누르면 전체로" aria-label="'+config[key].short+' (지금 보는 분야) · 누르면 전체 브리핑으로"':'';
   function navigation(){return '<nav class="nav" aria-label="브리핑 카테고리">'+LISTED.map(key=>'<a href="'+catHref(key)+'"'+catCur(key)+'>'+catArt(key,24)+config[key].short+'</a>').join('')+'</nav>';}
   // Mobile icon row: identical on home and category pages; only the ring of the active category changes.
-  function rounds(){return '<nav class="cat-rounds" aria-label="분야 바로가기">'+STORIES.concat(LISTED.includes('weather')?['weather']:[]).map(key=>'<a href="'+catHref(key)+'"'+catCur(key)+(key==='weather'?' class="pc-only"':'')+'><span class="ring"><span class="disc">'+catArt(key,30)+'</span></span><span class="lbl">'+config[key].short+'</span></a>').join('')+'</nav>';}
+  function rounds(){return '<nav class="cat-rounds" aria-label="분야 바로가기">'+LISTED.map(key=>'<a href="'+catHref(key)+'"'+catCur(key)+(key==='weather'?' class="pc-only"':'')+'><span class="ring"><span class="disc">'+catArt(key,30)+'</span></span><span class="lbl">'+config[key].short+'</span></a>').join('')+'</nav>';}
   // Mobile bottom tabs: 오늘 / 분야 (sheet) / 지난 호 (calendar). Hidden on PC by CSS.
   function tabbar(){
     return '<nav class="tabbar" aria-label="빠른 이동"><a class="tab" href="'+base.href+'"'+(HOME?' aria-current="page"':'')+'>'+svg('home')+'<span>오늘</span></a>'
@@ -215,7 +215,7 @@
       +(src?'<p class="wx-source">'+src+'</p>':'')+'</div>';
   }
   // ---- Home: card feed + archive calendar + 오늘의 흐름 ----
-  const homeCards=()=>(LISTED.includes('weather')?['weather']:[]).concat(STORIES);
+  const homeCards=()=>LISTED.slice();
   const skeletons=CARDS=>CARDS.map(cat=>'<article id="card-'+cat+'" class="digest-card'+(cat==='financial'?' lead-card':cat==='weather'?' wx-card':'')+'" data-category="'+cat+'">'+(cat==='financial'?'<div class="lead-bar" aria-hidden="true"></div>':'')+cardTop(cat)+'<div class="card-main"><div class="skeleton title"></div><div class="skeleton short"></div><div class="card-excerpt">최신 브리핑 확인 중…</div></div></article>').join('');
   async function home(ready){
     const date=new URL(location.href).searchParams.get('date');
